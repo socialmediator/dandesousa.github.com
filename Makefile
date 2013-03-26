@@ -1,5 +1,5 @@
 PELICAN=pelican
-PELICANOPTS=
+PELICANOPTS=-t timberland
 
 BASEDIR=$(CURDIR)
 INPUTDIR=$(BASEDIR)/content
@@ -17,6 +17,10 @@ SSH_USER=root
 SSH_TARGET_DIR=/var/www
 
 DROPBOX_DIR=~/Dropbox/Public/
+
+DATE_YEAR=$(shell date  "+%Y")
+DATE_MONTH=$(shell date  "+%m")
+DATE_DAY=$(shell date  "+%d")
 
 help:
 	@echo 'Makefile for a pelican Web site                                        '

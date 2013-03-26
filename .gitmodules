@@ -1,0 +1,3 @@
+[submodule "shovel"]
+	path = shovel
+	url = git@github.com:dandesousa/pelican-shovel.git
