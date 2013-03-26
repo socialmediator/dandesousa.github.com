@@ -327,7 +327,7 @@ HorizontalContentAlignment properties.&lt;/p&gt;
 &lt;p&gt;First, this is what the problem looks like. In blue we have the entire
 ListBox Control, and in white is the space for an individual item.&lt;/p&gt;
 &lt;h2&gt;The Problem&lt;/h2&gt;
-&lt;p&gt;&lt;img alt="problem" src="./static/wp-content/uploads/2010/08/problem_thumb.png" title="problem" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="problem" src="/static/wp-content/uploads/2010/08/problem_thumb.png" title="problem" /&gt;&lt;/p&gt;
 &lt;p&gt;As you can see, the ListBoxItem is shown in white and only fits the size
 of the content. The entire ListBox is shown in red and remains empty. If
 you increase the size of the text it will stretch to the width. But if
@@ -383,7 +383,7 @@ HorizontalContentAlignment to just work.&lt;/p&gt;
 
 
 &lt;h2&gt;The Result&lt;/h2&gt;
-&lt;p&gt;&lt;img alt="solved" src="./static/wp-content/uploads/2010/08/solved_thumb.png" title="solved" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="solved" src="/static/wp-content/uploads/2010/08/solved_thumb.png" title="solved" /&gt;&lt;/p&gt;
 &lt;p&gt;As you can see the item wrapped in white stretches the entire width of
 the ListBox in red.&lt;/p&gt;
 &lt;h2&gt;Conclusions&lt;/h2&gt;

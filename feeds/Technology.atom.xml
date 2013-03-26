@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom"><title>Dan De Sousa's Blog</title><link href="http://dandesousa.com/" rel="alternate"></link><link href="http://dandesousa.com/feeds/Technology.atom.xml" rel="self"></link><id>http://dandesousa.com/</id><updated>2012-12-09T20:07:00-05:00</updated><entry><title>Linking Together iCloud, Photo Stream and Dropbox.</title><link href="http://dandesousa.com/linking-together-icloud-photo-stream-and-dropbox.html" rel="alternate"></link><updated>2012-12-09T20:07:00-05:00</updated><author><name>Admin</name></author><id>tag:dandesousa.com,2012-12-09:linking-together-icloud-photo-stream-and-dropbox.html</id><summary type="html">&lt;p&gt;Looking for a way to link together iCloud and Dropbox to manage your
 photos? Look no further; the following is a guide to getting your iOS
 and Photo Stream photos automatically into Dropbox.&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="./static/wp-content/uploads/2012/12/dropbx-300x300.png" title="dropbx" /&gt; &lt;img alt="" src="./static/wp-content/uploads/2012/12/icloud-300x297.jpg" title="icloud" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="/static/wp-content/uploads/2012/12/dropbx-300x300.png" title="dropbx" /&gt; &lt;img alt="" src="/static/wp-content/uploads/2012/12/icloud-300x297.jpg" title="icloud" /&gt;&lt;/p&gt;
 &lt;h2&gt;Background&lt;/h2&gt;
 &lt;p&gt;This  process started because I was looking for a way to manage all my
 photos on my iPad. I want to take pictures with my DSLR or point and
@@ -32,15 +32,15 @@ Dropbox folder.&lt;/p&gt;
 account.&lt;/p&gt;
 &lt;p&gt;Second after you install the iCloud Control Panel, you want to find it
 under Control Panel &gt; iCloud. You should see something like this:&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="./static/wp-content/uploads/2012/12/icloudcontrolpanel.png" title="icloudcontrolpanel" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="/static/wp-content/uploads/2012/12/icloudcontrolpanel.png" title="icloudcontrolpanel" /&gt;&lt;/p&gt;
 &lt;p&gt;Select options next to Photo Stream:&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="./static/wp-content/uploads/2012/12/options.png" title="options" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="/static/wp-content/uploads/2012/12/options.png" title="options" /&gt;&lt;/p&gt;
 &lt;p&gt;Make sure that "My Photo Stream" is selected. Also check "Shared Photo
 Streams" if you use that feature. Select "Change" next to "Photo Stream
 location" and navigate to your Dropbox directory. You can either select
 the Photos directory. In the follow example I've created a dedicated
 directory just for my Photo Stream photos:&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="./static/wp-content/uploads/2012/12/files.png" title="files" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="/static/wp-content/uploads/2012/12/files.png" title="files" /&gt;&lt;/p&gt;
 &lt;p&gt;Don't worry about the directories under "Photo Streams" they will appear
 once your computer starts download photos from Apple. Once it's
 selected, select "OK" all the way until you get back to the main control
@@ -147,7 +147,7 @@ default.&lt;/em&gt;&lt;/p&gt;
 '192.168.1.1'.&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;Also note the DHCP range of your router, this varies by model but on the
 common dd-wrt setup can be found here:&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="./static/wp-content/uploads/2012/05/default-gateway-192.168.1.1-dhcp-address-781x1024.png" title="default-gateway-192.168.1.1-dhcp-address" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="/static/wp-content/uploads/2012/05/default-gateway-192.168.1.1-dhcp-address-781x1024.png" title="default-gateway-192.168.1.1-dhcp-address" /&gt;&lt;/p&gt;
 &lt;p&gt;&lt;/p&gt;
 For this scenario our DHCP range starts at 192.168.1.100. So anything
 from 192.168.1.0 - 192.168.1.99 is out of range and won't be used by the
@@ -184,12 +184,12 @@ Good news is you are pretty much done now. You can confirm your setup is
 working by assigning a machine to either network. You want to open up
 your network menu and find your network interface (representing the one
 connected to your network  -- be it wired or wireless).&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="./static/wp-content/uploads/2012/05/network-1.png" title="network-1" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="/static/wp-content/uploads/2012/05/network-1.png" title="network-1" /&gt;&lt;/p&gt;
 &lt;p&gt;now right click and select properties. Then select the IPv4 settings and
 hit properties again:&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="./static/wp-content/uploads/2012/05/network-2.png" title="network-2" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="/static/wp-content/uploads/2012/05/network-2.png" title="network-2" /&gt;&lt;/p&gt;
 &lt;p&gt;Now you want to manually configure your connection.&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="./static/wp-content/uploads/2012/05/network-3.png" title="network-3" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="/static/wp-content/uploads/2012/05/network-3.png" title="network-3" /&gt;&lt;/p&gt;
 &lt;p&gt;For your IP address, assign anything that is outside the DHCP range of
 your router (anything below 192.168.1.100 works in this example). Leave
 subnet mask matching your primary gateway and assign default gateway to
@@ -273,8 +273,8 @@ and Plex Media Server (PMS -- an unfortunate abbreviation) will deliver
 it over your home network or the internet. Plex is a UI which runs on a
 computer, mobile phone or TV and gives you access to that content. It
 looks something like this:&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="./static/wp-content/uploads/2011/11/episode_overview.png" title="episode_overview" /&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href="./static/wp-content/uploads/2011/11/episode_overview.png"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="/static/wp-content/uploads/2011/11/episode_overview.png" title="episode_overview" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="/static/wp-content/uploads/2011/11/episode_overview.png"&gt;&lt;/p&gt;
 &lt;p&gt;&lt;/a&gt;Basically gives you all your episodes (with metadata) automatically.
 Lets you browse by tons of different categories, like unwatched or
 recently aired/added. Did I mention it automatically organize your media
@@ -480,7 +480,7 @@ either run the highpoint flash utility under windows or you'll need to
 create a DOS boot disk. If you have access to a Windows box, using the
 utility is the easier course of action. When you extract the BIOS zip it
 should be listed as hptflash.exe and look like this:&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="./static/wp-content/uploads/2011/06/Capture-300x178.png" title="Capture" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="/static/wp-content/uploads/2011/06/Capture-300x178.png" title="Capture" /&gt;&lt;/p&gt;
 &lt;p&gt;2.) Configure the drive to be under legacy mode&lt;/p&gt;
 &lt;p&gt;Now plug you card back into the linux box and make sure that all the
 drives connected to the card are listed as "legacy" in the RocketRaid
