@@ -99,7 +99,7 @@ can make some of these details more straightforward before the final
 release or in updated versions of .NET.
 
 
-[problem]: ./static/wp-content/uploads/2010/08/problem_thumb.png
+[problem]: /static/wp-content/uploads/2010/08/problem_thumb.png
 "problem"
-[solved]: ./static/wp-content/uploads/2010/08/solved_thumb.png
+[solved]: /static/wp-content/uploads/2010/08/solved_thumb.png
 "solved"

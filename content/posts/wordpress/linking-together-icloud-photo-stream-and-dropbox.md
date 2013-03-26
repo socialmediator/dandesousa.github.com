@@ -117,15 +117,15 @@ Please feel free to comment or suggest alternate setups. So far this has
 been working quite well and allowing me to leverage the best of both of
 these great cloud services.
 
-  []: ./static/wp-content/uploads/2012/12/dropbx-300x300.png
+  []: /static/wp-content/uploads/2012/12/dropbx-300x300.png
     "dropbx"
-  [1]: ./static/wp-content/uploads/2012/12/icloud-300x297.jpg
+  [1]: /static/wp-content/uploads/2012/12/icloud-300x297.jpg
     "icloud"
-  [2]: ./static/wp-content/uploads/2012/12/icloudcontrolpanel.png
+  [2]: /static/wp-content/uploads/2012/12/icloudcontrolpanel.png
     "icloudcontrolpanel"
-  [3]: ./static/wp-content/uploads/2012/12/options.png
+  [3]: /static/wp-content/uploads/2012/12/options.png
     "options"
-  [4]: ./static/wp-content/uploads/2012/12/files.png
+  [4]: /static/wp-content/uploads/2012/12/files.png
     "files"
   [Dropbox]: https://www.dropbox.com/
   [Dropbox Space Race]: https://www.dropbox.com/spacerace

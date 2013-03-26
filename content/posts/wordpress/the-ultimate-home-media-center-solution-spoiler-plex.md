@@ -48,7 +48,7 @@ looks something like this:
 
 ![][]
 
-<a href="./static/wp-content/uploads/2011/11/episode_overview.png">
+<a href="/static/wp-content/uploads/2011/11/episode_overview.png">
 
 </a>Basically gives you all your episodes (with metadata) automatically.
 Lets you browse by tons of different categories, like unwatched or
@@ -256,4 +256,4 @@ have, what do you want to see in a streaming service that doesn't exist?
 </p>
 
   [Plex]: http://www.plexapp.com/
-  []: ./static/wp-content/uploads/2011/11/episode_overview.png "episode_overview"
+  []: /static/wp-content/uploads/2011/11/episode_overview.png "episode_overview"

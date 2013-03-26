@@ -153,11 +153,11 @@ and you should be fine.
 Hopefully this will be useful to people out there trying to work out how
 to use multiple connections in their home network. I know it was for me.
 
-  []: ./static/wp-content/uploads/2012/05/default-gateway-192.168.1.1-dhcp-address-781x1024.png
+  []: /static/wp-content/uploads/2012/05/default-gateway-192.168.1.1-dhcp-address-781x1024.png
     "default-gateway-192.168.1.1-dhcp-address"
-  [1]: ./static/wp-content/uploads/2012/05/network-1.png
+  [1]: /static/wp-content/uploads/2012/05/network-1.png
     "network-1"
-  [2]: ./static/wp-content/uploads/2012/05/network-2.png
+  [2]: /static/wp-content/uploads/2012/05/network-2.png
     "network-2"
-  [3]: ./static/wp-content/uploads/2012/05/network-3.png
+  [3]: /static/wp-content/uploads/2012/05/network-3.png
     "network-3"

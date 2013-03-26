@@ -26,6 +26,7 @@ DEFAULT_PAGINATION = 10
 
 PLUGINS = ['pelican.plugins.assets',]
 STATIC_PATHS = ['images', 'wp-content']
+FILES_TO_COPY = (('CNAME', 'CNAME'),)
 
 USE_FOLDERS_AS_CATEGORY=False
 DISPLAY_PAGES_ON_MENU=True

@@ -47,4 +47,4 @@ The drivers will then be installed. If you reboot and check ls /dev you
 should see a drive labeled sd\<\*\> for every drive connect to the card
 or your motherboard. Enjoy!
 
-  []: ./static/wp-content/uploads/2011/06/Capture-300x178.png "Capture"
+  []: /static/wp-content/uploads/2011/06/Capture-300x178.png "Capture"
