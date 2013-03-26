@@ -35,3 +35,5 @@ DISPLAY_PAGES_ON_MENU=True
 DISQUS_SITENAME = "dandesousacom"
 TWITTER_USERNAME = "dandesousa"
 
+# Tracking
+GOOGLE_ANALYTICS = "UA-10113677-1"
