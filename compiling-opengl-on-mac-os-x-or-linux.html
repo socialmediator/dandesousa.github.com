@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Dan De Sousa's Blog</title>
+    <meta name="description" content="">
+    <meta name="author" content="Dan De Sousa">
+
+    <link href="./theme/css/bootstrap.min.css" rel="stylesheet">
+    <link href="./theme/css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link href="./theme/css/font-awesome.min.css" rel="stylesheet">
+    <link href="./theme/css/timberland.css" rel="stylesheet">
+    <link href="./theme/css/timberland-icons.css" rel="stylesheet">
+    <link href="./theme/css/timberland-pygments.css" rel="stylesheet">
+            <script type="text/javascript">
+	var disqus_identifier = "compiling-opengl-on-mac-os-x-or-linux.html";
+	(function() {
+		var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+		dsq.src = 'http://dandesousacom.disqus.com/embed.js';
+		(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	})();
+</script>
+  </head>
+  <body>
+            <div class="navbar">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <a class="brand" href="./index.html">Dan De Sousa's Blog</a>
+          <ul class="nav">
+                                                <li ><a href="./pages/about.html">About</a></li>
+                                  </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="container-fluid">
+      <div class="row-fluid">
+        <div class="span2">
+          <div class="social">
+            <h2><small>Social</small></h2>
+            <ul class="unstyled">
+                                          <li><i class="icon-facebook-sign icon-large icon-color-facebook"></i> <a href="https://facebook.com/daniel.sousa">Facebook</a></li>
+                                          <li><i class="icon-github-sign icon-large icon-color-github"></i> <a href="http://github.com/dandesousa">Github</a></li>
+                                          <li><i class="icon-google-plus-sign icon-large icon-color-google-plus"></i> <a href="https://plus.google.com/114589102912613956952">Google Plus</a></li>
+                                          <li><i class="icon-twitter-sign icon-large icon-color-twitter"></i> <a href="http://twitter.com/dandesousa">Twitter</a></li>
+                          </ul>
+          </div>
+          <hr class="soften-left-right" />
+          <h2><small>Categories</small></h2>
+          <ul class="unstyled">
+                        <li><span class="badge ">3</span> <a href="./category/articles.html">Articles</a></li>
+                        <li><span class="badge ">1</span> <a href="./category/personal.html">Personal</a></li>
+                        <li><span class="badge ">1</span> <a href="./category/politics.html">Politics</a></li>
+                        <li><span class="badge badge-success">14</span> <a href="./category/programming.html">Programming</a></li>
+                        <li><span class="badge ">1</span> <a href="./category/ramblings.html">Ramblings</a></li>
+                        <li><span class="badge ">17</span> <a href="./category/technology.html">Technology</a></li>
+                      </ul>
+          <hr class="soften-left-right" />
+                    <h2><small>History</small></h2>
+          <ul class="unstyled">
+            <li><i class="icon-book"></i> <a href="./archives.html">Archives</a></li>
+            <li><i class="icon-tags"></i> <a href="./tags.html">Tags</a></li>
+          </ul>
+        </div>
+
+        <div class="span10">
+                    <div class='article'>
+  <div class="page-header"><h1>Compiling Opengl On Mac Os X Or Linux</h1>
+    <ul class="unstyled">
+  <li><i class="icon-time"></i> <a class="more" href="./compiling-opengl-on-mac-os-x-or-linux.html">2010-01-16 21:50:00</a>
+  <i class="icon-pencil"></i> <a class="url fn" href="./author/admin.html">Admin</a>   <i class="icon-folder-open"></i> <a href="./category/programming.html">Programming</a></li> 
+  <li></li>
+</ul>  </div>
+  <div class="page-content"><p>Most linux distributions make it easy to compile programs using OpenGL.
+Other systems, however, aren't so easy. Here are instructions on how to
+get it running in both platforms.</p>
+<p><strong>Ubuntu / Linux</strong></p>
+<ol>
+<li>
+<p>Make sure you install the opengl-mesa packages for opengl
+    development. On ubuntu you can get them all with the following
+    invocation:</p>
+<p><code>sudo apt-get install freeglut3-dev</code></p>
+</li>
+<li>
+<p>You should include the following #includes in your code referencing
+    opengl:</p>
+<div class="codehilite"><pre><span class="cp">#include &lt;GL/gl.h&gt;</span>
+<span class="cp">#include &lt;GL/glu.h&gt;</span>
+<span class="cp">#include &lt;GL/glut.h&gt;</span>
+</pre></div>
+
+
+</li>
+<li>
+<p>You should also have the following gcc cmdline flags in your
+    makefile:</p>
+<p><code>gcc -o simple simple.c -lGL -lglut -lGLU</code></p>
+</li>
+</ol>
+<p><strong>Mac OS X (tested on Snow Leopard)</strong></p>
+<ol>
+<li>
+<p>For this to work you will have to install gcc and Xcode, which
+    should install all the required opengl/glut libraries. You can get
+    it <a href="http://developer.apple.com/">here</a>.</p>
+</li>
+<li>
+<p>Now, you'll have to alter all the #includes in your files to
+    conform to the proper location. Change all your opengl #includes to
+    the following:<span style="font-family: monospace;"> </span></p>
+<div class="codehilite"><pre><span class="cp">#include &lt;OpenGL/gl.h&gt;</span>
+<span class="cp">#include &lt;OpenGL/glu.h&gt;</span>
+<span class="cp">#include &lt;GLUT/glut.h&gt;</span>
+</pre></div>
+
+
+</li>
+<li>
+<p>Additionally your gcc command line will need to contain the
+    following flags to link, along with any others you might have:</p>
+<p><code>gcc -o simple simple.c -framework Carbon -framework OpenGL -framework GLUT</code></p>
+</li>
+</ol>
+<p><strong>Cross Platform Compatibility</strong></p>
+<p><strong><span style="font-weight: normal;">If you want your code to run on
+both, you need to get the Makefile and code to load the proper libraries
+depending on your system. </span></strong></p>
+<p><strong><span style="font-weight: normal;">In all your OpenGL .c files, add
+the following header instead of your linux/mac includes:</span></strong></p>
+<div class="codehilite"><pre><span class="cp">#ifdef __APPLE__</span>
+<span class="cp">#  include &lt;OpenGL/gl.h&gt;</span>
+<span class="cp">#  include &lt;OpenGL/glu.h&gt;</span>
+<span class="cp">#  include &lt;GLUT/glut.h&gt;</span>
+<span class="cp">#else</span>
+<span class="cp">#  include &lt;GL/gl.h&gt;</span>
+<span class="cp">#  include &lt;GL/glu.h&gt;</span>
+<span class="cp">#  include &lt;GL/glut.h&gt;</span>
+<span class="cp">#endif</span>
+</pre></div>
+
+
+<p>Then in your makefile, add the following before your build targets:</p>
+<div class="codehilite"><pre><span class="c">#default cmdline flags</span>
+<span class="nv">LDFLAGS</span>  <span class="o">=</span> -lGL -lglut -lGLU
+<span class="c"># Mac OS alternate cmdline link options</span>
+<span class="cp">ifeq &quot;$(OSTYPE)&quot; &quot;Darwin&quot;</span>
+  <span class="nv">LDFLAGS</span> <span class="o">=</span> -framework Carbon -framework OpenGL -framework GLUT
+<span class="cp">endif</span>
+</pre></div></div>
+  <hr />
+  <div>
+    <h2>Comments</h2>
+    <a href="http://twitter.com/share" class="twitter-share-button" data-count="horizontal" data-via="dandesousa">Tweet</a><script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
+    <div id="disqus_thread"></div>      </div>
+</div>	
+        </div>
+      </div>
+    </div>
+
+    <footer class="footer">
+    <div class="container">
+      <p>Powered by <a href="http://alexis.notmyidea.org/pelican/">Pelican</a></p>
+      <p><a href="http://github.com/dandesousa/pelican-timberland">Timberland</a> based on <a href="http://twitter.github.com/bootstrap/">Bootstrap, from Twitter</a>.</p>
+      <p><a href="http://glyphicons.com">Glyphicons Free</a> licensed under <a href="http://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.</p> 
+      <p><a href="http://fortawesome.github.com/Font-Awesome">Font Awesome by Dave Gandy</a></p>
+      <p>&copy; Dan De Sousa 2013</p>
+    </div>
+    </footer>
+  </body>
+</html>

@@ -1,2 +1,1582 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Dan De Sousa's Blog</title><link href="http://dandesousa.com/" rel="alternate"></link><link href="http://dandesousa.com/feeds/all.atom.xml" rel="self"></link><id>http://dandesousa.com/</id><updated>2013-03-22T07:34:18Z</updated></feed>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Dan De Sousa's Blog</title><link href="http://dandesousa.com/" rel="alternate"></link><link href="http://dandesousa.com/feeds/all.atom.xml" rel="self"></link><id>http://dandesousa.com/</id><updated>2013-03-25T08:20:00-04:00</updated><entry><title>Migrating my site to github</title><link href="http://dandesousa.com/migrating-my-site-to-github.html" rel="alternate"></link><updated>2013-03-25T08:20:00-04:00</updated><author><name>Dan De Sousa</name></author><id>tag:dandesousa.com,2013-03-25:migrating-my-site-to-github.html</id><summary type="html">&lt;p&gt;I recently left my secure job to pursue my dream of working for myself. In honor of new beginnings, I felt it appropriate that I migrate my website to github. As I plan to be a much more active member of the open source community, I decided to delve right in and move from wordpress to a github pages hosted site with a theme of my own design. I'll go over how I did this, the tools I used, the code I developed, etc. Convienently, these and the subsequent blog posts will server as test data for my theme / tool development.&lt;/p&gt;
+&lt;h1&gt;Why move away from something like Wordpress?&lt;/h1&gt;
+&lt;p&gt;This is an interesting question because is presumes something, mainly that given an already setup Wordpress site is not currently meeting your needs. For me those needs were control, visibility, simplicity. &lt;/p&gt;
+&lt;p&gt;I wanted control over how my site was generated. I wanted to understand everything that was going on under the hood. Unfortunately this meant learning, nay 'groking' PHP. While I admire and respect PHP as the "father" of server side web languages, I would feel much more comfortable having something depending only on python. Additionally, wordpress has dependencies like MySQL, which is yet another dependency I would rather not wish to have, given the low level of user interaction on my site.&lt;/p&gt;
+&lt;p&gt;So I decided to go with github pages, which lets me serve my content statically. I opted to go with pelican over jekyll. Again, opting for something written in python which I could assist with contributing right away, and because it provided a bit more flexibility in terms of templating and generation over jekyll and liquid. &lt;/p&gt;
+&lt;h1&gt;What works and what doesn't&lt;/h1&gt;
+&lt;p&gt;Right off the bat, I found that for just quickly getting setup, it pelican works great. It let's me choose the markup language I want, generate my page and commit to a separate branch in my github repo. However, I find myself wanting for page management and organization (something I plan to take a stab at in the near future). Additionally, while there is a fair amount of themes available for pelican, they aren't as numerous as jekyll or wordpress (of which there are literally thousands).&lt;/p&gt;
+&lt;h1&gt;Future work&lt;/h1&gt;
+&lt;p&gt;I plan on doing the following in the near future:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Create my own theme&lt;/li&gt;
+&lt;li&gt;Create a set of util scripts to assist with pelican post / page management&lt;/li&gt;
+&lt;/ul&gt;</summary><category term="github"></category><category term="wordpress"></category></entry><entry><title>Silence of the Rounds: Why Silencers Make Everyone Safer</title><link href="http://dandesousa.com/silence-of-the-rounds-why-silencers-make-everyone-safer.html" rel="alternate"></link><updated>2013-01-12T23:19:00-05:00</updated><author><name>Admin</name></author><id>tag:dandesousa.com,2013-01-12:silence-of-the-rounds-why-silencers-make-everyone-safer.html</id><summary type="html">&lt;p&gt;With all the debate surrounding firearms in the recently weeks, I
+happened about a discussion with my pro-gun friend about suppressors.
+Mostly commonly known as &lt;em&gt;silencers&lt;/em&gt;, or the long black cylinder on the
+end of James Bond's gun in the movies. He seemed asked me the most worn
+out retort in gun debates across the country:&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;"But why would you ever need one (a silencer)?"&lt;/em&gt;&lt;/p&gt;
+&lt;/p&gt;
+
+&lt;p&gt;This was not an unforgivable question; but surprising one, considering
+he is a firearm owner and regular shooter. You see, many gun control
+advocates propose solutions based on false premises, and 'silencer' laws
+are no exception. It doesn't help that even modern day
+gun enthusiasts are willing to concede that they are dangerous. It's
+easy pray for people like [Alexander Zaitchik, who wrote a scathing
+article on the NRA's recent call for supressor regulation
+relaxation.][]{{1}} When it comes to banning anything, I never ask
+myself why should we have it. I ask "why not?".&lt;/p&gt;
+&lt;/p&gt;
+
+&lt;h2 style="text-align: left;"&gt;The Why&lt;/h2&gt;
+&lt;p&gt;&lt;/p&gt;
+For those who have never shot a firearm before, you should consider what
+these machines are capable of doing. In very simple terms: you pull the
+trigger which ignites a primer and then gunpowder, which forces the
+bullet out of the gun along the trajectory of the barrel. These bullets
+exit the barrel at very high velocities typically measured in many
+multiples of the speed sound. This causes a sonic boom, or displaced,
+compressed shock wave, similar to that produced by supersonic aircraft.
+But because the bullet is so small relative to an aircraft, it is not
+nearly as loud (though still very noticeable). If you never either fired
+a gun or sat on a tarmac, you will never even experience hearing
+anything of that level of volume. When you see actors firing guns on
+television and in movies, they wear no ear protection, yet never once
+flinch and walk away in perfect health. Please realize that you are not
+hearing or seeing real gun fire. What you hear through your speakers is
+far less than what you would hear even with ear protection at any firing
+range.&lt;/p&gt;
+&lt;p&gt;Actually discharging a firearm can cause serious damage to your hearing.
+The ancillary benefit is that other can hear the discharge and call for
+help or react if necessary. What I will try and prove is that perceived
+ability of silencers is far from reality and that they are far more
+useful to law abiding citizens than anyone seeking to cause harm.&lt;/p&gt;
+&lt;h2&gt;The Facts&lt;/h2&gt;
+&lt;/p&gt;
+
+&lt;p&gt;Most common firearms all produce decibel ratings within a fairly common
+range of 150-165db, depending on caliber and barrel.{{2}} We can assume
+a decibel rating of 150db.&lt;/p&gt;
+&lt;/p&gt;
+
+&lt;p&gt;To understand how much damage that can do to the human ear:&lt;/p&gt;
+&lt;p&gt;&lt;/p&gt;
+&lt;strong&gt;Hearing Damage Risk Levels in Decibels:{{3}}&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;85 dB:&lt;/strong&gt; Beginning of OSHA regulations&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;90 dB:&lt;/strong&gt; Risk of Hearing Damage After &lt;strong&gt;8 Hours&lt;/strong&gt; of Sound
+    Exposure&lt;/p&gt;
+&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Lawn Mower&lt;/li&gt;
+&lt;li&gt;Truck Traffic&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;/p&gt;
+&lt;p&gt;
+-   &lt;strong&gt;95 dB:&lt;/strong&gt; Risk of Hearing Damager After &lt;strong&gt;4 Hours&lt;/strong&gt; of Sound
+Exposure&lt;/p&gt;
+&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Motorcycle&lt;/li&gt;
+&lt;li&gt;Power Saw&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;/p&gt;
+&lt;p&gt;
+-   &lt;strong&gt;100 dB:&lt;/strong&gt; Risk of Hearing Damage After &lt;strong&gt;2 Hours&lt;/strong&gt; of Sound
+Exposure&lt;/p&gt;
+&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Chainsaw&lt;/li&gt;
+&lt;li&gt;Stereo Headphones&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;/p&gt;
+&lt;p&gt;
+-   &lt;strong&gt;105 dB:&lt;/strong&gt; Risk of Hearing Damage After &lt;strong&gt;1 Hour&lt;/strong&gt; of Sound
+Exposure&lt;/p&gt;
+&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Jackhammer&lt;/li&gt;
+&lt;li&gt;Helicopter&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;/p&gt;
+&lt;p&gt;
+-   &lt;strong&gt;110 dB:&lt;/strong&gt; Risk of Hearing Damage After &lt;strong&gt;30 Minutes&lt;/strong&gt; of Sound
+Exposure&lt;/p&gt;
+&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Snowmobile from Driver Seat&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;/p&gt;
+&lt;p&gt;
+-   &lt;strong&gt;115 dB:&lt;/strong&gt; Risk of Hearing Damage After &lt;strong&gt;15 Minutes&lt;/strong&gt; of Sound
+Exposure&lt;/p&gt;
+&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Baby's Cry&lt;/li&gt;
+&lt;li&gt;Stadium Football Game&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;/p&gt;
+&lt;p&gt;
+-   &lt;strong&gt;120 dB:&lt;/strong&gt; Risk of Hearing Damage After &lt;strong&gt;7.5 Minutes&lt;/strong&gt; of Sound
+Exposure&lt;/p&gt;
+&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Rock Concert&lt;/li&gt;
+&lt;li&gt;Sandblasting&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;/p&gt;
+&lt;p&gt;
+-   &lt;strong&gt;140 dB:&lt;/strong&gt; &lt;strong&gt;Immediate Hearing Damage&lt;/strong&gt;&lt;/p&gt;
+&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Gunshot&lt;/li&gt;
+&lt;li&gt;Jet Engine Taking Off&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;/p&gt;
+&lt;p&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/p&gt;
+
+&lt;p&gt;In other words, any discharge from a firearm without hearing protection
+&lt;em&gt;IMMEDIATELY&lt;/em&gt; begins to cause hearing damage. Sustained or repeated
+exposure (i.e. repeated gunshots) worsens the damage. My personal ear
+protection, with one of the highest decibel ratings I could find,
+reduces this by &lt;em&gt;30db&lt;/em&gt;, bringing the level to &lt;em&gt;120db,&lt;/em&gt; but outside of
+the immediate danger zone. Since most muzzle noise exposure is for
+milliseconds, we can be confident that our ears are safe.&lt;/p&gt;
+&lt;/p&gt;
+
+&lt;p&gt;And what about silencers? How much noise is that soft "punk" out of
+Bond's gun that lets him sneak around undetected? Since those bad guys,
+could presumably hear someone talking, we can make an educated guess
+from the movie, that it should be well below the 65 decibels of human
+speech. Well, according to independent tests{{4}}, firearm suppressors
+reduce noise by an average of -- suprise, suprise -- &lt;em&gt;30db&lt;/em&gt;. Or, just
+enough to not cause immediate, irreparable hearing damage. Consider that
+for a moment, putting a silencer on your gun is the equivalent of giving
+everyone in the area ear protection. Even then, our chart indicates that
+we'd still be exposed to a level of noise equivalent to a live concert,
+clearly enough for anyone within range of the firearm to hear.&lt;/p&gt;
+&lt;/p&gt;
+
+&lt;h2 style="text-align: left;"&gt;The Why Not&lt;/h2&gt;
+&lt;p&gt;&lt;/p&gt;
+So to answer my friend's question, a silencer could easily be used to
+assist someone who is using a gun in their home for self defense. No one
+is going to wait to put on their ear protection in an emergency, but
+they could keep the suppressor on their home defense firearm.
+Additionally, suppressors reduce the risk of harm in defending, say, a
+child's bedroom. They also reduce muzzle flash and make it less like to
+induce disorientation.&lt;/p&gt;
+&lt;p&gt;Would they enable someone to sneak around and dispatch people
+undetected? &lt;strong&gt;Absolutely not.&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Do they make firearms silent or more dangerous? &lt;strong&gt;No&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;Do they make firearms safer to discharge? &lt;strong&gt;Yes&lt;/strong&gt;.&lt;/p&gt;
+&lt;h2&gt;Beware of Truth&lt;/h2&gt;
+&lt;p&gt;&lt;/p&gt;
+I implore anyone who reads this to please do research on all the facts
+before decided to strip rights away from others. On the matter of gun
+control, more than any other, I find that people are willing to
+compromise critical thinking for confirmation bias. That makes everyone
+less safe.&lt;/p&gt;
+&lt;p&gt;Luckily suppressors are not entirely illegal, but they are not easily
+accessible. They require federal registration and a long waiting period.
+They are also not transferrable or legal in certain states.&lt;/p&gt;
+&lt;p&gt;[[1]]Silencers: The NRA’s latest big lie,
+&lt;a href="http://www.salon.com/2012/12/30/silencers_the_nras_latest_big_lie"&gt;http://www.salon.com/2012/12/30/silencers_the_nras_latest_big_lie&lt;/a&gt;[[1]]&lt;/p&gt;
+&lt;/p&gt;
+
+&lt;p&gt;[[2]]Gunfire Sound
+Levels, &lt;a href="http://www.freehearingtest.com/hia_gunfirenoise.shtml"&gt;http://www.freehearingtest.com/hia_gunfirenoise.shtml&lt;/a&gt;[[2]]&lt;/p&gt;
+&lt;/p&gt;
+
+&lt;p&gt;[[3]]Hearing Damage Sound Chart,
+&lt;a href="http://expecttohearbetter.com/hearing-damage-sound-chart.html"&gt;http://expecttohearbetter.com/hearing-damage-sound-chart.html&lt;/a&gt;[[3]]&lt;/p&gt;
+&lt;/p&gt;
+
+&lt;p&gt;[[4]]Silencer's are not
+silent, &lt;a href="http://www.todayifoundout.com/index.php/2010/11/gun-silencers-dont-make-them-anywhere-near-silent/"&gt;http://www.todayifoundout.com/index.php/2010/11/gun-silencers-dont-make-them-anywhere-near-silent/&lt;/a&gt;[[4]]&lt;/p&gt;
+&lt;/p&gt;
+
+&lt;p&gt;[Alexander Zaitchik, who wrote a scathing article on the NRA's recent
+  call for supressor regulation relaxation.]: http://www.salon.com/2012/12/30/silencers_the_nras_latest_big_lie/&lt;/p&gt;</summary><category term="guns"></category><category term="Politics"></category></entry><entry><title>Linking Together iCloud, Photo Stream and Dropbox.</title><link href="http://dandesousa.com/linking-together-icloud-photo-stream-and-dropbox.html" rel="alternate"></link><updated>2012-12-09T20:07:00-05:00</updated><author><name>Admin</name></author><id>tag:dandesousa.com,2012-12-09:linking-together-icloud-photo-stream-and-dropbox.html</id><summary type="html">&lt;p&gt;Looking for a way to link together iCloud and Dropbox to manage your
+photos? Look no further; the following is a guide to getting your iOS
+and Photo Stream photos automatically into Dropbox.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="./static/wp-content/uploads/2012/12/dropbx-300x300.png" title="dropbx" /&gt; &lt;img alt="" src="./static/wp-content/uploads/2012/12/icloud-300x297.jpg" title="icloud" /&gt;&lt;/p&gt;
+&lt;h2&gt;Background&lt;/h2&gt;
+&lt;p&gt;This  process started because I was looking for a way to manage all my
+photos on my iPad. I want to take pictures with my DSLR or point and
+shoot, download them to my iPad with the camera connection kit, and have
+them automatically added to my cloud or local photo library.
+Unfortunately many of the photo management services on the iPad are
+lacking, and it is not easy to create and sync albums through iCloud.
+What I really wanted was a permanent backup solution for photos on my
+iPad. It would also be nice to be able to manage my photos with a third
+party application like Picasa. That's when I thought to use Photo Stream
+as a delivery mechanism to upload photos to Dropbox. I trust Dropbox to
+keep my photos safe, and I like having access to all my photos on all my
+devices. Of course, all these photos are going to take up a lot of space
+over time. I cover the costs of this setup in the last section.&lt;/p&gt;
+&lt;h2&gt;Setup&lt;/h2&gt;
+&lt;p&gt;This setup will work on Windows or Mac, but I'll go over the
+instructions for Windows. If there are requests I can post directions
+for OS X, though it should be pretty straightforward from the following.&lt;/p&gt;
+&lt;p&gt;You'll need these applications:&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://www.dropbox.com/"&gt;Dropbox&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://support.apple.com/kb/dl1455"&gt;iCloud Control Panel&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;These instructions have you setup iCloud Control Panel to download your
+Photo Stream uploaded photos (which includes all photos added to your
+iOS through either the camera app or the camera connection kit) a
+Dropbox folder.&lt;/p&gt;
+&lt;p&gt;First you'll want to make sure Dropbox is configured and setup for your
+account.&lt;/p&gt;
+&lt;p&gt;Second after you install the iCloud Control Panel, you want to find it
+under Control Panel &gt; iCloud. You should see something like this:&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="./static/wp-content/uploads/2012/12/icloudcontrolpanel.png" title="icloudcontrolpanel" /&gt;&lt;/p&gt;
+&lt;p&gt;Select options next to Photo Stream:&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="./static/wp-content/uploads/2012/12/options.png" title="options" /&gt;&lt;/p&gt;
+&lt;p&gt;Make sure that "My Photo Stream" is selected. Also check "Shared Photo
+Streams" if you use that feature. Select "Change" next to "Photo Stream
+location" and navigate to your Dropbox directory. You can either select
+the Photos directory. In the follow example I've created a dedicated
+directory just for my Photo Stream photos:&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="./static/wp-content/uploads/2012/12/files.png" title="files" /&gt;&lt;/p&gt;
+&lt;p&gt;Don't worry about the directories under "Photo Streams" they will appear
+once your computer starts download photos from Apple. Once it's
+selected, select "OK" all the way until you get back to the main control
+panel window and close it.&lt;/p&gt;
+&lt;p&gt;From now on, all new pictures on your iOS device will automatically be
+downloaded to your local machine, and since the location of the download
+is in Dropbox, it will be uploaded to your Dropbox account as well.&lt;/p&gt;
+&lt;h2&gt;Benefits&lt;/h2&gt;
+&lt;p&gt;You might be asking why go through to the trouble of doing this. Well
+there are a number of benefits:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;You can access all your photos on all your devices, computers and on
+    the web securely.&lt;/li&gt;
+&lt;li&gt;Manage your photo library solely from your iPad, iPhone with Dropbox
+    and the Photos app.&lt;/li&gt;
+&lt;li&gt;Freedom to delete old photos from your iOS device without fear that
+    they will disappear from iCloud after 30 days or when your 1000
+    photo limit is reached. If dropbox is installed on your iOS device,
+    you can even view them there long after they've disappeared from
+    Photo Stream.&lt;/li&gt;
+&lt;li&gt;Automatically download photos to all your computers at once (as long
+    as your computer with iCloud Control Panel is running)&lt;/li&gt;
+&lt;li&gt;Automatically upload photos to all your iOS devices from any
+    computer in the world or the web by dropping them in the Photo
+    Stream &gt; Uploads folder (as long as your iCloud Control Panel
+    computer is running)&lt;/li&gt;
+&lt;li&gt;"Own" all your photos, organize them into albums and make them
+    accessible.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2&gt;Long Term Costs&lt;/h2&gt;
+&lt;p&gt;This setup does not come without its costs. While iCloud and Photo
+Stream are free for Photos, a new dropbox free user probably doesn't
+have much room to be storing their entire photo library. In the long
+term this will like depend on having a paid account. However, fret not,
+since Dropbox is always running a number of promotions to increase
+available space. The biggest is the &lt;a href="https://www.dropbox.com/spacerace"&gt;Dropbox Space Race&lt;/a&gt; and &lt;a href="https://www.dropbox.com/help/category/Referrals"&gt;referral
+program&lt;/a&gt;. You can also &lt;a href="https://www.dropbox.com/pricing"&gt;Dropbox's pricing details&lt;/a&gt; which have
+recently expanded. Furthermore, with the decrease in price of storage,
+we should see costs come down and capacity go up in the coming years.&lt;/p&gt;
+&lt;p&gt;Please feel free to comment or suggest alternate setups. So far this has
+been working quite well and allowing me to leverage the best of both of
+these great cloud services.&lt;/p&gt;</summary><category term="dropbox"></category><category term="icloud"></category><category term="photo stream"></category></entry><entry><title>Changing PlexSync Temporary Directory</title><link href="http://dandesousa.com/changing-plexsync-temporary-directory.html" rel="alternate"></link><updated>2012-11-20T20:10:00-05:00</updated><author><name>Admin</name></author><id>tag:dandesousa.com,2012-11-20:changing-plexsync-temporary-directory.html</id><summary type="html">&lt;p&gt;Plex just announced a great new syncing feature for iOS devices, but I
+noticed that when I started syncing, my SSD would quickly fill up. It
+turns out that as of the current release of plex server v0.9.7.3, you
+cannot directly change the directory. However, you can change the entire
+local application path for plex. There are instructions on the Plex wiki
+detailing how this is done:&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://wiki.plexapp.com/index.php/Plex_Media_Server_Preferences#Advanced_Preferences%20%20"&gt;Plex Wiki&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;In my case I set LocalAppDataPath in the registry to my RAID disc which
+has plenty of storage. You'll have to follow the instructions for your
+particular platform.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;IMPORTANT: &lt;/strong&gt;Make sure that when you change the path you copy your old
+plex app data directory to preserve all your metadata, thumbnails, and
+database. On Windows, its in "C:/Users/\&amp;lt;USERNAME&gt;/AppData/Local/Plex
+Media Server". Also important, remember that the directory
+Cache/Transcode/Sync &lt;strong&gt;MUST&lt;/strong&gt; exist. I tried to delete the cache to save
+myself some transfer time and when I was missing that
+Cache/Transcode/Sync directory, PlexSync would not work at all. Once I
+restored the directory, all was well.&lt;/p&gt;</summary><category term="plex"></category></entry><entry><title>HowTo: Setup a network with two internet connections</title><link href="http://dandesousa.com/howto-setup-a-network-with-two-internet-connections.html" rel="alternate"></link><updated>2012-05-26T08:41:00-04:00</updated><author><name>Admin</name></author><id>tag:dandesousa.com,2012-05-26:howto-setup-a-network-with-two-internet-connections.html</id><summary type="html">&lt;p&gt;If you are living in an area where internet connection options are
+limited, you may find yourself in a connundrum. Perhaps you want to be
+able to use high bandwidth services (netflix, itunes, bittorrent,
+gaming) but a single connection pipe is not large enough to accomodate
+all the traffic. Or perhaps, your internet is capped or throttled after
+a certain amount of time.&lt;/p&gt;
+&lt;h2&gt;&lt;strong&gt;My Situation&lt;/strong&gt;&lt;/h2&gt;
+&lt;p&gt;&lt;/p&gt;
+I currently live in such an area, where my faster internet provider will
+quickly throttle for high usage. I needed to be able to download (iTunes
+videos, Steam games, etc), but my primary provider throttles if we
+download too much. To make matters worse, my girlfriend works from home,
+so she needs a fast constant connection.&lt;/p&gt;
+&lt;p&gt;So what I wanted was to be able to use Clear (which has great speed and
+reception in our area) for normal internet and DSL for all the high
+bandwidth content. We needed to have one or two computers in our network
+use the DSL, and the others use Clear. However, we still needed everyone
+on the same network because we needed to access file shares and other
+applications running on the network.&lt;/p&gt;
+&lt;p&gt;After much searching I found a solution that fits my needs and that I
+hope will help some other people as well.&lt;/p&gt;
+&lt;h2&gt;&lt;strong&gt;The Solution&lt;/strong&gt;&lt;/h2&gt;
+&lt;p&gt;&lt;/p&gt;
+The solution to my problem is to create a &lt;strong&gt;&lt;em&gt;Multiple Gateway&lt;/em&gt;&lt;/strong&gt; setup.
+The idea is you have a standard network with one internet connection
+that acts as the primary gateway. By default all connecting devices use
+this connection. You then add one or more routers with separate incoming
+connections as other gateways. You assign them IPs and you tell the
+devices you want to use that gateway and it will use it for those
+connections.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;So in summary, this setup will allow you to keep all devices on one
+network and manually assign which connection each device uses (using one
+connection as the default).&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;You just need to follow these steps:&lt;/p&gt;
+&lt;h3&gt;&lt;strong&gt;Setup your default gateway&lt;/strong&gt;&lt;/h3&gt;
+&lt;p&gt;&lt;/p&gt;
+For the purpose of this article, gateway is just another term for a
+router with an incoming WAN or internet connection. Chances are your
+default gateway is already setup -- its just your current single
+connection network setup. If you want to continue to use this connection
+as the default for all devices on the network, leave as is and continue
+to the next step. Otherwise swap the internet connections.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;The internet connection on this gateway will be used for all devices by
+default.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;Make a note of your router's IP address; in most cases it is
+'192.168.1.1'.&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Also note the DHCP range of your router, this varies by model but on the
+common dd-wrt setup can be found here:&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="./static/wp-content/uploads/2012/05/default-gateway-192.168.1.1-dhcp-address-781x1024.png" title="default-gateway-192.168.1.1-dhcp-address" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;/p&gt;
+For this scenario our DHCP range starts at 192.168.1.100. So anything
+from 192.168.1.0 - 192.168.1.99 is out of range and won't be used by the
+router when assigning the addresses to devices. This is important to
+know for the next step.&lt;/p&gt;
+&lt;h3&gt;&lt;strong&gt;Setup your second gateway&lt;/strong&gt;&lt;/h3&gt;
+&lt;p&gt;&lt;/p&gt;
+You want to setup a completely separate network with the second router
+and connection. Don't connect the second gateway to the main network
+yet. Verify that on your second connection you have an internet
+connection and everything is working.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Assign the second gateway an IP address&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Once that works, you want to give the second gateway a different IP
+address to distinguish it from the primary gateway. Since the primary
+gateway is IP address 192.168.1.1, we'll use 192.168.1.2. Note that the
+address must be outside the range of DHCP for the primary gateway.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Disable DHCP on the second gateway&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Now, you want to disable DHCP server on the second gateway. If you are
+using DD-WRT, the highlighted radio box in the box image should be
+'Disable'. This is important, DHCP MUST BE DISABLED. Not set to a new
+gateway, not turned onto DHCP forwarding -- DISABLED. Make sure you hit
+apply and save any settings before moving onto the next step.&lt;/p&gt;
+&lt;h3&gt;&lt;strong&gt;Connect your second gateway to your network through the LAN port&lt;/strong&gt;&lt;/h3&gt;
+&lt;p&gt;&lt;/p&gt;
+Now connect your second gateway to your network through the LAN part as
+you would connect a switch to your network to allow for additional
+connections. Once you do so, you should be able to connect to your
+primary network and access both the primary gateway and the secondary
+gateway by their addresses. Confirm this by ensuring you can access
+192.168.1.1 and 192.168.1.2.&lt;/p&gt;
+&lt;h3&gt;&lt;strong&gt;Configure your machines to use the alternative gateway&lt;/strong&gt;&lt;/h3&gt;
+&lt;p&gt;&lt;/p&gt;
+Good news is you are pretty much done now. You can confirm your setup is
+working by assigning a machine to either network. You want to open up
+your network menu and find your network interface (representing the one
+connected to your network  -- be it wired or wireless).&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="./static/wp-content/uploads/2012/05/network-1.png" title="network-1" /&gt;&lt;/p&gt;
+&lt;p&gt;now right click and select properties. Then select the IPv4 settings and
+hit properties again:&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="./static/wp-content/uploads/2012/05/network-2.png" title="network-2" /&gt;&lt;/p&gt;
+&lt;p&gt;Now you want to manually configure your connection.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="./static/wp-content/uploads/2012/05/network-3.png" title="network-3" /&gt;&lt;/p&gt;
+&lt;p&gt;For your IP address, assign anything that is outside the DHCP range of
+your router (anything below 192.168.1.100 works in this example). Leave
+subnet mask matching your primary gateway and assign default gateway to
+the second connection. You'll also want to add that as the DNS server.
+This tells this network interface to use that gateway for your internet
+connection.&lt;/p&gt;
+&lt;p&gt;If all works successfully you should now have access, and all traffic on
+that box will flow to your second gateway, leaving your other
+connections unaffected.&lt;/p&gt;
+&lt;p&gt;Most devices give you the ability to customize the your IP configuration
+this way, so you should be able to configure your devices in any manner
+you choose.&lt;/p&gt;
+&lt;h3&gt;&lt;strong&gt;Repeat for any additional connections &lt;/strong&gt;&lt;/h3&gt;
+&lt;p&gt;&lt;/p&gt;
+The multiple gateway setup works for as many connections as you want.
+Just continue adding addresses outside your DHCP range for your gateways
+and you should be fine.&lt;/p&gt;
+&lt;p&gt;Hopefully this will be useful to people out there trying to work out how
+to use multiple connections in their home network. I know it was for me.&lt;/p&gt;</summary><category term="networking"></category></entry><entry><title>HowTo Fix: MacBook Pro and Dell 2711 DisplayPort Issues</title><link href="http://dandesousa.com/howto-fix-macbook-pro-and-dell-2711-displayport-issues.html" rel="alternate"></link><updated>2012-03-07T21:41:00-05:00</updated><author><name>Admin</name></author><id>tag:dandesousa.com,2012-03-07:howto-fix-macbook-pro-and-dell-2711-displayport-issues.html</id><summary type="html">&lt;p&gt;I chose to get the Dell U2711 mostly due to PC compatibility and price
+advantages over the Cinema Display. However, having a MacBook Pro I
+wanted to also connect it to  my nice display. I ordered a
+Mini-DisplayPort to DisplayPort cable and all worked fine until one day
+it didn't. The screen was black and no signal was being delivered
+between my MacBook Pro and the display. I tested with my girlfriend's
+computer and the problem persisted. I ordered yet another cable and the
+problem still persisted!&lt;/p&gt;
+&lt;p&gt;I knew something was wrong with the display. Finally I solved my problem
+in the most simple way:&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;While the monitor was on, I pulled the U2711's power cable and waited
+about 15-30 seconds. I plugged the monitor back in and switch to
+DisplayPort and it worked perfected!&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Obviously something is wrong with Dell's monitor in this instance, but
+this simple fix should help everyone having headaches with this like me.&lt;/p&gt;</summary><category term="apple"></category><category term="macbook pro"></category><category term="dell"></category><category term="displayport"></category><category term="u2711"></category></entry><entry><title>HowTo Fix: Slow SSD Boot Times in Mac OS X</title><link href="http://dandesousa.com/howto-fix-slow-ssd-boot-times-in-mac-os-x.html" rel="alternate"></link><updated>2012-03-07T21:31:00-05:00</updated><author><name>Admin</name></author><id>tag:dandesousa.com,2012-03-07:howto-fix-slow-ssd-boot-times-in-mac-os-x.html</id><summary type="html">&lt;p&gt;I recently bought a ssd for my macbook pro and noticed after installing
+and reformatting, the boot times were slow ... about as slow as my hdd
+or even slower. If you have an SSD, you can except boot times around 15
+seconds or so. If you are encountering boot times of 35+ seconds, you
+may have the same problem I had. I was able to solve the problem by
+following these steps:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;System Preferences -&gt; Startup Disk. Make sure that your SSD drive
+    is selected.&lt;/li&gt;
+&lt;li&gt;Open Disk Utility and select your drive, and click "Repair Disk
+    Permissions"&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://support.apple.com/kb/ht1379"&gt;Reset your PRAM&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://support.apple.com/kb/HT3964"&gt;Reset your SMC&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;/p&gt;
+The final step of reseting the SMC finally fixed this for me, but I had
+tried all the steps before hand, so I cannot be sure which will work for
+you. If you have any comments, please post for the benefit of all
+readers.&lt;/p&gt;</summary><category term="ssd"></category><category term="apple"></category><category term="macbook"></category><category term="boot"></category></entry><entry><title>[Boost.Python] Calling back into python from native C++ threads</title><link href="http://dandesousa.com/boostpython-calling-back-into-python-from-native-c-threads.html" rel="alternate"></link><updated>2011-12-11T21:46:00-05:00</updated><author><name>Admin</name></author><id>tag:dandesousa.com,2011-12-11:boostpython-calling-back-into-python-from-native-c-threads.html</id><summary type="html">&lt;p&gt;So I came across a particularly frustrating problem dealing with a boost
+python wrapper around a library which is calling python functions from
+native c++ threads (boost threads in this case). The problem was that
+some calls to release the global interpreter lock would cause python to
+through fatal errors and segmentation fault, despite seeming to acquire
+the GIL properly. This is how I solved the problem.&lt;/p&gt;
+&lt;p&gt;As a quick overview, you need to make sure that any native threads
+acquire the GIL (global interpreter lock) before any sort of python
+resources are touched. You may not use any C Python API functions or
+call into python until the GIL is acquired. A good practice is to follow
+the RIAA method for acquiring the GIL like so:&lt;/p&gt;
+&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;ScopedGILRelease&lt;/span&gt;
+&lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="nl"&gt;public:&lt;/span&gt;
+        &lt;span class="kr"&gt;inline&lt;/span&gt; &lt;span class="n"&gt;ScopedGILRelease&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+        &lt;span class="p"&gt;{&lt;/span&gt;
+            &lt;span class="n"&gt;d_gstate&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;PyGILState_Ensure&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+        &lt;span class="p"&gt;}&lt;/span&gt;
+        &lt;span class="kr"&gt;inline&lt;/span&gt; &lt;span class="o"&gt;~&lt;/span&gt;&lt;span class="n"&gt;ScopedGILRelease&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+        &lt;span class="p"&gt;{&lt;/span&gt;
+            &lt;span class="n"&gt;PyGILState_Release&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;d_gstate&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+        &lt;span class="p"&gt;}&lt;/span&gt;
+    &lt;span class="nl"&gt;private:&lt;/span&gt;
+        &lt;span class="n"&gt;PyGILState_STATE&lt;/span&gt; &lt;span class="n"&gt;d_gstate&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="p"&gt;};&lt;/span&gt;
+
+&lt;span class="kt"&gt;void&lt;/span&gt; &lt;span class="nf"&gt;onData&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;const&lt;/span&gt; &lt;span class="n"&gt;boost&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;shared_ptr&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;Data&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;::&lt;/span&gt;&lt;span class="n"&gt;P&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&lt;/span&gt; &lt;span class="n"&gt;data&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="k"&gt;const&lt;/span&gt; &lt;span class="kt"&gt;void&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;
+        &lt;span class="n"&gt;closure&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="n"&gt;ScopedGILRelease&lt;/span&gt; &lt;span class="n"&gt;gil_lock&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="c1"&gt;// invoke call_method to python&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;In the above example we call the lock which invokes PyGILState_Ensure()
+to acquire the lock. Additionally we call PyGILState_Release() on the
+same thread state object when we go out of scope.&lt;/p&gt;
+&lt;p&gt;What bit me when developing this solution was that the api was not being
+properly initialized. Originally I was calling two functions in my one
+of my modules objects which I assumed was going to be called before any
+threads were made.&lt;/p&gt;
+&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="n"&gt;PyEval_InitThreads&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+&lt;span class="n"&gt;PyEval_ReleaseLock&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Now according to the &lt;a href="http://docs.python.org/c-api/init.html#PyEval_InitThreads"&gt;python documentation&lt;/a&gt;, the first thread should:&lt;/p&gt;
+&lt;p&gt;
+&gt; Initialize and acquire the global interpreter lock. It should be
+&gt; called in the main thread before creating a second thread or engaging
+&gt; in any other thread operations such as PyEval_ReleaseLock() or
+&gt; PyEval_ReleaseThread(tstate). It is not needed before calling
+&gt; PyEval_SaveThread() or PyEval_RestoreThread().
+&lt;/p&gt;
+
+&lt;p&gt;However, that documentation is either incorrect or something very subtle
+was going on in my library, since PyEval_InitThreads() was being called
+before any thread operations and the object was being created in the
+main thread of the python interpreter. Perhaps I couldn't guarantee that
+python wasn't spawning some sub-thread to handle that part of the
+script. Anyway I found that I had to instead call PyEval_InitThreads()
+once in the module definition macro for boost python. Looking something
+like this:&lt;/p&gt;
+&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="n"&gt;BOOST_PYTHON_MODULE&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;ModuleName&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="n"&gt;PyEval_InitThreads&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+    &lt;span class="p"&gt;...&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;As always a super simple solution to a super frustrating problem. This
+information was extremely hard to find, so hopefully this helps someone
+out there from losing hours of time. &lt;a href="http://stackoverflow.com/questions/8451334/why-is-pygilstate-release-throwing-fatal-python-errors/8469304#8469304"&gt;Also, here is a link to the stack
+overflow question I eventually posted and quickly subsequently
+answered&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Enjoy.&lt;/p&gt;</summary><category term="python"></category><category term="c++"></category><category term="programming"></category><category term="boost"></category></entry><entry><title>The Ultimate Home Media Center Solution [Spoiler: Plex!]</title><link href="http://dandesousa.com/the-ultimate-home-media-center-solution-spoiler-plex.html" rel="alternate"></link><updated>2011-11-05T23:08:00-04:00</updated><author><name>Admin</name></author><id>tag:dandesousa.com,2011-11-05:the-ultimate-home-media-center-solution-spoiler-plex.html</id><summary type="html">&lt;p&gt;In this article, I cover my opinion on currently the best media center
+option for managing local content libraries, and my thoughts on the
+state of digital video distribution.&lt;/p&gt;
+&lt;p&gt;I do not condone any mention of piracy in the article and any references
+are merely for illustrative purposes regarding this rather opinionated
+article :-).&lt;/p&gt;
+&lt;p&gt;Feel free to jump ahead to the guide, but first some background:&lt;/p&gt;
+&lt;h1&gt;&lt;strong&gt;How I Discovered Plex&lt;/strong&gt;&lt;/h1&gt;
+&lt;p&gt;&lt;/p&gt;
+I can say that I have been searching for the "perfect" home media center
+for a long time. I have a rather large collection of TV Shows and DVDs
+that have been ripped. For years I struggled with getting that media on
+devices I wanted. At first I converted them to PS3 compatible formats
+and streamed them over DLNA using TwonkeyMedia. That was great except
+that conversions took a long time. Then if I wanted them on my iPhone or
+iPod I need to convert them yet again, to a different format. Then I
+needed space for all those duplicate files (and managing them was a
+nightmare). There seemed to be a lot of disjoint solutions which
+required manual management. A friend of mine suggested XBMC, which is a
+great home media center front end with tons of plug-in support. It
+actually eventually led to my discovery of what I believe to be clearly
+the best product out there for managing a local collection of content
+and getting it on your devices, and it is called &lt;a href="http://www.plexapp.com/"&gt;Plex&lt;/a&gt;.&lt;/p&gt;
+&lt;h1&gt;&lt;strong&gt;What Is Plex?&lt;/strong&gt;&lt;/h1&gt;
+&lt;p&gt;&lt;/p&gt;
+First, let me explain what Plex does. Plex is a media center front end
+for Plex Media Server. Basically, Plex Media Server manages a library of
+media on a computer for you, and serves it up to multiple devices. So
+you can have a drive with all your TV Shows, Movies, Music, Photos, etc
+and Plex Media Server (PMS -- an unfortunate abbreviation) will deliver
+it over your home network or the internet. Plex is a UI which runs on a
+computer, mobile phone or TV and gives you access to that content. It
+looks something like this:&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="./static/wp-content/uploads/2011/11/episode_overview.png" title="episode_overview" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="./static/wp-content/uploads/2011/11/episode_overview.png"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;/a&gt;Basically gives you all your episodes (with metadata) automatically.
+Lets you browse by tons of different categories, like unwatched or
+recently aired/added. Did I mention it automatically organize your media
+assuming you have everything reasonable named? Basically it is pretty
+close to media center nirvana, and the basic application and server are
+free to use.&lt;/p&gt;
+&lt;/p&gt;
+
+&lt;p&gt;So what makes this better than any other solution out there, especially
+XBMC (from which Plex was originally development from)?&lt;/p&gt;
+&lt;/p&gt;
+
+&lt;p&gt;Well it's all about Plex Media Server. Basically you can setup one
+machine in your network with media center, and serve up content to every
+client device running plex. The Plex client is available for Mac, Roku,
+Samsung and LG TVs, and jailbroken Apple TVs and more -- so theres
+plenty of choice on the set top box front. Additionally there are native
+iPhone, iPad, and Android apps. Also, Plex Media Server automatically
+live transcodes videos which are unsupported on client devices, and
+almost all video formats are supported. This solves the problem I had
+originally in storing many copies of files. Also, since everything is on
+a common server, you can stop a show or movie on your TV, then watch it
+on your iPad in bed. The server keeps track of partially watch shows on
+all devices. Also, you may want to search for an application called
+sickbeard, as it can integrate with plex to enhance your experience
+(that is all I can say :-) ).&lt;/p&gt;
+&lt;/p&gt;
+
+&lt;p&gt;If you like what you hear, I suggest trying it out. I can also recommend
+a setup which I've found useful, not everyone needs what I have, you can
+make due with less, but my setup fits with my other server needs.&lt;/p&gt;
+&lt;/p&gt;
+
+&lt;h1&gt;&lt;strong&gt;Setting Up Plex Media Center&lt;/strong&gt;&lt;/h1&gt;
+&lt;p&gt;&lt;/p&gt;
+EDIT: I just noticed that as of the latest update, Plex is also
+available for Windows. So you can use any machine you want.&lt;/p&gt;
+&lt;p&gt;You Will Need:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Mac Mini (Alternative: Samsung or LG TV with Apps, Roku, Google TV,
+    Apple TV)&lt;/li&gt;
+&lt;li&gt;Dedicated Server of any OS (Mac Mini will do, or any other machine
+    so long as it is on while you watch videos)&lt;/li&gt;
+&lt;li&gt;Plex for iOS / Android (Last I checked it was about \$3-5 in the app
+    store but definitely the best purchase I've made)&lt;/li&gt;
+&lt;li&gt;Plex for Mac&lt;/li&gt;
+&lt;li&gt;Plex Media Server&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/p&gt;
+
+&lt;div&gt;
+Rough Setup and Reasoning:
+
+&lt;/div&gt;
+
+&lt;/p&gt;
+
+&lt;div&gt;
+&lt;/p&gt;
+
+1.  First, you want to setup your Mac Mini or other plex box. I
+    recommend a mac mini because it is small and provides the best
+    looking, fastest Plex experience. You also get a complete client
+    implementation. It is also the most expensive option. There are Plex
+    clients for TVs, Roku, Google TV or Apple TV (jailbroken), so you
+    can also try one of those if you already have a different box.
+2.  You should install and run Plex Media Server on a dedicated box you
+    can always count on being on when you want to watch videos. This
+    should also be the server all the media is stored on. Advantage of
+    an always on server is that you can access your content from any
+    time on the network (or on the internet if you setup myPlex which is
+    available as of Plex 0.9.5).
+3.  Plex for iOS is only necessary if you want to watch you media on
+    mobile devices. The apps cost a few bucks but they are totally worth
+    it and highly polished.
+4.  Once you setup PMS you just need to run plex and it should
+    auto-detect your local server, exposing all your media. If you run
+    an alternative plex client you may need to point it to the address
+    of your server.
+
+&lt;/p&gt;
+&lt;p&gt;
+&lt;/div&gt;
+
+&lt;/p&gt;
+
+&lt;h1 style="text-align: left;"&gt;&lt;strong&gt;Why People Want Plex&lt;/strong&gt;&lt;/h1&gt;
+&lt;/p&gt;
+
+&lt;p&gt;I asked myself why people want home media centers. I don't think it is
+necessarily due to wanting to own copies of movies, tv shows and music.
+I think that Plex and XBMC have succeeded because simply put, the
+providers and TV device manufacturers have failed consumers. There is no
+single product out there that can give you everything you want, despite
+having tons of companies dedicated to this purpose.&lt;/p&gt;
+&lt;/p&gt;
+
+&lt;h2 style="text-align: left;"&gt;&lt;em&gt;Netflix&lt;/em&gt;&lt;/h2&gt;
+&lt;/p&gt;
+
+&lt;p&gt;Netflix is cheap and great, but it has a terrible selection. I mean 8\$
+a month isn't much but it seems like half the content on there are
+national geographic documentaries. They have great coverage for client
+devices (all mobile phone platforms, tablets, set tops, tvs) but their
+coverage is just so spotty. It seems like they are always losing
+providers or having content negotiation problems. Even so, most shows
+only come out on Netflix the same time they come out on DVD. Maybe I
+don't want to wait 8 months to watch a TV show.&lt;/p&gt;
+&lt;/p&gt;
+
+&lt;h2 style="text-align: left;"&gt;&lt;em&gt;Amazon Instant Video&lt;/em&gt;&lt;/h2&gt;
+&lt;/p&gt;
+
+&lt;p&gt;The next best service is probably Amazon Instant Video. It has a decent
+selection of TV shows and if you are an Amazon Prime member, the deal is
+great (I recently get addicted to Doctor Who thanks to Amazon Instant
+Video and am now I lover of the series). The problem with Amazon is that
+the client support is simply abysmal. I don't understand what they are
+doing. Amazon is perhaps my favorite internet company but I think
+whoever is running their video distribution strategy is a buffoon.
+Amazon Instant Video has clients for Roku and some TVs. However, theres
+no iOS support (no iPad -- come on!), no Android support, no apple tv
+support. If you sell a streaming service you need to make it accessible.
+Also, same criticism applies to the waiting period as netflix.&lt;/p&gt;
+&lt;/p&gt;
+
+&lt;h2 style="text-align: left;"&gt;&lt;em&gt;iTunes and Apple TV&lt;/em&gt;&lt;/h2&gt;
+&lt;/p&gt;
+
+&lt;p&gt;Apple TV provides a wide selection of TV Shows and Movies. They have
+their own dedicated box which is simple and cheap. Unfortunately, Apple
+TV has serious, serious flaws. The deal breaker being that its 720p, as
+is most of the content on the iTunes store. Also, theres no subscription
+option, you have to actually buy all the episodes of every show. Its
+almost a good alternative if you don't want cable.&lt;/p&gt;
+&lt;/p&gt;
+
+&lt;p&gt;I think what the world really needs is a digital form of on demand
+cable. Where you choose your box or client, and subscribe through a
+cable provider to certain shows or subsets of channels and have
+optionally commercial free streaming of content. Then you have access to
+all their networks contents from all time. The issue is that content
+providers and cable companies don't want to stray from a profitable
+traditional business model. They like charging you 100\$ a month for
+digital cable, when you watch about 25% of the shows and channels. Then
+they want to sell people box set DVDs they will watch once if ever after
+the original airing date. They think this is the best way to make money.
+What they don't realize is that if they provide customers with choice,
+such as choosing which channels they watch, choosing whether or not to
+watch with commercials, they will make more money. You can lend a box
+set of DVDs to your friend. You can't share DRM digital rental,
+subscription or purchase, and you can't resell it when you are finish
+(this is why the video game industry loves digital downloads -- they
+lose millions to the resale game market). This is not even to mention
+the possibility for targeted advertisements or exposing people to shows
+directly.&lt;/p&gt;
+&lt;/p&gt;
+
+&lt;p&gt;So how does Plex solve this? Well let's be honest, a large number of
+people who want XBMC or Plex are downloading TV Shows or ripping their
+own bought discs. They are making this complete service for themselves,
+for the subset of shows they want to watch. The sad thing is that the
+piracy is actually a better solution then what is legally available.
+Using the right tools, it can become completely automated, commercial
+free, and instant available after airing -- you could get full quality
+720 TV shows and 1080p Movies as soon as they air or become commercially
+available without lifting a finger. Get with the program providers, if
+people are willing to spend thousands on custom servers, software and
+services, they will pay a little extra for complete, high quality
+streaming access that is guaranteed and legal.&lt;/p&gt;
+&lt;/p&gt;
+
+&lt;p&gt;Hopefully Google, Microsoft or Apple will get their act together and
+release a good solution. Apple has a good track record with provider
+industries in getting content on digital devices. Maybe we will see an
+Apple TV running iOS with native third party app support soon. That
+could mean an app store that supports channels from providers, or a
+common subscription model. There is a lot of money to be made here.&lt;/p&gt;
+&lt;/p&gt;
+
+&lt;p&gt;I'd like to hear what anyone else thinks. What sort of setup do you guys
+have, what do you want to see in a streaming service that doesn't exist?&lt;/p&gt;
+&lt;/p&gt;</summary><category term="plex"></category><category term="home media center"></category></entry><entry><title>Implementing jQuery tablesorter natural sort plugin as text sort</title><link href="http://dandesousa.com/implementing-jquery-tablesorter-natural-sort-plugin-as-text-sort.html" rel="alternate"></link><updated>2011-11-04T22:55:00-04:00</updated><author><name>Admin</name></author><id>tag:dandesousa.com,2011-11-04:implementing-jquery-tablesorter-natural-sort-plugin-as-text-sort.html</id><summary type="html">&lt;p&gt;I have been doing quite a bit of web programming lately and was recently
+trying to figure out how to get the jquery plugin '&lt;a href="http://tablesorter.com/docs/"&gt;tablesorter&lt;/a&gt;' to
+perform a natural sort.&lt;/p&gt;
+&lt;p&gt;For those not aware of what natural sort is, it is the way in which
+human beings tend to sort things intuitively (hence the prefix
+'natural'). In fact, [coding horror as a pretty good article about
+natural sort and how tough it can be][]. To cut the story short, it
+ensures that word19 comes after word2 in a sorted list (a typical sort
+would place word2 after, since the ascii characters in the 5th position
+define the sort order).&lt;/p&gt;
+&lt;p&gt;Now, normally implementing a natural sort is not so difficult depending
+on the language, you basically split up the areas of the string that
+represent digits, and then sort each substring piece in order (string
+order if two strings, numeric order if two digits). Unfortunately, the
+javascript tablesorter plugin allows you to sort by providing a function
+that takes an element to be sorted and transforms it into a different
+string or number that must be sorted EITHER numerical OR textually, but
+not both.&lt;/p&gt;
+&lt;p&gt;Looking around online didn't yield any good solutions aside from,
+"implement a jquery plugin". So I got to wondering what how it could be
+done. These plugins could take the either table or cell as an argument
+but then you'd have to remain stateless and re-perform the entire
+natural sort over again. It may be possible to also use the jquery data
+api to store data about a table to be sorted and then fetch it on each
+call (performing the natural sort once and assigning ids to each cell or
+something).&lt;/p&gt;
+&lt;p&gt;It got me wondering about formulating a natural sorting algorithm as a
+numeric or textual sort. So I tried to prove if it could be done. I tend
+to get carried away and engrossed by certain little challenges like
+this:&lt;/p&gt;
+&lt;p&gt;1.) Natural Sort As Numeric Sort&lt;/p&gt;
+&lt;p&gt;This should become clear shortly that natural sort cannot be easily
+implemented as a stateless numerical sort. Since you are ultimately
+converting the string to a number, you can simply make the string longer
+to produce a bigger number and mess up the sort order.&lt;/p&gt;
+&lt;p&gt;2.) Natural Sort As Textual Sort&lt;/p&gt;
+&lt;p&gt;This seemed like it could work. A textual sort is just a sequential
+comparison of ascii coded bytes, each with a numeric value. Natural sort
+is also a set of sequential comparison operations that ultimately break
+down to numeric comparisons. One simply needs to convert the numeric
+pieces into a string of characters preserving the same order as the
+numeric sort, then create a new string with these numeric characters
+replaced.&lt;/p&gt;
+&lt;p&gt;I decided to follow the original idea of ascii code comparisons, and I
+decided to convert each number to a fixed length string in which each
+digit is a base 127 or 256 number. Why 127 or 256? They represent
+standard and extended ascii code length and ensure that the values
+always fall without the proper range. String needs to be fixed length so
+that all numerals are compared equally (longer numbers won't be
+incorrectly compared against smaller numbers). The length of your string
+determines the maximum size of any numeric segment. That means that
+using a N digit base 127 string gives you 127\^(N-1) numbers. At 10
+digits, thats 3x10\^18 numbers. If you use base 256 you get 21 decimal
+places. Technically you can go even higher with UTF8.&lt;/p&gt;
+&lt;p&gt;Anyway, here is my solution (excuse my probably ugly javascript,
+truthfully its one of the first javascript functions I've written from
+scratch).&lt;/p&gt;
+&lt;div class="codehilite"&gt;&lt;pre&gt;  &lt;span class="nx"&gt;ts&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;addParser&lt;/span&gt;&lt;span class="p"&gt;({&lt;/span&gt;
+  &lt;span class="nx"&gt;id&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;natural&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+  &lt;span class="nx"&gt;is&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="kd"&gt;function&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;s&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+  &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="kc"&gt;false&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="p"&gt;},&lt;/span&gt;
+  &lt;span class="nx"&gt;format&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="kd"&gt;function&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;s&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+  &lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;ret&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;num_str&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;base_num&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;256&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;fixed_len&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;num_to_ascii_len_str&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="kd"&gt;function&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;base&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;max_len&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;num&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+  &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;tmp&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;num&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;ret&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;i&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="nx"&gt;i&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="nx"&gt;max_len&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="nx"&gt;i&lt;/span&gt;&lt;span class="o"&gt;++&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="p"&gt;{&lt;/span&gt;
+      &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;tmp&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="nx"&gt;base&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+      &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;div&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;tmp&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt; &lt;span class="nx"&gt;base&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+        &lt;span class="nx"&gt;tmp&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;tmp&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="nx"&gt;div&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="nx"&gt;base&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+        &lt;span class="nx"&gt;ret&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;String&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;fromCharCode&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;div&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="nx"&gt;ret&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+      &lt;span class="p"&gt;}&lt;/span&gt;
+      &lt;span class="k"&gt;else&lt;/span&gt;
+      &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="nx"&gt;ret&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;String&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;fromCharCode&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;tmp&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="nx"&gt;ret&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+        &lt;span class="nx"&gt;tmp&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+      &lt;span class="p"&gt;}&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="nx"&gt;ret&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="p"&gt;};&lt;/span&gt;
+  &lt;span class="k"&gt;for&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;i&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="nx"&gt;i&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="nx"&gt;s&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;length&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="nx"&gt;i&lt;/span&gt;&lt;span class="o"&gt;++&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+  &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="nx"&gt;code&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;s&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;charCodeAt&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;i&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;code&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="mi"&gt;47&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class="nx"&gt;code&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="mi"&gt;58&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+      &lt;span class="nx"&gt;num_str&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;num_str&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="nx"&gt;s&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;charAt&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;i&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+    &lt;span class="k"&gt;else&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
+      &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;num_str&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;length&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+      &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="nx"&gt;ret&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;ret&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="nx"&gt;num_to_ascii_len_str&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;base_num&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;fixed_len&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+            &lt;span class="nb"&gt;parseInt&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;num_str&lt;/span&gt;&lt;span class="p"&gt;));&lt;/span&gt;
+        &lt;span class="nx"&gt;num_str&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+      &lt;span class="p"&gt;}&lt;/span&gt;
+      &lt;span class="k"&gt;else&lt;/span&gt;
+      &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="nx"&gt;ret&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;ret&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="nx"&gt;s&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;charAt&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;i&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+      &lt;span class="p"&gt;}&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+  &lt;span class="p"&gt;}&lt;/span&gt;
+  &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;num_str&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;length&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+  &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="nx"&gt;ret&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;ret&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="nx"&gt;num_to_ascii_len_str&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;base_num&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;fixed_len&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="nb"&gt;parseInt&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;num_str&lt;/span&gt;&lt;span class="p"&gt;));&lt;/span&gt;
+  &lt;span class="p"&gt;}&lt;/span&gt;
+  &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="nx"&gt;ret&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="p"&gt;},&lt;/span&gt;
+  &lt;span class="nx"&gt;type&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;text&amp;quot;&lt;/span&gt;
+  &lt;span class="p"&gt;});&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Hope this helps someone out there, as this kind of thing is useful but
+not easily found. Oh and if anyone can figure out if its possible for
+formulate this as a numeric sort or knows a better way to do this in the
+context of the tablesorter plugin, please share!&lt;/p&gt;
+&lt;p&gt;[coding horror as a pretty good article about natural sort and how
+  tough it can be]: http://www.codinghorror.com/blog/2007/12/sorting-for-humans-natural-sort-order.html&lt;/p&gt;</summary></entry><entry><title>Realtek RTL8111 Windows Server 2008</title><link href="http://dandesousa.com/realtek-rtl8111-windows-server-2008.html" rel="alternate"></link><updated>2011-06-03T21:45:00-04:00</updated><author><name>Admin</name></author><id>tag:dandesousa.com,2011-06-03:realtek-rtl8111-windows-server-2008.html</id><summary type="html">&lt;p&gt;Encountered an issue when loading Windows Server 2008 R2 onto my new
+media server. Seems it couldn't find my Realtek Gigabit onboard NIC on
+my Biostar A880G+. Anyway after much searching I failure installing the
+official realtek driver. I found the following driver which worked and
+allowed me to update all my other drivers:&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://drivers.softpedia.com/progDownload/Realtek-RTL8110SC-L-Driver-6218-for-WinServer-2008-Download-77885.html"&gt;http://drivers.softpedia.com/progDownload/Realtek-RTL8110SC-L-Driver-6218-for-WinServer-2008-Download-77885.html&lt;/a&gt;&lt;/p&gt;</summary></entry><entry><title>Getting Highpoint RocketRaid 2640x4 Controller To Work In Linux</title><link href="http://dandesousa.com/getting-highpoint-rocketraid-2640x4-controller-to-work-in-linux.html" rel="alternate"></link><updated>2011-06-03T17:29:00-04:00</updated><author><name>Admin</name></author><id>tag:dandesousa.com,2011-06-03:getting-highpoint-rocketraid-2640x4-controller-to-work-in-linux.html</id><summary type="html">&lt;p&gt;So, I finally got around to re-organizing my home server situation, and
+was given a RocketRaid 2640x4 SAS Raid Controller from a friend. My
+intention was to simply use it for the extra SATA slots and not bother
+with its own on-board RAID. However, when I tried to get it to work, I
+noticed that the drives weren't being detected under Ubuntu. I scored
+the internet until I finally found a post from a newegg buyer that
+resolved my issue and I feel its important enough to post.&lt;/p&gt;
+&lt;p&gt;Here are the steps you need to follow to get this controller to work
+under Linux. They may work for all versions of Linux but I have not
+tried them.&lt;/p&gt;
+&lt;p&gt;1.) Flash the BIOS to legacy&lt;/p&gt;
+&lt;p&gt;If you don't need the RAID features, you can flash the BIOS on the card
+to replace the current BIOS with a legacy BIOS &lt;em&gt;sans&lt;/em&gt; RAID. To do this,
+simply download the legacy BIOS from the Highpoint website. You can then
+either run the highpoint flash utility under windows or you'll need to
+create a DOS boot disk. If you have access to a Windows box, using the
+utility is the easier course of action. When you extract the BIOS zip it
+should be listed as hptflash.exe and look like this:&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="./static/wp-content/uploads/2011/06/Capture-300x178.png" title="Capture" /&gt;&lt;/p&gt;
+&lt;p&gt;2.) Configure the drive to be under legacy mode&lt;/p&gt;
+&lt;p&gt;Now plug you card back into the linux box and make sure that all the
+drives connected to the card are listed as "legacy" in the RocketRaid
+RAID utility that appears when you boot your machine (You may need to
+press CTRL+H when the appropriate screen appears).&lt;/p&gt;
+&lt;p&gt;3.) Download and Compile the Driver Source&lt;/p&gt;
+&lt;p&gt;Now you need to make sure the drivers are properly installed. I got
+issues when I tried to install the pre-built binaries. Luckily its
+pretty easy to compile the drivers yourself. Simply download the
+&lt;em&gt;legacy&lt;/em&gt; drives from the RocketRaid site on the same page as the BIOS.
+Now just cd in the lowest level of the source directory and type "sudo
+make install". You'll see it build and then you are done!&lt;/p&gt;
+&lt;p&gt;The drivers will then be installed. If you reboot and check ls /dev you
+should see a drive labeled sd\&amp;lt;*&gt; for every drive connect to the card
+or your motherboard. Enjoy!&lt;/p&gt;</summary></entry><entry><title>HTPC Stutter Over HDMI on Samsung HDTV</title><link href="http://dandesousa.com/htpc-stutter-over-hdmi-on-samsung-hdtv.html" rel="alternate"></link><updated>2011-02-18T23:25:00-05:00</updated><author><name>Admin</name></author><id>tag:dandesousa.com,2011-02-18:htpc-stutter-over-hdmi-on-samsung-hdtv.html</id><summary type="html">&lt;p&gt;This will be a quick one. I recently built an HTPC to run XBMC and play
+videos off my file share. I noticed that almost all videos had
+an occasional stutter that would occur every few seconds and produce a
+very slight stutter in the image. This happened for all file types and
+resolutions. I'm running with an integrated ATI HD 4250.&lt;/p&gt;
+&lt;p&gt;I eventually figured out that it was my TV settings. I was connecting
+over HDMI and Samsung must do some extra processing or handshaking over
+the HDMI to HTPC. I realized this since I connected my HTPC to my
+monitor at the same resolution (1080p 60hz) and I experienced perfect
+video playback. I eventually was able to solve the problem by setting
+the HDMI input source name to PC and disabling Auto Motion Plus
+features. It seems like this tells the Samsung set to stop any extra
+processing that causes and occasional stutter.&lt;/p&gt;
+&lt;p&gt;Hope this helps someone out there!&lt;/p&gt;
+&lt;p&gt;UPDATE: I found that turning off "de-interlacing" in the ATI catalyst
+settings eliminated this effect. Try that in addition to the above steps&lt;/p&gt;</summary><category term="hdmi"></category><category term="samsung"></category><category term="tv"></category><category term="xbmc"></category></entry><entry><title>How To Fix iOS Memory Leaks Coming From UIKit</title><link href="http://dandesousa.com/how-to-fix-ios-memory-leaks-coming-from-uikit.html" rel="alternate"></link><updated>2011-02-11T21:10:00-05:00</updated><author><name>Admin</name></author><id>tag:dandesousa.com,2011-02-11:how-to-fix-ios-memory-leaks-coming-from-uikit.html</id><summary type="html">&lt;p&gt;It looks as though I'm going to be posting a number of troubleshooting
+iOS SDK and objective-c guides in the coming weeks. The first deals with
+memory leaks coming from UIKit and QuartzCore.&lt;/p&gt;
+&lt;p&gt;If you are using the leaks tool included with Instruments and XCode, you
+might notice leaks. This is a pretty amazing tool that will tell you
+when you leak, how much and where the allocations occurred.&lt;/p&gt;
+&lt;p&gt;In instruments, you can select View -&gt; Extended Detail. This will
+provide you with the stack trace. You can then see where the leak
+originated. If you see errors coming straight from main, or from a call
+to pushViewController, you likely had the same problem I had -- you are
+not cleaning up your View or ViewController.&lt;/p&gt;
+&lt;p&gt;To be safe in memory management, be careful to do the following:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;In viewDidUnload:, you should set all your retain and IBOutlet
+    properties to nil like so:&lt;/li&gt;
+&lt;li&gt;Secondly, and very important, you should release and set all the
+    IBOutlet backing properties to nil, like so:&lt;/li&gt;
+&lt;li&gt;Make sure you have no references to parent views or controllers in
+    the leaking view controller.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;/p&gt;
+This may seem totally counterintuitive since retain properties should
+properly free all held memory when nil is set, but actually the second
+step is required when dealing with UI components, otherwise it will
+result it leaks that appear to originate from UIKit or other Apple
+libraries. Be very careful that all IBOutlets are set to nil.&lt;/p&gt;</summary></entry><entry><title>HowTo Fix: iOS 4.3 Beta Installed on iPad but Missing Gestures</title><link href="http://dandesousa.com/howto-fix-ios-43-beta-installed-on-ipad-but-missing-gestures.html" rel="alternate"></link><updated>2011-01-15T21:42:00-05:00</updated><author><name>Admin</name></author><id>tag:dandesousa.com,2011-01-15:howto-fix-ios-43-beta-installed-on-ipad-but-missing-gestures.html</id><summary type="html">&lt;p&gt;I recently installed the iPad OS 4.3 beta and found that the gestures
+were missing. A bit of tinkering around and I realized that actually I
+had not yet turned on my iPad for development use (something required to
+access these new features). If you are experiencing the same problems,
+following these steps to enabled gestures on your iPad:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Verify that gestures are not enabled&lt;/li&gt;
+&lt;li&gt;Plug you iPad into your mac and bring up the xcode organizer and
+    click "enable development use" on your iPad's summary screen.&lt;/li&gt;
+&lt;li&gt;Kill and restart the settings app on your iPad&lt;/li&gt;
+&lt;li&gt;Confirm you now have gestures.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/p&gt;</summary></entry><entry><title>iOS EXC_BAD_ACCESS error when navigating to/from nib</title><link href="http://dandesousa.com/ios-exc_bad_access-error-when-navigating-tofrom-nib.html" rel="alternate"></link><updated>2010-11-27T13:01:00-05:00</updated><author><name>Admin</name></author><id>tag:dandesousa.com,2010-11-27:ios-exc_bad_access-error-when-navigating-tofrom-nib.html</id><summary type="html">&lt;p&gt;As I have begun the trek towards mastering objective-c, I've come to
+appreciate the memory management nuances. I came across a problem where
+when navigating backwards in a table view, the application would just
+crash with an EXC_BAD_ACCESS error. If you see this it is most likely
+due to accidently mis-managing memory. I fixed my particular error by
+referring to the memory management rules with NIBs. Because of the way
+nibs are access you need to unload IBOutlet properties in the
+viewDidUnload method. Here are examples from apple's documentation:&lt;/p&gt;
+&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="k"&gt;-&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kt"&gt;void&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="nf"&gt;viewDidUnload&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="n"&gt;self&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;anOutlet&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;nil&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;super&lt;/span&gt; &lt;span class="n"&gt;viewDidUnload&lt;/span&gt;&lt;span class="p"&gt;];&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Also, for some reason you also have to release them in the dealloc for
+the controller you are in:&lt;/p&gt;
+&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="k"&gt;-&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kt"&gt;void&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="nf"&gt;dealloc&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="c1"&gt;// Release outlets and set outlet variables to nil.&lt;/span&gt;
+    &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;anOutlet&lt;/span&gt; &lt;span class="n"&gt;release&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; &lt;span class="n"&gt;anOutlet&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;nil&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;super&lt;/span&gt; &lt;span class="n"&gt;dealloc&lt;/span&gt;&lt;span class="p"&gt;];&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Hope this helps someone out there. &lt;a href="http://developer.apple.com/library/mac/#documentation/Cocoa/Conceptual/MemoryMgmt/Articles/mmNibObjects.html"&gt;Here are the details of how to
+manage memory in NIBS for Mac OS or iOS.&lt;/a&gt;&lt;/p&gt;</summary><category term="iphone"></category><category term="memory management"></category><category term="objective-c"></category><category term="UITableView"></category></entry><entry><title>Copying Test and Data Files to Build Directory in C# .NET Unit Tests</title><link href="http://dandesousa.com/copying-test-and-data-files-to-build-directory-in-c-net-unit-tests.html" rel="alternate"></link><updated>2010-10-02T08:20:00-04:00</updated><author><name>Admin</name></author><id>tag:dandesousa.com,2010-10-02:copying-test-and-data-files-to-build-directory-in-c-net-unit-tests.html</id><summary type="html">&lt;p&gt;Unit testing with VS2010's built in unit testing facilities is
+especially convenient. However it is no always clear how to specific
+that an entire directory should be copied into the build / test
+directory as data. Aside from setting up pre- and post- build rules,
+VS2010 comes with a way to automatically include any project or
+referenced directories and files as part of the build deployment. To
+specify this, you use what is known as the testconfigs file.&lt;/p&gt;
+&lt;p&gt;First, open up your unit testing project with visual studio, and from
+the test menu item, select edit test configuration.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://dans-coding-examples.googlecode.com/files/testcopy-editsettings.png" title="Test Copy Tutorial Edit Test Settings" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;/p&gt;
+Then, in the window that appears, select deployment and make sure that
+the enable deployment check box is &lt;strong&gt;selected&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://dans-coding-examples.googlecode.com/files/testcopy-editdeployment.png" title="Test Copy Deployment" /&gt;&lt;/p&gt;
+&lt;/p&gt;
+
+&lt;p&gt;Finally, just select add/remove file or directory and select what you
+want to copy.&lt;/p&gt;
+&lt;/p&gt;
+
+&lt;p&gt;&lt;img alt="" src="http://dans-coding-examples.googlecode.com/files/testcopy-editselect.png" title="http://dans-coding-examples.googlecode.com/files/testcopy-editselect.png" /&gt;&lt;/p&gt;
+&lt;/p&gt;
+
+&lt;/p&gt;
+
+&lt;p&gt;Now, each time you run or deploy your projects you can select that
+directories contents to also be copied over.&lt;/p&gt;
+&lt;/p&gt;
+
+&lt;p&gt;&lt;a href="http://dans-coding-examples.googlecode.com/files/UnitTestingProject.zip"&gt;Download Code.&lt;/a&gt;&lt;/p&gt;
+&lt;/p&gt;</summary><category term=".net"></category><category term="unit testing"></category></entry><entry><title>Windows Phone 7: Making an HTTP Request</title><link href="http://dandesousa.com/windows-phone-7-making-an-http-request.html" rel="alternate"></link><updated>2010-08-30T22:20:00-04:00</updated><author><name>Admin</name></author><id>tag:dandesousa.com,2010-08-30:windows-phone-7-making-an-http-request.html</id><summary type="html">&lt;p&gt;Silverlight and the Windows Phone 7 SDK include the standard System.Net
+packages for making various requests over ftp and http. Making a
+standard http request in C# involves setting up a number of delegates
+and asynchronous callbacks for getting http responses and can be a tad
+complicated. If you simply want to get some xml or html back as a string
+over http, it’s much easier to use the simpler, more abstract WebClient
+class. Here’s an example of using the WebClient class to make a request.&lt;/p&gt;
+&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="n"&gt;public&lt;/span&gt; &lt;span class="kt"&gt;void&lt;/span&gt; &lt;span class="nf"&gt;getResults&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;string&lt;/span&gt; &lt;span class="n"&gt;websiteURL&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="n"&gt;WebClient&lt;/span&gt; &lt;span class="n"&gt;c&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;new&lt;/span&gt; &lt;span class="n"&gt;WebClient&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+    &lt;span class="n"&gt;c&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;DownloadStringAsync&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;new&lt;/span&gt; &lt;span class="n"&gt;Uri&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;websiteURL&lt;/span&gt;&lt;span class="p"&gt;));&lt;/span&gt;
+    &lt;span class="n"&gt;c&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;DownloadStringCompleted&lt;/span&gt; &lt;span class="o"&gt;+=&lt;/span&gt; &lt;span class="n"&gt;new&lt;/span&gt;
+        &lt;span class="n"&gt;DownloadStringCompletedEventHandler&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;c_DownloadStringCompleted&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="kt"&gt;void&lt;/span&gt; &lt;span class="nf"&gt;c_DownloadStringCompleted&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;object&lt;/span&gt; &lt;span class="n"&gt;sender&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="n"&gt;DownloadStringCompletedEventArgs&lt;/span&gt; &lt;span class="n"&gt;e&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="n"&gt;lock&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;this&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="n"&gt;string&lt;/span&gt; &lt;span class="n"&gt;s&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;e&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Result&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+        &lt;span class="n"&gt;XmlReader&lt;/span&gt; &lt;span class="n"&gt;r&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;XmlReader&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Create&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;new&lt;/span&gt;
+                &lt;span class="n"&gt;MemoryStream&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;System&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Text&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;UnicodeEncoding&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Unicode&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;GetBytes&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;s&lt;/span&gt;&lt;span class="p"&gt;)));&lt;/span&gt;
+        &lt;span class="c1"&gt;// So something with the XML we get back&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;So basically all we do is say download the string and make the action to
+take when it is completed as c_DownloadStringCompleted event handler.
+You may want to do something different than place it in an xml reader
+(in this case the string we are getting back corresponds to a non-xhtml
+ xml file. Enjoy.&lt;/p&gt;
+&lt;/p&gt;</summary><category term=".net"></category><category term="C#"></category><category term="Windows Phone 7"></category><category term="WP7"></category></entry><entry><title>Windows Phone 7: ListBox Item Horizontal Width Stretch</title><link href="http://dandesousa.com/windows-phone-7-listbox-item-horizontal-width-stretch.html" rel="alternate"></link><updated>2010-08-29T17:15:00-04:00</updated><author><name>Admin</name></author><id>tag:dandesousa.com,2010-08-29:windows-phone-7-listbox-item-horizontal-width-stretch.html</id><summary type="html">&lt;p&gt;I have spent most of the day today working on a Windows Phone 7 app I
+hope to have ready for launch this fall / winter. I figured that
+adoption of the platform and generation of apps is good for all of us as
+it generates hype for the platform and facilitates development. So I
+will be sharing all the gotcha’s and particularly frustrating
+experiences (and there solutions here!).&lt;/p&gt;
+&lt;p&gt;In WP7, if you try to use a ListBox control, you’ll noticed that child
+controls do not completely fill the available space of the control. To
+do this you have to override the style of the ListBox’s ItemContainer,
+as well as override the template and set the appropriate
+HorizontalContentAlignment properties.&lt;/p&gt;
+&lt;p&gt;First, this is what the problem looks like. In blue we have the entire
+ListBox Control, and in white is the space for an individual item.&lt;/p&gt;
+&lt;h2&gt;The Problem&lt;/h2&gt;
+&lt;p&gt;&lt;img alt="problem" src="./static/wp-content/uploads/2010/08/problem_thumb.png" title="problem" /&gt;&lt;/p&gt;
+&lt;p&gt;As you can see, the ListBoxItem is shown in white and only fits the size
+of the content. The entire ListBox is shown in red and remains empty. If
+you increase the size of the text it will stretch to the width. But if
+we wanted to align the button on the right as its own column we want the
+text to take up the remaining space and we need the item to fit the
+width of the control. Then we’d be able to use a Grid control to set the
+proper alignment.&lt;/p&gt;
+&lt;h2&gt;The Solution&lt;/h2&gt;
+&lt;p&gt;We have to override not only the HorizontalContentAlignment Properties
+of the ItemContainer but also pass those onto the Template and Container
+in the Style. This is very unintuitive as you would expect
+HorizontalContentAlignment to just work.&lt;/p&gt;
+&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="nt"&gt;&amp;lt;phone:PhoneApplicationPage.Resources&amp;gt;&lt;/span&gt; &lt;span class="nt"&gt;&amp;lt;Style&lt;/span&gt;
+&lt;span class="na"&gt;x:Key=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;ListBoxItemStyle1&amp;quot;&lt;/span&gt; &lt;span class="na"&gt;TargetType=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;ListBoxItem&amp;quot;&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;
+&lt;span class="nt"&gt;&amp;lt;Setter&lt;/span&gt; &lt;span class="na"&gt;Property=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;Background&amp;quot;&lt;/span&gt; &lt;span class="na"&gt;Value=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;Transparent&amp;quot;&lt;/span&gt;&lt;span class="nt"&gt;/&amp;gt;&lt;/span&gt;
+&lt;span class="nt"&gt;&amp;lt;Setter&lt;/span&gt; &lt;span class="na"&gt;Property=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;BorderThickness&amp;quot;&lt;/span&gt; &lt;span class="na"&gt;Value=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;0&amp;quot;&lt;/span&gt;&lt;span class="nt"&gt;/&amp;gt;&lt;/span&gt;
+&lt;span class="nt"&gt;&amp;lt;Setter&lt;/span&gt; &lt;span class="na"&gt;Property=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;BorderBrush&amp;quot;&lt;/span&gt; &lt;span class="na"&gt;Value=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;Transparent&amp;quot;&lt;/span&gt;&lt;span class="nt"&gt;/&amp;gt;&lt;/span&gt;
+&lt;span class="nt"&gt;&amp;lt;Setter&lt;/span&gt; &lt;span class="na"&gt;Property=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;Padding&amp;quot;&lt;/span&gt; &lt;span class="na"&gt;Value=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;0&amp;quot;&lt;/span&gt;&lt;span class="nt"&gt;/&amp;gt;&lt;/span&gt;
+&lt;span class="nt"&gt;&amp;lt;Setter&lt;/span&gt; &lt;span class="na"&gt;Property=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;HorizontalContentAlignment&amp;quot;&lt;/span&gt; &lt;span class="na"&gt;Value=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;Stretch&amp;quot;&lt;/span&gt;&lt;span class="nt"&gt;/&amp;gt;&lt;/span&gt;
+&lt;span class="nt"&gt;&amp;lt;Setter&lt;/span&gt; &lt;span class="na"&gt;Property=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;HorizontalAlignment&amp;quot;&lt;/span&gt; &lt;span class="na"&gt;Value=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;Stretch&amp;quot;&lt;/span&gt; &lt;span class="nt"&gt;/&amp;gt;&lt;/span&gt;
+&lt;span class="nt"&gt;&amp;lt;Setter&lt;/span&gt; &lt;span class="na"&gt;Property=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;VerticalContentAlignment&amp;quot;&lt;/span&gt; &lt;span class="na"&gt;Value=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;Stretch&amp;quot;&lt;/span&gt;&lt;span class="nt"&gt;/&amp;gt;&lt;/span&gt;
+&lt;span class="nt"&gt;&amp;lt;Setter&lt;/span&gt; &lt;span class="na"&gt;Property=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;Template&amp;quot;&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;
+&lt;span class="nt"&gt;&amp;lt;Setter.Value&amp;gt;&lt;/span&gt;
+&lt;span class="nt"&gt;&amp;lt;ControlTemplate&lt;/span&gt; &lt;span class="na"&gt;TargetType=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;ListBoxItem&amp;quot;&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;
+&lt;span class="nt"&gt;&amp;lt;Border&lt;/span&gt; &lt;span class="na"&gt;x:Name=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;LayoutRoot&amp;quot;&lt;/span&gt; &lt;span class="na"&gt;BorderBrush=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;{TemplateBinding BorderBrush}&amp;quot;&lt;/span&gt;
+&lt;span class="na"&gt;BorderThickness=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;{TemplateBinding BorderThickness}&amp;quot;&lt;/span&gt;
+&lt;span class="na"&gt;Background=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;{TemplateBinding Background}&amp;quot;&lt;/span&gt;
+&lt;span class="na"&gt;HorizontalAlignment=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;{TemplateBinding HorizontalAlignment}&amp;quot;&lt;/span&gt;
+&lt;span class="na"&gt;VerticalAlignment=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;{TemplateBinding VerticalAlignment}&amp;quot;&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;
+&lt;span class="nt"&gt;&amp;lt;ContentControl&lt;/span&gt; &lt;span class="na"&gt;x:Name=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;ContentContainer&amp;quot;&lt;/span&gt;
+&lt;span class="na"&gt;ContentTemplate=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;{TemplateBinding ContentTemplate}&amp;quot;&lt;/span&gt;
+&lt;span class="na"&gt;Content=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;{TemplateBinding Content}&amp;quot;&lt;/span&gt; &lt;span class="na"&gt;Foreground=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;{TemplateBinding&lt;/span&gt;
+&lt;span class="s"&gt;Foreground}&amp;quot;&lt;/span&gt; &lt;span class="na"&gt;HorizontalContentAlignment=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;{TemplateBinding&lt;/span&gt;
+&lt;span class="s"&gt;HorizontalContentAlignment}&amp;quot;&lt;/span&gt; &lt;span class="na"&gt;Margin=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;{TemplateBinding Padding}&amp;quot;&lt;/span&gt;
+&lt;span class="na"&gt;VerticalContentAlignment=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;{TemplateBinding VerticalContentAlignment}&amp;quot;&lt;/span&gt;&lt;span class="nt"&gt;/&amp;gt;&lt;/span&gt;
+&lt;span class="nt"&gt;&amp;lt;/Border&amp;gt;&lt;/span&gt;
+&lt;span class="nt"&gt;&amp;lt;/ControlTemplate&amp;gt;&lt;/span&gt;
+&lt;span class="nt"&gt;&amp;lt;/Setter.Value&amp;gt;&lt;/span&gt;
+&lt;span class="nt"&gt;&amp;lt;/Setter&amp;gt;&lt;/span&gt;
+&lt;span class="nt"&gt;&amp;lt;/Style&amp;gt;&lt;/span&gt; &lt;span class="nt"&gt;&amp;lt;/phone:PhoneApplicationPage.Resources&amp;gt;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Then apply it to the ListBox:&lt;/p&gt;
+&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="nt"&gt;&amp;lt;ListBox&lt;/span&gt; &lt;span class="na"&gt;x:Name=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;SearchResultsListBox&amp;quot;&lt;/span&gt;
+&lt;span class="na"&gt;Grid.Row=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;0&amp;quot;&lt;/span&gt;
+&lt;span class="na"&gt;HorizontalContentAlignment=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;Stretch&amp;quot;&lt;/span&gt;
+&lt;span class="na"&gt;ItemContainerStyle=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;{StaticResource ListBoxItemStyle1}&amp;quot;&lt;/span&gt;
+&lt;span class="na"&gt;ItemsSource=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;{Binding ElementName=SearchPageControl,&lt;/span&gt;
+&lt;span class="s"&gt;    Path=QueryHandler.OpenSearchSuggestion.section.items, Mode=OneWay}&amp;quot;&lt;/span&gt;&lt;span class="err"&gt;\&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;
+    ...
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;The Result&lt;/h2&gt;
+&lt;p&gt;&lt;img alt="solved" src="./static/wp-content/uploads/2010/08/solved_thumb.png" title="solved" /&gt;&lt;/p&gt;
+&lt;p&gt;As you can see the item wrapped in white stretches the entire width of
+the ListBox in red.&lt;/p&gt;
+&lt;h2&gt;Conclusions&lt;/h2&gt;
+&lt;p&gt;Although unintuitive this should get the job done. Hopefully Microsoft
+can make some of these details more straightforward before the final
+release or in updated versions of .NET.&lt;/p&gt;</summary><category term=".net"></category><category term="C#"></category><category term="WP7"></category></entry><entry><title>HowTo Fix: C# .NET BackgroundWorker.IsBusy Always True</title><link href="http://dandesousa.com/howto-fix-c-net-backgroundworkerisbusy-always-true.html" rel="alternate"></link><updated>2010-08-20T23:52:00-04:00</updated><author><name>Admin</name></author><id>tag:dandesousa.com,2010-08-20:howto-fix-c-net-backgroundworkerisbusy-always-true.html</id><summary type="html">&lt;p&gt;BackgroundWorker provides a great simplified mechanism for seperating
+CPU intensive work from the UI thread in C# .NET. Indeed&lt;a href="http://msdn.microsoft.com/en-us/library/system.componentmodel.backgroundworker.aspx"&gt;the MSDN
+documentation does an excellent job detailing its usage&lt;/a&gt;. However, you
+may come across a bug wherein you need to run the backgroundworker while
+it is still running. You have code like this:&lt;/p&gt;
+&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="n"&gt;System&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;ComponentModel&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;BackgroundWorker&lt;/span&gt; &lt;span class="n"&gt;backgroundWorker&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="k"&gt;public&lt;/span&gt; &lt;span class="k"&gt;void&lt;/span&gt; &lt;span class="nf"&gt;someEvent&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="k"&gt;while&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;backgroundWorker&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;IsBusy&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="n"&gt;Thread&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Yield&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+    &lt;span class="n"&gt;backgroundWorker&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;RunWorkerAsync&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;But you may find that backgroundWorker.IsBusy is always true so the loop
+never executes. It seems that simply yielding the thread will not force
+the backgroundWorker to mark itself as done even though that worker
+thread has successfully completed. In some situations you are blocking
+the UI so it cannot mark itself complete. To resolve the problem, simply
+include a call to System.Windows.Forms.Application.DoEvents(). You can
+do this even if you are running an application under WPF. It should
+force the UI to load a frame.&lt;/p&gt;
+&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="n"&gt;using&lt;/span&gt; &lt;span class="n"&gt;System&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Windows&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Forms&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="n"&gt;System&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;ComponentModel&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;BackgroundWorker&lt;/span&gt; &lt;span class="n"&gt;backgroundWorker&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="n"&gt;public&lt;/span&gt; &lt;span class="kt"&gt;void&lt;/span&gt; &lt;span class="nf"&gt;someEvent&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="k"&gt;while&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;backgroundWorker&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;IsBusy&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="n"&gt;Thread&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Yield&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+        &lt;span class="n"&gt;Application&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;DoEvents&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+    &lt;span class="n"&gt;backgroundWorker&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;RunWorkerAsync&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;For more information on this method check out &lt;a href="http://msdn.microsoft.com/en-us/library/system.windows.forms.application.doevents.aspx"&gt;the MSDN documentation on
+Application.DoEvents()&lt;/a&gt;.&lt;/p&gt;</summary><category term=".net"></category><category term="C#"></category><category term="Threading"></category></entry><entry><title>Asynchronous Data Binding in .NET (C#)</title><link href="http://dandesousa.com/asynchronous-data-binding-in-net-c.html" rel="alternate"></link><updated>2010-08-07T16:31:00-04:00</updated><author><name>Admin</name></author><id>tag:dandesousa.com,2010-08-07:asynchronous-data-binding-in-net-c.html</id><summary type="html">&lt;p&gt;Asynchronous operations are prevalent in all manner of modern systems,
+desktop and web applications. Doing this in .NET is relatively easy as
+Microsoft has provided us with a built in mechanism for binding data.&lt;/p&gt;
+&lt;p&gt;Specifically in WPF, we can perform databinding simply by providing a
+binding target and a binding source. The binding target is the object in
+which the data belongs and the source is the property which it will be
+placed (sort of backwards, but basically they refer to the two
+endpoints). I won't write an entire article on Databinding but instead
+point you to&lt;a href="http://msdn.microsoft.com/en-us/library/ms752347.aspx"&gt;MSDN's official documentation on the subject&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Needless to say Databinding is immensely powerful and greatly simplifies
+how we as developers deal with code in UI space. Now from the Microsoft
+example, assume we have a databinding code snippet that looks like this:&lt;/p&gt;
+&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="n"&gt;MyData&lt;/span&gt; &lt;span class="n"&gt;myDataObject&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="n"&gt;MyData&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;DateTime&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Now&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="n"&gt;Binding&lt;/span&gt; &lt;span class="n"&gt;myBinding&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="n"&gt;Binding&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;MyDataProperty&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="n"&gt;myBinding&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Source&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="n"&gt;myDataObject&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="n"&gt;myText&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;SetBinding&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;TextBlock&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;TextProperty&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;myBinding&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Then if we want to load the data asynchronously we would simply add:&lt;/p&gt;
+&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="n"&gt;MyData&lt;/span&gt; &lt;span class="n"&gt;myDataObject&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="n"&gt;MyData&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;DateTime&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Now&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="n"&gt;Binding&lt;/span&gt; &lt;span class="n"&gt;myBinding&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="n"&gt;Binding&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;MyDataProperty&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="n"&gt;myBinding&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Source&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="n"&gt;myDataObject&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="n"&gt;myText&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;SetBinding&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;TextBlock&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;TextProperty&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;myBinding&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="c1"&gt;// Load this asynchronously&lt;/span&gt;
+&lt;span class="n"&gt;myText&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;IsAsync&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="k"&gt;true&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Which tells the binding to not wait for the value but instead move on
+with any other work while it waits for the value to come in. If you want
+to display a placeholder value, we can set that as well.&lt;/p&gt;
+&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="n"&gt;MyData&lt;/span&gt; &lt;span class="n"&gt;myDataObject&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="n"&gt;MyData&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;DateTime&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Now&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="n"&gt;Binding&lt;/span&gt; &lt;span class="n"&gt;myBinding&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="n"&gt;Binding&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;MyDataProperty&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="n"&gt;myBinding&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Source&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="n"&gt;myDataObject&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="n"&gt;myText&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;SetBinding&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;TextBlock&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;TextProperty&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;myBinding&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="c1"&gt;// Load this asynchronously&lt;/span&gt;
+&lt;span class="n"&gt;myText&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;IsAsync&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="k"&gt;true&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="n"&gt;myText&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;FallbackValue&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;Loading...&amp;quot;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Which will initially display "Loading..." until the value is ready from
+the bound property. This is useful in situations where you want to load
+an image which may take a while but want to hold some placeholder image
+until it is ready (we see in many mobile applications where data loading
+may be unpredictable and slow).&lt;/p&gt;
+&lt;p&gt;If you want to load multiple levels of objects, you can create a
+PriorityBinding object which can contain multiple bindings as above, and
+set each individual Binding object to be asynchronous and it will load
+them in order as it gets them. You can find details about this on
+&lt;a href="http://msdn.microsoft.com/en-us/library/system.windows.data.prioritybinding.aspx"&gt;Microsoft's PriorityBinding MSDN documentation page&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Lastly, remember that just because a value is asynchronous does not mean
+it is automatically loaded from a different thread. If you want to
+ensure that the UI thread is not held up, whichever property you are
+bound to must have its data dispatched from another thread or launch a
+thread. This will ensure that retrieving the property will take slightly
+long and make the UI thread run smooth (user interactions will take
+precedent).&lt;/p&gt;</summary><category term=".net"></category><category term="C#"></category><category term="Programming"></category></entry><entry><title>Microsoft Solver Foundation for Quadratic Programming</title><link href="http://dandesousa.com/microsoft-solver-foundation-for-quadratic-programming.html" rel="alternate"></link><updated>2010-07-15T21:55:00-04:00</updated><author><name>Admin</name></author><id>tag:dandesousa.com,2010-07-15:microsoft-solver-foundation-for-quadratic-programming.html</id><summary type="html">&lt;p&gt;The Microsoft Solver Foundation provides some excellent APIs for solving
+optimization problems in C# .NET. Getting to documentation about the
+Quadratic Programming facilities can be a bit tricky though. I've added
+below some sample code to help out with this.&lt;/p&gt;
+&lt;p&gt;In the following example I'm solving an example of the lagrangian dual
+form used for classification in an SVM.&lt;/p&gt;
+&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="n"&gt;InteriorPointSolver&lt;/span&gt; &lt;span class="n"&gt;solver&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="n"&gt;InteriorPointSolver&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+&lt;span class="c1"&gt;// Langrangian Dual&lt;/span&gt;
+&lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;dual&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="m"&gt;0&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="n"&gt;solver&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;AddRow&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;L&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="k"&gt;out&lt;/span&gt; &lt;span class="n"&gt;dual&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="c1"&gt;// Sum Constraint&lt;/span&gt;
+&lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;linearConstraint&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="m"&gt;0&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="n"&gt;solver&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;AddRow&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;SumConstraint&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="k"&gt;out&lt;/span&gt; &lt;span class="n"&gt;linearConstraint&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="c1"&gt;// Add variables and Lagrangian linear terms&lt;/span&gt;
+&lt;span class="kt"&gt;int&lt;/span&gt;&lt;span class="p"&gt;[]&lt;/span&gt; &lt;span class="n"&gt;vars&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="kt"&gt;int&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;];&lt;/span&gt;
+&lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="m"&gt;0&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="p"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;lt&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;++)&lt;/span&gt;
+&lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="c1"&gt;// Add the variable&lt;/span&gt;
+    &lt;span class="n"&gt;solver&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;AddVariable&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;a&amp;quot;&lt;/span&gt; &lt;span class="p"&gt;+&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="k"&gt;out&lt;/span&gt; &lt;span class="n"&gt;vars&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;]);&lt;/span&gt;
+    &lt;span class="c1"&gt;// Factor in C upper bounds&lt;/span&gt;
+    &lt;span class="n"&gt;solver&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;SetBounds&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;vars&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; &lt;span class="m"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;C&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="c1"&gt;// Linear constraint must equal 0&lt;/span&gt;
+&lt;span class="n"&gt;solver&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;SetBounds&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;linearConstraint&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="m"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="m"&gt;0&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="c1"&gt;// Lagrangian Quadratic Terms&lt;/span&gt;
+&lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="m"&gt;0&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="p"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;lt&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;++)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="n"&gt;solver&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;SetCoefficient&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;linearConstraint&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="n"&gt;vars&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; &lt;span class="n"&gt;trainingData&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;].&lt;/span&gt;&lt;span class="n"&gt;output&lt;/span&gt;&lt;span class="p"&gt;());&lt;/span&gt; &lt;span class="n"&gt;solver&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;SetCoefficient&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;dual&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;vars&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;
+        &lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt; &lt;span class="n"&gt;Parallel&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;For&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;o&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;j&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;=&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;gt&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+            &lt;span class="p"&gt;{&lt;/span&gt;
+            &lt;span class="kt"&gt;double&lt;/span&gt; &lt;span class="n"&gt;coef&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="n"&gt;trainingData&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;].&lt;/span&gt;&lt;span class="n"&gt;output&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="err"&gt;\&lt;/span&gt;&lt;span class="p"&gt;*&lt;/span&gt; &lt;span class="n"&gt;trainingData&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;j&lt;/span&gt;&lt;span class="p"&gt;].&lt;/span&gt;&lt;span class="n"&gt;output&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="err"&gt;\&lt;/span&gt;&lt;span class="p"&gt;*&lt;/span&gt;
+            &lt;span class="n"&gt;kernel&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;evaluate&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;trainingData&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;].&lt;/span&gt;&lt;span class="n"&gt;point&lt;/span&gt;&lt;span class="p"&gt;(),&lt;/span&gt; &lt;span class="n"&gt;trainingData&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;j&lt;/span&gt;&lt;span class="p"&gt;].&lt;/span&gt;&lt;span class="n"&gt;point&lt;/span&gt;&lt;span class="p"&gt;());&lt;/span&gt;
+            &lt;span class="n"&gt;solver&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;SetCoefficient&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;dual&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;-&lt;/span&gt;&lt;span class="m"&gt;0.5&lt;/span&gt; &lt;span class="err"&gt;\&lt;/span&gt;&lt;span class="p"&gt;*&lt;/span&gt; &lt;span class="n"&gt;coef&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;vars&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; &lt;span class="n"&gt;vars&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;j&lt;/span&gt;&lt;span class="p"&gt;]);&lt;/span&gt;
+            &lt;span class="p"&gt;});&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="n"&gt;solver&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;AddGoal&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;dual&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="m"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="k"&gt;false&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="n"&gt;InteriorPointSolverParams&lt;/span&gt; &lt;span class="n"&gt;param&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="k"&gt;new&lt;/span&gt;
+&lt;span class="n"&gt;InteriorPointSolverParams&lt;/span&gt;&lt;span class="p"&gt;();[/&lt;/span&gt;&lt;span class="n"&gt;csharp&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Essentially all we are doing here is adding all the variables to our
+constraint optimization problem and asking the solver to minimize. The
+vars array simply expressing a list of identifier for variables in the
+constraint problem. You should fire up the Solver Foundation library and
+give it a shot yourself.&lt;/p&gt;
+&lt;p&gt;Here are some resources that should make understanding this a bit easier
+as well. Its the official blog of one of the key developers on the
+project, specifically the links to tutorial on the quadratic programming
+solver.&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://blogs.msdn.com/b/natbr/archive/2009/09/24/using-the-solver-foundation-interior-point-solver.aspx"&gt;Nathan Brixius' QP Solver Tutorial&lt;/a&gt;&lt;/p&gt;</summary><category term=".net"></category><category term="C#"></category><category term="math"></category></entry><entry><title>HowTo Fix: Roomba Clicking Noise</title><link href="http://dandesousa.com/howto-fix-roomba-clicking-noise.html" rel="alternate"></link><updated>2010-05-28T13:02:00-04:00</updated><author><name>Admin</name></author><id>tag:dandesousa.com,2010-05-28:howto-fix-roomba-clicking-noise.html</id><summary type="html">&lt;p&gt;A while back the vacuum in our apartment stopped working so I decided to
+do something I always wanted: Get a roomba. So far its been great and it
+keeps the carpet clean with minimum effort.&lt;/p&gt;
+&lt;p&gt;However, we have encountered some problems where the Roomba occasionally
+makes a repeated clicking noise and then shuts off. It then repeats
+"Please Clean Roomba's Brushes". It got to the point where it was making
+the clicking noise EVERY time it was run and would shut down after about
+2 minutes. I tried reseting the battery, cleaning the
+brushes...everything. Finally I realized what was wrong. I wasn't
+cleaning the brushes properly. If you have a lot of dirt in your carpet
+or pets (we have cats), it's easy for fibers to get wrapped around some
+of the moving parts of the roomba brush.&lt;/p&gt;
+&lt;p&gt;So to fix the problem simply remove the brushes from the Roomba as your
+normally would to clean them. However, check under the yellow cap at the
+end of both brushes (by that I mean the brush and the rubber roller).
+Don't worry, they are designed to come off, so you can pull on them.
+Afterwards you may see something like this:&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://farm5.static.flickr.com/4045/4647414023_625bc72f44_d.jpg" title="Roomba Brush Under-Cap" /&gt;&lt;/p&gt;
+&lt;p&gt;Just pull out all the hair and fibers with a pencil or paper clip and
+replace the yellow cap. Afterwards your roomba will be good as new! Be
+aware though, that this is likely to happen again so make sure you
+periodically clean under the cap of both brush attachments.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://farm5.static.flickr.com/4038/4647413667_40a50cb12a_d.jpg" title="Another Brush Angle" /&gt;&lt;/p&gt;</summary><category term="cleaning"></category><category term="robots"></category><category term="roomba"></category></entry><entry><title>Quick Fix: iPhone Microphone and Headset Buttons don’t work</title><link href="http://dandesousa.com/quick-fix-iphone-microphone-and-headset-buttons-dont-work.html" rel="alternate"></link><updated>2010-04-04T14:38:00-04:00</updated><author><name>Admin</name></author><id>tag:dandesousa.com,2010-04-04:quick-fix-iphone-microphone-and-headset-buttons-dont-work.html</id><summary type="html">&lt;p&gt;I recently had a problem with my iPhone headphones where neither the
+built in mic nor the headphone answer (or start/stop) button would work.
+I attributed the failure to a recent tumble which also crack my front
+glass along the bezel.&lt;/p&gt;
+&lt;p&gt;Now, thanks to a helpful blog post I was able to correct the problem.
+Seems like a rather large piece lint had made it's way into the
+headphone jack and was blocking the plug. I would have never figured it
+out if it wasn't for this helpful blog post. So I've linked it below and
+will leave the explanation to him:&lt;/p&gt;
+&lt;p&gt;http://www.iphoneincanada.ca/tips-tricks/how-to-fix-your-iphone-headphones-mic-if-its-not-working/&lt;/p&gt;</summary><category term="iphone"></category></entry><entry><title>ChessGL3d Demo Video</title><link href="http://dandesousa.com/chessgl3d-demo-video.html" rel="alternate"></link><updated>2010-03-11T14:29:00-05:00</updated><author><name>Admin</name></author><id>tag:dandesousa.com,2010-03-11:chessgl3d-demo-video.html</id><summary type="html">&lt;div style="text-align: left; padding: 3px;"&gt;
+&lt;object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" width="500" height="313" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,40,0"&gt;
+&lt;param name="data" value="http://www.flickr.com/apps/video/stewart.swf?v=71377"&gt;&lt;/param&gt;&lt;param name="flashvars" value="intl_lang=en-us&amp;amp;photo_secret=6ee39f773e&amp;amp;photo_id=4425552860&amp;amp;flickr_show_info_box=true"&gt;&lt;/param&gt;&lt;param name="bgcolor" value="#000000"&gt;&lt;/param&gt;&lt;param name="allowFullScreen" value="true"&gt;&lt;/param&gt;&lt;param name="src" value="http://www.flickr.com/apps/video/stewart.swf?v=71377"&gt;&lt;/param&gt;&lt;param name="allowfullscreen" value="true"&gt;&lt;/param&gt;
+
+&lt;embed type="application/x-shockwave-flash" width="500" height="313" src="http://www.flickr.com/apps/video/stewart.swf?v=71377" allowfullscreen="true" bgcolor="#000000" flashvars="intl_lang=en-us&amp;amp;photo_secret=6ee39f773e&amp;amp;photo_id=4425552860&amp;amp;flickr_show_info_box=true" data="http://www.flickr.com/apps/video/stewart.swf?v=71377"&gt;
+&lt;/embed&gt;
+&lt;/object&gt;
+&lt;/p&gt;
+
+&lt;p&gt;
+&lt;span style="font-size: 0.8em; margin-top: 0px;"&gt;[chessgl3d][],
+originally uploaded by [dandesousa][].&lt;/span&gt;
+
+&lt;/div&gt;
+
+&lt;/p&gt;
+
+&lt;p&gt;Here is a demo video for my 3d chess game. See the games page for more
+details.&lt;/p&gt;
+&lt;/p&gt;</summary><category term="chess"></category><category term="graphics"></category><category term="opengl"></category></entry><entry><title>My Final OpenGL Project: ChessGL3d</title><link href="http://dandesousa.com/my-final-opengl-project-chessgl3d.html" rel="alternate"></link><updated>2010-03-06T21:07:00-05:00</updated><author><name>Admin</name></author><id>tag:dandesousa.com,2010-03-06:my-final-opengl-project-chessgl3d.html</id><summary type="html">&lt;p&gt;So I had an earlier post about starting my OpenGL experience for the
+first time. Well here is the culmination of my experience. I created a
+rough OpenGL version of Chess. I will post this as soon as I get some
+time. In the mean while, here are some screen shots. Enjoy.&lt;/p&gt;
+&lt;p&gt;[&lt;img alt="" src="http://farm5.static.flickr.com/4036/4412662604_a7fb4d6e7a_o_d.png" title="End Game Shot" /&gt;][]&lt;/p&gt;
+&lt;/p&gt;
+
+&lt;p&gt;&lt;a href="http://farm3.static.flickr.com/2719/4411894797_d2aa155130_o_d.png"&gt;&lt;img alt="" src="http://farm3.static.flickr.com/2719/4411894797_d2aa155130_o_d.png" /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;/p&gt;
+
+&lt;p&gt;[&lt;img alt="" src="http://farm5.static.flickr.com/4036/4412662604_a7fb4d6e7a_o_d.png" title="End Game Shot" /&gt;]: http://farm5.static.flickr.com/4036/4412662604_a7fb4d6e7a_o_d.png&lt;/p&gt;</summary><category term="chess"></category><category term="graphics"></category><category term="opengl"></category></entry><entry><title>OpenGL Display Lists And Sub Windows</title><link href="http://dandesousa.com/opengl-display-lists-and-sub-windows.html" rel="alternate"></link><updated>2010-03-06T21:02:00-05:00</updated><author><name>Admin</name></author><id>tag:dandesousa.com,2010-03-06:opengl-display-lists-and-sub-windows.html</id><summary type="html">&lt;p&gt;I recently discovered after some needless frustration, that you need to
+declare display lists that contain model drawing information in all
+windows in which you wish to draw the model. For example, if I say:&lt;/p&gt;
+&lt;p&gt;
+    glutSetWindow(main_window);initDisplayLists();...void main_display(){   drawDisplayList();}
+
+&lt;/p&gt;
+
+&lt;p&gt;It will work just fine. But if I try to do the same in a display
+function of the sub window it won't draw. You need to call whatever
+init() function you create your models / display lists in AFTER setting
+the window. For example&lt;/p&gt;
+&lt;p&gt;
+    glutSetWindow(main_window);// do stuffglutSetWindow(sub_window);initDisplayLists();...void sub_display(){    drawDisplayList();}
+
+&lt;/p&gt;
+
+&lt;p&gt;Hope that helps someone out there!&lt;/p&gt;</summary><category term="graphics"></category><category term="opengl"></category></entry><entry><title>WPF Context Menu Not Showing Up</title><link href="http://dandesousa.com/wpf-context-menu-not-showing-up.html" rel="alternate"></link><updated>2010-02-14T23:36:00-05:00</updated><author><name>Admin</name></author><id>tag:dandesousa.com,2010-02-14:wpf-context-menu-not-showing-up.html</id><summary type="html">&lt;p&gt;So I came across a problem with WPF and context menus. Whenever I added
+a context menu to a right click on a window or panel it would simple not
+open. The only time that a context menu would appear is when I right
+clicked on a button or label that was a child of the panel I added it
+to. I searched everywhere online for a solution and couldn't find one.
+Finally, I figured it out myself. For some strange reason, a context
+menu will not appear if you to not manually set a background color for a
+component or child component. So to fix the problem, simple set a
+background color for which components you want the top level context
+menu to appear.&lt;/p&gt;</summary><category term=".net"></category><category term="C#"></category><category term="xaml"></category></entry><entry><title>How To: Dual Monitors in Ubuntu with Nvidia</title><link href="http://dandesousa.com/how-to-dual-monitors-in-ubuntu-with-nvidia.html" rel="alternate"></link><updated>2010-01-24T15:13:00-05:00</updated><author><name>Admin</name></author><id>tag:dandesousa.com,2010-01-24:how-to-dual-monitors-in-ubuntu-with-nvidia.html</id><summary type="html">&lt;p&gt;I noticed that a lot of people are getting "cannot parse xorg.conf"
+message when they try to set up dual monitors with Nvidia settings
+manager in ubuntu. Here is the solution.&lt;/p&gt;
+&lt;p&gt;On the command line:&lt;/p&gt;
+&lt;p&gt;
+    sudo nvidia-xconfig
+
+&lt;/p&gt;
+
+&lt;p&gt;You should see it tell you that it overrode your xorg.conf. If you get
+warnings don't worry, it's likely just indicating that there was a
+previous problem. Then on the command line again, type this:&lt;/p&gt;
+&lt;p&gt;
+    sudo nvidia-settings
+
+&lt;/p&gt;
+
+&lt;p&gt;Now setup your dual monitor or triple monitor configuration as you want
+(with Twin View and the correct orientation). Then hit save
+configuration at the bottom and you should see that you get no error.&lt;/p&gt;
+&lt;p&gt;Reboot and enjoy.&lt;/p&gt;</summary><category term="linux"></category></entry><entry><title>Compiling OpenGL on Mac OS X or Linux</title><link href="http://dandesousa.com/compiling-opengl-on-mac-os-x-or-linux.html" rel="alternate"></link><updated>2010-01-16T21:50:00-05:00</updated><author><name>Admin</name></author><id>tag:dandesousa.com,2010-01-16:compiling-opengl-on-mac-os-x-or-linux.html</id><summary type="html">&lt;p&gt;Most linux distributions make it easy to compile programs using OpenGL.
+Other systems, however, aren't so easy. Here are instructions on how to
+get it running in both platforms.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Ubuntu / Linux&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Make sure you install the opengl-mesa packages for opengl
+    development. On ubuntu you can get them all with the following
+    invocation:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;sudo apt-get install freeglut3-dev&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;You should include the following #includes in your code referencing
+    opengl:&lt;/p&gt;
+&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="cp"&gt;#include &amp;lt;GL/gl.h&amp;gt;&lt;/span&gt;
+&lt;span class="cp"&gt;#include &amp;lt;GL/glu.h&amp;gt;&lt;/span&gt;
+&lt;span class="cp"&gt;#include &amp;lt;GL/glut.h&amp;gt;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;You should also have the following gcc cmdline flags in your
+    makefile:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;gcc -o simple simple.c -lGL -lglut -lGLU&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;strong&gt;Mac OS X (tested on Snow Leopard)&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;For this to work you will have to install gcc and Xcode, which
+    should install all the required opengl/glut libraries. You can get
+    it &lt;a href="http://developer.apple.com/"&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Now, you'll have to alter all the #includes in your files to
+    conform to the proper location. Change all your opengl #includes to
+    the following:&lt;span style="font-family: monospace;"&gt; &lt;/span&gt;&lt;/p&gt;
+&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="cp"&gt;#include &amp;lt;OpenGL/gl.h&amp;gt;&lt;/span&gt;
+&lt;span class="cp"&gt;#include &amp;lt;OpenGL/glu.h&amp;gt;&lt;/span&gt;
+&lt;span class="cp"&gt;#include &amp;lt;GLUT/glut.h&amp;gt;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Additionally your gcc command line will need to contain the
+    following flags to link, along with any others you might have:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;gcc -o simple simple.c -framework Carbon -framework OpenGL -framework GLUT&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;strong&gt;Cross Platform Compatibility&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;&lt;span style="font-weight: normal;"&gt;If you want your code to run on
+both, you need to get the Makefile and code to load the proper libraries
+depending on your system. &lt;/span&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;&lt;span style="font-weight: normal;"&gt;In all your OpenGL .c files, add
+the following header instead of your linux/mac includes:&lt;/span&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="cp"&gt;#ifdef __APPLE__&lt;/span&gt;
+&lt;span class="cp"&gt;#  include &amp;lt;OpenGL/gl.h&amp;gt;&lt;/span&gt;
+&lt;span class="cp"&gt;#  include &amp;lt;OpenGL/glu.h&amp;gt;&lt;/span&gt;
+&lt;span class="cp"&gt;#  include &amp;lt;GLUT/glut.h&amp;gt;&lt;/span&gt;
+&lt;span class="cp"&gt;#else&lt;/span&gt;
+&lt;span class="cp"&gt;#  include &amp;lt;GL/gl.h&amp;gt;&lt;/span&gt;
+&lt;span class="cp"&gt;#  include &amp;lt;GL/glu.h&amp;gt;&lt;/span&gt;
+&lt;span class="cp"&gt;#  include &amp;lt;GL/glut.h&amp;gt;&lt;/span&gt;
+&lt;span class="cp"&gt;#endif&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Then in your makefile, add the following before your build targets:&lt;/p&gt;
+&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="c"&gt;#default cmdline flags&lt;/span&gt;
+&lt;span class="nv"&gt;LDFLAGS&lt;/span&gt;  &lt;span class="o"&gt;=&lt;/span&gt; -lGL -lglut -lGLU
+&lt;span class="c"&gt;# Mac OS alternate cmdline link options&lt;/span&gt;
+&lt;span class="cp"&gt;ifeq &amp;quot;$(OSTYPE)&amp;quot; &amp;quot;Darwin&amp;quot;&lt;/span&gt;
+  &lt;span class="nv"&gt;LDFLAGS&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; -framework Carbon -framework OpenGL -framework GLUT
+&lt;span class="cp"&gt;endif&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;</summary></entry><entry><title>OpenMP and GCC Optimization</title><link href="http://dandesousa.com/openmp-and-gcc-optimization.html" rel="alternate"></link><updated>2009-02-10T20:34:00-05:00</updated><author><name>Admin</name></author><id>tag:dandesousa.com,2009-02-10:openmp-and-gcc-optimization.html</id><summary type="html">&lt;p&gt;So I encountered and interesting little affect while compiling some C
+code in OpenMP using GCC. Seems that my code ran fine without any
+automatic optimization flags (-O2, -O3), but when I turned them on, went
+haywire. The sequential version wasn't affected.&lt;/p&gt;
+&lt;p&gt;I tracked down the problem and found that it was actually do to my use
+of the private variable in the OpenMP directive. Here is a sample of the
+problem.&lt;/p&gt;
+&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="cp"&gt;#pragma omp parallel&lt;/span&gt;
+&lt;span class="p"&gt;{&lt;/span&gt; 
+&lt;span class="cp"&gt;#pragma omp for private(i, j, new_j, skip_next)&lt;/span&gt;
+    &lt;span class="k"&gt;for&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="o"&gt;++&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="c1"&gt;// Set each thread on one row of the loop&lt;/span&gt;
+        &lt;span class="n"&gt;skip_next&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+        &lt;span class="k"&gt;for&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;j&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="n"&gt;j&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="n"&gt;j&lt;/span&gt;&lt;span class="o"&gt;++&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="p"&gt;...&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;The problem actually occured because I did not have 'skip_next=0' on
+line 5 of this code. This didn't seem to matter when optimization was
+disabled but did cause incorrect semantics when I turned it on. Seems
+like OpenMP says you must assume that all privates are uninitialized
+when you start a new directive block. If you want them to be private but
+start with some default value, do what I did above or add the variable
+to the firstprivate() attribute instead of the private attribute:&lt;/p&gt;
+&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="cp"&gt;#pragma omp for firstprivate(skip_next) private(i, j, new_j)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;</summary></entry><entry><title>HF100 + ImageMixer Fix For Startup Freeze</title><link href="http://dandesousa.com/hf100-imagemixer-fix-for-startup-freeze.html" rel="alternate"></link><updated>2009-02-06T17:23:00-05:00</updated><author><name>Admin</name></author><id>tag:dandesousa.com,2009-02-06:hf100-imagemixer-fix-for-startup-freeze.html</id><summary type="html">&lt;p&gt;So I just got a new camcorder thanks to now qualifying for the US
+stimulus package from back in April. I was looking around for something
+to help stimulate the economy and decided that I should get a camcorder
+while prices are low and money is high. Anyway, the HF100 is flash based
+and really nice. It records in full HD 1080p with pretty decent picture
+quality, though I have yet to record in full light setting (outside). So
+far I only have sort of dim shots indoors of my roommate's cats and my
+ferret.&lt;/p&gt;
+&lt;p&gt;Anyway in my commitment to making a post with something useful every
+week, I've decided to share a tip with the world. Seems as though when I
+installed my ImageMixer 3 SE software, it would just freeze upon
+startup. Normally I wouldn't mind the issue with crap proprietary
+software, but there is no easy way to edit .MTS/M2TS files without
+converting and losing quality. Since I prefer to keep the originals as
+well as edit them so that extra footage is chopped off, I needed to
+figure out what was wrong. After some digging I found the solution to my
+problem.&lt;/p&gt;
+&lt;p&gt;If this occurs for you, you need to install all third party codec packs
+you installed. I had the CCCP (Community Codec Pak), which is useful for
+watching MKVs. Unfortunately, that was messing up something, so I had to
+uninstall it. I found numerous posts talking about uninstalling codec
+packs, so that's probably the way to go.&lt;/p&gt;
+&lt;p&gt;Unfortunately, that eliminates the ability to play back MKV's in WMV. I
+don't have a solution for this but I suggest installing &lt;a href="http://www.videolan.org/vlc/"&gt;VLC&lt;/a&gt;. It is
+wonderful and plays everything.&lt;/p&gt;
+&lt;p&gt;My first video, the high definition is better if you go straight to
+youtube:&lt;/p&gt;
+&lt;p align="center"&gt;
+&lt;embed src="http://www.youtube.com/v/eBXqOGTKyaA&amp;amp;hl=en&amp;amp;fs=1" width="480" height="295" type="application/x-shockwave-flash" allowfullscreen="true" allowscriptaccess="always"&gt;
+&lt;/embed&gt;
+&lt;/p&gt;
+
+&lt;/p&gt;</summary><category term="canon"></category><category term="hf100"></category><category term="imagemixer"></category></entry><entry><title>Timing Programs in C (Update)</title><link href="http://dandesousa.com/timing-programs-in-c-update.html" rel="alternate"></link><updated>2009-01-25T17:03:00-05:00</updated><author><name>Admin</name></author><id>tag:dandesousa.com,2009-01-25:timing-programs-in-c-update.html</id><summary type="html">&lt;p&gt;So I've decided to try and do at least one useful post a week to
+hopefully help a random searcher out. Here is the the updated version of
+how to get millisecond precise wall clock time in C.&lt;/p&gt;
+&lt;p&gt;#include \&amp;lt;sys\time.h&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;gettimeofday(&amp;amp;tstart, NULL);&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;double t1=tstart.tv_sec+(tstart.tv_usec/1000000.0);&lt;/code&gt;&lt;/p&gt;
+&lt;/p&gt;</summary></entry><entry><title>Timing Programs in C (Why I hate clock())</title><link href="http://dandesousa.com/timing-programs-in-c-why-i-hate-clock.html" rel="alternate"></link><updated>2009-01-16T08:51:00-05:00</updated><author><name>Admin</name></author><id>tag:dandesousa.com,2009-01-16:timing-programs-in-c-why-i-hate-clock.html</id><summary type="html">&lt;p&gt;So in working on a parallel programming assignment for a grad class I
+needed to time two algorithms, a sequential approach and a parallel
+approach. In doing so I did something like this:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;clock_t start, finish;&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;start = clock();&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;// do something finish = clock();&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;printf("Time Elapsed: %f", ((double) finish - start) / CLOCKS_PER_SEC);&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;However this code will give you the wrong time if you are trying to
+compare the runtime between these two types of programs.&lt;/p&gt;
+&lt;p&gt;On a sequential algorithm it should produce a good approximation of the
+wall-clock time, or the amount of time that would expire if you timed it
+using a clock on the wall (or stopwatch). But in a parallel algorithm we
+find that it actually gives you a larger time difference.&lt;/p&gt;
+&lt;p&gt;This is because in a multi-threaded program you are engaging multiple
+processors (if you have them). Since the clock() gets the number of
+clock ticks for the program, we get back almost 2x as many (on a
+two-core machine).&lt;/p&gt;
+&lt;p&gt;Unfortunately I have yet to find a decent way of getting the
+milliseconds for a C program accurately. You can use regular old time()
+to get the seconds, or if you are running on UNIX you can use the time
+command.&lt;/p&gt;
+&lt;/p&gt;</summary></entry><entry><title>NES ROM Editing</title><link href="http://dandesousa.com/nes-rom-editing.html" rel="alternate"></link><updated>2008-11-12T12:39:00-05:00</updated><author><name>Admin</name></author><id>tag:dandesousa.com,2008-11-12:nes-rom-editing.html</id><summary type="html">&lt;p&gt;So I did a presentation a couple years ago on NES Rom editting and I
+learned a lot about how to do some simple rom hacking and how old school
+cheat tools like game genie and game shark worked. Anyway I've decided
+to share the presentation I gave as well as all the resources I used.
+Everything is totally open. Everything I used to make the presentation
+below is included in the zip file and I even wrote up a quick little
+tool in .NET to translate text to dragon warrior tile entries. Anyway
+feel free to edit it as much as you'd like, but if you do anything cool
+with it I'd like to know so just shoot me an e-mail or leave some info
+in the comments.&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://www.cs.drexel.edu/~dsd33/demos/nes_rom_editting/Presentation.zip"&gt;Click here to download resources&lt;/a&gt;&lt;/p&gt;
+&lt;iframe src="http://docs.google.com/EmbedSlideshow?docid=d9jph9x_54gg9bdtcr" frameborder="0" width="410" height="342"&gt;&lt;/iframe&gt;
+
+&lt;/p&gt;</summary></entry><entry><title>Me and the GOP</title><link href="http://dandesousa.com/me-and-the-gop.html" rel="alternate"></link><updated>2008-10-29T21:51:00-04:00</updated><author><name>Admin</name></author><id>tag:dandesousa.com,2008-10-29:me-and-the-gop.html</id><summary type="html">&lt;p&gt;So contrary to my better judgement I've decided to post an old video of
+myself at the GOP convention back in the day. I remember I was a big
+Republican, back when I really just wanted to be different than my
+parents and I was told that abortion was murder. Anyway one good thing
+that came from this was that I did a "mock" news reporting for the GOP
+convention. Yes this is me in 2000, when I was about 12ish. I was
+probably just about to turn 13. Anyway, hopefully you'll get a kick out
+of it.&lt;/p&gt;
+&lt;p align="center"&gt;
+&lt;embed src="http://www.youtube.com/v/ZSIN4OAUyzU&amp;amp;hl=en&amp;amp;fs=1" width="425" height="344" type="application/x-shockwave-flash" allowfullscreen="true" allowscriptaccess="always"&gt;
+&lt;/embed&gt;
+&lt;/p&gt;
+
+&lt;/p&gt;</summary><category term="GOP"></category><category term="Me"></category><category term="Politics"></category><category term="Republicans"></category></entry><entry><title>Kitten Vs. Ferret (Part 1 -- 6 Weeks)</title><link href="http://dandesousa.com/kitten-vs-ferret-part-1-6-weeks.html" rel="alternate"></link><updated>2008-10-29T21:41:00-04:00</updated><author><name>Admin</name></author><id>tag:dandesousa.com,2008-10-29:kitten-vs-ferret-part-1-6-weeks.html</id><summary type="html">&lt;p&gt;My roommate just got a kitten and we decided to allow it to interact
+with our ferrets. Seems that it likes to have a good tussle with my
+ferret Jean-Luc. Right now it's not much of a challenge, but should be
+interesting to see what happens when the cat gets older. Here is part 1
+of a series I'll be updating every few weeks.&lt;/p&gt;
+&lt;p align="center"&gt;
+&lt;object width="425" height="344"&gt;
+&lt;param name="movie" value="http://www.youtube.com/v/erlvcrISuPE&amp;amp;hl=en&amp;amp;fs=1"&gt;&lt;/param&gt;&lt;param name="allowFullScreen" value="true"&gt;&lt;/param&gt;&lt;param name="allowscriptaccess" value="always"&gt;&lt;/param&gt;
+
+&lt;embed src="http://www.youtube.com/v/erlvcrISuPE&amp;amp;hl=en&amp;amp;fs=1" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="425" height="344"&gt;
+&lt;/embed&gt;
+&lt;/object&gt;
+&lt;/p&gt;
+
+&lt;/p&gt;</summary><category term="cat"></category><category term="ferrets"></category><category term="Pets"></category></entry></feed>

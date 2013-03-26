@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Dan De Sousa's Blog</title>
+    <meta name="description" content="">
+    <meta name="author" content="Dan De Sousa">
+
+    <link href="./theme/css/bootstrap.min.css" rel="stylesheet">
+    <link href="./theme/css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link href="./theme/css/font-awesome.min.css" rel="stylesheet">
+    <link href="./theme/css/timberland.css" rel="stylesheet">
+    <link href="./theme/css/timberland-icons.css" rel="stylesheet">
+    <link href="./theme/css/timberland-pygments.css" rel="stylesheet">
+            <script type="text/javascript">
+	var disqus_identifier = "how-to-fix-ios-memory-leaks-coming-from-uikit.html";
+	(function() {
+		var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+		dsq.src = 'http://dandesousacom.disqus.com/embed.js';
+		(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	})();
+</script>
+  </head>
+  <body>
+            <div class="navbar">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <a class="brand" href="./index.html">Dan De Sousa's Blog</a>
+          <ul class="nav">
+                                                <li ><a href="./pages/about.html">About</a></li>
+                                  </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="container-fluid">
+      <div class="row-fluid">
+        <div class="span2">
+          <div class="social">
+            <h2><small>Social</small></h2>
+            <ul class="unstyled">
+                                          <li><i class="icon-facebook-sign icon-large icon-color-facebook"></i> <a href="https://facebook.com/daniel.sousa">Facebook</a></li>
+                                          <li><i class="icon-github-sign icon-large icon-color-github"></i> <a href="http://github.com/dandesousa">Github</a></li>
+                                          <li><i class="icon-google-plus-sign icon-large icon-color-google-plus"></i> <a href="https://plus.google.com/114589102912613956952">Google Plus</a></li>
+                                          <li><i class="icon-twitter-sign icon-large icon-color-twitter"></i> <a href="http://twitter.com/dandesousa">Twitter</a></li>
+                          </ul>
+          </div>
+          <hr class="soften-left-right" />
+          <h2><small>Categories</small></h2>
+          <ul class="unstyled">
+                        <li><span class="badge ">3</span> <a href="./category/articles.html">Articles</a></li>
+                        <li><span class="badge ">1</span> <a href="./category/personal.html">Personal</a></li>
+                        <li><span class="badge ">1</span> <a href="./category/politics.html">Politics</a></li>
+                        <li><span class="badge badge-success">14</span> <a href="./category/programming.html">Programming</a></li>
+                        <li><span class="badge ">1</span> <a href="./category/ramblings.html">Ramblings</a></li>
+                        <li><span class="badge ">17</span> <a href="./category/technology.html">Technology</a></li>
+                      </ul>
+          <hr class="soften-left-right" />
+                    <h2><small>History</small></h2>
+          <ul class="unstyled">
+            <li><i class="icon-book"></i> <a href="./archives.html">Archives</a></li>
+            <li><i class="icon-tags"></i> <a href="./tags.html">Tags</a></li>
+          </ul>
+        </div>
+
+        <div class="span10">
+                    <div class='article'>
+  <div class="page-header"><h1>How To Fix Ios Memory Leaks Coming From Uikit</h1>
+    <ul class="unstyled">
+  <li><i class="icon-time"></i> <a class="more" href="./how-to-fix-ios-memory-leaks-coming-from-uikit.html">2011-02-11 21:10:00</a>
+  <i class="icon-pencil"></i> <a class="url fn" href="./author/admin.html">Admin</a>   <i class="icon-folder-open"></i> <a href="./category/programming.html">Programming</a></li> 
+  <li></li>
+</ul>  </div>
+  <div class="page-content"><p>It looks as though I'm going to be posting a number of troubleshooting
+iOS SDK and objective-c guides in the coming weeks. The first deals with
+memory leaks coming from UIKit and QuartzCore.</p>
+<p>If you are using the leaks tool included with Instruments and XCode, you
+might notice leaks. This is a pretty amazing tool that will tell you
+when you leak, how much and where the allocations occurred.</p>
+<p>In instruments, you can select View -> Extended Detail. This will
+provide you with the stack trace. You can then see where the leak
+originated. If you see errors coming straight from main, or from a call
+to pushViewController, you likely had the same problem I had -- you are
+not cleaning up your View or ViewController.</p>
+<p>To be safe in memory management, be careful to do the following:</p>
+<ol>
+<li>In viewDidUnload:, you should set all your retain and IBOutlet
+    properties to nil like so:</li>
+<li>Secondly, and very important, you should release and set all the
+    IBOutlet backing properties to nil, like so:</li>
+<li>Make sure you have no references to parent views or controllers in
+    the leaking view controller.</li>
+</ol>
+<p></p>
+This may seem totally counterintuitive since retain properties should
+properly free all held memory when nil is set, but actually the second
+step is required when dealing with UI components, otherwise it will
+result it leaks that appear to originate from UIKit or other Apple
+libraries. Be very careful that all IBOutlets are set to nil.</p></div>
+  <hr />
+  <div>
+    <h2>Comments</h2>
+    <a href="http://twitter.com/share" class="twitter-share-button" data-count="horizontal" data-via="dandesousa">Tweet</a><script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
+    <div id="disqus_thread"></div>      </div>
+</div>	
+        </div>
+      </div>
+    </div>
+
+    <footer class="footer">
+    <div class="container">
+      <p>Powered by <a href="http://alexis.notmyidea.org/pelican/">Pelican</a></p>
+      <p><a href="http://github.com/dandesousa/pelican-timberland">Timberland</a> based on <a href="http://twitter.github.com/bootstrap/">Bootstrap, from Twitter</a>.</p>
+      <p><a href="http://glyphicons.com">Glyphicons Free</a> licensed under <a href="http://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.</p> 
+      <p><a href="http://fortawesome.github.com/Font-Awesome">Font Awesome by Dave Gandy</a></p>
+      <p>&copy; Dan De Sousa 2013</p>
+    </div>
+    </footer>
+  </body>
+</html>

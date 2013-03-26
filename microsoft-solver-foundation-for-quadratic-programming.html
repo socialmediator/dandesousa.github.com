@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Dan De Sousa's Blog</title>
+    <meta name="description" content="">
+    <meta name="author" content="Dan De Sousa">
+
+    <link href="./theme/css/bootstrap.min.css" rel="stylesheet">
+    <link href="./theme/css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link href="./theme/css/font-awesome.min.css" rel="stylesheet">
+    <link href="./theme/css/timberland.css" rel="stylesheet">
+    <link href="./theme/css/timberland-icons.css" rel="stylesheet">
+    <link href="./theme/css/timberland-pygments.css" rel="stylesheet">
+            <script type="text/javascript">
+	var disqus_identifier = "microsoft-solver-foundation-for-quadratic-programming.html";
+	(function() {
+		var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+		dsq.src = 'http://dandesousacom.disqus.com/embed.js';
+		(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	})();
+</script>
+  </head>
+  <body>
+            <div class="navbar">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <a class="brand" href="./index.html">Dan De Sousa's Blog</a>
+          <ul class="nav">
+                                                <li ><a href="./pages/about.html">About</a></li>
+                                  </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="container-fluid">
+      <div class="row-fluid">
+        <div class="span2">
+          <div class="social">
+            <h2><small>Social</small></h2>
+            <ul class="unstyled">
+                                          <li><i class="icon-facebook-sign icon-large icon-color-facebook"></i> <a href="https://facebook.com/daniel.sousa">Facebook</a></li>
+                                          <li><i class="icon-github-sign icon-large icon-color-github"></i> <a href="http://github.com/dandesousa">Github</a></li>
+                                          <li><i class="icon-google-plus-sign icon-large icon-color-google-plus"></i> <a href="https://plus.google.com/114589102912613956952">Google Plus</a></li>
+                                          <li><i class="icon-twitter-sign icon-large icon-color-twitter"></i> <a href="http://twitter.com/dandesousa">Twitter</a></li>
+                          </ul>
+          </div>
+          <hr class="soften-left-right" />
+          <h2><small>Categories</small></h2>
+          <ul class="unstyled">
+                        <li><span class="badge ">3</span> <a href="./category/articles.html">Articles</a></li>
+                        <li><span class="badge ">1</span> <a href="./category/personal.html">Personal</a></li>
+                        <li><span class="badge ">1</span> <a href="./category/politics.html">Politics</a></li>
+                        <li><span class="badge badge-success">14</span> <a href="./category/programming.html">Programming</a></li>
+                        <li><span class="badge ">1</span> <a href="./category/ramblings.html">Ramblings</a></li>
+                        <li><span class="badge ">17</span> <a href="./category/technology.html">Technology</a></li>
+                      </ul>
+          <hr class="soften-left-right" />
+                    <h2><small>History</small></h2>
+          <ul class="unstyled">
+            <li><i class="icon-book"></i> <a href="./archives.html">Archives</a></li>
+            <li><i class="icon-tags"></i> <a href="./tags.html">Tags</a></li>
+          </ul>
+        </div>
+
+        <div class="span10">
+                    <div class='article'>
+  <div class="page-header"><h1>Microsoft Solver Foundation For Quadratic Programming</h1>
+    <ul class="unstyled">
+  <li><i class="icon-time"></i> <a class="more" href="./microsoft-solver-foundation-for-quadratic-programming.html">2010-07-15 21:55:00</a>
+  <i class="icon-pencil"></i> <a class="url fn" href="./author/admin.html">Admin</a>   <i class="icon-folder-open"></i> <a href="./category/programming.html">Programming</a></li> 
+  <li><i class="icon-tags"></i> <a href="./tag/net.html">.net</a> <a href="./tag/c.html">C#</a> <a href="./tag/math.html">math</a> </li>
+</ul>  </div>
+  <div class="page-content"><p>The Microsoft Solver Foundation provides some excellent APIs for solving
+optimization problems in C# .NET. Getting to documentation about the
+Quadratic Programming facilities can be a bit tricky though. I've added
+below some sample code to help out with this.</p>
+<p>In the following example I'm solving an example of the lagrangian dual
+form used for classification in an SVM.</p>
+<div class="codehilite"><pre><span class="n">InteriorPointSolver</span> <span class="n">solver</span> <span class="p">=</span> <span class="k">new</span> <span class="n">InteriorPointSolver</span><span class="p">();</span>
+<span class="c1">// Langrangian Dual</span>
+<span class="kt">int</span> <span class="n">dual</span> <span class="p">=</span> <span class="m">0</span><span class="p">;</span>
+<span class="n">solver</span><span class="p">.</span><span class="n">AddRow</span><span class="p">(</span><span class="s">&quot;L&quot;</span><span class="p">,</span> <span class="k">out</span> <span class="n">dual</span><span class="p">);</span>
+<span class="c1">// Sum Constraint</span>
+<span class="kt">int</span> <span class="n">linearConstraint</span> <span class="p">=</span> <span class="m">0</span><span class="p">;</span>
+<span class="n">solver</span><span class="p">.</span><span class="n">AddRow</span><span class="p">(</span><span class="s">&quot;SumConstraint&quot;</span><span class="p">,</span> <span class="k">out</span> <span class="n">linearConstraint</span><span class="p">);</span>
+<span class="c1">// Add variables and Lagrangian linear terms</span>
+<span class="kt">int</span><span class="p">[]</span> <span class="n">vars</span> <span class="p">=</span> <span class="k">new</span> <span class="kt">int</span><span class="p">[</span><span class="n">n</span><span class="p">];</span>
+<span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="p">=</span> <span class="m">0</span><span class="p">;</span> <span class="n">i</span> <span class="p">&amp;</span><span class="n">lt</span><span class="p">;</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="p">++)</span>
+<span class="p">{</span>
+    <span class="c1">// Add the variable</span>
+    <span class="n">solver</span><span class="p">.</span><span class="n">AddVariable</span><span class="p">(</span><span class="s">&quot;a&quot;</span> <span class="p">+</span> <span class="n">i</span><span class="p">,</span> <span class="k">out</span> <span class="n">vars</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+    <span class="c1">// Factor in C upper bounds</span>
+    <span class="n">solver</span><span class="p">.</span><span class="n">SetBounds</span><span class="p">(</span><span class="n">vars</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="m">0</span><span class="p">,</span> <span class="n">C</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="c1">// Linear constraint must equal 0</span>
+<span class="n">solver</span><span class="p">.</span><span class="n">SetBounds</span><span class="p">(</span><span class="n">linearConstraint</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">);</span>
+<span class="c1">// Lagrangian Quadratic Terms</span>
+<span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="p">=</span> <span class="m">0</span><span class="p">;</span> <span class="n">i</span> <span class="p">&amp;</span><span class="n">lt</span><span class="p">;</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="p">++)</span> <span class="p">{</span> <span class="n">solver</span><span class="p">.</span><span class="n">SetCoefficient</span><span class="p">(</span><span class="n">linearConstraint</span><span class="p">,</span>
+        <span class="n">vars</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">trainingData</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">output</span><span class="p">());</span> <span class="n">solver</span><span class="p">.</span><span class="n">SetCoefficient</span><span class="p">(</span><span class="n">dual</span><span class="p">,</span> <span class="n">vars</span><span class="p">[</span><span class="n">i</span><span class="p">],</span>
+        <span class="m">1</span><span class="p">);</span> <span class="n">Parallel</span><span class="p">.</span><span class="n">For</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">o</span><span class="p">,</span> <span class="p">(</span><span class="kt">int</span> <span class="n">j</span><span class="p">)</span> <span class="p">=&amp;</span><span class="n">gt</span><span class="p">;</span>
+            <span class="p">{</span>
+            <span class="kt">double</span> <span class="n">coef</span> <span class="p">=</span> <span class="n">trainingData</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">output</span><span class="p">()</span> <span class="err">\</span><span class="p">*</span> <span class="n">trainingData</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">output</span><span class="p">()</span> <span class="err">\</span><span class="p">*</span>
+            <span class="n">kernel</span><span class="p">.</span><span class="n">evaluate</span><span class="p">(</span><span class="n">trainingData</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">point</span><span class="p">(),</span> <span class="n">trainingData</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">point</span><span class="p">());</span>
+            <span class="n">solver</span><span class="p">.</span><span class="n">SetCoefficient</span><span class="p">(</span><span class="n">dual</span><span class="p">,</span> <span class="p">-</span><span class="m">0.5</span> <span class="err">\</span><span class="p">*</span> <span class="n">coef</span><span class="p">,</span> <span class="n">vars</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">vars</span><span class="p">[</span><span class="n">j</span><span class="p">]);</span>
+            <span class="p">});</span>
+<span class="p">}</span>
+<span class="n">solver</span><span class="p">.</span><span class="n">AddGoal</span><span class="p">(</span><span class="n">dual</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="k">false</span><span class="p">);</span>
+<span class="n">InteriorPointSolverParams</span> <span class="n">param</span> <span class="p">=</span> <span class="k">new</span>
+<span class="n">InteriorPointSolverParams</span><span class="p">();[/</span><span class="n">csharp</span><span class="p">]</span>
+</pre></div>
+
+
+<p>Essentially all we are doing here is adding all the variables to our
+constraint optimization problem and asking the solver to minimize. The
+vars array simply expressing a list of identifier for variables in the
+constraint problem. You should fire up the Solver Foundation library and
+give it a shot yourself.</p>
+<p>Here are some resources that should make understanding this a bit easier
+as well. Its the official blog of one of the key developers on the
+project, specifically the links to tutorial on the quadratic programming
+solver.</p>
+<p><a href="http://blogs.msdn.com/b/natbr/archive/2009/09/24/using-the-solver-foundation-interior-point-solver.aspx">Nathan Brixius' QP Solver Tutorial</a></p></div>
+  <hr />
+  <div>
+    <h2>Comments</h2>
+    <a href="http://twitter.com/share" class="twitter-share-button" data-count="horizontal" data-via="dandesousa">Tweet</a><script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
+    <div id="disqus_thread"></div>      </div>
+</div>	
+        </div>
+      </div>
+    </div>
+
+    <footer class="footer">
+    <div class="container">
+      <p>Powered by <a href="http://alexis.notmyidea.org/pelican/">Pelican</a></p>
+      <p><a href="http://github.com/dandesousa/pelican-timberland">Timberland</a> based on <a href="http://twitter.github.com/bootstrap/">Bootstrap, from Twitter</a>.</p>
+      <p><a href="http://glyphicons.com">Glyphicons Free</a> licensed under <a href="http://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.</p> 
+      <p><a href="http://fortawesome.github.com/Font-Awesome">Font Awesome by Dave Gandy</a></p>
+      <p>&copy; Dan De Sousa 2013</p>
+    </div>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Dan De Sousa's Blog</title>
+    <meta name="description" content="">
+    <meta name="author" content="Dan De Sousa">
+
+    <link href="./theme/css/bootstrap.min.css" rel="stylesheet">
+    <link href="./theme/css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link href="./theme/css/font-awesome.min.css" rel="stylesheet">
+    <link href="./theme/css/timberland.css" rel="stylesheet">
+    <link href="./theme/css/timberland-icons.css" rel="stylesheet">
+    <link href="./theme/css/timberland-pygments.css" rel="stylesheet">
+            <script type="text/javascript">
+	var disqus_identifier = "boostpython-calling-back-into-python-from-native-c-threads.html";
+	(function() {
+		var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+		dsq.src = 'http://dandesousacom.disqus.com/embed.js';
+		(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	})();
+</script>
+  </head>
+  <body>
+            <div class="navbar">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <a class="brand" href="./index.html">Dan De Sousa's Blog</a>
+          <ul class="nav">
+                                                <li ><a href="./pages/about.html">About</a></li>
+                                  </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="container-fluid">
+      <div class="row-fluid">
+        <div class="span2">
+          <div class="social">
+            <h2><small>Social</small></h2>
+            <ul class="unstyled">
+                                          <li><i class="icon-facebook-sign icon-large icon-color-facebook"></i> <a href="https://facebook.com/daniel.sousa">Facebook</a></li>
+                                          <li><i class="icon-github-sign icon-large icon-color-github"></i> <a href="http://github.com/dandesousa">Github</a></li>
+                                          <li><i class="icon-google-plus-sign icon-large icon-color-google-plus"></i> <a href="https://plus.google.com/114589102912613956952">Google Plus</a></li>
+                                          <li><i class="icon-twitter-sign icon-large icon-color-twitter"></i> <a href="http://twitter.com/dandesousa">Twitter</a></li>
+                          </ul>
+          </div>
+          <hr class="soften-left-right" />
+          <h2><small>Categories</small></h2>
+          <ul class="unstyled">
+                        <li><span class="badge ">3</span> <a href="./category/articles.html">Articles</a></li>
+                        <li><span class="badge ">1</span> <a href="./category/personal.html">Personal</a></li>
+                        <li><span class="badge ">1</span> <a href="./category/politics.html">Politics</a></li>
+                        <li><span class="badge badge-success">14</span> <a href="./category/programming.html">Programming</a></li>
+                        <li><span class="badge ">1</span> <a href="./category/ramblings.html">Ramblings</a></li>
+                        <li><span class="badge ">17</span> <a href="./category/technology.html">Technology</a></li>
+                      </ul>
+          <hr class="soften-left-right" />
+                    <h2><small>History</small></h2>
+          <ul class="unstyled">
+            <li><i class="icon-book"></i> <a href="./archives.html">Archives</a></li>
+            <li><i class="icon-tags"></i> <a href="./tags.html">Tags</a></li>
+          </ul>
+        </div>
+
+        <div class="span10">
+                    <div class='article'>
+  <div class="page-header"><h1>[Boost.Python] Calling Back Into Python From Native C++ Threads</h1>
+    <ul class="unstyled">
+  <li><i class="icon-time"></i> <a class="more" href="./boostpython-calling-back-into-python-from-native-c-threads.html">2011-12-11 21:46:00</a>
+  <i class="icon-pencil"></i> <a class="url fn" href="./author/admin.html">Admin</a>   <i class="icon-folder-open"></i> <a href="./category/programming.html">Programming</a></li> 
+  <li><i class="icon-tags"></i> <a href="./tag/python.html">python</a> <a href="./tag/c.html">c++</a> <a href="./tag/programming.html">programming</a> <a href="./tag/boost.html">boost</a> </li>
+</ul>  </div>
+  <div class="page-content"><p>So I came across a particularly frustrating problem dealing with a boost
+python wrapper around a library which is calling python functions from
+native c++ threads (boost threads in this case). The problem was that
+some calls to release the global interpreter lock would cause python to
+through fatal errors and segmentation fault, despite seeming to acquire
+the GIL properly. This is how I solved the problem.</p>
+<p>As a quick overview, you need to make sure that any native threads
+acquire the GIL (global interpreter lock) before any sort of python
+resources are touched. You may not use any C Python API functions or
+call into python until the GIL is acquired. A good practice is to follow
+the RIAA method for acquiring the GIL like so:</p>
+<div class="codehilite"><pre><span class="k">class</span> <span class="nc">ScopedGILRelease</span>
+<span class="p">{</span>
+    <span class="nl">public:</span>
+        <span class="kr">inline</span> <span class="n">ScopedGILRelease</span><span class="p">()</span>
+        <span class="p">{</span>
+            <span class="n">d_gstate</span> <span class="o">=</span> <span class="n">PyGILState_Ensure</span><span class="p">();</span>
+        <span class="p">}</span>
+        <span class="kr">inline</span> <span class="o">~</span><span class="n">ScopedGILRelease</span><span class="p">()</span>
+        <span class="p">{</span>
+            <span class="n">PyGILState_Release</span><span class="p">(</span><span class="n">d_gstate</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="nl">private:</span>
+        <span class="n">PyGILState_STATE</span> <span class="n">d_gstate</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="kt">void</span> <span class="nf">onData</span><span class="p">(</span><span class="k">const</span> <span class="n">boost</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">Data</span><span class="o">&gt;::</span><span class="n">P</span> <span class="o">&amp;</span> <span class="n">data</span><span class="p">,</span> <span class="k">const</span> <span class="kt">void</span> <span class="o">*</span>
+        <span class="n">closure</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">ScopedGILRelease</span> <span class="n">gil_lock</span><span class="p">;</span>
+    <span class="c1">// invoke call_method to python</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>In the above example we call the lock which invokes PyGILState_Ensure()
+to acquire the lock. Additionally we call PyGILState_Release() on the
+same thread state object when we go out of scope.</p>
+<p>What bit me when developing this solution was that the api was not being
+properly initialized. Originally I was calling two functions in my one
+of my modules objects which I assumed was going to be called before any
+threads were made.</p>
+<div class="codehilite"><pre><span class="n">PyEval_InitThreads</span><span class="p">();</span>
+<span class="n">PyEval_ReleaseLock</span><span class="p">();</span>
+</pre></div>
+
+
+<p>Now according to the <a href="http://docs.python.org/c-api/init.html#PyEval_InitThreads">python documentation</a>, the first thread should:</p>
+<p>
+> Initialize and acquire the global interpreter lock. It should be
+> called in the main thread before creating a second thread or engaging
+> in any other thread operations such as PyEval_ReleaseLock() or
+> PyEval_ReleaseThread(tstate). It is not needed before calling
+> PyEval_SaveThread() or PyEval_RestoreThread().
+</p>
+
+<p>However, that documentation is either incorrect or something very subtle
+was going on in my library, since PyEval_InitThreads() was being called
+before any thread operations and the object was being created in the
+main thread of the python interpreter. Perhaps I couldn't guarantee that
+python wasn't spawning some sub-thread to handle that part of the
+script. Anyway I found that I had to instead call PyEval_InitThreads()
+once in the module definition macro for boost python. Looking something
+like this:</p>
+<div class="codehilite"><pre><span class="n">BOOST_PYTHON_MODULE</span><span class="p">(</span><span class="n">ModuleName</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">PyEval_InitThreads</span><span class="p">();</span>
+    <span class="p">...</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>As always a super simple solution to a super frustrating problem. This
+information was extremely hard to find, so hopefully this helps someone
+out there from losing hours of time. <a href="http://stackoverflow.com/questions/8451334/why-is-pygilstate-release-throwing-fatal-python-errors/8469304#8469304">Also, here is a link to the stack
+overflow question I eventually posted and quickly subsequently
+answered</a>.</p>
+<p>Enjoy.</p></div>
+  <hr />
+  <div>
+    <h2>Comments</h2>
+    <a href="http://twitter.com/share" class="twitter-share-button" data-count="horizontal" data-via="dandesousa">Tweet</a><script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
+    <div id="disqus_thread"></div>      </div>
+</div>	
+        </div>
+      </div>
+    </div>
+
+    <footer class="footer">
+    <div class="container">
+      <p>Powered by <a href="http://alexis.notmyidea.org/pelican/">Pelican</a></p>
+      <p><a href="http://github.com/dandesousa/pelican-timberland">Timberland</a> based on <a href="http://twitter.github.com/bootstrap/">Bootstrap, from Twitter</a>.</p>
+      <p><a href="http://glyphicons.com">Glyphicons Free</a> licensed under <a href="http://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.</p> 
+      <p><a href="http://fortawesome.github.com/Font-Awesome">Font Awesome by Dave Gandy</a></p>
+      <p>&copy; Dan De Sousa 2013</p>
+    </div>
+    </footer>
+  </body>
+</html>

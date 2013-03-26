@@ -1,0 +1,674 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Dan De Sousa's Blog</title><link href="http://dandesousa.com/" rel="alternate"></link><link href="http://dandesousa.com/feeds/Technology.atom.xml" rel="self"></link><id>http://dandesousa.com/</id><updated>2012-12-09T20:07:00-05:00</updated><entry><title>Linking Together iCloud, Photo Stream and Dropbox.</title><link href="http://dandesousa.com/linking-together-icloud-photo-stream-and-dropbox.html" rel="alternate"></link><updated>2012-12-09T20:07:00-05:00</updated><author><name>Admin</name></author><id>tag:dandesousa.com,2012-12-09:linking-together-icloud-photo-stream-and-dropbox.html</id><summary type="html">&lt;p&gt;Looking for a way to link together iCloud and Dropbox to manage your
+photos? Look no further; the following is a guide to getting your iOS
+and Photo Stream photos automatically into Dropbox.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="./static/wp-content/uploads/2012/12/dropbx-300x300.png" title="dropbx" /&gt; &lt;img alt="" src="./static/wp-content/uploads/2012/12/icloud-300x297.jpg" title="icloud" /&gt;&lt;/p&gt;
+&lt;h2&gt;Background&lt;/h2&gt;
+&lt;p&gt;This  process started because I was looking for a way to manage all my
+photos on my iPad. I want to take pictures with my DSLR or point and
+shoot, download them to my iPad with the camera connection kit, and have
+them automatically added to my cloud or local photo library.
+Unfortunately many of the photo management services on the iPad are
+lacking, and it is not easy to create and sync albums through iCloud.
+What I really wanted was a permanent backup solution for photos on my
+iPad. It would also be nice to be able to manage my photos with a third
+party application like Picasa. That's when I thought to use Photo Stream
+as a delivery mechanism to upload photos to Dropbox. I trust Dropbox to
+keep my photos safe, and I like having access to all my photos on all my
+devices. Of course, all these photos are going to take up a lot of space
+over time. I cover the costs of this setup in the last section.&lt;/p&gt;
+&lt;h2&gt;Setup&lt;/h2&gt;
+&lt;p&gt;This setup will work on Windows or Mac, but I'll go over the
+instructions for Windows. If there are requests I can post directions
+for OS X, though it should be pretty straightforward from the following.&lt;/p&gt;
+&lt;p&gt;You'll need these applications:&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://www.dropbox.com/"&gt;Dropbox&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://support.apple.com/kb/dl1455"&gt;iCloud Control Panel&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;These instructions have you setup iCloud Control Panel to download your
+Photo Stream uploaded photos (which includes all photos added to your
+iOS through either the camera app or the camera connection kit) a
+Dropbox folder.&lt;/p&gt;
+&lt;p&gt;First you'll want to make sure Dropbox is configured and setup for your
+account.&lt;/p&gt;
+&lt;p&gt;Second after you install the iCloud Control Panel, you want to find it
+under Control Panel &gt; iCloud. You should see something like this:&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="./static/wp-content/uploads/2012/12/icloudcontrolpanel.png" title="icloudcontrolpanel" /&gt;&lt;/p&gt;
+&lt;p&gt;Select options next to Photo Stream:&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="./static/wp-content/uploads/2012/12/options.png" title="options" /&gt;&lt;/p&gt;
+&lt;p&gt;Make sure that "My Photo Stream" is selected. Also check "Shared Photo
+Streams" if you use that feature. Select "Change" next to "Photo Stream
+location" and navigate to your Dropbox directory. You can either select
+the Photos directory. In the follow example I've created a dedicated
+directory just for my Photo Stream photos:&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="./static/wp-content/uploads/2012/12/files.png" title="files" /&gt;&lt;/p&gt;
+&lt;p&gt;Don't worry about the directories under "Photo Streams" they will appear
+once your computer starts download photos from Apple. Once it's
+selected, select "OK" all the way until you get back to the main control
+panel window and close it.&lt;/p&gt;
+&lt;p&gt;From now on, all new pictures on your iOS device will automatically be
+downloaded to your local machine, and since the location of the download
+is in Dropbox, it will be uploaded to your Dropbox account as well.&lt;/p&gt;
+&lt;h2&gt;Benefits&lt;/h2&gt;
+&lt;p&gt;You might be asking why go through to the trouble of doing this. Well
+there are a number of benefits:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;You can access all your photos on all your devices, computers and on
+    the web securely.&lt;/li&gt;
+&lt;li&gt;Manage your photo library solely from your iPad, iPhone with Dropbox
+    and the Photos app.&lt;/li&gt;
+&lt;li&gt;Freedom to delete old photos from your iOS device without fear that
+    they will disappear from iCloud after 30 days or when your 1000
+    photo limit is reached. If dropbox is installed on your iOS device,
+    you can even view them there long after they've disappeared from
+    Photo Stream.&lt;/li&gt;
+&lt;li&gt;Automatically download photos to all your computers at once (as long
+    as your computer with iCloud Control Panel is running)&lt;/li&gt;
+&lt;li&gt;Automatically upload photos to all your iOS devices from any
+    computer in the world or the web by dropping them in the Photo
+    Stream &gt; Uploads folder (as long as your iCloud Control Panel
+    computer is running)&lt;/li&gt;
+&lt;li&gt;"Own" all your photos, organize them into albums and make them
+    accessible.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2&gt;Long Term Costs&lt;/h2&gt;
+&lt;p&gt;This setup does not come without its costs. While iCloud and Photo
+Stream are free for Photos, a new dropbox free user probably doesn't
+have much room to be storing their entire photo library. In the long
+term this will like depend on having a paid account. However, fret not,
+since Dropbox is always running a number of promotions to increase
+available space. The biggest is the &lt;a href="https://www.dropbox.com/spacerace"&gt;Dropbox Space Race&lt;/a&gt; and &lt;a href="https://www.dropbox.com/help/category/Referrals"&gt;referral
+program&lt;/a&gt;. You can also &lt;a href="https://www.dropbox.com/pricing"&gt;Dropbox's pricing details&lt;/a&gt; which have
+recently expanded. Furthermore, with the decrease in price of storage,
+we should see costs come down and capacity go up in the coming years.&lt;/p&gt;
+&lt;p&gt;Please feel free to comment or suggest alternate setups. So far this has
+been working quite well and allowing me to leverage the best of both of
+these great cloud services.&lt;/p&gt;</summary><category term="dropbox"></category><category term="icloud"></category><category term="photo stream"></category></entry><entry><title>Changing PlexSync Temporary Directory</title><link href="http://dandesousa.com/changing-plexsync-temporary-directory.html" rel="alternate"></link><updated>2012-11-20T20:10:00-05:00</updated><author><name>Admin</name></author><id>tag:dandesousa.com,2012-11-20:changing-plexsync-temporary-directory.html</id><summary type="html">&lt;p&gt;Plex just announced a great new syncing feature for iOS devices, but I
+noticed that when I started syncing, my SSD would quickly fill up. It
+turns out that as of the current release of plex server v0.9.7.3, you
+cannot directly change the directory. However, you can change the entire
+local application path for plex. There are instructions on the Plex wiki
+detailing how this is done:&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://wiki.plexapp.com/index.php/Plex_Media_Server_Preferences#Advanced_Preferences%20%20"&gt;Plex Wiki&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;In my case I set LocalAppDataPath in the registry to my RAID disc which
+has plenty of storage. You'll have to follow the instructions for your
+particular platform.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;IMPORTANT: &lt;/strong&gt;Make sure that when you change the path you copy your old
+plex app data directory to preserve all your metadata, thumbnails, and
+database. On Windows, its in "C:/Users/\&amp;lt;USERNAME&gt;/AppData/Local/Plex
+Media Server". Also important, remember that the directory
+Cache/Transcode/Sync &lt;strong&gt;MUST&lt;/strong&gt; exist. I tried to delete the cache to save
+myself some transfer time and when I was missing that
+Cache/Transcode/Sync directory, PlexSync would not work at all. Once I
+restored the directory, all was well.&lt;/p&gt;</summary><category term="plex"></category></entry><entry><title>HowTo: Setup a network with two internet connections</title><link href="http://dandesousa.com/howto-setup-a-network-with-two-internet-connections.html" rel="alternate"></link><updated>2012-05-26T08:41:00-04:00</updated><author><name>Admin</name></author><id>tag:dandesousa.com,2012-05-26:howto-setup-a-network-with-two-internet-connections.html</id><summary type="html">&lt;p&gt;If you are living in an area where internet connection options are
+limited, you may find yourself in a connundrum. Perhaps you want to be
+able to use high bandwidth services (netflix, itunes, bittorrent,
+gaming) but a single connection pipe is not large enough to accomodate
+all the traffic. Or perhaps, your internet is capped or throttled after
+a certain amount of time.&lt;/p&gt;
+&lt;h2&gt;&lt;strong&gt;My Situation&lt;/strong&gt;&lt;/h2&gt;
+&lt;p&gt;&lt;/p&gt;
+I currently live in such an area, where my faster internet provider will
+quickly throttle for high usage. I needed to be able to download (iTunes
+videos, Steam games, etc), but my primary provider throttles if we
+download too much. To make matters worse, my girlfriend works from home,
+so she needs a fast constant connection.&lt;/p&gt;
+&lt;p&gt;So what I wanted was to be able to use Clear (which has great speed and
+reception in our area) for normal internet and DSL for all the high
+bandwidth content. We needed to have one or two computers in our network
+use the DSL, and the others use Clear. However, we still needed everyone
+on the same network because we needed to access file shares and other
+applications running on the network.&lt;/p&gt;
+&lt;p&gt;After much searching I found a solution that fits my needs and that I
+hope will help some other people as well.&lt;/p&gt;
+&lt;h2&gt;&lt;strong&gt;The Solution&lt;/strong&gt;&lt;/h2&gt;
+&lt;p&gt;&lt;/p&gt;
+The solution to my problem is to create a &lt;strong&gt;&lt;em&gt;Multiple Gateway&lt;/em&gt;&lt;/strong&gt; setup.
+The idea is you have a standard network with one internet connection
+that acts as the primary gateway. By default all connecting devices use
+this connection. You then add one or more routers with separate incoming
+connections as other gateways. You assign them IPs and you tell the
+devices you want to use that gateway and it will use it for those
+connections.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;So in summary, this setup will allow you to keep all devices on one
+network and manually assign which connection each device uses (using one
+connection as the default).&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;You just need to follow these steps:&lt;/p&gt;
+&lt;h3&gt;&lt;strong&gt;Setup your default gateway&lt;/strong&gt;&lt;/h3&gt;
+&lt;p&gt;&lt;/p&gt;
+For the purpose of this article, gateway is just another term for a
+router with an incoming WAN or internet connection. Chances are your
+default gateway is already setup -- its just your current single
+connection network setup. If you want to continue to use this connection
+as the default for all devices on the network, leave as is and continue
+to the next step. Otherwise swap the internet connections.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;The internet connection on this gateway will be used for all devices by
+default.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;Make a note of your router's IP address; in most cases it is
+'192.168.1.1'.&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Also note the DHCP range of your router, this varies by model but on the
+common dd-wrt setup can be found here:&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="./static/wp-content/uploads/2012/05/default-gateway-192.168.1.1-dhcp-address-781x1024.png" title="default-gateway-192.168.1.1-dhcp-address" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;/p&gt;
+For this scenario our DHCP range starts at 192.168.1.100. So anything
+from 192.168.1.0 - 192.168.1.99 is out of range and won't be used by the
+router when assigning the addresses to devices. This is important to
+know for the next step.&lt;/p&gt;
+&lt;h3&gt;&lt;strong&gt;Setup your second gateway&lt;/strong&gt;&lt;/h3&gt;
+&lt;p&gt;&lt;/p&gt;
+You want to setup a completely separate network with the second router
+and connection. Don't connect the second gateway to the main network
+yet. Verify that on your second connection you have an internet
+connection and everything is working.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Assign the second gateway an IP address&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Once that works, you want to give the second gateway a different IP
+address to distinguish it from the primary gateway. Since the primary
+gateway is IP address 192.168.1.1, we'll use 192.168.1.2. Note that the
+address must be outside the range of DHCP for the primary gateway.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Disable DHCP on the second gateway&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Now, you want to disable DHCP server on the second gateway. If you are
+using DD-WRT, the highlighted radio box in the box image should be
+'Disable'. This is important, DHCP MUST BE DISABLED. Not set to a new
+gateway, not turned onto DHCP forwarding -- DISABLED. Make sure you hit
+apply and save any settings before moving onto the next step.&lt;/p&gt;
+&lt;h3&gt;&lt;strong&gt;Connect your second gateway to your network through the LAN port&lt;/strong&gt;&lt;/h3&gt;
+&lt;p&gt;&lt;/p&gt;
+Now connect your second gateway to your network through the LAN part as
+you would connect a switch to your network to allow for additional
+connections. Once you do so, you should be able to connect to your
+primary network and access both the primary gateway and the secondary
+gateway by their addresses. Confirm this by ensuring you can access
+192.168.1.1 and 192.168.1.2.&lt;/p&gt;
+&lt;h3&gt;&lt;strong&gt;Configure your machines to use the alternative gateway&lt;/strong&gt;&lt;/h3&gt;
+&lt;p&gt;&lt;/p&gt;
+Good news is you are pretty much done now. You can confirm your setup is
+working by assigning a machine to either network. You want to open up
+your network menu and find your network interface (representing the one
+connected to your network  -- be it wired or wireless).&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="./static/wp-content/uploads/2012/05/network-1.png" title="network-1" /&gt;&lt;/p&gt;
+&lt;p&gt;now right click and select properties. Then select the IPv4 settings and
+hit properties again:&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="./static/wp-content/uploads/2012/05/network-2.png" title="network-2" /&gt;&lt;/p&gt;
+&lt;p&gt;Now you want to manually configure your connection.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="./static/wp-content/uploads/2012/05/network-3.png" title="network-3" /&gt;&lt;/p&gt;
+&lt;p&gt;For your IP address, assign anything that is outside the DHCP range of
+your router (anything below 192.168.1.100 works in this example). Leave
+subnet mask matching your primary gateway and assign default gateway to
+the second connection. You'll also want to add that as the DNS server.
+This tells this network interface to use that gateway for your internet
+connection.&lt;/p&gt;
+&lt;p&gt;If all works successfully you should now have access, and all traffic on
+that box will flow to your second gateway, leaving your other
+connections unaffected.&lt;/p&gt;
+&lt;p&gt;Most devices give you the ability to customize the your IP configuration
+this way, so you should be able to configure your devices in any manner
+you choose.&lt;/p&gt;
+&lt;h3&gt;&lt;strong&gt;Repeat for any additional connections &lt;/strong&gt;&lt;/h3&gt;
+&lt;p&gt;&lt;/p&gt;
+The multiple gateway setup works for as many connections as you want.
+Just continue adding addresses outside your DHCP range for your gateways
+and you should be fine.&lt;/p&gt;
+&lt;p&gt;Hopefully this will be useful to people out there trying to work out how
+to use multiple connections in their home network. I know it was for me.&lt;/p&gt;</summary><category term="networking"></category></entry><entry><title>HowTo Fix: MacBook Pro and Dell 2711 DisplayPort Issues</title><link href="http://dandesousa.com/howto-fix-macbook-pro-and-dell-2711-displayport-issues.html" rel="alternate"></link><updated>2012-03-07T21:41:00-05:00</updated><author><name>Admin</name></author><id>tag:dandesousa.com,2012-03-07:howto-fix-macbook-pro-and-dell-2711-displayport-issues.html</id><summary type="html">&lt;p&gt;I chose to get the Dell U2711 mostly due to PC compatibility and price
+advantages over the Cinema Display. However, having a MacBook Pro I
+wanted to also connect it to  my nice display. I ordered a
+Mini-DisplayPort to DisplayPort cable and all worked fine until one day
+it didn't. The screen was black and no signal was being delivered
+between my MacBook Pro and the display. I tested with my girlfriend's
+computer and the problem persisted. I ordered yet another cable and the
+problem still persisted!&lt;/p&gt;
+&lt;p&gt;I knew something was wrong with the display. Finally I solved my problem
+in the most simple way:&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;While the monitor was on, I pulled the U2711's power cable and waited
+about 15-30 seconds. I plugged the monitor back in and switch to
+DisplayPort and it worked perfected!&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Obviously something is wrong with Dell's monitor in this instance, but
+this simple fix should help everyone having headaches with this like me.&lt;/p&gt;</summary><category term="apple"></category><category term="macbook pro"></category><category term="dell"></category><category term="displayport"></category><category term="u2711"></category></entry><entry><title>HowTo Fix: Slow SSD Boot Times in Mac OS X</title><link href="http://dandesousa.com/howto-fix-slow-ssd-boot-times-in-mac-os-x.html" rel="alternate"></link><updated>2012-03-07T21:31:00-05:00</updated><author><name>Admin</name></author><id>tag:dandesousa.com,2012-03-07:howto-fix-slow-ssd-boot-times-in-mac-os-x.html</id><summary type="html">&lt;p&gt;I recently bought a ssd for my macbook pro and noticed after installing
+and reformatting, the boot times were slow ... about as slow as my hdd
+or even slower. If you have an SSD, you can except boot times around 15
+seconds or so. If you are encountering boot times of 35+ seconds, you
+may have the same problem I had. I was able to solve the problem by
+following these steps:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;System Preferences -&gt; Startup Disk. Make sure that your SSD drive
+    is selected.&lt;/li&gt;
+&lt;li&gt;Open Disk Utility and select your drive, and click "Repair Disk
+    Permissions"&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://support.apple.com/kb/ht1379"&gt;Reset your PRAM&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://support.apple.com/kb/HT3964"&gt;Reset your SMC&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;/p&gt;
+The final step of reseting the SMC finally fixed this for me, but I had
+tried all the steps before hand, so I cannot be sure which will work for
+you. If you have any comments, please post for the benefit of all
+readers.&lt;/p&gt;</summary><category term="ssd"></category><category term="apple"></category><category term="macbook"></category><category term="boot"></category></entry><entry><title>The Ultimate Home Media Center Solution [Spoiler: Plex!]</title><link href="http://dandesousa.com/the-ultimate-home-media-center-solution-spoiler-plex.html" rel="alternate"></link><updated>2011-11-05T23:08:00-04:00</updated><author><name>Admin</name></author><id>tag:dandesousa.com,2011-11-05:the-ultimate-home-media-center-solution-spoiler-plex.html</id><summary type="html">&lt;p&gt;In this article, I cover my opinion on currently the best media center
+option for managing local content libraries, and my thoughts on the
+state of digital video distribution.&lt;/p&gt;
+&lt;p&gt;I do not condone any mention of piracy in the article and any references
+are merely for illustrative purposes regarding this rather opinionated
+article :-).&lt;/p&gt;
+&lt;p&gt;Feel free to jump ahead to the guide, but first some background:&lt;/p&gt;
+&lt;h1&gt;&lt;strong&gt;How I Discovered Plex&lt;/strong&gt;&lt;/h1&gt;
+&lt;p&gt;&lt;/p&gt;
+I can say that I have been searching for the "perfect" home media center
+for a long time. I have a rather large collection of TV Shows and DVDs
+that have been ripped. For years I struggled with getting that media on
+devices I wanted. At first I converted them to PS3 compatible formats
+and streamed them over DLNA using TwonkeyMedia. That was great except
+that conversions took a long time. Then if I wanted them on my iPhone or
+iPod I need to convert them yet again, to a different format. Then I
+needed space for all those duplicate files (and managing them was a
+nightmare). There seemed to be a lot of disjoint solutions which
+required manual management. A friend of mine suggested XBMC, which is a
+great home media center front end with tons of plug-in support. It
+actually eventually led to my discovery of what I believe to be clearly
+the best product out there for managing a local collection of content
+and getting it on your devices, and it is called &lt;a href="http://www.plexapp.com/"&gt;Plex&lt;/a&gt;.&lt;/p&gt;
+&lt;h1&gt;&lt;strong&gt;What Is Plex?&lt;/strong&gt;&lt;/h1&gt;
+&lt;p&gt;&lt;/p&gt;
+First, let me explain what Plex does. Plex is a media center front end
+for Plex Media Server. Basically, Plex Media Server manages a library of
+media on a computer for you, and serves it up to multiple devices. So
+you can have a drive with all your TV Shows, Movies, Music, Photos, etc
+and Plex Media Server (PMS -- an unfortunate abbreviation) will deliver
+it over your home network or the internet. Plex is a UI which runs on a
+computer, mobile phone or TV and gives you access to that content. It
+looks something like this:&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="./static/wp-content/uploads/2011/11/episode_overview.png" title="episode_overview" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="./static/wp-content/uploads/2011/11/episode_overview.png"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;/a&gt;Basically gives you all your episodes (with metadata) automatically.
+Lets you browse by tons of different categories, like unwatched or
+recently aired/added. Did I mention it automatically organize your media
+assuming you have everything reasonable named? Basically it is pretty
+close to media center nirvana, and the basic application and server are
+free to use.&lt;/p&gt;
+&lt;/p&gt;
+
+&lt;p&gt;So what makes this better than any other solution out there, especially
+XBMC (from which Plex was originally development from)?&lt;/p&gt;
+&lt;/p&gt;
+
+&lt;p&gt;Well it's all about Plex Media Server. Basically you can setup one
+machine in your network with media center, and serve up content to every
+client device running plex. The Plex client is available for Mac, Roku,
+Samsung and LG TVs, and jailbroken Apple TVs and more -- so theres
+plenty of choice on the set top box front. Additionally there are native
+iPhone, iPad, and Android apps. Also, Plex Media Server automatically
+live transcodes videos which are unsupported on client devices, and
+almost all video formats are supported. This solves the problem I had
+originally in storing many copies of files. Also, since everything is on
+a common server, you can stop a show or movie on your TV, then watch it
+on your iPad in bed. The server keeps track of partially watch shows on
+all devices. Also, you may want to search for an application called
+sickbeard, as it can integrate with plex to enhance your experience
+(that is all I can say :-) ).&lt;/p&gt;
+&lt;/p&gt;
+
+&lt;p&gt;If you like what you hear, I suggest trying it out. I can also recommend
+a setup which I've found useful, not everyone needs what I have, you can
+make due with less, but my setup fits with my other server needs.&lt;/p&gt;
+&lt;/p&gt;
+
+&lt;h1&gt;&lt;strong&gt;Setting Up Plex Media Center&lt;/strong&gt;&lt;/h1&gt;
+&lt;p&gt;&lt;/p&gt;
+EDIT: I just noticed that as of the latest update, Plex is also
+available for Windows. So you can use any machine you want.&lt;/p&gt;
+&lt;p&gt;You Will Need:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Mac Mini (Alternative: Samsung or LG TV with Apps, Roku, Google TV,
+    Apple TV)&lt;/li&gt;
+&lt;li&gt;Dedicated Server of any OS (Mac Mini will do, or any other machine
+    so long as it is on while you watch videos)&lt;/li&gt;
+&lt;li&gt;Plex for iOS / Android (Last I checked it was about \$3-5 in the app
+    store but definitely the best purchase I've made)&lt;/li&gt;
+&lt;li&gt;Plex for Mac&lt;/li&gt;
+&lt;li&gt;Plex Media Server&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/p&gt;
+
+&lt;div&gt;
+Rough Setup and Reasoning:
+
+&lt;/div&gt;
+
+&lt;/p&gt;
+
+&lt;div&gt;
+&lt;/p&gt;
+
+1.  First, you want to setup your Mac Mini or other plex box. I
+    recommend a mac mini because it is small and provides the best
+    looking, fastest Plex experience. You also get a complete client
+    implementation. It is also the most expensive option. There are Plex
+    clients for TVs, Roku, Google TV or Apple TV (jailbroken), so you
+    can also try one of those if you already have a different box.
+2.  You should install and run Plex Media Server on a dedicated box you
+    can always count on being on when you want to watch videos. This
+    should also be the server all the media is stored on. Advantage of
+    an always on server is that you can access your content from any
+    time on the network (or on the internet if you setup myPlex which is
+    available as of Plex 0.9.5).
+3.  Plex for iOS is only necessary if you want to watch you media on
+    mobile devices. The apps cost a few bucks but they are totally worth
+    it and highly polished.
+4.  Once you setup PMS you just need to run plex and it should
+    auto-detect your local server, exposing all your media. If you run
+    an alternative plex client you may need to point it to the address
+    of your server.
+
+&lt;/p&gt;
+&lt;p&gt;
+&lt;/div&gt;
+
+&lt;/p&gt;
+
+&lt;h1 style="text-align: left;"&gt;&lt;strong&gt;Why People Want Plex&lt;/strong&gt;&lt;/h1&gt;
+&lt;/p&gt;
+
+&lt;p&gt;I asked myself why people want home media centers. I don't think it is
+necessarily due to wanting to own copies of movies, tv shows and music.
+I think that Plex and XBMC have succeeded because simply put, the
+providers and TV device manufacturers have failed consumers. There is no
+single product out there that can give you everything you want, despite
+having tons of companies dedicated to this purpose.&lt;/p&gt;
+&lt;/p&gt;
+
+&lt;h2 style="text-align: left;"&gt;&lt;em&gt;Netflix&lt;/em&gt;&lt;/h2&gt;
+&lt;/p&gt;
+
+&lt;p&gt;Netflix is cheap and great, but it has a terrible selection. I mean 8\$
+a month isn't much but it seems like half the content on there are
+national geographic documentaries. They have great coverage for client
+devices (all mobile phone platforms, tablets, set tops, tvs) but their
+coverage is just so spotty. It seems like they are always losing
+providers or having content negotiation problems. Even so, most shows
+only come out on Netflix the same time they come out on DVD. Maybe I
+don't want to wait 8 months to watch a TV show.&lt;/p&gt;
+&lt;/p&gt;
+
+&lt;h2 style="text-align: left;"&gt;&lt;em&gt;Amazon Instant Video&lt;/em&gt;&lt;/h2&gt;
+&lt;/p&gt;
+
+&lt;p&gt;The next best service is probably Amazon Instant Video. It has a decent
+selection of TV shows and if you are an Amazon Prime member, the deal is
+great (I recently get addicted to Doctor Who thanks to Amazon Instant
+Video and am now I lover of the series). The problem with Amazon is that
+the client support is simply abysmal. I don't understand what they are
+doing. Amazon is perhaps my favorite internet company but I think
+whoever is running their video distribution strategy is a buffoon.
+Amazon Instant Video has clients for Roku and some TVs. However, theres
+no iOS support (no iPad -- come on!), no Android support, no apple tv
+support. If you sell a streaming service you need to make it accessible.
+Also, same criticism applies to the waiting period as netflix.&lt;/p&gt;
+&lt;/p&gt;
+
+&lt;h2 style="text-align: left;"&gt;&lt;em&gt;iTunes and Apple TV&lt;/em&gt;&lt;/h2&gt;
+&lt;/p&gt;
+
+&lt;p&gt;Apple TV provides a wide selection of TV Shows and Movies. They have
+their own dedicated box which is simple and cheap. Unfortunately, Apple
+TV has serious, serious flaws. The deal breaker being that its 720p, as
+is most of the content on the iTunes store. Also, theres no subscription
+option, you have to actually buy all the episodes of every show. Its
+almost a good alternative if you don't want cable.&lt;/p&gt;
+&lt;/p&gt;
+
+&lt;p&gt;I think what the world really needs is a digital form of on demand
+cable. Where you choose your box or client, and subscribe through a
+cable provider to certain shows or subsets of channels and have
+optionally commercial free streaming of content. Then you have access to
+all their networks contents from all time. The issue is that content
+providers and cable companies don't want to stray from a profitable
+traditional business model. They like charging you 100\$ a month for
+digital cable, when you watch about 25% of the shows and channels. Then
+they want to sell people box set DVDs they will watch once if ever after
+the original airing date. They think this is the best way to make money.
+What they don't realize is that if they provide customers with choice,
+such as choosing which channels they watch, choosing whether or not to
+watch with commercials, they will make more money. You can lend a box
+set of DVDs to your friend. You can't share DRM digital rental,
+subscription or purchase, and you can't resell it when you are finish
+(this is why the video game industry loves digital downloads -- they
+lose millions to the resale game market). This is not even to mention
+the possibility for targeted advertisements or exposing people to shows
+directly.&lt;/p&gt;
+&lt;/p&gt;
+
+&lt;p&gt;So how does Plex solve this? Well let's be honest, a large number of
+people who want XBMC or Plex are downloading TV Shows or ripping their
+own bought discs. They are making this complete service for themselves,
+for the subset of shows they want to watch. The sad thing is that the
+piracy is actually a better solution then what is legally available.
+Using the right tools, it can become completely automated, commercial
+free, and instant available after airing -- you could get full quality
+720 TV shows and 1080p Movies as soon as they air or become commercially
+available without lifting a finger. Get with the program providers, if
+people are willing to spend thousands on custom servers, software and
+services, they will pay a little extra for complete, high quality
+streaming access that is guaranteed and legal.&lt;/p&gt;
+&lt;/p&gt;
+
+&lt;p&gt;Hopefully Google, Microsoft or Apple will get their act together and
+release a good solution. Apple has a good track record with provider
+industries in getting content on digital devices. Maybe we will see an
+Apple TV running iOS with native third party app support soon. That
+could mean an app store that supports channels from providers, or a
+common subscription model. There is a lot of money to be made here.&lt;/p&gt;
+&lt;/p&gt;
+
+&lt;p&gt;I'd like to hear what anyone else thinks. What sort of setup do you guys
+have, what do you want to see in a streaming service that doesn't exist?&lt;/p&gt;
+&lt;/p&gt;</summary><category term="plex"></category><category term="home media center"></category></entry><entry><title>Realtek RTL8111 Windows Server 2008</title><link href="http://dandesousa.com/realtek-rtl8111-windows-server-2008.html" rel="alternate"></link><updated>2011-06-03T21:45:00-04:00</updated><author><name>Admin</name></author><id>tag:dandesousa.com,2011-06-03:realtek-rtl8111-windows-server-2008.html</id><summary type="html">&lt;p&gt;Encountered an issue when loading Windows Server 2008 R2 onto my new
+media server. Seems it couldn't find my Realtek Gigabit onboard NIC on
+my Biostar A880G+. Anyway after much searching I failure installing the
+official realtek driver. I found the following driver which worked and
+allowed me to update all my other drivers:&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://drivers.softpedia.com/progDownload/Realtek-RTL8110SC-L-Driver-6218-for-WinServer-2008-Download-77885.html"&gt;http://drivers.softpedia.com/progDownload/Realtek-RTL8110SC-L-Driver-6218-for-WinServer-2008-Download-77885.html&lt;/a&gt;&lt;/p&gt;</summary></entry><entry><title>Getting Highpoint RocketRaid 2640x4 Controller To Work In Linux</title><link href="http://dandesousa.com/getting-highpoint-rocketraid-2640x4-controller-to-work-in-linux.html" rel="alternate"></link><updated>2011-06-03T17:29:00-04:00</updated><author><name>Admin</name></author><id>tag:dandesousa.com,2011-06-03:getting-highpoint-rocketraid-2640x4-controller-to-work-in-linux.html</id><summary type="html">&lt;p&gt;So, I finally got around to re-organizing my home server situation, and
+was given a RocketRaid 2640x4 SAS Raid Controller from a friend. My
+intention was to simply use it for the extra SATA slots and not bother
+with its own on-board RAID. However, when I tried to get it to work, I
+noticed that the drives weren't being detected under Ubuntu. I scored
+the internet until I finally found a post from a newegg buyer that
+resolved my issue and I feel its important enough to post.&lt;/p&gt;
+&lt;p&gt;Here are the steps you need to follow to get this controller to work
+under Linux. They may work for all versions of Linux but I have not
+tried them.&lt;/p&gt;
+&lt;p&gt;1.) Flash the BIOS to legacy&lt;/p&gt;
+&lt;p&gt;If you don't need the RAID features, you can flash the BIOS on the card
+to replace the current BIOS with a legacy BIOS &lt;em&gt;sans&lt;/em&gt; RAID. To do this,
+simply download the legacy BIOS from the Highpoint website. You can then
+either run the highpoint flash utility under windows or you'll need to
+create a DOS boot disk. If you have access to a Windows box, using the
+utility is the easier course of action. When you extract the BIOS zip it
+should be listed as hptflash.exe and look like this:&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="./static/wp-content/uploads/2011/06/Capture-300x178.png" title="Capture" /&gt;&lt;/p&gt;
+&lt;p&gt;2.) Configure the drive to be under legacy mode&lt;/p&gt;
+&lt;p&gt;Now plug you card back into the linux box and make sure that all the
+drives connected to the card are listed as "legacy" in the RocketRaid
+RAID utility that appears when you boot your machine (You may need to
+press CTRL+H when the appropriate screen appears).&lt;/p&gt;
+&lt;p&gt;3.) Download and Compile the Driver Source&lt;/p&gt;
+&lt;p&gt;Now you need to make sure the drivers are properly installed. I got
+issues when I tried to install the pre-built binaries. Luckily its
+pretty easy to compile the drivers yourself. Simply download the
+&lt;em&gt;legacy&lt;/em&gt; drives from the RocketRaid site on the same page as the BIOS.
+Now just cd in the lowest level of the source directory and type "sudo
+make install". You'll see it build and then you are done!&lt;/p&gt;
+&lt;p&gt;The drivers will then be installed. If you reboot and check ls /dev you
+should see a drive labeled sd\&amp;lt;*&gt; for every drive connect to the card
+or your motherboard. Enjoy!&lt;/p&gt;</summary></entry><entry><title>HTPC Stutter Over HDMI on Samsung HDTV</title><link href="http://dandesousa.com/htpc-stutter-over-hdmi-on-samsung-hdtv.html" rel="alternate"></link><updated>2011-02-18T23:25:00-05:00</updated><author><name>Admin</name></author><id>tag:dandesousa.com,2011-02-18:htpc-stutter-over-hdmi-on-samsung-hdtv.html</id><summary type="html">&lt;p&gt;This will be a quick one. I recently built an HTPC to run XBMC and play
+videos off my file share. I noticed that almost all videos had
+an occasional stutter that would occur every few seconds and produce a
+very slight stutter in the image. This happened for all file types and
+resolutions. I'm running with an integrated ATI HD 4250.&lt;/p&gt;
+&lt;p&gt;I eventually figured out that it was my TV settings. I was connecting
+over HDMI and Samsung must do some extra processing or handshaking over
+the HDMI to HTPC. I realized this since I connected my HTPC to my
+monitor at the same resolution (1080p 60hz) and I experienced perfect
+video playback. I eventually was able to solve the problem by setting
+the HDMI input source name to PC and disabling Auto Motion Plus
+features. It seems like this tells the Samsung set to stop any extra
+processing that causes and occasional stutter.&lt;/p&gt;
+&lt;p&gt;Hope this helps someone out there!&lt;/p&gt;
+&lt;p&gt;UPDATE: I found that turning off "de-interlacing" in the ATI catalyst
+settings eliminated this effect. Try that in addition to the above steps&lt;/p&gt;</summary><category term="hdmi"></category><category term="samsung"></category><category term="tv"></category><category term="xbmc"></category></entry><entry><title>HowTo Fix: iOS 4.3 Beta Installed on iPad but Missing Gestures</title><link href="http://dandesousa.com/howto-fix-ios-43-beta-installed-on-ipad-but-missing-gestures.html" rel="alternate"></link><updated>2011-01-15T21:42:00-05:00</updated><author><name>Admin</name></author><id>tag:dandesousa.com,2011-01-15:howto-fix-ios-43-beta-installed-on-ipad-but-missing-gestures.html</id><summary type="html">&lt;p&gt;I recently installed the iPad OS 4.3 beta and found that the gestures
+were missing. A bit of tinkering around and I realized that actually I
+had not yet turned on my iPad for development use (something required to
+access these new features). If you are experiencing the same problems,
+following these steps to enabled gestures on your iPad:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Verify that gestures are not enabled&lt;/li&gt;
+&lt;li&gt;Plug you iPad into your mac and bring up the xcode organizer and
+    click "enable development use" on your iPad's summary screen.&lt;/li&gt;
+&lt;li&gt;Kill and restart the settings app on your iPad&lt;/li&gt;
+&lt;li&gt;Confirm you now have gestures.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/p&gt;</summary></entry><entry><title>HowTo Fix: C# .NET BackgroundWorker.IsBusy Always True</title><link href="http://dandesousa.com/howto-fix-c-net-backgroundworkerisbusy-always-true.html" rel="alternate"></link><updated>2010-08-20T23:52:00-04:00</updated><author><name>Admin</name></author><id>tag:dandesousa.com,2010-08-20:howto-fix-c-net-backgroundworkerisbusy-always-true.html</id><summary type="html">&lt;p&gt;BackgroundWorker provides a great simplified mechanism for seperating
+CPU intensive work from the UI thread in C# .NET. Indeed&lt;a href="http://msdn.microsoft.com/en-us/library/system.componentmodel.backgroundworker.aspx"&gt;the MSDN
+documentation does an excellent job detailing its usage&lt;/a&gt;. However, you
+may come across a bug wherein you need to run the backgroundworker while
+it is still running. You have code like this:&lt;/p&gt;
+&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="n"&gt;System&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;ComponentModel&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;BackgroundWorker&lt;/span&gt; &lt;span class="n"&gt;backgroundWorker&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="k"&gt;public&lt;/span&gt; &lt;span class="k"&gt;void&lt;/span&gt; &lt;span class="nf"&gt;someEvent&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="k"&gt;while&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;backgroundWorker&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;IsBusy&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="n"&gt;Thread&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Yield&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+    &lt;span class="n"&gt;backgroundWorker&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;RunWorkerAsync&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;But you may find that backgroundWorker.IsBusy is always true so the loop
+never executes. It seems that simply yielding the thread will not force
+the backgroundWorker to mark itself as done even though that worker
+thread has successfully completed. In some situations you are blocking
+the UI so it cannot mark itself complete. To resolve the problem, simply
+include a call to System.Windows.Forms.Application.DoEvents(). You can
+do this even if you are running an application under WPF. It should
+force the UI to load a frame.&lt;/p&gt;
+&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="n"&gt;using&lt;/span&gt; &lt;span class="n"&gt;System&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Windows&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Forms&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="n"&gt;System&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;ComponentModel&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;BackgroundWorker&lt;/span&gt; &lt;span class="n"&gt;backgroundWorker&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="n"&gt;public&lt;/span&gt; &lt;span class="kt"&gt;void&lt;/span&gt; &lt;span class="nf"&gt;someEvent&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="k"&gt;while&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;backgroundWorker&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;IsBusy&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="n"&gt;Thread&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Yield&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+        &lt;span class="n"&gt;Application&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;DoEvents&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+    &lt;span class="n"&gt;backgroundWorker&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;RunWorkerAsync&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;For more information on this method check out &lt;a href="http://msdn.microsoft.com/en-us/library/system.windows.forms.application.doevents.aspx"&gt;the MSDN documentation on
+Application.DoEvents()&lt;/a&gt;.&lt;/p&gt;</summary><category term=".net"></category><category term="C#"></category><category term="Threading"></category></entry><entry><title>HowTo Fix: Roomba Clicking Noise</title><link href="http://dandesousa.com/howto-fix-roomba-clicking-noise.html" rel="alternate"></link><updated>2010-05-28T13:02:00-04:00</updated><author><name>Admin</name></author><id>tag:dandesousa.com,2010-05-28:howto-fix-roomba-clicking-noise.html</id><summary type="html">&lt;p&gt;A while back the vacuum in our apartment stopped working so I decided to
+do something I always wanted: Get a roomba. So far its been great and it
+keeps the carpet clean with minimum effort.&lt;/p&gt;
+&lt;p&gt;However, we have encountered some problems where the Roomba occasionally
+makes a repeated clicking noise and then shuts off. It then repeats
+"Please Clean Roomba's Brushes". It got to the point where it was making
+the clicking noise EVERY time it was run and would shut down after about
+2 minutes. I tried reseting the battery, cleaning the
+brushes...everything. Finally I realized what was wrong. I wasn't
+cleaning the brushes properly. If you have a lot of dirt in your carpet
+or pets (we have cats), it's easy for fibers to get wrapped around some
+of the moving parts of the roomba brush.&lt;/p&gt;
+&lt;p&gt;So to fix the problem simply remove the brushes from the Roomba as your
+normally would to clean them. However, check under the yellow cap at the
+end of both brushes (by that I mean the brush and the rubber roller).
+Don't worry, they are designed to come off, so you can pull on them.
+Afterwards you may see something like this:&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://farm5.static.flickr.com/4045/4647414023_625bc72f44_d.jpg" title="Roomba Brush Under-Cap" /&gt;&lt;/p&gt;
+&lt;p&gt;Just pull out all the hair and fibers with a pencil or paper clip and
+replace the yellow cap. Afterwards your roomba will be good as new! Be
+aware though, that this is likely to happen again so make sure you
+periodically clean under the cap of both brush attachments.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://farm5.static.flickr.com/4038/4647413667_40a50cb12a_d.jpg" title="Another Brush Angle" /&gt;&lt;/p&gt;</summary><category term="cleaning"></category><category term="robots"></category><category term="roomba"></category></entry><entry><title>Quick Fix: iPhone Microphone and Headset Buttons don’t work</title><link href="http://dandesousa.com/quick-fix-iphone-microphone-and-headset-buttons-dont-work.html" rel="alternate"></link><updated>2010-04-04T14:38:00-04:00</updated><author><name>Admin</name></author><id>tag:dandesousa.com,2010-04-04:quick-fix-iphone-microphone-and-headset-buttons-dont-work.html</id><summary type="html">&lt;p&gt;I recently had a problem with my iPhone headphones where neither the
+built in mic nor the headphone answer (or start/stop) button would work.
+I attributed the failure to a recent tumble which also crack my front
+glass along the bezel.&lt;/p&gt;
+&lt;p&gt;Now, thanks to a helpful blog post I was able to correct the problem.
+Seems like a rather large piece lint had made it's way into the
+headphone jack and was blocking the plug. I would have never figured it
+out if it wasn't for this helpful blog post. So I've linked it below and
+will leave the explanation to him:&lt;/p&gt;
+&lt;p&gt;http://www.iphoneincanada.ca/tips-tricks/how-to-fix-your-iphone-headphones-mic-if-its-not-working/&lt;/p&gt;</summary><category term="iphone"></category></entry><entry><title>How To: Dual Monitors in Ubuntu with Nvidia</title><link href="http://dandesousa.com/how-to-dual-monitors-in-ubuntu-with-nvidia.html" rel="alternate"></link><updated>2010-01-24T15:13:00-05:00</updated><author><name>Admin</name></author><id>tag:dandesousa.com,2010-01-24:how-to-dual-monitors-in-ubuntu-with-nvidia.html</id><summary type="html">&lt;p&gt;I noticed that a lot of people are getting "cannot parse xorg.conf"
+message when they try to set up dual monitors with Nvidia settings
+manager in ubuntu. Here is the solution.&lt;/p&gt;
+&lt;p&gt;On the command line:&lt;/p&gt;
+&lt;p&gt;
+    sudo nvidia-xconfig
+
+&lt;/p&gt;
+
+&lt;p&gt;You should see it tell you that it overrode your xorg.conf. If you get
+warnings don't worry, it's likely just indicating that there was a
+previous problem. Then on the command line again, type this:&lt;/p&gt;
+&lt;p&gt;
+    sudo nvidia-settings
+
+&lt;/p&gt;
+
+&lt;p&gt;Now setup your dual monitor or triple monitor configuration as you want
+(with Twin View and the correct orientation). Then hit save
+configuration at the bottom and you should see that you get no error.&lt;/p&gt;
+&lt;p&gt;Reboot and enjoy.&lt;/p&gt;</summary><category term="linux"></category></entry><entry><title>HF100 + ImageMixer Fix For Startup Freeze</title><link href="http://dandesousa.com/hf100-imagemixer-fix-for-startup-freeze.html" rel="alternate"></link><updated>2009-02-06T17:23:00-05:00</updated><author><name>Admin</name></author><id>tag:dandesousa.com,2009-02-06:hf100-imagemixer-fix-for-startup-freeze.html</id><summary type="html">&lt;p&gt;So I just got a new camcorder thanks to now qualifying for the US
+stimulus package from back in April. I was looking around for something
+to help stimulate the economy and decided that I should get a camcorder
+while prices are low and money is high. Anyway, the HF100 is flash based
+and really nice. It records in full HD 1080p with pretty decent picture
+quality, though I have yet to record in full light setting (outside). So
+far I only have sort of dim shots indoors of my roommate's cats and my
+ferret.&lt;/p&gt;
+&lt;p&gt;Anyway in my commitment to making a post with something useful every
+week, I've decided to share a tip with the world. Seems as though when I
+installed my ImageMixer 3 SE software, it would just freeze upon
+startup. Normally I wouldn't mind the issue with crap proprietary
+software, but there is no easy way to edit .MTS/M2TS files without
+converting and losing quality. Since I prefer to keep the originals as
+well as edit them so that extra footage is chopped off, I needed to
+figure out what was wrong. After some digging I found the solution to my
+problem.&lt;/p&gt;
+&lt;p&gt;If this occurs for you, you need to install all third party codec packs
+you installed. I had the CCCP (Community Codec Pak), which is useful for
+watching MKVs. Unfortunately, that was messing up something, so I had to
+uninstall it. I found numerous posts talking about uninstalling codec
+packs, so that's probably the way to go.&lt;/p&gt;
+&lt;p&gt;Unfortunately, that eliminates the ability to play back MKV's in WMV. I
+don't have a solution for this but I suggest installing &lt;a href="http://www.videolan.org/vlc/"&gt;VLC&lt;/a&gt;. It is
+wonderful and plays everything.&lt;/p&gt;
+&lt;p&gt;My first video, the high definition is better if you go straight to
+youtube:&lt;/p&gt;
+&lt;p align="center"&gt;
+&lt;embed src="http://www.youtube.com/v/eBXqOGTKyaA&amp;amp;hl=en&amp;amp;fs=1" width="480" height="295" type="application/x-shockwave-flash" allowfullscreen="true" allowscriptaccess="always"&gt;
+&lt;/embed&gt;
+&lt;/p&gt;
+
+&lt;/p&gt;</summary><category term="canon"></category><category term="hf100"></category><category term="imagemixer"></category></entry><entry><title>NES ROM Editing</title><link href="http://dandesousa.com/nes-rom-editing.html" rel="alternate"></link><updated>2008-11-12T12:39:00-05:00</updated><author><name>Admin</name></author><id>tag:dandesousa.com,2008-11-12:nes-rom-editing.html</id><summary type="html">&lt;p&gt;So I did a presentation a couple years ago on NES Rom editting and I
+learned a lot about how to do some simple rom hacking and how old school
+cheat tools like game genie and game shark worked. Anyway I've decided
+to share the presentation I gave as well as all the resources I used.
+Everything is totally open. Everything I used to make the presentation
+below is included in the zip file and I even wrote up a quick little
+tool in .NET to translate text to dragon warrior tile entries. Anyway
+feel free to edit it as much as you'd like, but if you do anything cool
+with it I'd like to know so just shoot me an e-mail or leave some info
+in the comments.&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://www.cs.drexel.edu/~dsd33/demos/nes_rom_editting/Presentation.zip"&gt;Click here to download resources&lt;/a&gt;&lt;/p&gt;
+&lt;iframe src="http://docs.google.com/EmbedSlideshow?docid=d9jph9x_54gg9bdtcr" frameborder="0" width="410" height="342"&gt;&lt;/iframe&gt;
+
+&lt;/p&gt;</summary></entry><entry><title>Me and the GOP</title><link href="http://dandesousa.com/me-and-the-gop.html" rel="alternate"></link><updated>2008-10-29T21:51:00-04:00</updated><author><name>Admin</name></author><id>tag:dandesousa.com,2008-10-29:me-and-the-gop.html</id><summary type="html">&lt;p&gt;So contrary to my better judgement I've decided to post an old video of
+myself at the GOP convention back in the day. I remember I was a big
+Republican, back when I really just wanted to be different than my
+parents and I was told that abortion was murder. Anyway one good thing
+that came from this was that I did a "mock" news reporting for the GOP
+convention. Yes this is me in 2000, when I was about 12ish. I was
+probably just about to turn 13. Anyway, hopefully you'll get a kick out
+of it.&lt;/p&gt;
+&lt;p align="center"&gt;
+&lt;embed src="http://www.youtube.com/v/ZSIN4OAUyzU&amp;amp;hl=en&amp;amp;fs=1" width="425" height="344" type="application/x-shockwave-flash" allowfullscreen="true" allowscriptaccess="always"&gt;
+&lt;/embed&gt;
+&lt;/p&gt;
+
+&lt;/p&gt;</summary><category term="GOP"></category><category term="Me"></category><category term="Politics"></category><category term="Republicans"></category></entry></feed>

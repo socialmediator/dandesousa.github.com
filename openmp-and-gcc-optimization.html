@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Dan De Sousa's Blog</title>
+    <meta name="description" content="">
+    <meta name="author" content="Dan De Sousa">
+
+    <link href="./theme/css/bootstrap.min.css" rel="stylesheet">
+    <link href="./theme/css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link href="./theme/css/font-awesome.min.css" rel="stylesheet">
+    <link href="./theme/css/timberland.css" rel="stylesheet">
+    <link href="./theme/css/timberland-icons.css" rel="stylesheet">
+    <link href="./theme/css/timberland-pygments.css" rel="stylesheet">
+            <script type="text/javascript">
+	var disqus_identifier = "openmp-and-gcc-optimization.html";
+	(function() {
+		var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+		dsq.src = 'http://dandesousacom.disqus.com/embed.js';
+		(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	})();
+</script>
+  </head>
+  <body>
+            <div class="navbar">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <a class="brand" href="./index.html">Dan De Sousa's Blog</a>
+          <ul class="nav">
+                                                <li ><a href="./pages/about.html">About</a></li>
+                                  </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="container-fluid">
+      <div class="row-fluid">
+        <div class="span2">
+          <div class="social">
+            <h2><small>Social</small></h2>
+            <ul class="unstyled">
+                                          <li><i class="icon-facebook-sign icon-large icon-color-facebook"></i> <a href="https://facebook.com/daniel.sousa">Facebook</a></li>
+                                          <li><i class="icon-github-sign icon-large icon-color-github"></i> <a href="http://github.com/dandesousa">Github</a></li>
+                                          <li><i class="icon-google-plus-sign icon-large icon-color-google-plus"></i> <a href="https://plus.google.com/114589102912613956952">Google Plus</a></li>
+                                          <li><i class="icon-twitter-sign icon-large icon-color-twitter"></i> <a href="http://twitter.com/dandesousa">Twitter</a></li>
+                          </ul>
+          </div>
+          <hr class="soften-left-right" />
+          <h2><small>Categories</small></h2>
+          <ul class="unstyled">
+                        <li><span class="badge badge-success">3</span> <a href="./category/articles.html">Articles</a></li>
+                        <li><span class="badge ">1</span> <a href="./category/personal.html">Personal</a></li>
+                        <li><span class="badge ">1</span> <a href="./category/politics.html">Politics</a></li>
+                        <li><span class="badge ">14</span> <a href="./category/programming.html">Programming</a></li>
+                        <li><span class="badge ">1</span> <a href="./category/ramblings.html">Ramblings</a></li>
+                        <li><span class="badge ">17</span> <a href="./category/technology.html">Technology</a></li>
+                      </ul>
+          <hr class="soften-left-right" />
+                    <h2><small>History</small></h2>
+          <ul class="unstyled">
+            <li><i class="icon-book"></i> <a href="./archives.html">Archives</a></li>
+            <li><i class="icon-tags"></i> <a href="./tags.html">Tags</a></li>
+          </ul>
+        </div>
+
+        <div class="span10">
+                    <div class='article'>
+  <div class="page-header"><h1>Openmp And Gcc Optimization</h1>
+    <ul class="unstyled">
+  <li><i class="icon-time"></i> <a class="more" href="./openmp-and-gcc-optimization.html">2009-02-10 20:34:00</a>
+  <i class="icon-pencil"></i> <a class="url fn" href="./author/admin.html">Admin</a>   <i class="icon-folder-open"></i> <a href="./category/articles.html">Articles</a></li> 
+  <li></li>
+</ul>  </div>
+  <div class="page-content"><p>So I encountered and interesting little affect while compiling some C
+code in OpenMP using GCC. Seems that my code ran fine without any
+automatic optimization flags (-O2, -O3), but when I turned them on, went
+haywire. The sequential version wasn't affected.</p>
+<p>I tracked down the problem and found that it was actually do to my use
+of the private variable in the OpenMP directive. Here is a sample of the
+problem.</p>
+<div class="codehilite"><pre><span class="cp">#pragma omp parallel</span>
+<span class="p">{</span> 
+<span class="cp">#pragma omp for private(i, j, new_j, skip_next)</span>
+    <span class="k">for</span><span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// Set each thread on one row of the loop</span>
+        <span class="n">skip_next</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="k">for</span><span class="p">(</span><span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span>
+        <span class="p">{</span>
+        <span class="p">...</span>
+</pre></div>
+
+
+<p>The problem actually occured because I did not have 'skip_next=0' on
+line 5 of this code. This didn't seem to matter when optimization was
+disabled but did cause incorrect semantics when I turned it on. Seems
+like OpenMP says you must assume that all privates are uninitialized
+when you start a new directive block. If you want them to be private but
+start with some default value, do what I did above or add the variable
+to the firstprivate() attribute instead of the private attribute:</p>
+<div class="codehilite"><pre><span class="cp">#pragma omp for firstprivate(skip_next) private(i, j, new_j)</span>
+</pre></div></div>
+  <hr />
+  <div>
+    <h2>Comments</h2>
+    <a href="http://twitter.com/share" class="twitter-share-button" data-count="horizontal" data-via="dandesousa">Tweet</a><script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
+    <div id="disqus_thread"></div>      </div>
+</div>	
+        </div>
+      </div>
+    </div>
+
+    <footer class="footer">
+    <div class="container">
+      <p>Powered by <a href="http://alexis.notmyidea.org/pelican/">Pelican</a></p>
+      <p><a href="http://github.com/dandesousa/pelican-timberland">Timberland</a> based on <a href="http://twitter.github.com/bootstrap/">Bootstrap, from Twitter</a>.</p>
+      <p><a href="http://glyphicons.com">Glyphicons Free</a> licensed under <a href="http://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.</p> 
+      <p><a href="http://fortawesome.github.com/Font-Awesome">Font Awesome by Dave Gandy</a></p>
+      <p>&copy; Dan De Sousa 2013</p>
+    </div>
+    </footer>
+  </body>
+</html>

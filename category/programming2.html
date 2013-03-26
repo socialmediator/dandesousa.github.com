@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Dan De Sousa's Blog</title>
+    <meta name="description" content="">
+    <meta name="author" content="Dan De Sousa">
+
+    <link href="../theme/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../theme/css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link href="../theme/css/font-awesome.min.css" rel="stylesheet">
+    <link href="../theme/css/timberland.css" rel="stylesheet">
+    <link href="../theme/css/timberland-icons.css" rel="stylesheet">
+    <link href="../theme/css/timberland-pygments.css" rel="stylesheet">
+              </head>
+  <body>
+            <div class="navbar">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <a class="brand" href="../index.html">Dan De Sousa's Blog</a>
+          <ul class="nav">
+                                                <li ><a href="../pages/about.html">About</a></li>
+                                  </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="container-fluid">
+      <div class="row-fluid">
+        <div class="span2">
+          <div class="social">
+            <h2><small>Social</small></h2>
+            <ul class="unstyled">
+                                          <li><i class="icon-facebook-sign icon-large icon-color-facebook"></i> <a href="https://facebook.com/daniel.sousa">Facebook</a></li>
+                                          <li><i class="icon-github-sign icon-large icon-color-github"></i> <a href="http://github.com/dandesousa">Github</a></li>
+                                          <li><i class="icon-google-plus-sign icon-large icon-color-google-plus"></i> <a href="https://plus.google.com/114589102912613956952">Google Plus</a></li>
+                                          <li><i class="icon-twitter-sign icon-large icon-color-twitter"></i> <a href="http://twitter.com/dandesousa">Twitter</a></li>
+                          </ul>
+          </div>
+          <hr class="soften-left-right" />
+          <h2><small>Categories</small></h2>
+          <ul class="unstyled">
+                        <li><span class="badge ">3</span> <a href="../category/articles.html">Articles</a></li>
+                        <li><span class="badge ">1</span> <a href="../category/personal.html">Personal</a></li>
+                        <li><span class="badge ">1</span> <a href="../category/politics.html">Politics</a></li>
+                        <li><span class="badge badge-success">14</span> <a href="../category/programming.html">Programming</a></li>
+                        <li><span class="badge ">1</span> <a href="../category/ramblings.html">Ramblings</a></li>
+                        <li><span class="badge ">17</span> <a href="../category/technology.html">Technology</a></li>
+                      </ul>
+          <hr class="soften-left-right" />
+                    <h2><small>History</small></h2>
+          <ul class="unstyled">
+            <li><i class="icon-book"></i> <a href="../archives.html">Archives</a></li>
+            <li><i class="icon-tags"></i> <a href="../tags.html">Tags</a></li>
+          </ul>
+        </div>
+
+        <div class="span10">
+                    
+<div class='article'>
+  <h3>Opengl Display Lists And Sub Windows</h3>
+  <div><ul class="unstyled">
+  <li><i class="icon-time"></i> <a class="more" href="../opengl-display-lists-and-sub-windows.html">2010-03-06 21:02:00</a>
+  <i class="icon-pencil"></i> <a class="url fn" href="../author/admin.html">Admin</a>   <i class="icon-folder-open"></i> <a href="../category/programming.html">Programming</a></li> 
+  <li><i class="icon-tags"></i> <a href="../tag/graphics.html">graphics</a> <a href="../tag/opengl.html">opengl</a> </li>
+</ul></div>
+  <hr class="soften-right" />
+  <div class="summary"><p>I recently discovered after some needless frustration, that you need to
+declare display lists that contain model drawing information in all
+windows in which you wish to draw the model. For example, if I say:</p>
+<p>
+    glutSetWindow(main_window);initDisplayLists();...void main_display(){   drawDisplayList();}
+
+</p>
+
+<p>It will work just fine. But if I try ...</p><br>
+    <br>
+    <a class="btn primary xsmall" href="../opengl-display-lists-and-sub-windows.html">More...</a>
+  </div>
+</div>	
+<hr />
+<div class='article'>
+  <h3>Compiling Opengl On Mac Os X Or Linux</h3>
+  <div><ul class="unstyled">
+  <li><i class="icon-time"></i> <a class="more" href="../compiling-opengl-on-mac-os-x-or-linux.html">2010-01-16 21:50:00</a>
+  <i class="icon-pencil"></i> <a class="url fn" href="../author/admin.html">Admin</a>   <i class="icon-folder-open"></i> <a href="../category/programming.html">Programming</a></li> 
+  <li></li>
+</ul></div>
+  <hr class="soften-right" />
+  <div class="summary"><p>Most linux distributions make it easy to compile programs using OpenGL.
+Other systems, however, aren't so easy. Here are instructions on how to
+get it running in both platforms.</p>
+<p><strong>Ubuntu / Linux</strong></p>
+<ol>
+<li>
+<p>Make sure you install the opengl-mesa packages for opengl
+    development. On ubuntu you can get them all with ...</p></li></ol><br>
+    <br>
+    <a class="btn primary xsmall" href="../compiling-opengl-on-mac-os-x-or-linux.html">More...</a>
+  </div>
+</div>	
+<hr />
+<div class='article'>
+  <h3>Timing Programs In C (Update)</h3>
+  <div><ul class="unstyled">
+  <li><i class="icon-time"></i> <a class="more" href="../timing-programs-in-c-update.html">2009-01-25 17:03:00</a>
+  <i class="icon-pencil"></i> <a class="url fn" href="../author/admin.html">Admin</a>   <i class="icon-folder-open"></i> <a href="../category/programming.html">Programming</a></li> 
+  <li></li>
+</ul></div>
+  <hr class="soften-right" />
+  <div class="summary"><p>So I've decided to try and do at least one useful post a week to
+hopefully help a random searcher out. Here is the the updated version of
+how to get millisecond precise wall clock time in C.</p>
+<p>#include \&lt;sys\time.h></p>
+<p><code>gettimeofday(&amp;tstart, NULL);</code></p>
+<p><code>double t1=tstart.tv_sec ...</code></p><br>
+    <br>
+    <a class="btn primary xsmall" href="../timing-programs-in-c-update.html">More...</a>
+  </div>
+</div>	
+<hr />
+<div class='article'>
+  <h3>Timing Programs In C (Why I Hate Clock())</h3>
+  <div><ul class="unstyled">
+  <li><i class="icon-time"></i> <a class="more" href="../timing-programs-in-c-why-i-hate-clock.html">2009-01-16 08:51:00</a>
+  <i class="icon-pencil"></i> <a class="url fn" href="../author/admin.html">Admin</a>   <i class="icon-folder-open"></i> <a href="../category/programming.html">Programming</a></li> 
+  <li></li>
+</ul></div>
+  <hr class="soften-right" />
+  <div class="summary"><p>So in working on a parallel programming assignment for a grad class I
+needed to time two algorithms, a sequential approach and a parallel
+approach. In doing so I did something like this:</p>
+<p><code>clock_t start, finish;</code></p>
+<p><code>start = clock();</code></p>
+<p><code>// do something finish = clock();</code></p>
+<p><code>printf("Time Elapsed: %f", ((double) finish - start) / CLOCKS_PER_SEC ...</code></p><br>
+    <br>
+    <a class="btn primary xsmall" href="../timing-programs-in-c-why-i-hate-clock.html">More...</a>
+  </div>
+</div>	
+<hr />
+
+<div class="pagination">
+  <ul>
+            <li class="prev"><a href="../category/programming.html">&larr; Previous</a></li>
+            <li class=""><a href="../category/programming.html">1</a></li>
+        <li class="active"><a href="../category/programming2.html">2</a></li>
+            <li class="next disabled"><a href="#">&rarr; Next</a></li>
+      </ul>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    <footer class="footer">
+    <div class="container">
+      <p>Powered by <a href="http://alexis.notmyidea.org/pelican/">Pelican</a></p>
+      <p><a href="http://github.com/dandesousa/pelican-timberland">Timberland</a> based on <a href="http://twitter.github.com/bootstrap/">Bootstrap, from Twitter</a>.</p>
+      <p><a href="http://glyphicons.com">Glyphicons Free</a> licensed under <a href="http://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.</p> 
+      <p><a href="http://fortawesome.github.com/Font-Awesome">Font Awesome by Dave Gandy</a></p>
+      <p>&copy; Dan De Sousa 2013</p>
+    </div>
+    </footer>
+  </body>
+</html>

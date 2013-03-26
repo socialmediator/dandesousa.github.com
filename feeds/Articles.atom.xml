@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Dan De Sousa's Blog</title><link href="http://dandesousa.com/" rel="alternate"></link><link href="http://dandesousa.com/feeds/Articles.atom.xml" rel="self"></link><id>http://dandesousa.com/</id><updated>2010-03-06T21:07:00-05:00</updated><entry><title>My Final OpenGL Project: ChessGL3d</title><link href="http://dandesousa.com/my-final-opengl-project-chessgl3d.html" rel="alternate"></link><updated>2010-03-06T21:07:00-05:00</updated><author><name>Admin</name></author><id>tag:dandesousa.com,2010-03-06:my-final-opengl-project-chessgl3d.html</id><summary type="html">&lt;p&gt;So I had an earlier post about starting my OpenGL experience for the
+first time. Well here is the culmination of my experience. I created a
+rough OpenGL version of Chess. I will post this as soon as I get some
+time. In the mean while, here are some screen shots. Enjoy.&lt;/p&gt;
+&lt;p&gt;[&lt;img alt="" src="http://farm5.static.flickr.com/4036/4412662604_a7fb4d6e7a_o_d.png" title="End Game Shot" /&gt;][]&lt;/p&gt;
+&lt;/p&gt;
+
+&lt;p&gt;&lt;a href="http://farm3.static.flickr.com/2719/4411894797_d2aa155130_o_d.png"&gt;&lt;img alt="" src="http://farm3.static.flickr.com/2719/4411894797_d2aa155130_o_d.png" /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;/p&gt;
+
+&lt;p&gt;[&lt;img alt="" src="http://farm5.static.flickr.com/4036/4412662604_a7fb4d6e7a_o_d.png" title="End Game Shot" /&gt;]: http://farm5.static.flickr.com/4036/4412662604_a7fb4d6e7a_o_d.png&lt;/p&gt;</summary><category term="chess"></category><category term="graphics"></category><category term="opengl"></category></entry><entry><title>WPF Context Menu Not Showing Up</title><link href="http://dandesousa.com/wpf-context-menu-not-showing-up.html" rel="alternate"></link><updated>2010-02-14T23:36:00-05:00</updated><author><name>Admin</name></author><id>tag:dandesousa.com,2010-02-14:wpf-context-menu-not-showing-up.html</id><summary type="html">&lt;p&gt;So I came across a problem with WPF and context menus. Whenever I added
+a context menu to a right click on a window or panel it would simple not
+open. The only time that a context menu would appear is when I right
+clicked on a button or label that was a child of the panel I added it
+to. I searched everywhere online for a solution and couldn't find one.
+Finally, I figured it out myself. For some strange reason, a context
+menu will not appear if you to not manually set a background color for a
+component or child component. So to fix the problem, simple set a
+background color for which components you want the top level context
+menu to appear.&lt;/p&gt;</summary><category term=".net"></category><category term="C#"></category><category term="xaml"></category></entry><entry><title>OpenMP and GCC Optimization</title><link href="http://dandesousa.com/openmp-and-gcc-optimization.html" rel="alternate"></link><updated>2009-02-10T20:34:00-05:00</updated><author><name>Admin</name></author><id>tag:dandesousa.com,2009-02-10:openmp-and-gcc-optimization.html</id><summary type="html">&lt;p&gt;So I encountered and interesting little affect while compiling some C
+code in OpenMP using GCC. Seems that my code ran fine without any
+automatic optimization flags (-O2, -O3), but when I turned them on, went
+haywire. The sequential version wasn't affected.&lt;/p&gt;
+&lt;p&gt;I tracked down the problem and found that it was actually do to my use
+of the private variable in the OpenMP directive. Here is a sample of the
+problem.&lt;/p&gt;
+&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="cp"&gt;#pragma omp parallel&lt;/span&gt;
+&lt;span class="p"&gt;{&lt;/span&gt; 
+&lt;span class="cp"&gt;#pragma omp for private(i, j, new_j, skip_next)&lt;/span&gt;
+    &lt;span class="k"&gt;for&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="o"&gt;++&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="c1"&gt;// Set each thread on one row of the loop&lt;/span&gt;
+        &lt;span class="n"&gt;skip_next&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+        &lt;span class="k"&gt;for&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;j&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="n"&gt;j&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="n"&gt;j&lt;/span&gt;&lt;span class="o"&gt;++&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="p"&gt;...&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;The problem actually occured because I did not have 'skip_next=0' on
+line 5 of this code. This didn't seem to matter when optimization was
+disabled but did cause incorrect semantics when I turned it on. Seems
+like OpenMP says you must assume that all privates are uninitialized
+when you start a new directive block. If you want them to be private but
+start with some default value, do what I did above or add the variable
+to the firstprivate() attribute instead of the private attribute:&lt;/p&gt;
+&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="cp"&gt;#pragma omp for firstprivate(skip_next) private(i, j, new_j)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;</summary></entry></feed>

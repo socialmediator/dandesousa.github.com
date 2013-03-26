@@ -1,0 +1,638 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Dan De Sousa's Blog</title><link href="http://dandesousa.com/" rel="alternate"></link><link href="http://dandesousa.com/feeds/Programming.atom.xml" rel="self"></link><id>http://dandesousa.com/</id><updated>2011-12-11T21:46:00-05:00</updated><entry><title>[Boost.Python] Calling back into python from native C++ threads</title><link href="http://dandesousa.com/boostpython-calling-back-into-python-from-native-c-threads.html" rel="alternate"></link><updated>2011-12-11T21:46:00-05:00</updated><author><name>Admin</name></author><id>tag:dandesousa.com,2011-12-11:boostpython-calling-back-into-python-from-native-c-threads.html</id><summary type="html">&lt;p&gt;So I came across a particularly frustrating problem dealing with a boost
+python wrapper around a library which is calling python functions from
+native c++ threads (boost threads in this case). The problem was that
+some calls to release the global interpreter lock would cause python to
+through fatal errors and segmentation fault, despite seeming to acquire
+the GIL properly. This is how I solved the problem.&lt;/p&gt;
+&lt;p&gt;As a quick overview, you need to make sure that any native threads
+acquire the GIL (global interpreter lock) before any sort of python
+resources are touched. You may not use any C Python API functions or
+call into python until the GIL is acquired. A good practice is to follow
+the RIAA method for acquiring the GIL like so:&lt;/p&gt;
+&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;ScopedGILRelease&lt;/span&gt;
+&lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="nl"&gt;public:&lt;/span&gt;
+        &lt;span class="kr"&gt;inline&lt;/span&gt; &lt;span class="n"&gt;ScopedGILRelease&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+        &lt;span class="p"&gt;{&lt;/span&gt;
+            &lt;span class="n"&gt;d_gstate&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;PyGILState_Ensure&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+        &lt;span class="p"&gt;}&lt;/span&gt;
+        &lt;span class="kr"&gt;inline&lt;/span&gt; &lt;span class="o"&gt;~&lt;/span&gt;&lt;span class="n"&gt;ScopedGILRelease&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+        &lt;span class="p"&gt;{&lt;/span&gt;
+            &lt;span class="n"&gt;PyGILState_Release&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;d_gstate&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+        &lt;span class="p"&gt;}&lt;/span&gt;
+    &lt;span class="nl"&gt;private:&lt;/span&gt;
+        &lt;span class="n"&gt;PyGILState_STATE&lt;/span&gt; &lt;span class="n"&gt;d_gstate&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="p"&gt;};&lt;/span&gt;
+
+&lt;span class="kt"&gt;void&lt;/span&gt; &lt;span class="nf"&gt;onData&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;const&lt;/span&gt; &lt;span class="n"&gt;boost&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;shared_ptr&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;Data&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;::&lt;/span&gt;&lt;span class="n"&gt;P&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&lt;/span&gt; &lt;span class="n"&gt;data&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="k"&gt;const&lt;/span&gt; &lt;span class="kt"&gt;void&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;
+        &lt;span class="n"&gt;closure&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="n"&gt;ScopedGILRelease&lt;/span&gt; &lt;span class="n"&gt;gil_lock&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="c1"&gt;// invoke call_method to python&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;In the above example we call the lock which invokes PyGILState_Ensure()
+to acquire the lock. Additionally we call PyGILState_Release() on the
+same thread state object when we go out of scope.&lt;/p&gt;
+&lt;p&gt;What bit me when developing this solution was that the api was not being
+properly initialized. Originally I was calling two functions in my one
+of my modules objects which I assumed was going to be called before any
+threads were made.&lt;/p&gt;
+&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="n"&gt;PyEval_InitThreads&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+&lt;span class="n"&gt;PyEval_ReleaseLock&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Now according to the &lt;a href="http://docs.python.org/c-api/init.html#PyEval_InitThreads"&gt;python documentation&lt;/a&gt;, the first thread should:&lt;/p&gt;
+&lt;p&gt;
+&gt; Initialize and acquire the global interpreter lock. It should be
+&gt; called in the main thread before creating a second thread or engaging
+&gt; in any other thread operations such as PyEval_ReleaseLock() or
+&gt; PyEval_ReleaseThread(tstate). It is not needed before calling
+&gt; PyEval_SaveThread() or PyEval_RestoreThread().
+&lt;/p&gt;
+
+&lt;p&gt;However, that documentation is either incorrect or something very subtle
+was going on in my library, since PyEval_InitThreads() was being called
+before any thread operations and the object was being created in the
+main thread of the python interpreter. Perhaps I couldn't guarantee that
+python wasn't spawning some sub-thread to handle that part of the
+script. Anyway I found that I had to instead call PyEval_InitThreads()
+once in the module definition macro for boost python. Looking something
+like this:&lt;/p&gt;
+&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="n"&gt;BOOST_PYTHON_MODULE&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;ModuleName&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="n"&gt;PyEval_InitThreads&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+    &lt;span class="p"&gt;...&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;As always a super simple solution to a super frustrating problem. This
+information was extremely hard to find, so hopefully this helps someone
+out there from losing hours of time. &lt;a href="http://stackoverflow.com/questions/8451334/why-is-pygilstate-release-throwing-fatal-python-errors/8469304#8469304"&gt;Also, here is a link to the stack
+overflow question I eventually posted and quickly subsequently
+answered&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Enjoy.&lt;/p&gt;</summary><category term="python"></category><category term="c++"></category><category term="programming"></category><category term="boost"></category></entry><entry><title>Implementing jQuery tablesorter natural sort plugin as text sort</title><link href="http://dandesousa.com/implementing-jquery-tablesorter-natural-sort-plugin-as-text-sort.html" rel="alternate"></link><updated>2011-11-04T22:55:00-04:00</updated><author><name>Admin</name></author><id>tag:dandesousa.com,2011-11-04:implementing-jquery-tablesorter-natural-sort-plugin-as-text-sort.html</id><summary type="html">&lt;p&gt;I have been doing quite a bit of web programming lately and was recently
+trying to figure out how to get the jquery plugin '&lt;a href="http://tablesorter.com/docs/"&gt;tablesorter&lt;/a&gt;' to
+perform a natural sort.&lt;/p&gt;
+&lt;p&gt;For those not aware of what natural sort is, it is the way in which
+human beings tend to sort things intuitively (hence the prefix
+'natural'). In fact, [coding horror as a pretty good article about
+natural sort and how tough it can be][]. To cut the story short, it
+ensures that word19 comes after word2 in a sorted list (a typical sort
+would place word2 after, since the ascii characters in the 5th position
+define the sort order).&lt;/p&gt;
+&lt;p&gt;Now, normally implementing a natural sort is not so difficult depending
+on the language, you basically split up the areas of the string that
+represent digits, and then sort each substring piece in order (string
+order if two strings, numeric order if two digits). Unfortunately, the
+javascript tablesorter plugin allows you to sort by providing a function
+that takes an element to be sorted and transforms it into a different
+string or number that must be sorted EITHER numerical OR textually, but
+not both.&lt;/p&gt;
+&lt;p&gt;Looking around online didn't yield any good solutions aside from,
+"implement a jquery plugin". So I got to wondering what how it could be
+done. These plugins could take the either table or cell as an argument
+but then you'd have to remain stateless and re-perform the entire
+natural sort over again. It may be possible to also use the jquery data
+api to store data about a table to be sorted and then fetch it on each
+call (performing the natural sort once and assigning ids to each cell or
+something).&lt;/p&gt;
+&lt;p&gt;It got me wondering about formulating a natural sorting algorithm as a
+numeric or textual sort. So I tried to prove if it could be done. I tend
+to get carried away and engrossed by certain little challenges like
+this:&lt;/p&gt;
+&lt;p&gt;1.) Natural Sort As Numeric Sort&lt;/p&gt;
+&lt;p&gt;This should become clear shortly that natural sort cannot be easily
+implemented as a stateless numerical sort. Since you are ultimately
+converting the string to a number, you can simply make the string longer
+to produce a bigger number and mess up the sort order.&lt;/p&gt;
+&lt;p&gt;2.) Natural Sort As Textual Sort&lt;/p&gt;
+&lt;p&gt;This seemed like it could work. A textual sort is just a sequential
+comparison of ascii coded bytes, each with a numeric value. Natural sort
+is also a set of sequential comparison operations that ultimately break
+down to numeric comparisons. One simply needs to convert the numeric
+pieces into a string of characters preserving the same order as the
+numeric sort, then create a new string with these numeric characters
+replaced.&lt;/p&gt;
+&lt;p&gt;I decided to follow the original idea of ascii code comparisons, and I
+decided to convert each number to a fixed length string in which each
+digit is a base 127 or 256 number. Why 127 or 256? They represent
+standard and extended ascii code length and ensure that the values
+always fall without the proper range. String needs to be fixed length so
+that all numerals are compared equally (longer numbers won't be
+incorrectly compared against smaller numbers). The length of your string
+determines the maximum size of any numeric segment. That means that
+using a N digit base 127 string gives you 127\^(N-1) numbers. At 10
+digits, thats 3x10\^18 numbers. If you use base 256 you get 21 decimal
+places. Technically you can go even higher with UTF8.&lt;/p&gt;
+&lt;p&gt;Anyway, here is my solution (excuse my probably ugly javascript,
+truthfully its one of the first javascript functions I've written from
+scratch).&lt;/p&gt;
+&lt;div class="codehilite"&gt;&lt;pre&gt;  &lt;span class="nx"&gt;ts&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;addParser&lt;/span&gt;&lt;span class="p"&gt;({&lt;/span&gt;
+  &lt;span class="nx"&gt;id&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;natural&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+  &lt;span class="nx"&gt;is&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="kd"&gt;function&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;s&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+  &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="kc"&gt;false&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="p"&gt;},&lt;/span&gt;
+  &lt;span class="nx"&gt;format&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="kd"&gt;function&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;s&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+  &lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;ret&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;num_str&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;base_num&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;256&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;fixed_len&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;num_to_ascii_len_str&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="kd"&gt;function&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;base&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;max_len&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;num&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+  &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;tmp&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;num&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;ret&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;i&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="nx"&gt;i&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="nx"&gt;max_len&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="nx"&gt;i&lt;/span&gt;&lt;span class="o"&gt;++&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="p"&gt;{&lt;/span&gt;
+      &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;tmp&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="nx"&gt;base&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+      &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;div&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;tmp&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt; &lt;span class="nx"&gt;base&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+        &lt;span class="nx"&gt;tmp&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;tmp&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="nx"&gt;div&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="nx"&gt;base&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+        &lt;span class="nx"&gt;ret&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;String&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;fromCharCode&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;div&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="nx"&gt;ret&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+      &lt;span class="p"&gt;}&lt;/span&gt;
+      &lt;span class="k"&gt;else&lt;/span&gt;
+      &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="nx"&gt;ret&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;String&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;fromCharCode&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;tmp&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="nx"&gt;ret&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+        &lt;span class="nx"&gt;tmp&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+      &lt;span class="p"&gt;}&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="nx"&gt;ret&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="p"&gt;};&lt;/span&gt;
+  &lt;span class="k"&gt;for&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;i&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="nx"&gt;i&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="nx"&gt;s&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;length&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="nx"&gt;i&lt;/span&gt;&lt;span class="o"&gt;++&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+  &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="nx"&gt;code&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;s&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;charCodeAt&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;i&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;code&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="mi"&gt;47&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class="nx"&gt;code&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="mi"&gt;58&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+      &lt;span class="nx"&gt;num_str&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;num_str&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="nx"&gt;s&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;charAt&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;i&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+    &lt;span class="k"&gt;else&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
+      &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;num_str&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;length&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+      &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="nx"&gt;ret&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;ret&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="nx"&gt;num_to_ascii_len_str&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;base_num&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;fixed_len&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+            &lt;span class="nb"&gt;parseInt&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;num_str&lt;/span&gt;&lt;span class="p"&gt;));&lt;/span&gt;
+        &lt;span class="nx"&gt;num_str&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+      &lt;span class="p"&gt;}&lt;/span&gt;
+      &lt;span class="k"&gt;else&lt;/span&gt;
+      &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="nx"&gt;ret&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;ret&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="nx"&gt;s&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;charAt&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;i&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+      &lt;span class="p"&gt;}&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+  &lt;span class="p"&gt;}&lt;/span&gt;
+  &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;num_str&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;length&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+  &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="nx"&gt;ret&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;ret&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="nx"&gt;num_to_ascii_len_str&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;base_num&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;fixed_len&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="nb"&gt;parseInt&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;num_str&lt;/span&gt;&lt;span class="p"&gt;));&lt;/span&gt;
+  &lt;span class="p"&gt;}&lt;/span&gt;
+  &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="nx"&gt;ret&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="p"&gt;},&lt;/span&gt;
+  &lt;span class="nx"&gt;type&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;text&amp;quot;&lt;/span&gt;
+  &lt;span class="p"&gt;});&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Hope this helps someone out there, as this kind of thing is useful but
+not easily found. Oh and if anyone can figure out if its possible for
+formulate this as a numeric sort or knows a better way to do this in the
+context of the tablesorter plugin, please share!&lt;/p&gt;
+&lt;p&gt;[coding horror as a pretty good article about natural sort and how
+  tough it can be]: http://www.codinghorror.com/blog/2007/12/sorting-for-humans-natural-sort-order.html&lt;/p&gt;</summary></entry><entry><title>How To Fix iOS Memory Leaks Coming From UIKit</title><link href="http://dandesousa.com/how-to-fix-ios-memory-leaks-coming-from-uikit.html" rel="alternate"></link><updated>2011-02-11T21:10:00-05:00</updated><author><name>Admin</name></author><id>tag:dandesousa.com,2011-02-11:how-to-fix-ios-memory-leaks-coming-from-uikit.html</id><summary type="html">&lt;p&gt;It looks as though I'm going to be posting a number of troubleshooting
+iOS SDK and objective-c guides in the coming weeks. The first deals with
+memory leaks coming from UIKit and QuartzCore.&lt;/p&gt;
+&lt;p&gt;If you are using the leaks tool included with Instruments and XCode, you
+might notice leaks. This is a pretty amazing tool that will tell you
+when you leak, how much and where the allocations occurred.&lt;/p&gt;
+&lt;p&gt;In instruments, you can select View -&gt; Extended Detail. This will
+provide you with the stack trace. You can then see where the leak
+originated. If you see errors coming straight from main, or from a call
+to pushViewController, you likely had the same problem I had -- you are
+not cleaning up your View or ViewController.&lt;/p&gt;
+&lt;p&gt;To be safe in memory management, be careful to do the following:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;In viewDidUnload:, you should set all your retain and IBOutlet
+    properties to nil like so:&lt;/li&gt;
+&lt;li&gt;Secondly, and very important, you should release and set all the
+    IBOutlet backing properties to nil, like so:&lt;/li&gt;
+&lt;li&gt;Make sure you have no references to parent views or controllers in
+    the leaking view controller.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;/p&gt;
+This may seem totally counterintuitive since retain properties should
+properly free all held memory when nil is set, but actually the second
+step is required when dealing with UI components, otherwise it will
+result it leaks that appear to originate from UIKit or other Apple
+libraries. Be very careful that all IBOutlets are set to nil.&lt;/p&gt;</summary></entry><entry><title>iOS EXC_BAD_ACCESS error when navigating to/from nib</title><link href="http://dandesousa.com/ios-exc_bad_access-error-when-navigating-tofrom-nib.html" rel="alternate"></link><updated>2010-11-27T13:01:00-05:00</updated><author><name>Admin</name></author><id>tag:dandesousa.com,2010-11-27:ios-exc_bad_access-error-when-navigating-tofrom-nib.html</id><summary type="html">&lt;p&gt;As I have begun the trek towards mastering objective-c, I've come to
+appreciate the memory management nuances. I came across a problem where
+when navigating backwards in a table view, the application would just
+crash with an EXC_BAD_ACCESS error. If you see this it is most likely
+due to accidently mis-managing memory. I fixed my particular error by
+referring to the memory management rules with NIBs. Because of the way
+nibs are access you need to unload IBOutlet properties in the
+viewDidUnload method. Here are examples from apple's documentation:&lt;/p&gt;
+&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="k"&gt;-&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kt"&gt;void&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="nf"&gt;viewDidUnload&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="n"&gt;self&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;anOutlet&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;nil&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;super&lt;/span&gt; &lt;span class="n"&gt;viewDidUnload&lt;/span&gt;&lt;span class="p"&gt;];&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Also, for some reason you also have to release them in the dealloc for
+the controller you are in:&lt;/p&gt;
+&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="k"&gt;-&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kt"&gt;void&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="nf"&gt;dealloc&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="c1"&gt;// Release outlets and set outlet variables to nil.&lt;/span&gt;
+    &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;anOutlet&lt;/span&gt; &lt;span class="n"&gt;release&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; &lt;span class="n"&gt;anOutlet&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;nil&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;super&lt;/span&gt; &lt;span class="n"&gt;dealloc&lt;/span&gt;&lt;span class="p"&gt;];&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Hope this helps someone out there. &lt;a href="http://developer.apple.com/library/mac/#documentation/Cocoa/Conceptual/MemoryMgmt/Articles/mmNibObjects.html"&gt;Here are the details of how to
+manage memory in NIBS for Mac OS or iOS.&lt;/a&gt;&lt;/p&gt;</summary><category term="iphone"></category><category term="memory management"></category><category term="objective-c"></category><category term="UITableView"></category></entry><entry><title>Copying Test and Data Files to Build Directory in C# .NET Unit Tests</title><link href="http://dandesousa.com/copying-test-and-data-files-to-build-directory-in-c-net-unit-tests.html" rel="alternate"></link><updated>2010-10-02T08:20:00-04:00</updated><author><name>Admin</name></author><id>tag:dandesousa.com,2010-10-02:copying-test-and-data-files-to-build-directory-in-c-net-unit-tests.html</id><summary type="html">&lt;p&gt;Unit testing with VS2010's built in unit testing facilities is
+especially convenient. However it is no always clear how to specific
+that an entire directory should be copied into the build / test
+directory as data. Aside from setting up pre- and post- build rules,
+VS2010 comes with a way to automatically include any project or
+referenced directories and files as part of the build deployment. To
+specify this, you use what is known as the testconfigs file.&lt;/p&gt;
+&lt;p&gt;First, open up your unit testing project with visual studio, and from
+the test menu item, select edit test configuration.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://dans-coding-examples.googlecode.com/files/testcopy-editsettings.png" title="Test Copy Tutorial Edit Test Settings" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;/p&gt;
+Then, in the window that appears, select deployment and make sure that
+the enable deployment check box is &lt;strong&gt;selected&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://dans-coding-examples.googlecode.com/files/testcopy-editdeployment.png" title="Test Copy Deployment" /&gt;&lt;/p&gt;
+&lt;/p&gt;
+
+&lt;p&gt;Finally, just select add/remove file or directory and select what you
+want to copy.&lt;/p&gt;
+&lt;/p&gt;
+
+&lt;p&gt;&lt;img alt="" src="http://dans-coding-examples.googlecode.com/files/testcopy-editselect.png" title="http://dans-coding-examples.googlecode.com/files/testcopy-editselect.png" /&gt;&lt;/p&gt;
+&lt;/p&gt;
+
+&lt;/p&gt;
+
+&lt;p&gt;Now, each time you run or deploy your projects you can select that
+directories contents to also be copied over.&lt;/p&gt;
+&lt;/p&gt;
+
+&lt;p&gt;&lt;a href="http://dans-coding-examples.googlecode.com/files/UnitTestingProject.zip"&gt;Download Code.&lt;/a&gt;&lt;/p&gt;
+&lt;/p&gt;</summary><category term=".net"></category><category term="unit testing"></category></entry><entry><title>Windows Phone 7: Making an HTTP Request</title><link href="http://dandesousa.com/windows-phone-7-making-an-http-request.html" rel="alternate"></link><updated>2010-08-30T22:20:00-04:00</updated><author><name>Admin</name></author><id>tag:dandesousa.com,2010-08-30:windows-phone-7-making-an-http-request.html</id><summary type="html">&lt;p&gt;Silverlight and the Windows Phone 7 SDK include the standard System.Net
+packages for making various requests over ftp and http. Making a
+standard http request in C# involves setting up a number of delegates
+and asynchronous callbacks for getting http responses and can be a tad
+complicated. If you simply want to get some xml or html back as a string
+over http, it’s much easier to use the simpler, more abstract WebClient
+class. Here’s an example of using the WebClient class to make a request.&lt;/p&gt;
+&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="n"&gt;public&lt;/span&gt; &lt;span class="kt"&gt;void&lt;/span&gt; &lt;span class="nf"&gt;getResults&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;string&lt;/span&gt; &lt;span class="n"&gt;websiteURL&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="n"&gt;WebClient&lt;/span&gt; &lt;span class="n"&gt;c&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;new&lt;/span&gt; &lt;span class="n"&gt;WebClient&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+    &lt;span class="n"&gt;c&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;DownloadStringAsync&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;new&lt;/span&gt; &lt;span class="n"&gt;Uri&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;websiteURL&lt;/span&gt;&lt;span class="p"&gt;));&lt;/span&gt;
+    &lt;span class="n"&gt;c&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;DownloadStringCompleted&lt;/span&gt; &lt;span class="o"&gt;+=&lt;/span&gt; &lt;span class="n"&gt;new&lt;/span&gt;
+        &lt;span class="n"&gt;DownloadStringCompletedEventHandler&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;c_DownloadStringCompleted&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="kt"&gt;void&lt;/span&gt; &lt;span class="nf"&gt;c_DownloadStringCompleted&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;object&lt;/span&gt; &lt;span class="n"&gt;sender&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="n"&gt;DownloadStringCompletedEventArgs&lt;/span&gt; &lt;span class="n"&gt;e&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="n"&gt;lock&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;this&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="n"&gt;string&lt;/span&gt; &lt;span class="n"&gt;s&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;e&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Result&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+        &lt;span class="n"&gt;XmlReader&lt;/span&gt; &lt;span class="n"&gt;r&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;XmlReader&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Create&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;new&lt;/span&gt;
+                &lt;span class="n"&gt;MemoryStream&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;System&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Text&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;UnicodeEncoding&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Unicode&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;GetBytes&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;s&lt;/span&gt;&lt;span class="p"&gt;)));&lt;/span&gt;
+        &lt;span class="c1"&gt;// So something with the XML we get back&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;So basically all we do is say download the string and make the action to
+take when it is completed as c_DownloadStringCompleted event handler.
+You may want to do something different than place it in an xml reader
+(in this case the string we are getting back corresponds to a non-xhtml
+ xml file. Enjoy.&lt;/p&gt;
+&lt;/p&gt;</summary><category term=".net"></category><category term="C#"></category><category term="Windows Phone 7"></category><category term="WP7"></category></entry><entry><title>Windows Phone 7: ListBox Item Horizontal Width Stretch</title><link href="http://dandesousa.com/windows-phone-7-listbox-item-horizontal-width-stretch.html" rel="alternate"></link><updated>2010-08-29T17:15:00-04:00</updated><author><name>Admin</name></author><id>tag:dandesousa.com,2010-08-29:windows-phone-7-listbox-item-horizontal-width-stretch.html</id><summary type="html">&lt;p&gt;I have spent most of the day today working on a Windows Phone 7 app I
+hope to have ready for launch this fall / winter. I figured that
+adoption of the platform and generation of apps is good for all of us as
+it generates hype for the platform and facilitates development. So I
+will be sharing all the gotcha’s and particularly frustrating
+experiences (and there solutions here!).&lt;/p&gt;
+&lt;p&gt;In WP7, if you try to use a ListBox control, you’ll noticed that child
+controls do not completely fill the available space of the control. To
+do this you have to override the style of the ListBox’s ItemContainer,
+as well as override the template and set the appropriate
+HorizontalContentAlignment properties.&lt;/p&gt;
+&lt;p&gt;First, this is what the problem looks like. In blue we have the entire
+ListBox Control, and in white is the space for an individual item.&lt;/p&gt;
+&lt;h2&gt;The Problem&lt;/h2&gt;
+&lt;p&gt;&lt;img alt="problem" src="./static/wp-content/uploads/2010/08/problem_thumb.png" title="problem" /&gt;&lt;/p&gt;
+&lt;p&gt;As you can see, the ListBoxItem is shown in white and only fits the size
+of the content. The entire ListBox is shown in red and remains empty. If
+you increase the size of the text it will stretch to the width. But if
+we wanted to align the button on the right as its own column we want the
+text to take up the remaining space and we need the item to fit the
+width of the control. Then we’d be able to use a Grid control to set the
+proper alignment.&lt;/p&gt;
+&lt;h2&gt;The Solution&lt;/h2&gt;
+&lt;p&gt;We have to override not only the HorizontalContentAlignment Properties
+of the ItemContainer but also pass those onto the Template and Container
+in the Style. This is very unintuitive as you would expect
+HorizontalContentAlignment to just work.&lt;/p&gt;
+&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="nt"&gt;&amp;lt;phone:PhoneApplicationPage.Resources&amp;gt;&lt;/span&gt; &lt;span class="nt"&gt;&amp;lt;Style&lt;/span&gt;
+&lt;span class="na"&gt;x:Key=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;ListBoxItemStyle1&amp;quot;&lt;/span&gt; &lt;span class="na"&gt;TargetType=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;ListBoxItem&amp;quot;&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;
+&lt;span class="nt"&gt;&amp;lt;Setter&lt;/span&gt; &lt;span class="na"&gt;Property=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;Background&amp;quot;&lt;/span&gt; &lt;span class="na"&gt;Value=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;Transparent&amp;quot;&lt;/span&gt;&lt;span class="nt"&gt;/&amp;gt;&lt;/span&gt;
+&lt;span class="nt"&gt;&amp;lt;Setter&lt;/span&gt; &lt;span class="na"&gt;Property=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;BorderThickness&amp;quot;&lt;/span&gt; &lt;span class="na"&gt;Value=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;0&amp;quot;&lt;/span&gt;&lt;span class="nt"&gt;/&amp;gt;&lt;/span&gt;
+&lt;span class="nt"&gt;&amp;lt;Setter&lt;/span&gt; &lt;span class="na"&gt;Property=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;BorderBrush&amp;quot;&lt;/span&gt; &lt;span class="na"&gt;Value=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;Transparent&amp;quot;&lt;/span&gt;&lt;span class="nt"&gt;/&amp;gt;&lt;/span&gt;
+&lt;span class="nt"&gt;&amp;lt;Setter&lt;/span&gt; &lt;span class="na"&gt;Property=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;Padding&amp;quot;&lt;/span&gt; &lt;span class="na"&gt;Value=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;0&amp;quot;&lt;/span&gt;&lt;span class="nt"&gt;/&amp;gt;&lt;/span&gt;
+&lt;span class="nt"&gt;&amp;lt;Setter&lt;/span&gt; &lt;span class="na"&gt;Property=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;HorizontalContentAlignment&amp;quot;&lt;/span&gt; &lt;span class="na"&gt;Value=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;Stretch&amp;quot;&lt;/span&gt;&lt;span class="nt"&gt;/&amp;gt;&lt;/span&gt;
+&lt;span class="nt"&gt;&amp;lt;Setter&lt;/span&gt; &lt;span class="na"&gt;Property=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;HorizontalAlignment&amp;quot;&lt;/span&gt; &lt;span class="na"&gt;Value=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;Stretch&amp;quot;&lt;/span&gt; &lt;span class="nt"&gt;/&amp;gt;&lt;/span&gt;
+&lt;span class="nt"&gt;&amp;lt;Setter&lt;/span&gt; &lt;span class="na"&gt;Property=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;VerticalContentAlignment&amp;quot;&lt;/span&gt; &lt;span class="na"&gt;Value=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;Stretch&amp;quot;&lt;/span&gt;&lt;span class="nt"&gt;/&amp;gt;&lt;/span&gt;
+&lt;span class="nt"&gt;&amp;lt;Setter&lt;/span&gt; &lt;span class="na"&gt;Property=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;Template&amp;quot;&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;
+&lt;span class="nt"&gt;&amp;lt;Setter.Value&amp;gt;&lt;/span&gt;
+&lt;span class="nt"&gt;&amp;lt;ControlTemplate&lt;/span&gt; &lt;span class="na"&gt;TargetType=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;ListBoxItem&amp;quot;&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;
+&lt;span class="nt"&gt;&amp;lt;Border&lt;/span&gt; &lt;span class="na"&gt;x:Name=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;LayoutRoot&amp;quot;&lt;/span&gt; &lt;span class="na"&gt;BorderBrush=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;{TemplateBinding BorderBrush}&amp;quot;&lt;/span&gt;
+&lt;span class="na"&gt;BorderThickness=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;{TemplateBinding BorderThickness}&amp;quot;&lt;/span&gt;
+&lt;span class="na"&gt;Background=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;{TemplateBinding Background}&amp;quot;&lt;/span&gt;
+&lt;span class="na"&gt;HorizontalAlignment=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;{TemplateBinding HorizontalAlignment}&amp;quot;&lt;/span&gt;
+&lt;span class="na"&gt;VerticalAlignment=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;{TemplateBinding VerticalAlignment}&amp;quot;&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;
+&lt;span class="nt"&gt;&amp;lt;ContentControl&lt;/span&gt; &lt;span class="na"&gt;x:Name=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;ContentContainer&amp;quot;&lt;/span&gt;
+&lt;span class="na"&gt;ContentTemplate=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;{TemplateBinding ContentTemplate}&amp;quot;&lt;/span&gt;
+&lt;span class="na"&gt;Content=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;{TemplateBinding Content}&amp;quot;&lt;/span&gt; &lt;span class="na"&gt;Foreground=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;{TemplateBinding&lt;/span&gt;
+&lt;span class="s"&gt;Foreground}&amp;quot;&lt;/span&gt; &lt;span class="na"&gt;HorizontalContentAlignment=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;{TemplateBinding&lt;/span&gt;
+&lt;span class="s"&gt;HorizontalContentAlignment}&amp;quot;&lt;/span&gt; &lt;span class="na"&gt;Margin=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;{TemplateBinding Padding}&amp;quot;&lt;/span&gt;
+&lt;span class="na"&gt;VerticalContentAlignment=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;{TemplateBinding VerticalContentAlignment}&amp;quot;&lt;/span&gt;&lt;span class="nt"&gt;/&amp;gt;&lt;/span&gt;
+&lt;span class="nt"&gt;&amp;lt;/Border&amp;gt;&lt;/span&gt;
+&lt;span class="nt"&gt;&amp;lt;/ControlTemplate&amp;gt;&lt;/span&gt;
+&lt;span class="nt"&gt;&amp;lt;/Setter.Value&amp;gt;&lt;/span&gt;
+&lt;span class="nt"&gt;&amp;lt;/Setter&amp;gt;&lt;/span&gt;
+&lt;span class="nt"&gt;&amp;lt;/Style&amp;gt;&lt;/span&gt; &lt;span class="nt"&gt;&amp;lt;/phone:PhoneApplicationPage.Resources&amp;gt;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Then apply it to the ListBox:&lt;/p&gt;
+&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="nt"&gt;&amp;lt;ListBox&lt;/span&gt; &lt;span class="na"&gt;x:Name=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;SearchResultsListBox&amp;quot;&lt;/span&gt;
+&lt;span class="na"&gt;Grid.Row=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;0&amp;quot;&lt;/span&gt;
+&lt;span class="na"&gt;HorizontalContentAlignment=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;Stretch&amp;quot;&lt;/span&gt;
+&lt;span class="na"&gt;ItemContainerStyle=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;{StaticResource ListBoxItemStyle1}&amp;quot;&lt;/span&gt;
+&lt;span class="na"&gt;ItemsSource=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;{Binding ElementName=SearchPageControl,&lt;/span&gt;
+&lt;span class="s"&gt;    Path=QueryHandler.OpenSearchSuggestion.section.items, Mode=OneWay}&amp;quot;&lt;/span&gt;&lt;span class="err"&gt;\&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;
+    ...
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;The Result&lt;/h2&gt;
+&lt;p&gt;&lt;img alt="solved" src="./static/wp-content/uploads/2010/08/solved_thumb.png" title="solved" /&gt;&lt;/p&gt;
+&lt;p&gt;As you can see the item wrapped in white stretches the entire width of
+the ListBox in red.&lt;/p&gt;
+&lt;h2&gt;Conclusions&lt;/h2&gt;
+&lt;p&gt;Although unintuitive this should get the job done. Hopefully Microsoft
+can make some of these details more straightforward before the final
+release or in updated versions of .NET.&lt;/p&gt;</summary><category term=".net"></category><category term="C#"></category><category term="WP7"></category></entry><entry><title>Asynchronous Data Binding in .NET (C#)</title><link href="http://dandesousa.com/asynchronous-data-binding-in-net-c.html" rel="alternate"></link><updated>2010-08-07T16:31:00-04:00</updated><author><name>Admin</name></author><id>tag:dandesousa.com,2010-08-07:asynchronous-data-binding-in-net-c.html</id><summary type="html">&lt;p&gt;Asynchronous operations are prevalent in all manner of modern systems,
+desktop and web applications. Doing this in .NET is relatively easy as
+Microsoft has provided us with a built in mechanism for binding data.&lt;/p&gt;
+&lt;p&gt;Specifically in WPF, we can perform databinding simply by providing a
+binding target and a binding source. The binding target is the object in
+which the data belongs and the source is the property which it will be
+placed (sort of backwards, but basically they refer to the two
+endpoints). I won't write an entire article on Databinding but instead
+point you to&lt;a href="http://msdn.microsoft.com/en-us/library/ms752347.aspx"&gt;MSDN's official documentation on the subject&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Needless to say Databinding is immensely powerful and greatly simplifies
+how we as developers deal with code in UI space. Now from the Microsoft
+example, assume we have a databinding code snippet that looks like this:&lt;/p&gt;
+&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="n"&gt;MyData&lt;/span&gt; &lt;span class="n"&gt;myDataObject&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="n"&gt;MyData&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;DateTime&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Now&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="n"&gt;Binding&lt;/span&gt; &lt;span class="n"&gt;myBinding&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="n"&gt;Binding&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;MyDataProperty&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="n"&gt;myBinding&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Source&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="n"&gt;myDataObject&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="n"&gt;myText&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;SetBinding&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;TextBlock&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;TextProperty&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;myBinding&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Then if we want to load the data asynchronously we would simply add:&lt;/p&gt;
+&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="n"&gt;MyData&lt;/span&gt; &lt;span class="n"&gt;myDataObject&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="n"&gt;MyData&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;DateTime&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Now&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="n"&gt;Binding&lt;/span&gt; &lt;span class="n"&gt;myBinding&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="n"&gt;Binding&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;MyDataProperty&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="n"&gt;myBinding&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Source&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="n"&gt;myDataObject&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="n"&gt;myText&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;SetBinding&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;TextBlock&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;TextProperty&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;myBinding&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="c1"&gt;// Load this asynchronously&lt;/span&gt;
+&lt;span class="n"&gt;myText&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;IsAsync&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="k"&gt;true&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Which tells the binding to not wait for the value but instead move on
+with any other work while it waits for the value to come in. If you want
+to display a placeholder value, we can set that as well.&lt;/p&gt;
+&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="n"&gt;MyData&lt;/span&gt; &lt;span class="n"&gt;myDataObject&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="n"&gt;MyData&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;DateTime&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Now&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="n"&gt;Binding&lt;/span&gt; &lt;span class="n"&gt;myBinding&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="n"&gt;Binding&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;MyDataProperty&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="n"&gt;myBinding&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Source&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="n"&gt;myDataObject&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="n"&gt;myText&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;SetBinding&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;TextBlock&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;TextProperty&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;myBinding&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="c1"&gt;// Load this asynchronously&lt;/span&gt;
+&lt;span class="n"&gt;myText&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;IsAsync&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="k"&gt;true&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="n"&gt;myText&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;FallbackValue&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;Loading...&amp;quot;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Which will initially display "Loading..." until the value is ready from
+the bound property. This is useful in situations where you want to load
+an image which may take a while but want to hold some placeholder image
+until it is ready (we see in many mobile applications where data loading
+may be unpredictable and slow).&lt;/p&gt;
+&lt;p&gt;If you want to load multiple levels of objects, you can create a
+PriorityBinding object which can contain multiple bindings as above, and
+set each individual Binding object to be asynchronous and it will load
+them in order as it gets them. You can find details about this on
+&lt;a href="http://msdn.microsoft.com/en-us/library/system.windows.data.prioritybinding.aspx"&gt;Microsoft's PriorityBinding MSDN documentation page&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Lastly, remember that just because a value is asynchronous does not mean
+it is automatically loaded from a different thread. If you want to
+ensure that the UI thread is not held up, whichever property you are
+bound to must have its data dispatched from another thread or launch a
+thread. This will ensure that retrieving the property will take slightly
+long and make the UI thread run smooth (user interactions will take
+precedent).&lt;/p&gt;</summary><category term=".net"></category><category term="C#"></category><category term="Programming"></category></entry><entry><title>Microsoft Solver Foundation for Quadratic Programming</title><link href="http://dandesousa.com/microsoft-solver-foundation-for-quadratic-programming.html" rel="alternate"></link><updated>2010-07-15T21:55:00-04:00</updated><author><name>Admin</name></author><id>tag:dandesousa.com,2010-07-15:microsoft-solver-foundation-for-quadratic-programming.html</id><summary type="html">&lt;p&gt;The Microsoft Solver Foundation provides some excellent APIs for solving
+optimization problems in C# .NET. Getting to documentation about the
+Quadratic Programming facilities can be a bit tricky though. I've added
+below some sample code to help out with this.&lt;/p&gt;
+&lt;p&gt;In the following example I'm solving an example of the lagrangian dual
+form used for classification in an SVM.&lt;/p&gt;
+&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="n"&gt;InteriorPointSolver&lt;/span&gt; &lt;span class="n"&gt;solver&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="n"&gt;InteriorPointSolver&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+&lt;span class="c1"&gt;// Langrangian Dual&lt;/span&gt;
+&lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;dual&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="m"&gt;0&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="n"&gt;solver&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;AddRow&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;L&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="k"&gt;out&lt;/span&gt; &lt;span class="n"&gt;dual&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="c1"&gt;// Sum Constraint&lt;/span&gt;
+&lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;linearConstraint&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="m"&gt;0&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="n"&gt;solver&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;AddRow&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;SumConstraint&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="k"&gt;out&lt;/span&gt; &lt;span class="n"&gt;linearConstraint&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="c1"&gt;// Add variables and Lagrangian linear terms&lt;/span&gt;
+&lt;span class="kt"&gt;int&lt;/span&gt;&lt;span class="p"&gt;[]&lt;/span&gt; &lt;span class="n"&gt;vars&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="kt"&gt;int&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;];&lt;/span&gt;
+&lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="m"&gt;0&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="p"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;lt&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;++)&lt;/span&gt;
+&lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="c1"&gt;// Add the variable&lt;/span&gt;
+    &lt;span class="n"&gt;solver&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;AddVariable&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;a&amp;quot;&lt;/span&gt; &lt;span class="p"&gt;+&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="k"&gt;out&lt;/span&gt; &lt;span class="n"&gt;vars&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;]);&lt;/span&gt;
+    &lt;span class="c1"&gt;// Factor in C upper bounds&lt;/span&gt;
+    &lt;span class="n"&gt;solver&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;SetBounds&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;vars&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; &lt;span class="m"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;C&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="c1"&gt;// Linear constraint must equal 0&lt;/span&gt;
+&lt;span class="n"&gt;solver&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;SetBounds&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;linearConstraint&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="m"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="m"&gt;0&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="c1"&gt;// Lagrangian Quadratic Terms&lt;/span&gt;
+&lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="m"&gt;0&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="p"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;lt&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;++)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="n"&gt;solver&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;SetCoefficient&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;linearConstraint&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="n"&gt;vars&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; &lt;span class="n"&gt;trainingData&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;].&lt;/span&gt;&lt;span class="n"&gt;output&lt;/span&gt;&lt;span class="p"&gt;());&lt;/span&gt; &lt;span class="n"&gt;solver&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;SetCoefficient&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;dual&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;vars&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;
+        &lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt; &lt;span class="n"&gt;Parallel&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;For&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;o&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;j&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;=&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;gt&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+            &lt;span class="p"&gt;{&lt;/span&gt;
+            &lt;span class="kt"&gt;double&lt;/span&gt; &lt;span class="n"&gt;coef&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="n"&gt;trainingData&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;].&lt;/span&gt;&lt;span class="n"&gt;output&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="err"&gt;\&lt;/span&gt;&lt;span class="p"&gt;*&lt;/span&gt; &lt;span class="n"&gt;trainingData&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;j&lt;/span&gt;&lt;span class="p"&gt;].&lt;/span&gt;&lt;span class="n"&gt;output&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="err"&gt;\&lt;/span&gt;&lt;span class="p"&gt;*&lt;/span&gt;
+            &lt;span class="n"&gt;kernel&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;evaluate&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;trainingData&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;].&lt;/span&gt;&lt;span class="n"&gt;point&lt;/span&gt;&lt;span class="p"&gt;(),&lt;/span&gt; &lt;span class="n"&gt;trainingData&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;j&lt;/span&gt;&lt;span class="p"&gt;].&lt;/span&gt;&lt;span class="n"&gt;point&lt;/span&gt;&lt;span class="p"&gt;());&lt;/span&gt;
+            &lt;span class="n"&gt;solver&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;SetCoefficient&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;dual&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;-&lt;/span&gt;&lt;span class="m"&gt;0.5&lt;/span&gt; &lt;span class="err"&gt;\&lt;/span&gt;&lt;span class="p"&gt;*&lt;/span&gt; &lt;span class="n"&gt;coef&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;vars&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; &lt;span class="n"&gt;vars&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;j&lt;/span&gt;&lt;span class="p"&gt;]);&lt;/span&gt;
+            &lt;span class="p"&gt;});&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="n"&gt;solver&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;AddGoal&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;dual&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="m"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="k"&gt;false&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="n"&gt;InteriorPointSolverParams&lt;/span&gt; &lt;span class="n"&gt;param&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="k"&gt;new&lt;/span&gt;
+&lt;span class="n"&gt;InteriorPointSolverParams&lt;/span&gt;&lt;span class="p"&gt;();[/&lt;/span&gt;&lt;span class="n"&gt;csharp&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Essentially all we are doing here is adding all the variables to our
+constraint optimization problem and asking the solver to minimize. The
+vars array simply expressing a list of identifier for variables in the
+constraint problem. You should fire up the Solver Foundation library and
+give it a shot yourself.&lt;/p&gt;
+&lt;p&gt;Here are some resources that should make understanding this a bit easier
+as well. Its the official blog of one of the key developers on the
+project, specifically the links to tutorial on the quadratic programming
+solver.&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://blogs.msdn.com/b/natbr/archive/2009/09/24/using-the-solver-foundation-interior-point-solver.aspx"&gt;Nathan Brixius' QP Solver Tutorial&lt;/a&gt;&lt;/p&gt;</summary><category term=".net"></category><category term="C#"></category><category term="math"></category></entry><entry><title>ChessGL3d Demo Video</title><link href="http://dandesousa.com/chessgl3d-demo-video.html" rel="alternate"></link><updated>2010-03-11T14:29:00-05:00</updated><author><name>Admin</name></author><id>tag:dandesousa.com,2010-03-11:chessgl3d-demo-video.html</id><summary type="html">&lt;div style="text-align: left; padding: 3px;"&gt;
+&lt;object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" width="500" height="313" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,40,0"&gt;
+&lt;param name="data" value="http://www.flickr.com/apps/video/stewart.swf?v=71377"&gt;&lt;/param&gt;&lt;param name="flashvars" value="intl_lang=en-us&amp;amp;photo_secret=6ee39f773e&amp;amp;photo_id=4425552860&amp;amp;flickr_show_info_box=true"&gt;&lt;/param&gt;&lt;param name="bgcolor" value="#000000"&gt;&lt;/param&gt;&lt;param name="allowFullScreen" value="true"&gt;&lt;/param&gt;&lt;param name="src" value="http://www.flickr.com/apps/video/stewart.swf?v=71377"&gt;&lt;/param&gt;&lt;param name="allowfullscreen" value="true"&gt;&lt;/param&gt;
+
+&lt;embed type="application/x-shockwave-flash" width="500" height="313" src="http://www.flickr.com/apps/video/stewart.swf?v=71377" allowfullscreen="true" bgcolor="#000000" flashvars="intl_lang=en-us&amp;amp;photo_secret=6ee39f773e&amp;amp;photo_id=4425552860&amp;amp;flickr_show_info_box=true" data="http://www.flickr.com/apps/video/stewart.swf?v=71377"&gt;
+&lt;/embed&gt;
+&lt;/object&gt;
+&lt;/p&gt;
+
+&lt;p&gt;
+&lt;span style="font-size: 0.8em; margin-top: 0px;"&gt;[chessgl3d][],
+originally uploaded by [dandesousa][].&lt;/span&gt;
+
+&lt;/div&gt;
+
+&lt;/p&gt;
+
+&lt;p&gt;Here is a demo video for my 3d chess game. See the games page for more
+details.&lt;/p&gt;
+&lt;/p&gt;</summary><category term="chess"></category><category term="graphics"></category><category term="opengl"></category></entry><entry><title>OpenGL Display Lists And Sub Windows</title><link href="http://dandesousa.com/opengl-display-lists-and-sub-windows.html" rel="alternate"></link><updated>2010-03-06T21:02:00-05:00</updated><author><name>Admin</name></author><id>tag:dandesousa.com,2010-03-06:opengl-display-lists-and-sub-windows.html</id><summary type="html">&lt;p&gt;I recently discovered after some needless frustration, that you need to
+declare display lists that contain model drawing information in all
+windows in which you wish to draw the model. For example, if I say:&lt;/p&gt;
+&lt;p&gt;
+    glutSetWindow(main_window);initDisplayLists();...void main_display(){   drawDisplayList();}
+
+&lt;/p&gt;
+
+&lt;p&gt;It will work just fine. But if I try to do the same in a display
+function of the sub window it won't draw. You need to call whatever
+init() function you create your models / display lists in AFTER setting
+the window. For example&lt;/p&gt;
+&lt;p&gt;
+    glutSetWindow(main_window);// do stuffglutSetWindow(sub_window);initDisplayLists();...void sub_display(){    drawDisplayList();}
+
+&lt;/p&gt;
+
+&lt;p&gt;Hope that helps someone out there!&lt;/p&gt;</summary><category term="graphics"></category><category term="opengl"></category></entry><entry><title>Compiling OpenGL on Mac OS X or Linux</title><link href="http://dandesousa.com/compiling-opengl-on-mac-os-x-or-linux.html" rel="alternate"></link><updated>2010-01-16T21:50:00-05:00</updated><author><name>Admin</name></author><id>tag:dandesousa.com,2010-01-16:compiling-opengl-on-mac-os-x-or-linux.html</id><summary type="html">&lt;p&gt;Most linux distributions make it easy to compile programs using OpenGL.
+Other systems, however, aren't so easy. Here are instructions on how to
+get it running in both platforms.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Ubuntu / Linux&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Make sure you install the opengl-mesa packages for opengl
+    development. On ubuntu you can get them all with the following
+    invocation:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;sudo apt-get install freeglut3-dev&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;You should include the following #includes in your code referencing
+    opengl:&lt;/p&gt;
+&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="cp"&gt;#include &amp;lt;GL/gl.h&amp;gt;&lt;/span&gt;
+&lt;span class="cp"&gt;#include &amp;lt;GL/glu.h&amp;gt;&lt;/span&gt;
+&lt;span class="cp"&gt;#include &amp;lt;GL/glut.h&amp;gt;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;You should also have the following gcc cmdline flags in your
+    makefile:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;gcc -o simple simple.c -lGL -lglut -lGLU&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;strong&gt;Mac OS X (tested on Snow Leopard)&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;For this to work you will have to install gcc and Xcode, which
+    should install all the required opengl/glut libraries. You can get
+    it &lt;a href="http://developer.apple.com/"&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Now, you'll have to alter all the #includes in your files to
+    conform to the proper location. Change all your opengl #includes to
+    the following:&lt;span style="font-family: monospace;"&gt; &lt;/span&gt;&lt;/p&gt;
+&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="cp"&gt;#include &amp;lt;OpenGL/gl.h&amp;gt;&lt;/span&gt;
+&lt;span class="cp"&gt;#include &amp;lt;OpenGL/glu.h&amp;gt;&lt;/span&gt;
+&lt;span class="cp"&gt;#include &amp;lt;GLUT/glut.h&amp;gt;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Additionally your gcc command line will need to contain the
+    following flags to link, along with any others you might have:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;gcc -o simple simple.c -framework Carbon -framework OpenGL -framework GLUT&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;strong&gt;Cross Platform Compatibility&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;&lt;span style="font-weight: normal;"&gt;If you want your code to run on
+both, you need to get the Makefile and code to load the proper libraries
+depending on your system. &lt;/span&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;&lt;span style="font-weight: normal;"&gt;In all your OpenGL .c files, add
+the following header instead of your linux/mac includes:&lt;/span&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="cp"&gt;#ifdef __APPLE__&lt;/span&gt;
+&lt;span class="cp"&gt;#  include &amp;lt;OpenGL/gl.h&amp;gt;&lt;/span&gt;
+&lt;span class="cp"&gt;#  include &amp;lt;OpenGL/glu.h&amp;gt;&lt;/span&gt;
+&lt;span class="cp"&gt;#  include &amp;lt;GLUT/glut.h&amp;gt;&lt;/span&gt;
+&lt;span class="cp"&gt;#else&lt;/span&gt;
+&lt;span class="cp"&gt;#  include &amp;lt;GL/gl.h&amp;gt;&lt;/span&gt;
+&lt;span class="cp"&gt;#  include &amp;lt;GL/glu.h&amp;gt;&lt;/span&gt;
+&lt;span class="cp"&gt;#  include &amp;lt;GL/glut.h&amp;gt;&lt;/span&gt;
+&lt;span class="cp"&gt;#endif&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Then in your makefile, add the following before your build targets:&lt;/p&gt;
+&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="c"&gt;#default cmdline flags&lt;/span&gt;
+&lt;span class="nv"&gt;LDFLAGS&lt;/span&gt;  &lt;span class="o"&gt;=&lt;/span&gt; -lGL -lglut -lGLU
+&lt;span class="c"&gt;# Mac OS alternate cmdline link options&lt;/span&gt;
+&lt;span class="cp"&gt;ifeq &amp;quot;$(OSTYPE)&amp;quot; &amp;quot;Darwin&amp;quot;&lt;/span&gt;
+  &lt;span class="nv"&gt;LDFLAGS&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; -framework Carbon -framework OpenGL -framework GLUT
+&lt;span class="cp"&gt;endif&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;</summary></entry><entry><title>Timing Programs in C (Update)</title><link href="http://dandesousa.com/timing-programs-in-c-update.html" rel="alternate"></link><updated>2009-01-25T17:03:00-05:00</updated><author><name>Admin</name></author><id>tag:dandesousa.com,2009-01-25:timing-programs-in-c-update.html</id><summary type="html">&lt;p&gt;So I've decided to try and do at least one useful post a week to
+hopefully help a random searcher out. Here is the the updated version of
+how to get millisecond precise wall clock time in C.&lt;/p&gt;
+&lt;p&gt;#include \&amp;lt;sys\time.h&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;gettimeofday(&amp;amp;tstart, NULL);&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;double t1=tstart.tv_sec+(tstart.tv_usec/1000000.0);&lt;/code&gt;&lt;/p&gt;
+&lt;/p&gt;</summary></entry><entry><title>Timing Programs in C (Why I hate clock())</title><link href="http://dandesousa.com/timing-programs-in-c-why-i-hate-clock.html" rel="alternate"></link><updated>2009-01-16T08:51:00-05:00</updated><author><name>Admin</name></author><id>tag:dandesousa.com,2009-01-16:timing-programs-in-c-why-i-hate-clock.html</id><summary type="html">&lt;p&gt;So in working on a parallel programming assignment for a grad class I
+needed to time two algorithms, a sequential approach and a parallel
+approach. In doing so I did something like this:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;clock_t start, finish;&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;start = clock();&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;// do something finish = clock();&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;printf("Time Elapsed: %f", ((double) finish - start) / CLOCKS_PER_SEC);&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;However this code will give you the wrong time if you are trying to
+compare the runtime between these two types of programs.&lt;/p&gt;
+&lt;p&gt;On a sequential algorithm it should produce a good approximation of the
+wall-clock time, or the amount of time that would expire if you timed it
+using a clock on the wall (or stopwatch). But in a parallel algorithm we
+find that it actually gives you a larger time difference.&lt;/p&gt;
+&lt;p&gt;This is because in a multi-threaded program you are engaging multiple
+processors (if you have them). Since the clock() gets the number of
+clock ticks for the program, we get back almost 2x as many (on a
+two-core machine).&lt;/p&gt;
+&lt;p&gt;Unfortunately I have yet to find a decent way of getting the
+milliseconds for a C program accurately. You can use regular old time()
+to get the seconds, or if you are running on UNIX you can use the time
+command.&lt;/p&gt;
+&lt;/p&gt;</summary></entry></feed>
