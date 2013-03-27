@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*- #
 
-AUTHOR = u'Dan De Sousa'
-SITENAME = u"Dan De Sousa's Blog"
+AUTHOR = u'Dan'
+SITENAME = u"Dan DeSousa's Blog"
 SITEURL = ''
 
 TIMEZONE = 'US/Eastern'
@@ -37,3 +37,6 @@ TWITTER_USERNAME = "dandesousa"
 
 # Tracking
 GOOGLE_ANALYTICS = "UA-10113677-1"
+
+# Search
+GOOGLE_SITE_SEARCH_URL = "http://dandesousa.com"
