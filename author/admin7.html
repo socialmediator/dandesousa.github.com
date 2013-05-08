@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Dan DeSousa's Blog</title>
+    <meta name="description" content="">
+    <meta name="author" content="Dan">
+
+    <link href="../theme/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../theme/css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link href="../theme/css/font-awesome.min.css" rel="stylesheet">
+    <link href="../theme/css/showcase.css" rel="stylesheet">
+    <link href="../theme/css/showcase-icons.css" rel="stylesheet">
+    <link href="../theme/css/showcase-pygments.css" rel="stylesheet">
+    <script>var _gaq=[['_setAccount','UA-10113677-1'],['_trackPageview']];(function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];g.src='//www.google-analytics.com/ga.js';s.parentNode.insertBefore(g,s)}(document,'script'))</script>
+      </head>
+  <body>
+    
+    <div class="container site-container">
+      <div class="row">
+        <div class="span12 text-center">
+                    <a style="text-decoration: none" href=".."><h1>Dan DeSousa's Blog</h1></a>
+                  </div>
+      </div>
+
+      <div class="row">
+        <div class="span12 centered-pills">
+          <ul class="nav nav-pills">
+            <li class="active"><a href="/">Blog</a></li>
+                        <li ><a href="/pages/about">About</a></li>
+                      </ul>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="span12">
+                    
+<div class="page-header"><h1>Blog</h1></div>
+<div class='article'>
+    <h3>Ios Exc_Bad_Access Error When Navigating To/From Nib</h3>
+  <div class="row">
+    <div class="span4">
+      <div class="well well-small">
+        <ul class="unstyled">
+  <li><i class="icon-time"></i> <a class="more" href="../posts/2010/11/27/ios-exc_bad_access-error-when-navigating-tofrom-nib/">Saturday, November 27 2010 01:01 PM</a> </li> 
+  <li><i class="icon-pencil"></i> <a class="url fn" href="../author/admin.html">Admin</a> </li>
+  <li>
+  <i class="icon-tags"></i> 
+    <a href="../tag/iphone.html">iphone</a>
+    <a href="../tag/memory-management.html">memory management</a>
+    <a href="../tag/objective-c.html">objective-c</a>
+    <a href="../tag/uitableview.html">UITableView</a>
+    </li>
+  <!-- <li><i class="icon-folder-open"></i> <a href="../category/programming.html">Programming</a></li> -->
+</ul>        <i class="icon-comments-alt"></i> <a href="../posts/2010/11/27/ios-exc_bad_access-error-when-navigating-tofrom-nib/#disqus_thread"></a>      </div>
+    </div>
+    <div class="span8">
+      <div class="summary">
+        <p>As I have begun the trek towards mastering objective-c, I've come to
+appreciate the memory management nuances. I came across a problem where
+when navigating backwards in a table view, the application would just
+crash with an EXC_BAD_ACCESS error. If you see this it is most likely
+due to accidently mis-managing memory. I fixed my particular error by
+referring to the memory management rules with NIBs. Because of the way
+nibs are access you need to unload IBOutlet properties in the
+viewDidUnload method. Here are examples from apple's documentation:</p>
+<div class="codehilite"><pre><span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">viewDidUnload</span> <span class="p">{</span>
+    <span class="n">self</span><span class="p">.</span><span class="n">anOutlet</span> <span class="o">=</span> <span class="nb">nil</span><span class="p">;</span>
+    <span class="p">[</span><span class="n">super</span> <span class="n">viewDidUnload</span><span class="p">];</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>Also, for some reason you also have to release them in the dealloc for
+the controller you are in:</p>
+<div class="codehilite"><pre><span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">dealloc</span> <span class="p">{</span>
+    <span class="c1">// Release outlets and set outlet variables to nil.</span>
+    <span class="p">[</span><span class="n">anOutlet</span> <span class="n">release</span><span class="p">],</span> <span class="n">anOutlet</span> <span class="o">=</span> <span class="nb">nil</span><span class="p">;</span>
+    <span class="p">[</span><span class="n">super</span> <span class="n">dealloc</span><span class="p">];</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>Hope this helps someone out there. <a href="http://developer.apple.com/library/mac/#documentation/Cocoa/Conceptual/MemoryMgmt/Articles/mmNibObjects.html">Here are the details of how to
+manage memory in NIBS for Mac OS or iOS.</a></p>
+      </div>
+    </diV>
+  </div>
+</div>	
+<br>
+<hr/>
+</ul>
+<div class='article'>
+    <h3>Kitten Vs. Ferret (Part 1 -- 6 Weeks)</h3>
+  <div class="row">
+    <div class="span4">
+      <div class="well well-small">
+        <ul class="unstyled">
+  <li><i class="icon-time"></i> <a class="more" href="../posts/2008/10/29/kitten-vs-ferret-part-1-6-weeks/">Wednesday, October 29 2008 09:41 PM</a> </li> 
+  <li><i class="icon-pencil"></i> <a class="url fn" href="../author/admin.html">Admin</a> </li>
+  <li>
+  <i class="icon-tags"></i> 
+    <a href="../tag/cat.html">cat</a>
+    <a href="../tag/ferrets.html">ferrets</a>
+    <a href="../tag/pets.html">Pets</a>
+    </li>
+  <!-- <li><i class="icon-folder-open"></i> <a href="../category/personal.html">Personal</a></li> -->
+</ul>        <i class="icon-comments-alt"></i> <a href="../posts/2008/10/29/kitten-vs-ferret-part-1-6-weeks/#disqus_thread"></a>      </div>
+    </div>
+    <div class="span8">
+      <div class="summary">
+        <p>My roommate just got a kitten and we decided to allow it to interact
+with our ferrets. Seems that it likes to have a good tussle with my
+ferret Jean-Luc. Right now it's not much of a challenge, but should be
+interesting to see what happens when the cat gets older. Here is part 1
+of a series I'll be updating every few weeks.</p>
+<p align="center">
+<object width="425" height="344">
+<param name="movie" value="http://www.youtube.com/v/erlvcrISuPE&amp;hl=en&amp;fs=1"></param><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param>
+
+<embed src="http://www.youtube.com/v/erlvcrISuPE&amp;hl=en&amp;fs=1" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="425" height="344">
+</embed>
+</object>
+</p>
+
+</p>
+      </div>
+    </diV>
+  </div>
+</div>	
+<br>
+<hr/>
+</ul>
+<div class='article'>
+    <h3>Linking Together Icloud, Photo Stream And Dropbox.</h3>
+  <div class="row">
+    <div class="span4">
+      <div class="well well-small">
+        <ul class="unstyled">
+  <li><i class="icon-time"></i> <a class="more" href="../posts/2012/12/09/linking-together-icloud-photo-stream-and-dropbox/">Sunday, December 09 2012 08:07 PM</a> </li> 
+  <li><i class="icon-pencil"></i> <a class="url fn" href="../author/admin.html">Admin</a> </li>
+  <li>
+  <i class="icon-tags"></i> 
+    <a href="../tag/dropbox.html">dropbox</a>
+    <a href="../tag/icloud.html">icloud</a>
+    <a href="../tag/photo-stream.html">photo stream</a>
+    </li>
+  <!-- <li><i class="icon-folder-open"></i> <a href="../category/technology.html">Technology</a></li> -->
+</ul>        <i class="icon-comments-alt"></i> <a href="../posts/2012/12/09/linking-together-icloud-photo-stream-and-dropbox/#disqus_thread"></a>      </div>
+    </div>
+    <div class="span8">
+      <div class="summary">
+        <p>Looking for a way to link together iCloud and Dropbox to manage your
+photos? Look no further; the following is a guide to getting your iOS
+and Photo Stream photos automatically into Dropbox.</p>
+<p><img alt="" src="/static/wp-content/uploads/2012/12/dropbx-300x300.png" title="dropbx" /> <img alt="" src="/static/wp-content/uploads/2012/12/icloud-300x297.jpg" title="icloud" /></p>
+<h2>Background</h2>
+<p>This  process started because I was looking for a way to manage all my
+photos on my iPad. I want to take pictures with my DSLR or point and
+shoot, download them to my iPad with the camera connection kit, and have
+them automatically added to my cloud or local photo library.
+Unfortunately many of the photo management services on the iPad are
+lacking, and it is not easy to create and sync albums through iCloud.
+What I really wanted was a permanent backup solution for photos on my
+iPad. It would also be nice to be able to manage my photos with a third
+party application like Picasa. That's when I thought to use Photo Stream
+as a delivery mechanism to upload photos to Dropbox. I trust Dropbox to
+keep my photos safe, and I like having access to all my photos on all my
+devices. Of course, all these photos are going to take up a lot of space
+over time. I cover the costs of this setup in the last section.</p>
+<h2>Setup</h2>
+<p>This setup will work on Windows or Mac, but I'll go over the
+instructions for Windows. If there are requests I can post directions
+for OS X, though it should be pretty straightforward from the following.</p>
+<p>You'll need these applications:</p>
+<p><a href="https://www.dropbox.com/">Dropbox</a></p>
+<p><a href="http://support.apple.com/kb/dl1455">iCloud Control Panel</a></p>
+<p>These instructions have you setup iCloud Control Panel to download your
+Photo Stream uploaded photos (which includes all photos added to your
+iOS through either the camera app or the camera connection kit) a
+Dropbox folder.</p>
+<p>First you'll want to make sure Dropbox is configured and setup for your
+account.</p>
+<p>Second after you install the iCloud Control Panel, you want to find it
+under Control Panel > iCloud. You should see something like this:</p>
+<p><img alt="" src="/static/wp-content/uploads/2012/12/icloudcontrolpanel.png" title="icloudcontrolpanel" /></p>
+<p>Select options next to Photo Stream:</p>
+<p><img alt="" src="/static/wp-content/uploads/2012/12/options.png" title="options" /></p>
+<p>Make sure that "My Photo Stream" is selected. Also check "Shared Photo
+Streams" if you use that feature. Select "Change" next to "Photo Stream
+location" and navigate to your Dropbox directory. You can either select
+the Photos directory. In the follow example I've created a dedicated
+directory just for my Photo Stream photos:</p>
+<p><img alt="" src="/static/wp-content/uploads/2012/12/files.png" title="files" /></p>
+<p>Don't worry about the directories under "Photo Streams" they will appear
+once your computer starts download photos from Apple. Once it's
+selected, select "OK" all the way until you get back to the main control
+panel window and close it.</p>
+<p>From now on, all new pictures on your iOS device will automatically be
+downloaded to your local machine, and since the location of the download
+is in Dropbox, it will be uploaded to your Dropbox account as well.</p>
+<h2>Benefits</h2>
+<p>You might be asking why go through to the trouble of doing this. Well
+there are a number of benefits:</p>
+<ol>
+<li>You can access all your photos on all your devices, computers and on
+    the web securely.</li>
+<li>Manage your photo library solely from your iPad, iPhone with Dropbox
+    and the Photos app.</li>
+<li>Freedom to delete old photos from your iOS device without fear that
+    they will disappear from iCloud after 30 days or when your 1000
+    photo limit is reached. If dropbox is installed on your iOS device,
+    you can even view them there long after they've disappeared from
+    Photo Stream.</li>
+<li>Automatically download photos to all your computers at once (as long
+    as your computer with iCloud Control Panel is running)</li>
+<li>Automatically upload photos to all your iOS devices from any
+    computer in the world or the web by dropping them in the Photo
+    Stream > Uploads folder (as long as your iCloud Control Panel
+    computer is running)</li>
+<li>"Own" all your photos, organize them into albums and make them
+    accessible.</li>
+</ol>
+<h2>Long Term Costs</h2>
+<p>This setup does not come without its costs. While iCloud and Photo
+Stream are free for Photos, a new dropbox free user probably doesn't
+have much room to be storing their entire photo library. In the long
+term this will like depend on having a paid account. However, fret not,
+since Dropbox is always running a number of promotions to increase
+available space. The biggest is the <a href="https://www.dropbox.com/spacerace">Dropbox Space Race</a> and <a href="https://www.dropbox.com/help/category/Referrals">referral
+program</a>. You can also <a href="https://www.dropbox.com/pricing">Dropbox's pricing details</a> which have
+recently expanded. Furthermore, with the decrease in price of storage,
+we should see costs come down and capacity go up in the coming years.</p>
+<p>Please feel free to comment or suggest alternate setups. So far this has
+been working quite well and allowing me to leverage the best of both of
+these great cloud services.</p>
+      </div>
+    </diV>
+  </div>
+</div>	
+<br>
+<hr/>
+</ul>
+
+<div class="pagination">
+  <ul>
+            <li class="prev"><a href="../author/admin6.html">&larr; Previous</a></li>
+            <li class=""><a href="../author/admin.html">1</a></li>
+        <li class=""><a href="../author/admin2.html">2</a></li>
+        <li class=""><a href="../author/admin3.html">3</a></li>
+        <li class=""><a href="../author/admin4.html">4</a></li>
+        <li class=""><a href="../author/admin5.html">5</a></li>
+        <li class=""><a href="../author/admin6.html">6</a></li>
+        <li class="active"><a href="../author/admin7.html">7</a></li>
+        <li class=""><a href="../author/admin8.html">8</a></li>
+        <li class=""><a href="../author/admin9.html">9</a></li>
+        <li class=""><a href="../author/admin10.html">10</a></li>
+        <li class=""><a href="../author/admin11.html">11</a></li>
+        <li class=""><a href="../author/admin12.html">12</a></li>
+            <li class="next"><a href="../author/admin8.html">Next &rarr;</a></li>
+      </ul>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    <footer class="footer">
+    <div class="container">
+      <p> 
+                <a href="https://facebook.com/daniel.sousa"><i class="icon-color-facebook icon-2x icon-facebook-sign"></i></a>
+                        <a href="http://twitter.com/dandesousa"><i class="icon-color-twitter icon-2x icon-twitter-sign"></i></a>
+                        <a href="https://github.com/dandesousa"><i class="icon-color-github icon-2x icon-github-alt"></i></a>
+              </p>
+      <p><a href="http://github.com/minksoftware/pelican-showcase">Showcase</a> based on <a href="http://twitter.github.com/bootstrap/">Bootstrap, from Twitter</a>.</p>
+      <p><a href="http://fortawesome.github.com/Font-Awesome">Font Awesome by Dave Gandy</a></p>
+      <p>&copy;  Dan DeSousa  2013</p>
+    </div>
+    </footer>
+
+    <script type="text/javascript">
+/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+var disqus_shortname = 'example'; // required: replace example with your forum shortname
+
+/* * * DON'T EDIT BELOW THIS LINE * * */
+(function () {
+var s = document.createElement('script'); s.async = true;
+s.type = 'text/javascript';
+s.src = 'http://' + disqus_shortname + '.disqus.com/count.js';
+(document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+}());
+</script>  </body>
+</html>

@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Dan DeSousa's Blog</title>
+    <meta name="description" content="">
+    <meta name="author" content="Dan">
+
+    <link href="../../../../../theme/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../../../../theme/css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link href="../../../../../theme/css/font-awesome.min.css" rel="stylesheet">
+    <link href="../../../../../theme/css/showcase.css" rel="stylesheet">
+    <link href="../../../../../theme/css/showcase-icons.css" rel="stylesheet">
+    <link href="../../../../../theme/css/showcase-pygments.css" rel="stylesheet">
+    <script>var _gaq=[['_setAccount','UA-10113677-1'],['_trackPageview']];(function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];g.src='//www.google-analytics.com/ga.js';s.parentNode.insertBefore(g,s)}(document,'script'))</script>
+    <script type="text/javascript">
+	var disqus_identifier = "posts/2011/11/04/implementing-jquery-tablesorter-natural-sort-plugin-as-text-sort/";
+	(function() {
+		var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+		dsq.src = 'http://dandesousacom.disqus.com/embed.js';
+		(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	})();
+</script>
+  </head>
+  <body>
+    
+    <div class="container site-container">
+      <div class="row">
+        <div class="span12 text-center">
+                    <a style="text-decoration: none" href="../../../../.."><h1>Dan DeSousa's Blog</h1></a>
+                  </div>
+      </div>
+
+      <div class="row">
+        <div class="span12 centered-pills">
+          <ul class="nav nav-pills">
+            <li class="active"><a href="/">Blog</a></li>
+                        <li ><a href="/pages/about">About</a></li>
+                      </ul>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="span12">
+                    <div class='article'>
+  <div class="page-header"><h1>Implementing Jquery Tablesorter Natural Sort Plugin As Text Sort</h1>
+    <ul class="unstyled">
+  <li><i class="icon-time"></i> <a class="more" href="../../../../../posts/2011/11/04/implementing-jquery-tablesorter-natural-sort-plugin-as-text-sort/">Friday, November 04 2011 10:55 PM</a> </li> 
+  <li><i class="icon-pencil"></i> <a class="url fn" href="../../../../../author/admin.html">Admin</a> </li>
+  <li>
+  <i class="icon-tags"></i> 
+    </li>
+  <!-- <li><i class="icon-folder-open"></i> <a href="../../../../../category/programming.html">Programming</a></li> -->
+</ul>  </div>
+  <div class="page-content"><p>I have been doing quite a bit of web programming lately and was recently
+trying to figure out how to get the jquery plugin '<a href="http://tablesorter.com/docs/">tablesorter</a>' to
+perform a natural sort.</p>
+<p>For those not aware of what natural sort is, it is the way in which
+human beings tend to sort things intuitively (hence the prefix
+'natural'). In fact, [coding horror as a pretty good article about
+natural sort and how tough it can be][]. To cut the story short, it
+ensures that word19 comes after word2 in a sorted list (a typical sort
+would place word2 after, since the ascii characters in the 5th position
+define the sort order).</p>
+<p>Now, normally implementing a natural sort is not so difficult depending
+on the language, you basically split up the areas of the string that
+represent digits, and then sort each substring piece in order (string
+order if two strings, numeric order if two digits). Unfortunately, the
+javascript tablesorter plugin allows you to sort by providing a function
+that takes an element to be sorted and transforms it into a different
+string or number that must be sorted EITHER numerical OR textually, but
+not both.</p>
+<p>Looking around online didn't yield any good solutions aside from,
+"implement a jquery plugin". So I got to wondering what how it could be
+done. These plugins could take the either table or cell as an argument
+but then you'd have to remain stateless and re-perform the entire
+natural sort over again. It may be possible to also use the jquery data
+api to store data about a table to be sorted and then fetch it on each
+call (performing the natural sort once and assigning ids to each cell or
+something).</p>
+<p>It got me wondering about formulating a natural sorting algorithm as a
+numeric or textual sort. So I tried to prove if it could be done. I tend
+to get carried away and engrossed by certain little challenges like
+this:</p>
+<p>1.) Natural Sort As Numeric Sort</p>
+<p>This should become clear shortly that natural sort cannot be easily
+implemented as a stateless numerical sort. Since you are ultimately
+converting the string to a number, you can simply make the string longer
+to produce a bigger number and mess up the sort order.</p>
+<p>2.) Natural Sort As Textual Sort</p>
+<p>This seemed like it could work. A textual sort is just a sequential
+comparison of ascii coded bytes, each with a numeric value. Natural sort
+is also a set of sequential comparison operations that ultimately break
+down to numeric comparisons. One simply needs to convert the numeric
+pieces into a string of characters preserving the same order as the
+numeric sort, then create a new string with these numeric characters
+replaced.</p>
+<p>I decided to follow the original idea of ascii code comparisons, and I
+decided to convert each number to a fixed length string in which each
+digit is a base 127 or 256 number. Why 127 or 256? They represent
+standard and extended ascii code length and ensure that the values
+always fall without the proper range. String needs to be fixed length so
+that all numerals are compared equally (longer numbers won't be
+incorrectly compared against smaller numbers). The length of your string
+determines the maximum size of any numeric segment. That means that
+using a N digit base 127 string gives you 127\^(N-1) numbers. At 10
+digits, thats 3x10\^18 numbers. If you use base 256 you get 21 decimal
+places. Technically you can go even higher with UTF8.</p>
+<p>Anyway, here is my solution (excuse my probably ugly javascript,
+truthfully its one of the first javascript functions I've written from
+scratch).</p>
+<div class="codehilite"><pre>  <span class="nx">ts</span><span class="p">.</span><span class="nx">addParser</span><span class="p">({</span>
+  <span class="nx">id</span><span class="o">:</span> <span class="s2">&quot;natural&quot;</span><span class="p">,</span>
+  <span class="nx">is</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">s</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+  <span class="p">},</span>
+  <span class="nx">format</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">s</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">var</span> <span class="nx">ret</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">;</span>
+  <span class="kd">var</span> <span class="nx">num_str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">;</span>
+  <span class="kd">var</span> <span class="nx">base_num</span> <span class="o">=</span> <span class="mi">256</span><span class="p">;</span>
+  <span class="kd">var</span> <span class="nx">fixed_len</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+  <span class="kd">var</span> <span class="nx">num_to_ascii_len_str</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">base</span><span class="p">,</span> <span class="nx">max_len</span><span class="p">,</span> <span class="nx">num</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">tmp</span> <span class="o">=</span> <span class="nx">num</span><span class="p">;</span>
+    <span class="kd">var</span> <span class="nx">ret</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">;</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">max_len</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span>
+    <span class="p">{</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">tmp</span> <span class="o">&gt;</span> <span class="nx">base</span><span class="p">)</span>
+      <span class="p">{</span>
+        <span class="kd">var</span> <span class="nx">div</span> <span class="o">=</span> <span class="nx">tmp</span> <span class="o">/</span> <span class="nx">base</span><span class="p">;</span>
+        <span class="nx">tmp</span> <span class="o">=</span> <span class="nx">tmp</span> <span class="o">-</span> <span class="nx">div</span> <span class="o">*</span> <span class="nx">base</span><span class="p">;</span>
+        <span class="nx">ret</span> <span class="o">=</span> <span class="nb">String</span><span class="p">.</span><span class="nx">fromCharCode</span><span class="p">(</span><span class="nx">div</span><span class="p">)</span> <span class="o">+</span> <span class="nx">ret</span><span class="p">;</span>
+      <span class="p">}</span>
+      <span class="k">else</span>
+      <span class="p">{</span>
+        <span class="nx">ret</span> <span class="o">=</span> <span class="nb">String</span><span class="p">.</span><span class="nx">fromCharCode</span><span class="p">(</span><span class="nx">tmp</span><span class="p">)</span> <span class="o">+</span> <span class="nx">ret</span><span class="p">;</span>
+        <span class="nx">tmp</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="nx">ret</span><span class="p">;</span>
+  <span class="p">};</span>
+  <span class="k">for</span><span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">s</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="nx">code</span> <span class="o">=</span> <span class="nx">s</span><span class="p">.</span><span class="nx">charCodeAt</span><span class="p">(</span><span class="nx">i</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">code</span> <span class="o">&gt;</span> <span class="mi">47</span> <span class="o">&amp;&amp;</span> <span class="nx">code</span> <span class="o">&lt;</span> <span class="mi">58</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">num_str</span> <span class="o">=</span> <span class="nx">num_str</span> <span class="o">+</span> <span class="nx">s</span><span class="p">.</span><span class="nx">charAt</span><span class="p">(</span><span class="nx">i</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="k">else</span><span class="p">{</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">num_str</span><span class="p">.</span><span class="nx">length</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span>
+      <span class="p">{</span>
+        <span class="nx">ret</span> <span class="o">=</span> <span class="nx">ret</span> <span class="o">+</span> <span class="nx">num_to_ascii_len_str</span><span class="p">(</span><span class="nx">base_num</span><span class="p">,</span> <span class="nx">fixed_len</span><span class="p">,</span>
+            <span class="nb">parseInt</span><span class="p">(</span><span class="nx">num_str</span><span class="p">));</span>
+        <span class="nx">num_str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">;</span>
+      <span class="p">}</span>
+      <span class="k">else</span>
+      <span class="p">{</span>
+        <span class="nx">ret</span> <span class="o">=</span> <span class="nx">ret</span> <span class="o">+</span> <span class="nx">s</span><span class="p">.</span><span class="nx">charAt</span><span class="p">(</span><span class="nx">i</span><span class="p">);</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">num_str</span><span class="p">.</span><span class="nx">length</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="nx">ret</span> <span class="o">=</span> <span class="nx">ret</span> <span class="o">+</span> <span class="nx">num_to_ascii_len_str</span><span class="p">(</span><span class="nx">base_num</span><span class="p">,</span> <span class="nx">fixed_len</span><span class="p">,</span>
+        <span class="nb">parseInt</span><span class="p">(</span><span class="nx">num_str</span><span class="p">));</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="nx">ret</span><span class="p">;</span>
+  <span class="p">},</span>
+  <span class="nx">type</span><span class="o">:</span> <span class="s2">&quot;text&quot;</span>
+  <span class="p">});</span>
+</pre></div>
+
+
+<p>Hope this helps someone out there, as this kind of thing is useful but
+not easily found. Oh and if anyone can figure out if its possible for
+formulate this as a numeric sort or knows a better way to do this in the
+context of the tablesorter plugin, please share!</p>
+<p>[coding horror as a pretty good article about natural sort and how
+  tough it can be]: http://www.codinghorror.com/blog/2007/12/sorting-for-humans-natural-sort-order.html</p></div>
+  <br><br>
+  <div>
+    <h2>Comments</h2>
+    <a href="http://twitter.com/share" class="twitter-share-button" data-count="horizontal" data-via="dandesousa">Tweet</a><script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
+    <div id="disqus_thread"></div>      </div>
+</div>	
+        </div>
+      </div>
+    </div>
+
+    <footer class="footer">
+    <div class="container">
+      <p> 
+                <a href="https://facebook.com/daniel.sousa"><i class="icon-color-facebook icon-2x icon-facebook-sign"></i></a>
+                        <a href="http://twitter.com/dandesousa"><i class="icon-color-twitter icon-2x icon-twitter-sign"></i></a>
+                        <a href="https://github.com/dandesousa"><i class="icon-color-github icon-2x icon-github-alt"></i></a>
+              </p>
+      <p><a href="http://github.com/minksoftware/pelican-showcase">Showcase</a> based on <a href="http://twitter.github.com/bootstrap/">Bootstrap, from Twitter</a>.</p>
+      <p><a href="http://fortawesome.github.com/Font-Awesome">Font Awesome by Dave Gandy</a></p>
+      <p>&copy;  Dan DeSousa  2013</p>
+    </div>
+    </footer>
+
+    <script type="text/javascript">
+/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+var disqus_shortname = 'example'; // required: replace example with your forum shortname
+
+/* * * DON'T EDIT BELOW THIS LINE * * */
+(function () {
+var s = document.createElement('script'); s.async = true;
+s.type = 'text/javascript';
+s.src = 'http://' + disqus_shortname + '.disqus.com/count.js';
+(document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+}());
+</script>  </body>
+</html>

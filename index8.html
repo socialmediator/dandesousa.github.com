@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Dan DeSousa's Blog</title>
+    <meta name="description" content="">
+    <meta name="author" content="Dan">
+
+    <link href="./theme/css/bootstrap.min.css" rel="stylesheet">
+    <link href="./theme/css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link href="./theme/css/font-awesome.min.css" rel="stylesheet">
+    <link href="./theme/css/showcase.css" rel="stylesheet">
+    <link href="./theme/css/showcase-icons.css" rel="stylesheet">
+    <link href="./theme/css/showcase-pygments.css" rel="stylesheet">
+    <script>var _gaq=[['_setAccount','UA-10113677-1'],['_trackPageview']];(function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];g.src='//www.google-analytics.com/ga.js';s.parentNode.insertBefore(g,s)}(document,'script'))</script>
+      </head>
+  <body>
+    
+    <div class="container site-container">
+      <div class="row">
+        <div class="span12 text-center">
+                    <a style="text-decoration: none" href="."><h1>Dan DeSousa's Blog</h1></a>
+                  </div>
+      </div>
+
+      <div class="row">
+        <div class="span12 centered-pills">
+          <ul class="nav nav-pills">
+            <li class="active"><a href="/">Blog</a></li>
+                        <li ><a href="/pages/about">About</a></li>
+                      </ul>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="span12">
+                    
+<div class="page-header"><h1>Blog</h1></div>
+<div class='article'>
+    <h3>Microsoft Solver Foundation For Quadratic Programming</h3>
+  <div class="row">
+    <div class="span4">
+      <div class="well well-small">
+        <ul class="unstyled">
+  <li><i class="icon-time"></i> <a class="more" href="./posts/2010/07/15/microsoft-solver-foundation-for-quadratic-programming/">Thursday, July 15 2010 09:55 PM</a> </li> 
+  <li><i class="icon-pencil"></i> <a class="url fn" href="./author/admin.html">Admin</a> </li>
+  <li>
+  <i class="icon-tags"></i> 
+    <a href="./tag/net.html">.net</a>
+    <a href="./tag/c.html">C#</a>
+    <a href="./tag/math.html">math</a>
+    </li>
+  <!-- <li><i class="icon-folder-open"></i> <a href="./category/programming.html">Programming</a></li> -->
+</ul>        <i class="icon-comments-alt"></i> <a href="./posts/2010/07/15/microsoft-solver-foundation-for-quadratic-programming/#disqus_thread"></a>      </div>
+    </div>
+    <div class="span8">
+      <div class="summary">
+        <p>The Microsoft Solver Foundation provides some excellent APIs for solving
+optimization problems in C# .NET. Getting to documentation about the
+Quadratic Programming facilities can be a bit tricky though. I've added
+below some sample code to help out with this.</p>
+<p>In the following example I'm solving an example of the lagrangian dual
+form used for classification in an SVM.</p>
+<div class="codehilite"><pre><span class="n">InteriorPointSolver</span> <span class="n">solver</span> <span class="p">=</span> <span class="k">new</span> <span class="n">InteriorPointSolver</span><span class="p">();</span>
+<span class="c1">// Langrangian Dual</span>
+<span class="kt">int</span> <span class="n">dual</span> <span class="p">=</span> <span class="m">0</span><span class="p">;</span>
+<span class="n">solver</span><span class="p">.</span><span class="n">AddRow</span><span class="p">(</span><span class="s">&quot;L&quot;</span><span class="p">,</span> <span class="k">out</span> <span class="n">dual</span><span class="p">);</span>
+<span class="c1">// Sum Constraint</span>
+<span class="kt">int</span> <span class="n">linearConstraint</span> <span class="p">=</span> <span class="m">0</span><span class="p">;</span>
+<span class="n">solver</span><span class="p">.</span><span class="n">AddRow</span><span class="p">(</span><span class="s">&quot;SumConstraint&quot;</span><span class="p">,</span> <span class="k">out</span> <span class="n">linearConstraint</span><span class="p">);</span>
+<span class="c1">// Add variables and Lagrangian linear terms</span>
+<span class="kt">int</span><span class="p">[]</span> <span class="n">vars</span> <span class="p">=</span> <span class="k">new</span> <span class="kt">int</span><span class="p">[</span><span class="n">n</span><span class="p">];</span>
+<span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="p">=</span> <span class="m">0</span><span class="p">;</span> <span class="n">i</span> <span class="p">&amp;</span><span class="n">lt</span><span class="p">;</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="p">++)</span>
+<span class="p">{</span>
+    <span class="c1">// Add the variable</span>
+    <span class="n">solver</span><span class="p">.</span><span class="n">AddVariable</span><span class="p">(</span><span class="s">&quot;a&quot;</span> <span class="p">+</span> <span class="n">i</span><span class="p">,</span> <span class="k">out</span> <span class="n">vars</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+    <span class="c1">// Factor in C upper bounds</span>
+    <span class="n">solver</span><span class="p">.</span><span class="n">SetBounds</span><span class="p">(</span><span class="n">vars</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="m">0</span><span class="p">,</span> <span class="n">C</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="c1">// Linear constraint must equal 0</span>
+<span class="n">solver</span><span class="p">.</span><span class="n">SetBounds</span><span class="p">(</span><span class="n">linearConstraint</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">);</span>
+<span class="c1">// Lagrangian Quadratic Terms</span>
+<span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="p">=</span> <span class="m">0</span><span class="p">;</span> <span class="n">i</span> <span class="p">&amp;</span><span class="n">lt</span><span class="p">;</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="p">++)</span> <span class="p">{</span> <span class="n">solver</span><span class="p">.</span><span class="n">SetCoefficient</span><span class="p">(</span><span class="n">linearConstraint</span><span class="p">,</span>
+        <span class="n">vars</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">trainingData</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">output</span><span class="p">());</span> <span class="n">solver</span><span class="p">.</span><span class="n">SetCoefficient</span><span class="p">(</span><span class="n">dual</span><span class="p">,</span> <span class="n">vars</span><span class="p">[</span><span class="n">i</span><span class="p">],</span>
+        <span class="m">1</span><span class="p">);</span> <span class="n">Parallel</span><span class="p">.</span><span class="n">For</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">o</span><span class="p">,</span> <span class="p">(</span><span class="kt">int</span> <span class="n">j</span><span class="p">)</span> <span class="p">=&amp;</span><span class="n">gt</span><span class="p">;</span>
+            <span class="p">{</span>
+            <span class="kt">double</span> <span class="n">coef</span> <span class="p">=</span> <span class="n">trainingData</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">output</span><span class="p">()</span> <span class="err">\</span><span class="p">*</span> <span class="n">trainingData</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">output</span><span class="p">()</span> <span class="err">\</span><span class="p">*</span>
+            <span class="n">kernel</span><span class="p">.</span><span class="n">evaluate</span><span class="p">(</span><span class="n">trainingData</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">point</span><span class="p">(),</span> <span class="n">trainingData</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">point</span><span class="p">());</span>
+            <span class="n">solver</span><span class="p">.</span><span class="n">SetCoefficient</span><span class="p">(</span><span class="n">dual</span><span class="p">,</span> <span class="p">-</span><span class="m">0.5</span> <span class="err">\</span><span class="p">*</span> <span class="n">coef</span><span class="p">,</span> <span class="n">vars</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">vars</span><span class="p">[</span><span class="n">j</span><span class="p">]);</span>
+            <span class="p">});</span>
+<span class="p">}</span>
+<span class="n">solver</span><span class="p">.</span><span class="n">AddGoal</span><span class="p">(</span><span class="n">dual</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="k">false</span><span class="p">);</span>
+<span class="n">InteriorPointSolverParams</span> <span class="n">param</span> <span class="p">=</span> <span class="k">new</span>
+<span class="n">InteriorPointSolverParams</span><span class="p">();[/</span><span class="n">csharp</span><span class="p">]</span>
+</pre></div>
+
+
+<p>Essentially all we are doing here is adding all the variables to our
+constraint optimization problem and asking the solver to minimize. The
+vars array simply expressing a list of identifier for variables in the
+constraint problem. You should fire up the Solver Foundation library and
+give it a shot yourself.</p>
+<p>Here are some resources that should make understanding this a bit easier
+as well. Its the official blog of one of the key developers on the
+project, specifically the links to tutorial on the quadratic programming
+solver.</p>
+<p><a href="http://blogs.msdn.com/b/natbr/archive/2009/09/24/using-the-solver-foundation-interior-point-solver.aspx">Nathan Brixius' QP Solver Tutorial</a></p>
+      </div>
+    </diV>
+  </div>
+</div>	
+<br>
+<hr/>
+</ul>
+<div class='article'>
+    <h3>Howto Fix: Roomba Clicking Noise</h3>
+  <div class="row">
+    <div class="span4">
+      <div class="well well-small">
+        <ul class="unstyled">
+  <li><i class="icon-time"></i> <a class="more" href="./posts/2010/05/28/howto-fix-roomba-clicking-noise/">Friday, May 28 2010 01:02 PM</a> </li> 
+  <li><i class="icon-pencil"></i> <a class="url fn" href="./author/admin.html">Admin</a> </li>
+  <li>
+  <i class="icon-tags"></i> 
+    <a href="./tag/cleaning.html">cleaning</a>
+    <a href="./tag/robots.html">robots</a>
+    <a href="./tag/roomba.html">roomba</a>
+    </li>
+  <!-- <li><i class="icon-folder-open"></i> <a href="./category/technology.html">Technology</a></li> -->
+</ul>        <i class="icon-comments-alt"></i> <a href="./posts/2010/05/28/howto-fix-roomba-clicking-noise/#disqus_thread"></a>      </div>
+    </div>
+    <div class="span8">
+      <div class="summary">
+        <p>A while back the vacuum in our apartment stopped working so I decided to
+do something I always wanted: Get a roomba. So far its been great and it
+keeps the carpet clean with minimum effort.</p>
+<p>However, we have encountered some problems where the Roomba occasionally
+makes a repeated clicking noise and then shuts off. It then repeats
+"Please Clean Roomba's Brushes". It got to the point where it was making
+the clicking noise EVERY time it was run and would shut down after about
+2 minutes. I tried reseting the battery, cleaning the
+brushes...everything. Finally I realized what was wrong. I wasn't
+cleaning the brushes properly. If you have a lot of dirt in your carpet
+or pets (we have cats), it's easy for fibers to get wrapped around some
+of the moving parts of the roomba brush.</p>
+<p>So to fix the problem simply remove the brushes from the Roomba as your
+normally would to clean them. However, check under the yellow cap at the
+end of both brushes (by that I mean the brush and the rubber roller).
+Don't worry, they are designed to come off, so you can pull on them.
+Afterwards you may see something like this:</p>
+<p><img alt="" src="http://farm5.static.flickr.com/4045/4647414023_625bc72f44_d.jpg" title="Roomba Brush Under-Cap" /></p>
+<p>Just pull out all the hair and fibers with a pencil or paper clip and
+replace the yellow cap. Afterwards your roomba will be good as new! Be
+aware though, that this is likely to happen again so make sure you
+periodically clean under the cap of both brush attachments.</p>
+<p><img alt="" src="http://farm5.static.flickr.com/4038/4647413667_40a50cb12a_d.jpg" title="Another Brush Angle" /></p>
+      </div>
+    </diV>
+  </div>
+</div>	
+<br>
+<hr/>
+</ul>
+<div class='article'>
+    <h3>Quick Fix: Iphone Microphone And Headset Buttons Don’T Work</h3>
+  <div class="row">
+    <div class="span4">
+      <div class="well well-small">
+        <ul class="unstyled">
+  <li><i class="icon-time"></i> <a class="more" href="./posts/2010/04/04/quick-fix-iphone-microphone-and-headset-buttons-dont-work/">Sunday, April 04 2010 02:38 PM</a> </li> 
+  <li><i class="icon-pencil"></i> <a class="url fn" href="./author/admin.html">Admin</a> </li>
+  <li>
+  <i class="icon-tags"></i> 
+    <a href="./tag/iphone.html">iphone</a>
+    </li>
+  <!-- <li><i class="icon-folder-open"></i> <a href="./category/technology.html">Technology</a></li> -->
+</ul>        <i class="icon-comments-alt"></i> <a href="./posts/2010/04/04/quick-fix-iphone-microphone-and-headset-buttons-dont-work/#disqus_thread"></a>      </div>
+    </div>
+    <div class="span8">
+      <div class="summary">
+        <p>I recently had a problem with my iPhone headphones where neither the
+built in mic nor the headphone answer (or start/stop) button would work.
+I attributed the failure to a recent tumble which also crack my front
+glass along the bezel.</p>
+<p>Now, thanks to a helpful blog post I was able to correct the problem.
+Seems like a rather large piece lint had made it's way into the
+headphone jack and was blocking the plug. I would have never figured it
+out if it wasn't for this helpful blog post. So I've linked it below and
+will leave the explanation to him:</p>
+<p>http://www.iphoneincanada.ca/tips-tricks/how-to-fix-your-iphone-headphones-mic-if-its-not-working/</p>
+      </div>
+    </diV>
+  </div>
+</div>	
+<br>
+<hr/>
+</ul>
+
+<div class="pagination">
+  <ul>
+            <li class="prev"><a href="./index7.html">&larr; Previous</a></li>
+            <li class=""><a href="./index.html">1</a></li>
+        <li class=""><a href="./index2.html">2</a></li>
+        <li class=""><a href="./index3.html">3</a></li>
+        <li class=""><a href="./index4.html">4</a></li>
+        <li class=""><a href="./index5.html">5</a></li>
+        <li class=""><a href="./index6.html">6</a></li>
+        <li class=""><a href="./index7.html">7</a></li>
+        <li class="active"><a href="./index8.html">8</a></li>
+        <li class=""><a href="./index9.html">9</a></li>
+        <li class=""><a href="./index10.html">10</a></li>
+        <li class=""><a href="./index11.html">11</a></li>
+        <li class=""><a href="./index12.html">12</a></li>
+        <li class=""><a href="./index13.html">13</a></li>
+            <li class="next"><a href="./index9.html">Next &rarr;</a></li>
+      </ul>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    <footer class="footer">
+    <div class="container">
+      <p> 
+                <a href="https://facebook.com/daniel.sousa"><i class="icon-color-facebook icon-2x icon-facebook-sign"></i></a>
+                        <a href="http://twitter.com/dandesousa"><i class="icon-color-twitter icon-2x icon-twitter-sign"></i></a>
+                        <a href="https://github.com/dandesousa"><i class="icon-color-github icon-2x icon-github-alt"></i></a>
+              </p>
+      <p><a href="http://github.com/minksoftware/pelican-showcase">Showcase</a> based on <a href="http://twitter.github.com/bootstrap/">Bootstrap, from Twitter</a>.</p>
+      <p><a href="http://fortawesome.github.com/Font-Awesome">Font Awesome by Dave Gandy</a></p>
+      <p>&copy;  Dan DeSousa  2013</p>
+    </div>
+    </footer>
+
+    <script type="text/javascript">
+/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+var disqus_shortname = 'example'; // required: replace example with your forum shortname
+
+/* * * DON'T EDIT BELOW THIS LINE * * */
+(function () {
+var s = document.createElement('script'); s.async = true;
+s.type = 'text/javascript';
+s.src = 'http://' + disqus_shortname + '.disqus.com/count.js';
+(document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+}());
+</script>  </body>
+</html>

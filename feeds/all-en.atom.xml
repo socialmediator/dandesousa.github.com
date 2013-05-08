@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Dan DeSousa's Blog</title><link href="http://dandesousa.com/" rel="alternate"></link><link href="http://dandesousa.com/feeds/all-en.atom.xml" rel="self"></link><id>http://dandesousa.com/</id><updated>2013-03-25T08:20:00-04:00</updated><entry><title>Migrating my site to github</title><link href="http://dandesousa.com/migrating-my-site-to-github.html" rel="alternate"></link><updated>2013-03-25T08:20:00-04:00</updated><author><name>Dan De Sousa</name></author><id>tag:dandesousa.com,2013-03-25:migrating-my-site-to-github.html</id><summary type="html">&lt;p&gt;I recently left my secure job to pursue my dream of working for myself. In honor of new beginnings, I felt it appropriate that I migrate my website to github. As I plan to be a much more active member of the open source community, I decided to delve right in and move from wordpress to a github pages hosted site with a theme of my own design. I'll go over how I did this, the tools I used, the code I developed, etc. Convienently, these and the subsequent blog posts will server as test data for my theme / tool development.&lt;/p&gt;
-&lt;h1&gt;Why move away from something like Wordpress?&lt;/h1&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Dan DeSousa's Blog</title><link href="http://dandesousa.com/" rel="alternate"></link><link href="http://dandesousa.com/feeds/all-en.atom.xml" rel="self"></link><id>http://dandesousa.com/</id><updated>2013-03-25T08:20:00-04:00</updated><entry><title>Migrating my site to github</title><link href="http://dandesousa.com/posts/2013/03/25/migrating-my-site-to-github/" rel="alternate"></link><updated>2013-03-25T08:20:00-04:00</updated><author><name>Dan De Sousa</name></author><id>tag:dandesousa.com,2013-03-25:posts/2013/03/25/migrating-my-site-to-github/</id><summary type="html">&lt;p&gt;I recently left my secure job to pursue my dream of working for myself. In honor of new beginnings, I felt it appropriate that I migrate my website to github. As I plan to be a much more active member of the open source community, I decided to delve right in and move from wordpress to a github pages hosted site with a theme of my own design. I'll go over how I did this, the tools I used, the code I developed, etc. Convienently, these and the subsequent blog posts will server as test data for my theme / tool development.&lt;/p&gt;
+&lt;h2&gt;Why move away from something like Wordpress?&lt;/h2&gt;
 &lt;p&gt;This is an interesting question because is presumes something, mainly that given an already setup Wordpress site is not currently meeting your needs. For me those needs were control, visibility, simplicity. &lt;/p&gt;
 &lt;p&gt;I wanted control over how my site was generated. I wanted to understand everything that was going on under the hood. Unfortunately this meant learning, nay 'groking' PHP. While I admire and respect PHP as the "father" of server side web languages, I would feel much more comfortable having something depending only on python. Additionally, wordpress has dependencies like MySQL, which is yet another dependency I would rather not wish to have, given the low level of user interaction on my site.&lt;/p&gt;
 &lt;p&gt;So I decided to go with github pages, which lets me serve my content statically. I opted to go with pelican over jekyll. Again, opting for something written in python which I could assist with contributing right away, and because it provided a bit more flexibility in terms of templating and generation over jekyll and liquid. &lt;/p&gt;
-&lt;h1&gt;What works and what doesn't&lt;/h1&gt;
+&lt;h2&gt;What works and what doesn't&lt;/h2&gt;
 &lt;p&gt;Right off the bat, I found that for just quickly getting setup, it pelican works great. It let's me choose the markup language I want, generate my page and commit to a separate branch in my github repo. However, I find myself wanting for page management and organization (something I plan to take a stab at in the near future). Additionally, while there is a fair amount of themes available for pelican, they aren't as numerous as jekyll or wordpress (of which there are literally thousands).&lt;/p&gt;
-&lt;h1&gt;Future work&lt;/h1&gt;
+&lt;h2&gt;Future work&lt;/h2&gt;
 &lt;p&gt;I plan on doing the following in the near future:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Create my own theme&lt;/li&gt;
 &lt;li&gt;Create a set of util scripts to assist with pelican post / page management&lt;/li&gt;
-&lt;/ul&gt;</summary><category term="github"></category><category term="wordpress"></category></entry><entry><title>Silence of the Rounds: Why Silencers Make Everyone Safer</title><link href="http://dandesousa.com/silence-of-the-rounds-why-silencers-make-everyone-safer.html" rel="alternate"></link><updated>2013-01-12T23:19:00-05:00</updated><author><name>Admin</name></author><id>tag:dandesousa.com,2013-01-12:silence-of-the-rounds-why-silencers-make-everyone-safer.html</id><summary type="html">&lt;p&gt;With all the debate surrounding firearms in the recently weeks, I
+&lt;/ul&gt;</summary><category term="github"></category><category term="wordpress"></category></entry><entry><title>Silence of the Rounds: Why Silencers Make Everyone Safer</title><link href="http://dandesousa.com/posts/2013/01/12/silence-of-the-rounds-why-silencers-make-everyone-safer/" rel="alternate"></link><updated>2013-01-12T23:19:00-05:00</updated><author><name>Admin</name></author><id>tag:dandesousa.com,2013-01-12:posts/2013/01/12/silence-of-the-rounds-why-silencers-make-everyone-safer/</id><summary type="html">&lt;p&gt;With all the debate surrounding firearms in the recently weeks, I
 happened about a discussion with my pro-gun friend about suppressors.
 Mostly commonly known as &lt;em&gt;silencers&lt;/em&gt;, or the long black cylinder on the
 end of James Bond's gun in the movies. He seemed asked me the most worn
@@ -211,7 +211,7 @@ silent, &lt;a href="http://www.todayifoundout.com/index.php/2010/11/gun-silence
 &lt;/p&gt;
 
 &lt;p&gt;[Alexander Zaitchik, who wrote a scathing article on the NRA's recent
-  call for supressor regulation relaxation.]: http://www.salon.com/2012/12/30/silencers_the_nras_latest_big_lie/&lt;/p&gt;</summary><category term="guns"></category><category term="Politics"></category></entry><entry><title>Linking Together iCloud, Photo Stream and Dropbox.</title><link href="http://dandesousa.com/linking-together-icloud-photo-stream-and-dropbox.html" rel="alternate"></link><updated>2012-12-09T20:07:00-05:00</updated><author><name>Admin</name></author><id>tag:dandesousa.com,2012-12-09:linking-together-icloud-photo-stream-and-dropbox.html</id><summary type="html">&lt;p&gt;Looking for a way to link together iCloud and Dropbox to manage your
+  call for supressor regulation relaxation.]: http://www.salon.com/2012/12/30/silencers_the_nras_latest_big_lie/&lt;/p&gt;</summary><category term="guns"></category><category term="Politics"></category></entry><entry><title>Linking Together iCloud, Photo Stream and Dropbox.</title><link href="http://dandesousa.com/posts/2012/12/09/linking-together-icloud-photo-stream-and-dropbox/" rel="alternate"></link><updated>2012-12-09T20:07:00-05:00</updated><author><name>Admin</name></author><id>tag:dandesousa.com,2012-12-09:posts/2012/12/09/linking-together-icloud-photo-stream-and-dropbox/</id><summary type="html">&lt;p&gt;Looking for a way to link together iCloud and Dropbox to manage your
 photos? Look no further; the following is a guide to getting your iOS
 and Photo Stream photos automatically into Dropbox.&lt;/p&gt;
 &lt;p&gt;&lt;img alt="" src="/static/wp-content/uploads/2012/12/dropbx-300x300.png" title="dropbx" /&gt; &lt;img alt="" src="/static/wp-content/uploads/2012/12/icloud-300x297.jpg" title="icloud" /&gt;&lt;/p&gt;
@@ -294,7 +294,7 @@ recently expanded. Furthermore, with the decrease in price of storage,
 we should see costs come down and capacity go up in the coming years.&lt;/p&gt;
 &lt;p&gt;Please feel free to comment or suggest alternate setups. So far this has
 been working quite well and allowing me to leverage the best of both of
-these great cloud services.&lt;/p&gt;</summary><category term="dropbox"></category><category term="icloud"></category><category term="photo stream"></category></entry><entry><title>Changing PlexSync Temporary Directory</title><link href="http://dandesousa.com/changing-plexsync-temporary-directory.html" rel="alternate"></link><updated>2012-11-20T20:10:00-05:00</updated><author><name>Admin</name></author><id>tag:dandesousa.com,2012-11-20:changing-plexsync-temporary-directory.html</id><summary type="html">&lt;p&gt;Plex just announced a great new syncing feature for iOS devices, but I
+these great cloud services.&lt;/p&gt;</summary><category term="dropbox"></category><category term="icloud"></category><category term="photo stream"></category></entry><entry><title>Changing PlexSync Temporary Directory</title><link href="http://dandesousa.com/posts/2012/11/20/changing-plexsync-temporary-directory/" rel="alternate"></link><updated>2012-11-20T20:10:00-05:00</updated><author><name>Admin</name></author><id>tag:dandesousa.com,2012-11-20:posts/2012/11/20/changing-plexsync-temporary-directory/</id><summary type="html">&lt;p&gt;Plex just announced a great new syncing feature for iOS devices, but I
 noticed that when I started syncing, my SSD would quickly fill up. It
 turns out that as of the current release of plex server v0.9.7.3, you
 cannot directly change the directory. However, you can change the entire
@@ -311,7 +311,7 @@ Media Server". Also important, remember that the directory
 Cache/Transcode/Sync &lt;strong&gt;MUST&lt;/strong&gt; exist. I tried to delete the cache to save
 myself some transfer time and when I was missing that
 Cache/Transcode/Sync directory, PlexSync would not work at all. Once I
-restored the directory, all was well.&lt;/p&gt;</summary><category term="plex"></category></entry><entry><title>HowTo: Setup a network with two internet connections</title><link href="http://dandesousa.com/howto-setup-a-network-with-two-internet-connections.html" rel="alternate"></link><updated>2012-05-26T08:41:00-04:00</updated><author><name>Admin</name></author><id>tag:dandesousa.com,2012-05-26:howto-setup-a-network-with-two-internet-connections.html</id><summary type="html">&lt;p&gt;If you are living in an area where internet connection options are
+restored the directory, all was well.&lt;/p&gt;</summary><category term="plex"></category></entry><entry><title>HowTo: Setup a network with two internet connections</title><link href="http://dandesousa.com/posts/2012/05/26/howto-setup-a-network-with-two-internet-connections/" rel="alternate"></link><updated>2012-05-26T08:41:00-04:00</updated><author><name>Admin</name></author><id>tag:dandesousa.com,2012-05-26:posts/2012/05/26/howto-setup-a-network-with-two-internet-connections/</id><summary type="html">&lt;p&gt;If you are living in an area where internet connection options are
 limited, you may find yourself in a connundrum. Perhaps you want to be
 able to use high bandwidth services (netflix, itunes, bittorrent,
 gaming) but a single connection pipe is not large enough to accomodate
@@ -420,7 +420,7 @@ The multiple gateway setup works for as many connections as you want.
 Just continue adding addresses outside your DHCP range for your gateways
 and you should be fine.&lt;/p&gt;
 &lt;p&gt;Hopefully this will be useful to people out there trying to work out how
-to use multiple connections in their home network. I know it was for me.&lt;/p&gt;</summary><category term="networking"></category></entry><entry><title>HowTo Fix: MacBook Pro and Dell 2711 DisplayPort Issues</title><link href="http://dandesousa.com/howto-fix-macbook-pro-and-dell-2711-displayport-issues.html" rel="alternate"></link><updated>2012-03-07T21:41:00-05:00</updated><author><name>Admin</name></author><id>tag:dandesousa.com,2012-03-07:howto-fix-macbook-pro-and-dell-2711-displayport-issues.html</id><summary type="html">&lt;p&gt;I chose to get the Dell U2711 mostly due to PC compatibility and price
+to use multiple connections in their home network. I know it was for me.&lt;/p&gt;</summary><category term="networking"></category></entry><entry><title>HowTo Fix: MacBook Pro and Dell 2711 DisplayPort Issues</title><link href="http://dandesousa.com/posts/2012/03/07/howto-fix-macbook-pro-and-dell-2711-displayport-issues/" rel="alternate"></link><updated>2012-03-07T21:41:00-05:00</updated><author><name>Admin</name></author><id>tag:dandesousa.com,2012-03-07:posts/2012/03/07/howto-fix-macbook-pro-and-dell-2711-displayport-issues/</id><summary type="html">&lt;p&gt;I chose to get the Dell U2711 mostly due to PC compatibility and price
 advantages over the Cinema Display. However, having a MacBook Pro I
 wanted to also connect it to  my nice display. I ordered a
 Mini-DisplayPort to DisplayPort cable and all worked fine until one day
@@ -434,7 +434,7 @@ in the most simple way:&lt;/p&gt;
 about 15-30 seconds. I plugged the monitor back in and switch to
 DisplayPort and it worked perfected!&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;Obviously something is wrong with Dell's monitor in this instance, but
-this simple fix should help everyone having headaches with this like me.&lt;/p&gt;</summary><category term="apple"></category><category term="macbook pro"></category><category term="dell"></category><category term="displayport"></category><category term="u2711"></category></entry><entry><title>HowTo Fix: Slow SSD Boot Times in Mac OS X</title><link href="http://dandesousa.com/howto-fix-slow-ssd-boot-times-in-mac-os-x.html" rel="alternate"></link><updated>2012-03-07T21:31:00-05:00</updated><author><name>Admin</name></author><id>tag:dandesousa.com,2012-03-07:howto-fix-slow-ssd-boot-times-in-mac-os-x.html</id><summary type="html">&lt;p&gt;I recently bought a ssd for my macbook pro and noticed after installing
+this simple fix should help everyone having headaches with this like me.&lt;/p&gt;</summary><category term="apple"></category><category term="macbook pro"></category><category term="dell"></category><category term="displayport"></category><category term="u2711"></category></entry><entry><title>HowTo Fix: Slow SSD Boot Times in Mac OS X</title><link href="http://dandesousa.com/posts/2012/03/07/howto-fix-slow-ssd-boot-times-in-mac-os-x/" rel="alternate"></link><updated>2012-03-07T21:31:00-05:00</updated><author><name>Admin</name></author><id>tag:dandesousa.com,2012-03-07:posts/2012/03/07/howto-fix-slow-ssd-boot-times-in-mac-os-x/</id><summary type="html">&lt;p&gt;I recently bought a ssd for my macbook pro and noticed after installing
 and reformatting, the boot times were slow ... about as slow as my hdd
 or even slower. If you have an SSD, you can except boot times around 15
 seconds or so. If you are encountering boot times of 35+ seconds, you
@@ -452,7 +452,7 @@ following these steps:&lt;/p&gt;
 The final step of reseting the SMC finally fixed this for me, but I had
 tried all the steps before hand, so I cannot be sure which will work for
 you. If you have any comments, please post for the benefit of all
-readers.&lt;/p&gt;</summary><category term="ssd"></category><category term="apple"></category><category term="macbook"></category><category term="boot"></category></entry><entry><title>[Boost.Python] Calling back into python from native C++ threads</title><link href="http://dandesousa.com/boostpython-calling-back-into-python-from-native-c-threads.html" rel="alternate"></link><updated>2011-12-11T21:46:00-05:00</updated><author><name>Admin</name></author><id>tag:dandesousa.com,2011-12-11:boostpython-calling-back-into-python-from-native-c-threads.html</id><summary type="html">&lt;p&gt;So I came across a particularly frustrating problem dealing with a boost
+readers.&lt;/p&gt;</summary><category term="ssd"></category><category term="apple"></category><category term="macbook"></category><category term="boot"></category></entry><entry><title>[Boost.Python] Calling back into python from native C++ threads</title><link href="http://dandesousa.com/posts/2011/12/11/boostpython-calling-back-into-python-from-native-c-threads/" rel="alternate"></link><updated>2011-12-11T21:46:00-05:00</updated><author><name>Admin</name></author><id>tag:dandesousa.com,2011-12-11:posts/2011/12/11/boostpython-calling-back-into-python-from-native-c-threads/</id><summary type="html">&lt;p&gt;So I came across a particularly frustrating problem dealing with a boost
 python wrapper around a library which is calling python functions from
 native c++ threads (boost threads in this case). The problem was that
 some calls to release the global interpreter lock would cause python to
@@ -529,7 +529,7 @@ information was extremely hard to find, so hopefully this helps someone
 out there from losing hours of time. &lt;a href="http://stackoverflow.com/questions/8451334/why-is-pygilstate-release-throwing-fatal-python-errors/8469304#8469304"&gt;Also, here is a link to the stack
 overflow question I eventually posted and quickly subsequently
 answered&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;Enjoy.&lt;/p&gt;</summary><category term="python"></category><category term="c++"></category><category term="programming"></category><category term="boost"></category></entry><entry><title>The Ultimate Home Media Center Solution [Spoiler: Plex!]</title><link href="http://dandesousa.com/the-ultimate-home-media-center-solution-spoiler-plex.html" rel="alternate"></link><updated>2011-11-05T23:08:00-04:00</updated><author><name>Admin</name></author><id>tag:dandesousa.com,2011-11-05:the-ultimate-home-media-center-solution-spoiler-plex.html</id><summary type="html">&lt;p&gt;In this article, I cover my opinion on currently the best media center
+&lt;p&gt;Enjoy.&lt;/p&gt;</summary><category term="python"></category><category term="c++"></category><category term="programming"></category><category term="boost"></category></entry><entry><title>The Ultimate Home Media Center Solution [Spoiler: Plex!]</title><link href="http://dandesousa.com/posts/2011/11/05/the-ultimate-home-media-center-solution-spoiler-plex/" rel="alternate"></link><updated>2011-11-05T23:08:00-04:00</updated><author><name>Admin</name></author><id>tag:dandesousa.com,2011-11-05:posts/2011/11/05/the-ultimate-home-media-center-solution-spoiler-plex/</id><summary type="html">&lt;p&gt;In this article, I cover my opinion on currently the best media center
 option for managing local content libraries, and my thoughts on the
 state of digital video distribution.&lt;/p&gt;
 &lt;p&gt;I do not condone any mention of piracy in the article and any references
@@ -746,7 +746,7 @@ common subscription model. There is a lot of money to be made here.&lt;/p&gt;
 
 &lt;p&gt;I'd like to hear what anyone else thinks. What sort of setup do you guys
 have, what do you want to see in a streaming service that doesn't exist?&lt;/p&gt;
-&lt;/p&gt;</summary><category term="plex"></category><category term="home media center"></category></entry><entry><title>Implementing jQuery tablesorter natural sort plugin as text sort</title><link href="http://dandesousa.com/implementing-jquery-tablesorter-natural-sort-plugin-as-text-sort.html" rel="alternate"></link><updated>2011-11-04T22:55:00-04:00</updated><author><name>Admin</name></author><id>tag:dandesousa.com,2011-11-04:implementing-jquery-tablesorter-natural-sort-plugin-as-text-sort.html</id><summary type="html">&lt;p&gt;I have been doing quite a bit of web programming lately and was recently
+&lt;/p&gt;</summary><category term="plex"></category><category term="home media center"></category></entry><entry><title>Implementing jQuery tablesorter natural sort plugin as text sort</title><link href="http://dandesousa.com/posts/2011/11/04/implementing-jquery-tablesorter-natural-sort-plugin-as-text-sort/" rel="alternate"></link><updated>2011-11-04T22:55:00-04:00</updated><author><name>Admin</name></author><id>tag:dandesousa.com,2011-11-04:posts/2011/11/04/implementing-jquery-tablesorter-natural-sort-plugin-as-text-sort/</id><summary type="html">&lt;p&gt;I have been doing quite a bit of web programming lately and was recently
 trying to figure out how to get the jquery plugin '&lt;a href="http://tablesorter.com/docs/"&gt;tablesorter&lt;/a&gt;' to
 perform a natural sort.&lt;/p&gt;
 &lt;p&gt;For those not aware of what natural sort is, it is the way in which
@@ -869,12 +869,12 @@ not easily found. Oh and if anyone can figure out if its possible for
 formulate this as a numeric sort or knows a better way to do this in the
 context of the tablesorter plugin, please share!&lt;/p&gt;
 &lt;p&gt;[coding horror as a pretty good article about natural sort and how
-  tough it can be]: http://www.codinghorror.com/blog/2007/12/sorting-for-humans-natural-sort-order.html&lt;/p&gt;</summary></entry><entry><title>Realtek RTL8111 Windows Server 2008</title><link href="http://dandesousa.com/realtek-rtl8111-windows-server-2008.html" rel="alternate"></link><updated>2011-06-03T21:45:00-04:00</updated><author><name>Admin</name></author><id>tag:dandesousa.com,2011-06-03:realtek-rtl8111-windows-server-2008.html</id><summary type="html">&lt;p&gt;Encountered an issue when loading Windows Server 2008 R2 onto my new
+  tough it can be]: http://www.codinghorror.com/blog/2007/12/sorting-for-humans-natural-sort-order.html&lt;/p&gt;</summary></entry><entry><title>Realtek RTL8111 Windows Server 2008</title><link href="http://dandesousa.com/posts/2011/06/03/realtek-rtl8111-windows-server-2008/" rel="alternate"></link><updated>2011-06-03T21:45:00-04:00</updated><author><name>Admin</name></author><id>tag:dandesousa.com,2011-06-03:posts/2011/06/03/realtek-rtl8111-windows-server-2008/</id><summary type="html">&lt;p&gt;Encountered an issue when loading Windows Server 2008 R2 onto my new
 media server. Seems it couldn't find my Realtek Gigabit onboard NIC on
 my Biostar A880G+. Anyway after much searching I failure installing the
 official realtek driver. I found the following driver which worked and
 allowed me to update all my other drivers:&lt;/p&gt;
-&lt;p&gt;&lt;a href="http://drivers.softpedia.com/progDownload/Realtek-RTL8110SC-L-Driver-6218-for-WinServer-2008-Download-77885.html"&gt;http://drivers.softpedia.com/progDownload/Realtek-RTL8110SC-L-Driver-6218-for-WinServer-2008-Download-77885.html&lt;/a&gt;&lt;/p&gt;</summary></entry><entry><title>Getting Highpoint RocketRaid 2640x4 Controller To Work In Linux</title><link href="http://dandesousa.com/getting-highpoint-rocketraid-2640x4-controller-to-work-in-linux.html" rel="alternate"></link><updated>2011-06-03T17:29:00-04:00</updated><author><name>Admin</name></author><id>tag:dandesousa.com,2011-06-03:getting-highpoint-rocketraid-2640x4-controller-to-work-in-linux.html</id><summary type="html">&lt;p&gt;So, I finally got around to re-organizing my home server situation, and
+&lt;p&gt;&lt;a href="http://drivers.softpedia.com/progDownload/Realtek-RTL8110SC-L-Driver-6218-for-WinServer-2008-Download-77885.html"&gt;http://drivers.softpedia.com/progDownload/Realtek-RTL8110SC-L-Driver-6218-for-WinServer-2008-Download-77885.html&lt;/a&gt;&lt;/p&gt;</summary></entry><entry><title>Getting Highpoint RocketRaid 2640x4 Controller To Work In Linux</title><link href="http://dandesousa.com/posts/2011/06/03/getting-highpoint-rocketraid-2640x4-controller-to-work-in-linux/" rel="alternate"></link><updated>2011-06-03T17:29:00-04:00</updated><author><name>Admin</name></author><id>tag:dandesousa.com,2011-06-03:posts/2011/06/03/getting-highpoint-rocketraid-2640x4-controller-to-work-in-linux/</id><summary type="html">&lt;p&gt;So, I finally got around to re-organizing my home server situation, and
 was given a RocketRaid 2640x4 SAS Raid Controller from a friend. My
 intention was to simply use it for the extra SATA slots and not bother
 with its own on-board RAID. However, when I tried to get it to work, I
@@ -907,7 +907,7 @@ Now just cd in the lowest level of the source directory and type "sudo
 make install". You'll see it build and then you are done!&lt;/p&gt;
 &lt;p&gt;The drivers will then be installed. If you reboot and check ls /dev you
 should see a drive labeled sd\&amp;lt;*&gt; for every drive connect to the card
-or your motherboard. Enjoy!&lt;/p&gt;</summary></entry><entry><title>HTPC Stutter Over HDMI on Samsung HDTV</title><link href="http://dandesousa.com/htpc-stutter-over-hdmi-on-samsung-hdtv.html" rel="alternate"></link><updated>2011-02-18T23:25:00-05:00</updated><author><name>Admin</name></author><id>tag:dandesousa.com,2011-02-18:htpc-stutter-over-hdmi-on-samsung-hdtv.html</id><summary type="html">&lt;p&gt;This will be a quick one. I recently built an HTPC to run XBMC and play
+or your motherboard. Enjoy!&lt;/p&gt;</summary></entry><entry><title>HTPC Stutter Over HDMI on Samsung HDTV</title><link href="http://dandesousa.com/posts/2011/02/18/htpc-stutter-over-hdmi-on-samsung-hdtv/" rel="alternate"></link><updated>2011-02-18T23:25:00-05:00</updated><author><name>Admin</name></author><id>tag:dandesousa.com,2011-02-18:posts/2011/02/18/htpc-stutter-over-hdmi-on-samsung-hdtv/</id><summary type="html">&lt;p&gt;This will be a quick one. I recently built an HTPC to run XBMC and play
 videos off my file share. I noticed that almost all videos had
 an occasional stutter that would occur every few seconds and produce a
 very slight stutter in the image. This happened for all file types and
@@ -922,7 +922,7 @@ features. It seems like this tells the Samsung set to stop any extra
 processing that causes and occasional stutter.&lt;/p&gt;
 &lt;p&gt;Hope this helps someone out there!&lt;/p&gt;
 &lt;p&gt;UPDATE: I found that turning off "de-interlacing" in the ATI catalyst
-settings eliminated this effect. Try that in addition to the above steps&lt;/p&gt;</summary><category term="hdmi"></category><category term="samsung"></category><category term="tv"></category><category term="xbmc"></category></entry><entry><title>How To Fix iOS Memory Leaks Coming From UIKit</title><link href="http://dandesousa.com/how-to-fix-ios-memory-leaks-coming-from-uikit.html" rel="alternate"></link><updated>2011-02-11T21:10:00-05:00</updated><author><name>Admin</name></author><id>tag:dandesousa.com,2011-02-11:how-to-fix-ios-memory-leaks-coming-from-uikit.html</id><summary type="html">&lt;p&gt;It looks as though I'm going to be posting a number of troubleshooting
+settings eliminated this effect. Try that in addition to the above steps&lt;/p&gt;</summary><category term="hdmi"></category><category term="samsung"></category><category term="tv"></category><category term="xbmc"></category></entry><entry><title>How To Fix iOS Memory Leaks Coming From UIKit</title><link href="http://dandesousa.com/posts/2011/02/11/how-to-fix-ios-memory-leaks-coming-from-uikit/" rel="alternate"></link><updated>2011-02-11T21:10:00-05:00</updated><author><name>Admin</name></author><id>tag:dandesousa.com,2011-02-11:posts/2011/02/11/how-to-fix-ios-memory-leaks-coming-from-uikit/</id><summary type="html">&lt;p&gt;It looks as though I'm going to be posting a number of troubleshooting
 iOS SDK and objective-c guides in the coming weeks. The first deals with
 memory leaks coming from UIKit and QuartzCore.&lt;/p&gt;
 &lt;p&gt;If you are using the leaks tool included with Instruments and XCode, you
@@ -947,7 +947,7 @@ This may seem totally counterintuitive since retain properties should
 properly free all held memory when nil is set, but actually the second
 step is required when dealing with UI components, otherwise it will
 result it leaks that appear to originate from UIKit or other Apple
-libraries. Be very careful that all IBOutlets are set to nil.&lt;/p&gt;</summary></entry><entry><title>HowTo Fix: iOS 4.3 Beta Installed on iPad but Missing Gestures</title><link href="http://dandesousa.com/howto-fix-ios-43-beta-installed-on-ipad-but-missing-gestures.html" rel="alternate"></link><updated>2011-01-15T21:42:00-05:00</updated><author><name>Admin</name></author><id>tag:dandesousa.com,2011-01-15:howto-fix-ios-43-beta-installed-on-ipad-but-missing-gestures.html</id><summary type="html">&lt;p&gt;I recently installed the iPad OS 4.3 beta and found that the gestures
+libraries. Be very careful that all IBOutlets are set to nil.&lt;/p&gt;</summary></entry><entry><title>HowTo Fix: iOS 4.3 Beta Installed on iPad but Missing Gestures</title><link href="http://dandesousa.com/posts/2011/01/15/howto-fix-ios-43-beta-installed-on-ipad-but-missing-gestures/" rel="alternate"></link><updated>2011-01-15T21:42:00-05:00</updated><author><name>Admin</name></author><id>tag:dandesousa.com,2011-01-15:posts/2011/01/15/howto-fix-ios-43-beta-installed-on-ipad-but-missing-gestures/</id><summary type="html">&lt;p&gt;I recently installed the iPad OS 4.3 beta and found that the gestures
 were missing. A bit of tinkering around and I realized that actually I
 had not yet turned on my iPad for development use (something required to
 access these new features). If you are experiencing the same problems,
@@ -959,7 +959,7 @@ following these steps to enabled gestures on your iPad:&lt;/p&gt;
 &lt;li&gt;Kill and restart the settings app on your iPad&lt;/li&gt;
 &lt;li&gt;Confirm you now have gestures.&lt;/li&gt;
 &lt;/ol&gt;
-&lt;/p&gt;</summary></entry><entry><title>iOS EXC_BAD_ACCESS error when navigating to/from nib</title><link href="http://dandesousa.com/ios-exc_bad_access-error-when-navigating-tofrom-nib.html" rel="alternate"></link><updated>2010-11-27T13:01:00-05:00</updated><author><name>Admin</name></author><id>tag:dandesousa.com,2010-11-27:ios-exc_bad_access-error-when-navigating-tofrom-nib.html</id><summary type="html">&lt;p&gt;As I have begun the trek towards mastering objective-c, I've come to
+&lt;/p&gt;</summary></entry><entry><title>iOS EXC_BAD_ACCESS error when navigating to/from nib</title><link href="http://dandesousa.com/posts/2010/11/27/ios-exc_bad_access-error-when-navigating-tofrom-nib/" rel="alternate"></link><updated>2010-11-27T13:01:00-05:00</updated><author><name>Admin</name></author><id>tag:dandesousa.com,2010-11-27:posts/2010/11/27/ios-exc_bad_access-error-when-navigating-tofrom-nib/</id><summary type="html">&lt;p&gt;As I have begun the trek towards mastering objective-c, I've come to
 appreciate the memory management nuances. I came across a problem where
 when navigating backwards in a table view, the application would just
 crash with an EXC_BAD_ACCESS error. If you see this it is most likely
@@ -985,7 +985,7 @@ the controller you are in:&lt;/p&gt;
 
 
 &lt;p&gt;Hope this helps someone out there. &lt;a href="http://developer.apple.com/library/mac/#documentation/Cocoa/Conceptual/MemoryMgmt/Articles/mmNibObjects.html"&gt;Here are the details of how to
-manage memory in NIBS for Mac OS or iOS.&lt;/a&gt;&lt;/p&gt;</summary><category term="iphone"></category><category term="memory management"></category><category term="objective-c"></category><category term="UITableView"></category></entry><entry><title>Copying Test and Data Files to Build Directory in C# .NET Unit Tests</title><link href="http://dandesousa.com/copying-test-and-data-files-to-build-directory-in-c-net-unit-tests.html" rel="alternate"></link><updated>2010-10-02T08:20:00-04:00</updated><author><name>Admin</name></author><id>tag:dandesousa.com,2010-10-02:copying-test-and-data-files-to-build-directory-in-c-net-unit-tests.html</id><summary type="html">&lt;p&gt;Unit testing with VS2010's built in unit testing facilities is
+manage memory in NIBS for Mac OS or iOS.&lt;/a&gt;&lt;/p&gt;</summary><category term="iphone"></category><category term="memory management"></category><category term="objective-c"></category><category term="UITableView"></category></entry><entry><title>Copying Test and Data Files to Build Directory in C# .NET Unit Tests</title><link href="http://dandesousa.com/posts/2010/10/02/copying-test-and-data-files-to-build-directory-in-c-net-unit-tests/" rel="alternate"></link><updated>2010-10-02T08:20:00-04:00</updated><author><name>Admin</name></author><id>tag:dandesousa.com,2010-10-02:posts/2010/10/02/copying-test-and-data-files-to-build-directory-in-c-net-unit-tests/</id><summary type="html">&lt;p&gt;Unit testing with VS2010's built in unit testing facilities is
 especially convenient. However it is no always clear how to specific
 that an entire directory should be copied into the build / test
 directory as data. Aside from setting up pre- and post- build rules,
@@ -1015,7 +1015,7 @@ directories contents to also be copied over.&lt;/p&gt;
 &lt;/p&gt;
 
 &lt;p&gt;&lt;a href="http://dans-coding-examples.googlecode.com/files/UnitTestingProject.zip"&gt;Download Code.&lt;/a&gt;&lt;/p&gt;
-&lt;/p&gt;</summary><category term=".net"></category><category term="unit testing"></category></entry><entry><title>Windows Phone 7: Making an HTTP Request</title><link href="http://dandesousa.com/windows-phone-7-making-an-http-request.html" rel="alternate"></link><updated>2010-08-30T22:20:00-04:00</updated><author><name>Admin</name></author><id>tag:dandesousa.com,2010-08-30:windows-phone-7-making-an-http-request.html</id><summary type="html">&lt;p&gt;Silverlight and the Windows Phone 7 SDK include the standard System.Net
+&lt;/p&gt;</summary><category term=".net"></category><category term="unit testing"></category></entry><entry><title>Windows Phone 7: Making an HTTP Request</title><link href="http://dandesousa.com/posts/2010/08/30/windows-phone-7-making-an-http-request/" rel="alternate"></link><updated>2010-08-30T22:20:00-04:00</updated><author><name>Admin</name></author><id>tag:dandesousa.com,2010-08-30:posts/2010/08/30/windows-phone-7-making-an-http-request/</id><summary type="html">&lt;p&gt;Silverlight and the Windows Phone 7 SDK include the standard System.Net
 packages for making various requests over ftp and http. Making a
 standard http request in C# involves setting up a number of delegates
 and asynchronous callbacks for getting http responses and can be a tad
@@ -1048,7 +1048,7 @@ take when it is completed as c_DownloadStringCompleted event handler.
 You may want to do something different than place it in an xml reader
 (in this case the string we are getting back corresponds to a non-xhtml
  xml file. Enjoy.&lt;/p&gt;
-&lt;/p&gt;</summary><category term=".net"></category><category term="C#"></category><category term="Windows Phone 7"></category><category term="WP7"></category></entry><entry><title>Windows Phone 7: ListBox Item Horizontal Width Stretch</title><link href="http://dandesousa.com/windows-phone-7-listbox-item-horizontal-width-stretch.html" rel="alternate"></link><updated>2010-08-29T17:15:00-04:00</updated><author><name>Admin</name></author><id>tag:dandesousa.com,2010-08-29:windows-phone-7-listbox-item-horizontal-width-stretch.html</id><summary type="html">&lt;p&gt;I have spent most of the day today working on a Windows Phone 7 app I
+&lt;/p&gt;</summary><category term=".net"></category><category term="C#"></category><category term="Windows Phone 7"></category><category term="WP7"></category></entry><entry><title>Windows Phone 7: ListBox Item Horizontal Width Stretch</title><link href="http://dandesousa.com/posts/2010/08/29/windows-phone-7-listbox-item-horizontal-width-stretch/" rel="alternate"></link><updated>2010-08-29T17:15:00-04:00</updated><author><name>Admin</name></author><id>tag:dandesousa.com,2010-08-29:posts/2010/08/29/windows-phone-7-listbox-item-horizontal-width-stretch/</id><summary type="html">&lt;p&gt;I have spent most of the day today working on a Windows Phone 7 app I
 hope to have ready for launch this fall / winter. I figured that
 adoption of the platform and generation of apps is good for all of us as
 it generates hype for the platform and facilitates development. So I
@@ -1124,7 +1124,7 @@ the ListBox in red.&lt;/p&gt;
 &lt;h2&gt;Conclusions&lt;/h2&gt;
 &lt;p&gt;Although unintuitive this should get the job done. Hopefully Microsoft
 can make some of these details more straightforward before the final
-release or in updated versions of .NET.&lt;/p&gt;</summary><category term=".net"></category><category term="C#"></category><category term="WP7"></category></entry><entry><title>HowTo Fix: C# .NET BackgroundWorker.IsBusy Always True</title><link href="http://dandesousa.com/howto-fix-c-net-backgroundworkerisbusy-always-true.html" rel="alternate"></link><updated>2010-08-20T23:52:00-04:00</updated><author><name>Admin</name></author><id>tag:dandesousa.com,2010-08-20:howto-fix-c-net-backgroundworkerisbusy-always-true.html</id><summary type="html">&lt;p&gt;BackgroundWorker provides a great simplified mechanism for seperating
+release or in updated versions of .NET.&lt;/p&gt;</summary><category term=".net"></category><category term="C#"></category><category term="WP7"></category></entry><entry><title>HowTo Fix: C# .NET BackgroundWorker.IsBusy Always True</title><link href="http://dandesousa.com/posts/2010/08/20/howto-fix-c-net-backgroundworkerisbusy-always-true/" rel="alternate"></link><updated>2010-08-20T23:52:00-04:00</updated><author><name>Admin</name></author><id>tag:dandesousa.com,2010-08-20:posts/2010/08/20/howto-fix-c-net-backgroundworkerisbusy-always-true/</id><summary type="html">&lt;p&gt;BackgroundWorker provides a great simplified mechanism for seperating
 CPU intensive work from the UI thread in C# .NET. Indeed&lt;a href="http://msdn.microsoft.com/en-us/library/system.componentmodel.backgroundworker.aspx"&gt;the MSDN
 documentation does an excellent job detailing its usage&lt;/a&gt;. However, you
 may come across a bug wherein you need to run the backgroundworker while
@@ -1164,7 +1164,7 @@ force the UI to load a frame.&lt;/p&gt;
 
 
 &lt;p&gt;For more information on this method check out &lt;a href="http://msdn.microsoft.com/en-us/library/system.windows.forms.application.doevents.aspx"&gt;the MSDN documentation on
-Application.DoEvents()&lt;/a&gt;.&lt;/p&gt;</summary><category term=".net"></category><category term="C#"></category><category term="Threading"></category></entry><entry><title>Asynchronous Data Binding in .NET (C#)</title><link href="http://dandesousa.com/asynchronous-data-binding-in-net-c.html" rel="alternate"></link><updated>2010-08-07T16:31:00-04:00</updated><author><name>Admin</name></author><id>tag:dandesousa.com,2010-08-07:asynchronous-data-binding-in-net-c.html</id><summary type="html">&lt;p&gt;Asynchronous operations are prevalent in all manner of modern systems,
+Application.DoEvents()&lt;/a&gt;.&lt;/p&gt;</summary><category term=".net"></category><category term="C#"></category><category term="Threading"></category></entry><entry><title>Asynchronous Data Binding in .NET (C#)</title><link href="http://dandesousa.com/posts/2010/08/07/asynchronous-data-binding-in-net-c/" rel="alternate"></link><updated>2010-08-07T16:31:00-04:00</updated><author><name>Admin</name></author><id>tag:dandesousa.com,2010-08-07:posts/2010/08/07/asynchronous-data-binding-in-net-c/</id><summary type="html">&lt;p&gt;Asynchronous operations are prevalent in all manner of modern systems,
 desktop and web applications. Doing this in .NET is relatively easy as
 Microsoft has provided us with a built in mechanism for binding data.&lt;/p&gt;
 &lt;p&gt;Specifically in WPF, we can perform databinding simply by providing a
@@ -1222,7 +1222,7 @@ ensure that the UI thread is not held up, whichever property you are
 bound to must have its data dispatched from another thread or launch a
 thread. This will ensure that retrieving the property will take slightly
 long and make the UI thread run smooth (user interactions will take
-precedent).&lt;/p&gt;</summary><category term=".net"></category><category term="C#"></category><category term="Programming"></category></entry><entry><title>Microsoft Solver Foundation for Quadratic Programming</title><link href="http://dandesousa.com/microsoft-solver-foundation-for-quadratic-programming.html" rel="alternate"></link><updated>2010-07-15T21:55:00-04:00</updated><author><name>Admin</name></author><id>tag:dandesousa.com,2010-07-15:microsoft-solver-foundation-for-quadratic-programming.html</id><summary type="html">&lt;p&gt;The Microsoft Solver Foundation provides some excellent APIs for solving
+precedent).&lt;/p&gt;</summary><category term=".net"></category><category term="C#"></category><category term="Programming"></category></entry><entry><title>Microsoft Solver Foundation for Quadratic Programming</title><link href="http://dandesousa.com/posts/2010/07/15/microsoft-solver-foundation-for-quadratic-programming/" rel="alternate"></link><updated>2010-07-15T21:55:00-04:00</updated><author><name>Admin</name></author><id>tag:dandesousa.com,2010-07-15:posts/2010/07/15/microsoft-solver-foundation-for-quadratic-programming/</id><summary type="html">&lt;p&gt;The Microsoft Solver Foundation provides some excellent APIs for solving
 optimization problems in C# .NET. Getting to documentation about the
 Quadratic Programming facilities can be a bit tricky though. I've added
 below some sample code to help out with this.&lt;/p&gt;
@@ -1271,7 +1271,7 @@ give it a shot yourself.&lt;/p&gt;
 as well. Its the official blog of one of the key developers on the
 project, specifically the links to tutorial on the quadratic programming
 solver.&lt;/p&gt;
-&lt;p&gt;&lt;a href="http://blogs.msdn.com/b/natbr/archive/2009/09/24/using-the-solver-foundation-interior-point-solver.aspx"&gt;Nathan Brixius' QP Solver Tutorial&lt;/a&gt;&lt;/p&gt;</summary><category term=".net"></category><category term="C#"></category><category term="math"></category></entry><entry><title>HowTo Fix: Roomba Clicking Noise</title><link href="http://dandesousa.com/howto-fix-roomba-clicking-noise.html" rel="alternate"></link><updated>2010-05-28T13:02:00-04:00</updated><author><name>Admin</name></author><id>tag:dandesousa.com,2010-05-28:howto-fix-roomba-clicking-noise.html</id><summary type="html">&lt;p&gt;A while back the vacuum in our apartment stopped working so I decided to
+&lt;p&gt;&lt;a href="http://blogs.msdn.com/b/natbr/archive/2009/09/24/using-the-solver-foundation-interior-point-solver.aspx"&gt;Nathan Brixius' QP Solver Tutorial&lt;/a&gt;&lt;/p&gt;</summary><category term=".net"></category><category term="C#"></category><category term="math"></category></entry><entry><title>HowTo Fix: Roomba Clicking Noise</title><link href="http://dandesousa.com/posts/2010/05/28/howto-fix-roomba-clicking-noise/" rel="alternate"></link><updated>2010-05-28T13:02:00-04:00</updated><author><name>Admin</name></author><id>tag:dandesousa.com,2010-05-28:posts/2010/05/28/howto-fix-roomba-clicking-noise/</id><summary type="html">&lt;p&gt;A while back the vacuum in our apartment stopped working so I decided to
 do something I always wanted: Get a roomba. So far its been great and it
 keeps the carpet clean with minimum effort.&lt;/p&gt;
 &lt;p&gt;However, we have encountered some problems where the Roomba occasionally
@@ -1293,7 +1293,7 @@ Afterwards you may see something like this:&lt;/p&gt;
 replace the yellow cap. Afterwards your roomba will be good as new! Be
 aware though, that this is likely to happen again so make sure you
 periodically clean under the cap of both brush attachments.&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="http://farm5.static.flickr.com/4038/4647413667_40a50cb12a_d.jpg" title="Another Brush Angle" /&gt;&lt;/p&gt;</summary><category term="cleaning"></category><category term="robots"></category><category term="roomba"></category></entry><entry><title>Quick Fix: iPhone Microphone and Headset Buttons don’t work</title><link href="http://dandesousa.com/quick-fix-iphone-microphone-and-headset-buttons-dont-work.html" rel="alternate"></link><updated>2010-04-04T14:38:00-04:00</updated><author><name>Admin</name></author><id>tag:dandesousa.com,2010-04-04:quick-fix-iphone-microphone-and-headset-buttons-dont-work.html</id><summary type="html">&lt;p&gt;I recently had a problem with my iPhone headphones where neither the
+&lt;p&gt;&lt;img alt="" src="http://farm5.static.flickr.com/4038/4647413667_40a50cb12a_d.jpg" title="Another Brush Angle" /&gt;&lt;/p&gt;</summary><category term="cleaning"></category><category term="robots"></category><category term="roomba"></category></entry><entry><title>Quick Fix: iPhone Microphone and Headset Buttons don’t work</title><link href="http://dandesousa.com/posts/2010/04/04/quick-fix-iphone-microphone-and-headset-buttons-dont-work/" rel="alternate"></link><updated>2010-04-04T14:38:00-04:00</updated><author><name>Admin</name></author><id>tag:dandesousa.com,2010-04-04:posts/2010/04/04/quick-fix-iphone-microphone-and-headset-buttons-dont-work/</id><summary type="html">&lt;p&gt;I recently had a problem with my iPhone headphones where neither the
 built in mic nor the headphone answer (or start/stop) button would work.
 I attributed the failure to a recent tumble which also crack my front
 glass along the bezel.&lt;/p&gt;
@@ -1302,7 +1302,7 @@ Seems like a rather large piece lint had made it's way into the
 headphone jack and was blocking the plug. I would have never figured it
 out if it wasn't for this helpful blog post. So I've linked it below and
 will leave the explanation to him:&lt;/p&gt;
-&lt;p&gt;http://www.iphoneincanada.ca/tips-tricks/how-to-fix-your-iphone-headphones-mic-if-its-not-working/&lt;/p&gt;</summary><category term="iphone"></category></entry><entry><title>ChessGL3d Demo Video</title><link href="http://dandesousa.com/chessgl3d-demo-video.html" rel="alternate"></link><updated>2010-03-11T14:29:00-05:00</updated><author><name>Admin</name></author><id>tag:dandesousa.com,2010-03-11:chessgl3d-demo-video.html</id><summary type="html">&lt;div style="text-align: left; padding: 3px;"&gt;
+&lt;p&gt;http://www.iphoneincanada.ca/tips-tricks/how-to-fix-your-iphone-headphones-mic-if-its-not-working/&lt;/p&gt;</summary><category term="iphone"></category></entry><entry><title>ChessGL3d Demo Video</title><link href="http://dandesousa.com/posts/2010/03/11/chessgl3d-demo-video/" rel="alternate"></link><updated>2010-03-11T14:29:00-05:00</updated><author><name>Admin</name></author><id>tag:dandesousa.com,2010-03-11:posts/2010/03/11/chessgl3d-demo-video/</id><summary type="html">&lt;div style="text-align: left; padding: 3px;"&gt;
 &lt;object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" width="500" height="313" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,40,0"&gt;
 &lt;param name="data" value="http://www.flickr.com/apps/video/stewart.swf?v=71377"&gt;&lt;/param&gt;&lt;param name="flashvars" value="intl_lang=en-us&amp;amp;photo_secret=6ee39f773e&amp;amp;photo_id=4425552860&amp;amp;flickr_show_info_box=true"&gt;&lt;/param&gt;&lt;param name="bgcolor" value="#000000"&gt;&lt;/param&gt;&lt;param name="allowFullScreen" value="true"&gt;&lt;/param&gt;&lt;param name="src" value="http://www.flickr.com/apps/video/stewart.swf?v=71377"&gt;&lt;/param&gt;&lt;param name="allowfullscreen" value="true"&gt;&lt;/param&gt;
 
@@ -1321,7 +1321,7 @@ originally uploaded by [dandesousa][].&lt;/span&gt;
 
 &lt;p&gt;Here is a demo video for my 3d chess game. See the games page for more
 details.&lt;/p&gt;
-&lt;/p&gt;</summary><category term="chess"></category><category term="graphics"></category><category term="opengl"></category></entry><entry><title>My Final OpenGL Project: ChessGL3d</title><link href="http://dandesousa.com/my-final-opengl-project-chessgl3d.html" rel="alternate"></link><updated>2010-03-06T21:07:00-05:00</updated><author><name>Admin</name></author><id>tag:dandesousa.com,2010-03-06:my-final-opengl-project-chessgl3d.html</id><summary type="html">&lt;p&gt;So I had an earlier post about starting my OpenGL experience for the
+&lt;/p&gt;</summary><category term="chess"></category><category term="graphics"></category><category term="opengl"></category></entry><entry><title>My Final OpenGL Project: ChessGL3d</title><link href="http://dandesousa.com/posts/2010/03/06/my-final-opengl-project-chessgl3d/" rel="alternate"></link><updated>2010-03-06T21:07:00-05:00</updated><author><name>Admin</name></author><id>tag:dandesousa.com,2010-03-06:posts/2010/03/06/my-final-opengl-project-chessgl3d/</id><summary type="html">&lt;p&gt;So I had an earlier post about starting my OpenGL experience for the
 first time. Well here is the culmination of my experience. I created a
 rough OpenGL version of Chess. I will post this as soon as I get some
 time. In the mean while, here are some screen shots. Enjoy.&lt;/p&gt;
@@ -1331,7 +1331,7 @@ time. In the mean while, here are some screen shots. Enjoy.&lt;/p&gt;
 &lt;p&gt;&lt;a href="http://farm3.static.flickr.com/2719/4411894797_d2aa155130_o_d.png"&gt;&lt;img alt="" src="http://farm3.static.flickr.com/2719/4411894797_d2aa155130_o_d.png" /&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;/p&gt;
 
-&lt;p&gt;[&lt;img alt="" src="http://farm5.static.flickr.com/4036/4412662604_a7fb4d6e7a_o_d.png" title="End Game Shot" /&gt;]: http://farm5.static.flickr.com/4036/4412662604_a7fb4d6e7a_o_d.png&lt;/p&gt;</summary><category term="chess"></category><category term="graphics"></category><category term="opengl"></category></entry><entry><title>OpenGL Display Lists And Sub Windows</title><link href="http://dandesousa.com/opengl-display-lists-and-sub-windows.html" rel="alternate"></link><updated>2010-03-06T21:02:00-05:00</updated><author><name>Admin</name></author><id>tag:dandesousa.com,2010-03-06:opengl-display-lists-and-sub-windows.html</id><summary type="html">&lt;p&gt;I recently discovered after some needless frustration, that you need to
+&lt;p&gt;[&lt;img alt="" src="http://farm5.static.flickr.com/4036/4412662604_a7fb4d6e7a_o_d.png" title="End Game Shot" /&gt;]: http://farm5.static.flickr.com/4036/4412662604_a7fb4d6e7a_o_d.png&lt;/p&gt;</summary><category term="chess"></category><category term="graphics"></category><category term="opengl"></category></entry><entry><title>OpenGL Display Lists And Sub Windows</title><link href="http://dandesousa.com/posts/2010/03/06/opengl-display-lists-and-sub-windows/" rel="alternate"></link><updated>2010-03-06T21:02:00-05:00</updated><author><name>Admin</name></author><id>tag:dandesousa.com,2010-03-06:posts/2010/03/06/opengl-display-lists-and-sub-windows/</id><summary type="html">&lt;p&gt;I recently discovered after some needless frustration, that you need to
 declare display lists that contain model drawing information in all
 windows in which you wish to draw the model. For example, if I say:&lt;/p&gt;
 &lt;p&gt;
@@ -1348,7 +1348,7 @@ the window. For example&lt;/p&gt;
 
 &lt;/p&gt;
 
-&lt;p&gt;Hope that helps someone out there!&lt;/p&gt;</summary><category term="graphics"></category><category term="opengl"></category></entry><entry><title>WPF Context Menu Not Showing Up</title><link href="http://dandesousa.com/wpf-context-menu-not-showing-up.html" rel="alternate"></link><updated>2010-02-14T23:36:00-05:00</updated><author><name>Admin</name></author><id>tag:dandesousa.com,2010-02-14:wpf-context-menu-not-showing-up.html</id><summary type="html">&lt;p&gt;So I came across a problem with WPF and context menus. Whenever I added
+&lt;p&gt;Hope that helps someone out there!&lt;/p&gt;</summary><category term="graphics"></category><category term="opengl"></category></entry><entry><title>WPF Context Menu Not Showing Up</title><link href="http://dandesousa.com/posts/2010/02/14/wpf-context-menu-not-showing-up/" rel="alternate"></link><updated>2010-02-14T23:36:00-05:00</updated><author><name>Admin</name></author><id>tag:dandesousa.com,2010-02-14:posts/2010/02/14/wpf-context-menu-not-showing-up/</id><summary type="html">&lt;p&gt;So I came across a problem with WPF and context menus. Whenever I added
 a context menu to a right click on a window or panel it would simple not
 open. The only time that a context menu would appear is when I right
 clicked on a button or label that was a child of the panel I added it
@@ -1357,7 +1357,7 @@ Finally, I figured it out myself. For some strange reason, a context
 menu will not appear if you to not manually set a background color for a
 component or child component. So to fix the problem, simple set a
 background color for which components you want the top level context
-menu to appear.&lt;/p&gt;</summary><category term=".net"></category><category term="C#"></category><category term="xaml"></category></entry><entry><title>How To: Dual Monitors in Ubuntu with Nvidia</title><link href="http://dandesousa.com/how-to-dual-monitors-in-ubuntu-with-nvidia.html" rel="alternate"></link><updated>2010-01-24T15:13:00-05:00</updated><author><name>Admin</name></author><id>tag:dandesousa.com,2010-01-24:how-to-dual-monitors-in-ubuntu-with-nvidia.html</id><summary type="html">&lt;p&gt;I noticed that a lot of people are getting "cannot parse xorg.conf"
+menu to appear.&lt;/p&gt;</summary><category term=".net"></category><category term="C#"></category><category term="xaml"></category></entry><entry><title>How To: Dual Monitors in Ubuntu with Nvidia</title><link href="http://dandesousa.com/posts/2010/01/24/how-to-dual-monitors-in-ubuntu-with-nvidia/" rel="alternate"></link><updated>2010-01-24T15:13:00-05:00</updated><author><name>Admin</name></author><id>tag:dandesousa.com,2010-01-24:posts/2010/01/24/how-to-dual-monitors-in-ubuntu-with-nvidia/</id><summary type="html">&lt;p&gt;I noticed that a lot of people are getting "cannot parse xorg.conf"
 message when they try to set up dual monitors with Nvidia settings
 manager in ubuntu. Here is the solution.&lt;/p&gt;
 &lt;p&gt;On the command line:&lt;/p&gt;
@@ -1377,7 +1377,7 @@ previous problem. Then on the command line again, type this:&lt;/p&gt;
 &lt;p&gt;Now setup your dual monitor or triple monitor configuration as you want
 (with Twin View and the correct orientation). Then hit save
 configuration at the bottom and you should see that you get no error.&lt;/p&gt;
-&lt;p&gt;Reboot and enjoy.&lt;/p&gt;</summary><category term="linux"></category></entry><entry><title>Compiling OpenGL on Mac OS X or Linux</title><link href="http://dandesousa.com/compiling-opengl-on-mac-os-x-or-linux.html" rel="alternate"></link><updated>2010-01-16T21:50:00-05:00</updated><author><name>Admin</name></author><id>tag:dandesousa.com,2010-01-16:compiling-opengl-on-mac-os-x-or-linux.html</id><summary type="html">&lt;p&gt;Most linux distributions make it easy to compile programs using OpenGL.
+&lt;p&gt;Reboot and enjoy.&lt;/p&gt;</summary><category term="linux"></category></entry><entry><title>Compiling OpenGL on Mac OS X or Linux</title><link href="http://dandesousa.com/posts/2010/01/16/compiling-opengl-on-mac-os-x-or-linux/" rel="alternate"></link><updated>2010-01-16T21:50:00-05:00</updated><author><name>Admin</name></author><id>tag:dandesousa.com,2010-01-16:posts/2010/01/16/compiling-opengl-on-mac-os-x-or-linux/</id><summary type="html">&lt;p&gt;Most linux distributions make it easy to compile programs using OpenGL.
 Other systems, however, aren't so easy. Here are instructions on how to
 get it running in both platforms.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Ubuntu / Linux&lt;/strong&gt;&lt;/p&gt;
@@ -1453,7 +1453,7 @@ the following header instead of your linux/mac includes:&lt;/span&gt;&lt;/strong
 &lt;span class="cp"&gt;ifeq &amp;quot;$(OSTYPE)&amp;quot; &amp;quot;Darwin&amp;quot;&lt;/span&gt;
   &lt;span class="nv"&gt;LDFLAGS&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; -framework Carbon -framework OpenGL -framework GLUT
 &lt;span class="cp"&gt;endif&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;</summary></entry><entry><title>OpenMP and GCC Optimization</title><link href="http://dandesousa.com/openmp-and-gcc-optimization.html" rel="alternate"></link><updated>2009-02-10T20:34:00-05:00</updated><author><name>Admin</name></author><id>tag:dandesousa.com,2009-02-10:openmp-and-gcc-optimization.html</id><summary type="html">&lt;p&gt;So I encountered and interesting little affect while compiling some C
+&lt;/pre&gt;&lt;/div&gt;</summary></entry><entry><title>OpenMP and GCC Optimization</title><link href="http://dandesousa.com/posts/2009/02/10/openmp-and-gcc-optimization/" rel="alternate"></link><updated>2009-02-10T20:34:00-05:00</updated><author><name>Admin</name></author><id>tag:dandesousa.com,2009-02-10:posts/2009/02/10/openmp-and-gcc-optimization/</id><summary type="html">&lt;p&gt;So I encountered and interesting little affect while compiling some C
 code in OpenMP using GCC. Seems that my code ran fine without any
 automatic optimization flags (-O2, -O3), but when I turned them on, went
 haywire. The sequential version wasn't affected.&lt;/p&gt;
@@ -1480,7 +1480,7 @@ when you start a new directive block. If you want them to be private but
 start with some default value, do what I did above or add the variable
 to the firstprivate() attribute instead of the private attribute:&lt;/p&gt;
 &lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="cp"&gt;#pragma omp for firstprivate(skip_next) private(i, j, new_j)&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;</summary></entry><entry><title>HF100 + ImageMixer Fix For Startup Freeze</title><link href="http://dandesousa.com/hf100-imagemixer-fix-for-startup-freeze.html" rel="alternate"></link><updated>2009-02-06T17:23:00-05:00</updated><author><name>Admin</name></author><id>tag:dandesousa.com,2009-02-06:hf100-imagemixer-fix-for-startup-freeze.html</id><summary type="html">&lt;p&gt;So I just got a new camcorder thanks to now qualifying for the US
+&lt;/pre&gt;&lt;/div&gt;</summary></entry><entry><title>HF100 + ImageMixer Fix For Startup Freeze</title><link href="http://dandesousa.com/posts/2009/02/06/hf100-imagemixer-fix-for-startup-freeze/" rel="alternate"></link><updated>2009-02-06T17:23:00-05:00</updated><author><name>Admin</name></author><id>tag:dandesousa.com,2009-02-06:posts/2009/02/06/hf100-imagemixer-fix-for-startup-freeze/</id><summary type="html">&lt;p&gt;So I just got a new camcorder thanks to now qualifying for the US
 stimulus package from back in April. I was looking around for something
 to help stimulate the economy and decided that I should get a camcorder
 while prices are low and money is high. Anyway, the HF100 is flash based
@@ -1512,13 +1512,13 @@ youtube:&lt;/p&gt;
 &lt;/embed&gt;
 &lt;/p&gt;
 
-&lt;/p&gt;</summary><category term="canon"></category><category term="hf100"></category><category term="imagemixer"></category></entry><entry><title>Timing Programs in C (Update)</title><link href="http://dandesousa.com/timing-programs-in-c-update.html" rel="alternate"></link><updated>2009-01-25T17:03:00-05:00</updated><author><name>Admin</name></author><id>tag:dandesousa.com,2009-01-25:timing-programs-in-c-update.html</id><summary type="html">&lt;p&gt;So I've decided to try and do at least one useful post a week to
+&lt;/p&gt;</summary><category term="canon"></category><category term="hf100"></category><category term="imagemixer"></category></entry><entry><title>Timing Programs in C (Update)</title><link href="http://dandesousa.com/posts/2009/01/25/timing-programs-in-c-update/" rel="alternate"></link><updated>2009-01-25T17:03:00-05:00</updated><author><name>Admin</name></author><id>tag:dandesousa.com,2009-01-25:posts/2009/01/25/timing-programs-in-c-update/</id><summary type="html">&lt;p&gt;So I've decided to try and do at least one useful post a week to
 hopefully help a random searcher out. Here is the the updated version of
 how to get millisecond precise wall clock time in C.&lt;/p&gt;
 &lt;p&gt;#include \&amp;lt;sys\time.h&gt;&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;gettimeofday(&amp;amp;tstart, NULL);&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;double t1=tstart.tv_sec+(tstart.tv_usec/1000000.0);&lt;/code&gt;&lt;/p&gt;
-&lt;/p&gt;</summary></entry><entry><title>Timing Programs in C (Why I hate clock())</title><link href="http://dandesousa.com/timing-programs-in-c-why-i-hate-clock.html" rel="alternate"></link><updated>2009-01-16T08:51:00-05:00</updated><author><name>Admin</name></author><id>tag:dandesousa.com,2009-01-16:timing-programs-in-c-why-i-hate-clock.html</id><summary type="html">&lt;p&gt;So in working on a parallel programming assignment for a grad class I
+&lt;/p&gt;</summary></entry><entry><title>Timing Programs in C (Why I hate clock())</title><link href="http://dandesousa.com/posts/2009/01/16/timing-programs-in-c-why-i-hate-clock/" rel="alternate"></link><updated>2009-01-16T08:51:00-05:00</updated><author><name>Admin</name></author><id>tag:dandesousa.com,2009-01-16:posts/2009/01/16/timing-programs-in-c-why-i-hate-clock/</id><summary type="html">&lt;p&gt;So in working on a parallel programming assignment for a grad class I
 needed to time two algorithms, a sequential approach and a parallel
 approach. In doing so I did something like this:&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;clock_t start, finish;&lt;/code&gt;&lt;/p&gt;
@@ -1539,7 +1539,7 @@ two-core machine).&lt;/p&gt;
 milliseconds for a C program accurately. You can use regular old time()
 to get the seconds, or if you are running on UNIX you can use the time
 command.&lt;/p&gt;
-&lt;/p&gt;</summary></entry><entry><title>NES ROM Editing</title><link href="http://dandesousa.com/nes-rom-editing.html" rel="alternate"></link><updated>2008-11-12T12:39:00-05:00</updated><author><name>Admin</name></author><id>tag:dandesousa.com,2008-11-12:nes-rom-editing.html</id><summary type="html">&lt;p&gt;So I did a presentation a couple years ago on NES Rom editting and I
+&lt;/p&gt;</summary></entry><entry><title>NES ROM Editing</title><link href="http://dandesousa.com/posts/2008/11/12/nes-rom-editing/" rel="alternate"></link><updated>2008-11-12T12:39:00-05:00</updated><author><name>Admin</name></author><id>tag:dandesousa.com,2008-11-12:posts/2008/11/12/nes-rom-editing/</id><summary type="html">&lt;p&gt;So I did a presentation a couple years ago on NES Rom editting and I
 learned a lot about how to do some simple rom hacking and how old school
 cheat tools like game genie and game shark worked. Anyway I've decided
 to share the presentation I gave as well as all the resources I used.
@@ -1552,7 +1552,7 @@ in the comments.&lt;/p&gt;
 &lt;p&gt;&lt;a href="http://www.cs.drexel.edu/~dsd33/demos/nes_rom_editting/Presentation.zip"&gt;Click here to download resources&lt;/a&gt;&lt;/p&gt;
 &lt;iframe src="http://docs.google.com/EmbedSlideshow?docid=d9jph9x_54gg9bdtcr" frameborder="0" width="410" height="342"&gt;&lt;/iframe&gt;
 
-&lt;/p&gt;</summary></entry><entry><title>Me and the GOP</title><link href="http://dandesousa.com/me-and-the-gop.html" rel="alternate"></link><updated>2008-10-29T21:51:00-04:00</updated><author><name>Admin</name></author><id>tag:dandesousa.com,2008-10-29:me-and-the-gop.html</id><summary type="html">&lt;p&gt;So contrary to my better judgement I've decided to post an old video of
+&lt;/p&gt;</summary></entry><entry><title>Me and the GOP</title><link href="http://dandesousa.com/posts/2008/10/29/me-and-the-gop/" rel="alternate"></link><updated>2008-10-29T21:51:00-04:00</updated><author><name>Admin</name></author><id>tag:dandesousa.com,2008-10-29:posts/2008/10/29/me-and-the-gop/</id><summary type="html">&lt;p&gt;So contrary to my better judgement I've decided to post an old video of
 myself at the GOP convention back in the day. I remember I was a big
 Republican, back when I really just wanted to be different than my
 parents and I was told that abortion was murder. Anyway one good thing
@@ -1565,7 +1565,7 @@ of it.&lt;/p&gt;
 &lt;/embed&gt;
 &lt;/p&gt;
 
-&lt;/p&gt;</summary><category term="GOP"></category><category term="Me"></category><category term="Politics"></category><category term="Republicans"></category></entry><entry><title>Kitten Vs. Ferret (Part 1 -- 6 Weeks)</title><link href="http://dandesousa.com/kitten-vs-ferret-part-1-6-weeks.html" rel="alternate"></link><updated>2008-10-29T21:41:00-04:00</updated><author><name>Admin</name></author><id>tag:dandesousa.com,2008-10-29:kitten-vs-ferret-part-1-6-weeks.html</id><summary type="html">&lt;p&gt;My roommate just got a kitten and we decided to allow it to interact
+&lt;/p&gt;</summary><category term="GOP"></category><category term="Me"></category><category term="Politics"></category><category term="Republicans"></category></entry><entry><title>Kitten Vs. Ferret (Part 1 -- 6 Weeks)</title><link href="http://dandesousa.com/posts/2008/10/29/kitten-vs-ferret-part-1-6-weeks/" rel="alternate"></link><updated>2008-10-29T21:41:00-04:00</updated><author><name>Admin</name></author><id>tag:dandesousa.com,2008-10-29:posts/2008/10/29/kitten-vs-ferret-part-1-6-weeks/</id><summary type="html">&lt;p&gt;My roommate just got a kitten and we decided to allow it to interact
 with our ferrets. Seems that it likes to have a good tussle with my
 ferret Jean-Luc. Right now it's not much of a challenge, but should be
 interesting to see what happens when the cat gets older. Here is part 1

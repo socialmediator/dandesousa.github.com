@@ -10,10 +10,10 @@
     <link href="./theme/css/bootstrap.min.css" rel="stylesheet">
     <link href="./theme/css/bootstrap-responsive.min.css" rel="stylesheet">
     <link href="./theme/css/font-awesome.min.css" rel="stylesheet">
-    <link href="./theme/css/timberland.css" rel="stylesheet">
-    <link href="./theme/css/timberland-icons.css" rel="stylesheet">
-    <link href="./theme/css/timberland-pygments.css" rel="stylesheet">
-        <script>var _gaq=[['_setAccount','UA-10113677-1'],['_trackPageview']];(function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];g.src='//www.google-analytics.com/ga.js';s.parentNode.insertBefore(g,s)}(document,'script'))</script>
+    <link href="./theme/css/showcase.css" rel="stylesheet">
+    <link href="./theme/css/showcase-icons.css" rel="stylesheet">
+    <link href="./theme/css/showcase-pygments.css" rel="stylesheet">
+    <script>var _gaq=[['_setAccount','UA-10113677-1'],['_trackPageview']];(function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];g.src='//www.google-analytics.com/ga.js';s.parentNode.insertBefore(g,s)}(document,'script'))</script>
     <script type="text/javascript">
 	var disqus_identifier = "compiling-opengl-on-mac-os-x-or-linux.html";
 	(function() {
@@ -24,66 +24,35 @@
 </script>
   </head>
   <body>
-            <div class="navbar">
-      <div class="navbar-inner">
-        <div class="container-fluid">
-          <a class="brand" href="./index.html">Dan DeSousa's Blog</a>
-          <ul class="nav">
-                                                <li ><a href="./pages/about.html">About</a></li>
-                                  </ul>
+        
+    <div class="container site-container">
+      <div class="row">
+        <div class="span12 text-center">
+          <a href="."><img src="" class="header" /></a>
         </div>
       </div>
-    </div>
 
-    <div class="container-fluid">
-      <div class="row-fluid">
-        <div class="span2">
-          <div class="social">
-            <h2><small>Social</small></h2>
-            <ul class="unstyled">
-                                          <li><i class="icon-facebook-sign icon-large icon-color-facebook"></i> <a href="https://facebook.com/daniel.sousa">Facebook</a></li>
-                                          <li><i class="icon-github-sign icon-large icon-color-github"></i> <a href="http://github.com/dandesousa">Github</a></li>
-                                          <li><i class="icon-google-plus-sign icon-large icon-color-google-plus"></i> <a href="https://plus.google.com/114589102912613956952">Google Plus</a></li>
-                                          <li><i class="icon-twitter-sign icon-large icon-color-twitter"></i> <a href="http://twitter.com/dandesousa">Twitter</a></li>
-                          </ul>
-          </div>
-          <hr class="soften-left-right" />
-          <h2><small>Categories</small></h2>
-          <ul class="unstyled">
-                        <li><span class="badge ">3</span> <a href="./category/articles.html">Articles</a></li>
-                        <li><span class="badge ">1</span> <a href="./category/personal.html">Personal</a></li>
-                        <li><span class="badge ">1</span> <a href="./category/politics.html">Politics</a></li>
-                        <li><span class="badge badge-success">14</span> <a href="./category/programming.html">Programming</a></li>
-                        <li><span class="badge ">1</span> <a href="./category/ramblings.html">Ramblings</a></li>
-                        <li><span class="badge ">17</span> <a href="./category/technology.html">Technology</a></li>
+      <div class="row">
+        <div class="span12 centered-pills">
+          <ul class="nav nav-pills">
+            <li class="active"><a href="/">Blog</a></li>
+                        <li ><a href="/pages/about">About</a></li>
                       </ul>
-          <hr class="soften-left-right" />
-                    <h2><small>History</small></h2>
-          <ul class="unstyled">
-            <li><i class="icon-book"></i> <a href="./archives.html">Archives</a></li>
-            <li><i class="icon-tags"></i> <a href="./tags.html">Tags</a></li>
-          </ul>
-
-                    <hr class="soften-left-right" />
-          <div class="google-search-area">
-            <form name="google-search" method="get" action="http://www.google.com/search">
-              <input type="hidden" name="sitesearch" value="http://dandesousa.com" />
-              <div class="input-prepend">
-                <input name="q" style="width: 80%" type="text" placeholder="Google on this site..." />
-                <span class="add-on"><i class="icon-search"></i></span>
-              </div>
-            </form>
-          </div>
-          
         </div>
+      </div>
 
-        <div class="span10">
+      <div class="row">
+        <div class="span12">
                     <div class='article'>
   <div class="page-header"><h1>Compiling Opengl On Mac Os X Or Linux</h1>
     <ul class="unstyled">
-  <li><i class="icon-time"></i> <a class="more" href="./compiling-opengl-on-mac-os-x-or-linux.html">2010-01-16 21:50:00</a>
-  <i class="icon-pencil"></i> <a class="url fn" href="./author/admin.html">Admin</a>   <i class="icon-folder-open"></i> <a href="./category/programming.html">Programming</a></li> 
-  </ul>  </div>
+  <li><i class="icon-time"></i> <a class="more" href="./compiling-opengl-on-mac-os-x-or-linux.html">Sat 16 January 2010</a> </li> 
+  <li><i class="icon-pencil"></i> <a class="url fn" href="./author/admin.html">Admin</a> </li>
+  <li>
+  <i class="icon-tags"></i> 
+    </li>
+  <!-- <li><i class="icon-folder-open"></i> <a href="./category/programming.html">Programming</a></li> -->
+</ul>  </div>
   <div class="page-content"><p>Most linux distributions make it easy to compile programs using OpenGL.
 Other systems, however, aren't so easy. Here are instructions on how to
 get it running in both platforms.</p>
@@ -161,8 +130,7 @@ the following header instead of your linux/mac includes:</span></strong></p>
   <span class="nv">LDFLAGS</span> <span class="o">=</span> -framework Carbon -framework OpenGL -framework GLUT
 <span class="cp">endif</span>
 </pre></div></div>
-  <hr />
-    <br><br>
+  <br><br>
   <div>
     <h2>Comments</h2>
     <a href="http://twitter.com/share" class="twitter-share-button" data-count="horizontal" data-via="dandesousa">Tweet</a><script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
@@ -174,12 +142,26 @@ the following header instead of your linux/mac includes:</span></strong></p>
 
     <footer class="footer">
     <div class="container">
-      <p>Powered by <a href="http://alexis.notmyidea.org/pelican/">Pelican</a></p>
-      <p><a href="http://github.com/dandesousa/pelican-timberland">Timberland</a> based on <a href="http://twitter.github.com/bootstrap/">Bootstrap, from Twitter</a>.</p>
-      <p><a href="http://glyphicons.com">Glyphicons Free</a> licensed under <a href="http://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.</p> 
+      <p> 
+                <a href="https://facebook.com/daniel.sousa"><i class="icon-color-facebook icon-2x icon-facebook-sign"></i></a>
+                        <a href="http://twitter.com/dandesousa"><i class="icon-color-twitter icon-2x icon-twitter-sign"></i></a>
+              </p>
+      <p><a href="http://github.com/minksoftware/pelican-showcase">Showcase</a> based on <a href="http://twitter.github.com/bootstrap/">Bootstrap, from Twitter</a>.</p>
       <p><a href="http://fortawesome.github.com/Font-Awesome">Font Awesome by Dave Gandy</a></p>
-      <p>&copy; Dan 2013</p>
+      <p>&copy;  Dan DeSousa  2013</p>
     </div>
     </footer>
-  </body>
+
+    <script type="text/javascript">
+/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+var disqus_shortname = 'example'; // required: replace example with your forum shortname
+
+/* * * DON'T EDIT BELOW THIS LINE * * */
+(function () {
+var s = document.createElement('script'); s.async = true;
+s.type = 'text/javascript';
+s.src = 'http://' + disqus_shortname + '.disqus.com/count.js';
+(document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+}());
+</script>  </body>
 </html>

@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Dan DeSousa's Blog</title>
+    <meta name="description" content="">
+    <meta name="author" content="Dan">
+
+    <link href="./theme/css/bootstrap.min.css" rel="stylesheet">
+    <link href="./theme/css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link href="./theme/css/font-awesome.min.css" rel="stylesheet">
+    <link href="./theme/css/showcase.css" rel="stylesheet">
+    <link href="./theme/css/showcase-icons.css" rel="stylesheet">
+    <link href="./theme/css/showcase-pygments.css" rel="stylesheet">
+    <script>var _gaq=[['_setAccount','UA-10113677-1'],['_trackPageview']];(function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];g.src='//www.google-analytics.com/ga.js';s.parentNode.insertBefore(g,s)}(document,'script'))</script>
+      </head>
+  <body>
+    
+    <div class="container site-container">
+      <div class="row">
+        <div class="span12 text-center">
+                    <a style="text-decoration: none" href="."><h1>Dan DeSousa's Blog</h1></a>
+                  </div>
+      </div>
+
+      <div class="row">
+        <div class="span12 centered-pills">
+          <ul class="nav nav-pills">
+            <li class="active"><a href="/">Blog</a></li>
+                        <li ><a href="/pages/about">About</a></li>
+                      </ul>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="span12">
+                    
+<div class="page-header"><h1>Blog</h1></div>
+<div class='article'>
+    <h3>Ios Exc_Bad_Access Error When Navigating To/From Nib</h3>
+  <div class="row">
+    <div class="span4">
+      <div class="well well-small">
+        <ul class="unstyled">
+  <li><i class="icon-time"></i> <a class="more" href="./posts/2010/11/27/ios-exc_bad_access-error-when-navigating-tofrom-nib/">Saturday, November 27 2010 01:01 PM</a> </li> 
+  <li><i class="icon-pencil"></i> <a class="url fn" href="./author/admin.html">Admin</a> </li>
+  <li>
+  <i class="icon-tags"></i> 
+    <a href="./tag/iphone.html">iphone</a>
+    <a href="./tag/memory-management.html">memory management</a>
+    <a href="./tag/objective-c.html">objective-c</a>
+    <a href="./tag/uitableview.html">UITableView</a>
+    </li>
+  <!-- <li><i class="icon-folder-open"></i> <a href="./category/programming.html">Programming</a></li> -->
+</ul>        <i class="icon-comments-alt"></i> <a href="./posts/2010/11/27/ios-exc_bad_access-error-when-navigating-tofrom-nib/#disqus_thread"></a>      </div>
+    </div>
+    <div class="span8">
+      <div class="summary">
+        <p>As I have begun the trek towards mastering objective-c, I've come to
+appreciate the memory management nuances. I came across a problem where
+when navigating backwards in a table view, the application would just
+crash with an EXC_BAD_ACCESS error. If you see this it is most likely
+due to accidently mis-managing memory. I fixed my particular error by
+referring to the memory management rules with NIBs. Because of the way
+nibs are access you need to unload IBOutlet properties in the
+viewDidUnload method. Here are examples from apple's documentation:</p>
+<div class="codehilite"><pre><span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">viewDidUnload</span> <span class="p">{</span>
+    <span class="n">self</span><span class="p">.</span><span class="n">anOutlet</span> <span class="o">=</span> <span class="nb">nil</span><span class="p">;</span>
+    <span class="p">[</span><span class="n">super</span> <span class="n">viewDidUnload</span><span class="p">];</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>Also, for some reason you also have to release them in the dealloc for
+the controller you are in:</p>
+<div class="codehilite"><pre><span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">dealloc</span> <span class="p">{</span>
+    <span class="c1">// Release outlets and set outlet variables to nil.</span>
+    <span class="p">[</span><span class="n">anOutlet</span> <span class="n">release</span><span class="p">],</span> <span class="n">anOutlet</span> <span class="o">=</span> <span class="nb">nil</span><span class="p">;</span>
+    <span class="p">[</span><span class="n">super</span> <span class="n">dealloc</span><span class="p">];</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>Hope this helps someone out there. <a href="http://developer.apple.com/library/mac/#documentation/Cocoa/Conceptual/MemoryMgmt/Articles/mmNibObjects.html">Here are the details of how to
+manage memory in NIBS for Mac OS or iOS.</a></p>
+      </div>
+    </diV>
+  </div>
+</div>	
+<br>
+<hr/>
+</ul>
+<div class='article'>
+    <h3>Copying Test And Data Files To Build Directory In C# .Net Unit Tests</h3>
+  <div class="row">
+    <div class="span4">
+      <div class="well well-small">
+        <ul class="unstyled">
+  <li><i class="icon-time"></i> <a class="more" href="./posts/2010/10/02/copying-test-and-data-files-to-build-directory-in-c-net-unit-tests/">Saturday, October 02 2010 08:20 AM</a> </li> 
+  <li><i class="icon-pencil"></i> <a class="url fn" href="./author/admin.html">Admin</a> </li>
+  <li>
+  <i class="icon-tags"></i> 
+    <a href="./tag/net.html">.net</a>
+    <a href="./tag/unit-testing.html">unit testing</a>
+    </li>
+  <!-- <li><i class="icon-folder-open"></i> <a href="./category/programming.html">Programming</a></li> -->
+</ul>        <i class="icon-comments-alt"></i> <a href="./posts/2010/10/02/copying-test-and-data-files-to-build-directory-in-c-net-unit-tests/#disqus_thread"></a>      </div>
+    </div>
+    <div class="span8">
+      <div class="summary">
+        <p>Unit testing with VS2010's built in unit testing facilities is
+especially convenient. However it is no always clear how to specific
+that an entire directory should be copied into the build / test
+directory as data. Aside from setting up pre- and post- build rules,
+VS2010 comes with a way to automatically include any project or
+referenced directories and files as part of the build deployment. To
+specify this, you use what is known as the testconfigs file.</p>
+<p>First, open up your unit testing project with visual studio, and from
+the test menu item, select edit test configuration.</p>
+<p><img alt="" src="http://dans-coding-examples.googlecode.com/files/testcopy-editsettings.png" title="Test Copy Tutorial Edit Test Settings" /></p>
+<p></p>
+Then, in the window that appears, select deployment and make sure that
+the enable deployment check box is <strong>selected</strong>.</p>
+<p><img alt="" src="http://dans-coding-examples.googlecode.com/files/testcopy-editdeployment.png" title="Test Copy Deployment" /></p>
+</p>
+
+<p>Finally, just select add/remove file or directory and select what you
+want to copy.</p>
+</p>
+
+<p><img alt="" src="http://dans-coding-examples.googlecode.com/files/testcopy-editselect.png" title="http://dans-coding-examples.googlecode.com/files/testcopy-editselect.png" /></p>
+</p>
+
+</p>
+
+<p>Now, each time you run or deploy your projects you can select that
+directories contents to also be copied over.</p>
+</p>
+
+<p><a href="http://dans-coding-examples.googlecode.com/files/UnitTestingProject.zip">Download Code.</a></p>
+</p>
+      </div>
+    </diV>
+  </div>
+</div>	
+<br>
+<hr/>
+</ul>
+<div class='article'>
+    <h3>Windows Phone 7: Making An Http Request</h3>
+  <div class="row">
+    <div class="span4">
+      <div class="well well-small">
+        <ul class="unstyled">
+  <li><i class="icon-time"></i> <a class="more" href="./posts/2010/08/30/windows-phone-7-making-an-http-request/">Monday, August 30 2010 10:20 PM</a> </li> 
+  <li><i class="icon-pencil"></i> <a class="url fn" href="./author/admin.html">Admin</a> </li>
+  <li>
+  <i class="icon-tags"></i> 
+    <a href="./tag/net.html">.net</a>
+    <a href="./tag/c.html">C#</a>
+    <a href="./tag/windows-phone-7.html">Windows Phone 7</a>
+    <a href="./tag/wp7.html">WP7</a>
+    </li>
+  <!-- <li><i class="icon-folder-open"></i> <a href="./category/programming.html">Programming</a></li> -->
+</ul>        <i class="icon-comments-alt"></i> <a href="./posts/2010/08/30/windows-phone-7-making-an-http-request/#disqus_thread"></a>      </div>
+    </div>
+    <div class="span8">
+      <div class="summary">
+        <p>Silverlight and the Windows Phone 7 SDK include the standard System.Net
+packages for making various requests over ftp and http. Making a
+standard http request in C# involves setting up a number of delegates
+and asynchronous callbacks for getting http responses and can be a tad
+complicated. If you simply want to get some xml or html back as a string
+over http, it’s much easier to use the simpler, more abstract WebClient
+class. Here’s an example of using the WebClient class to make a request.</p>
+<div class="codehilite"><pre><span class="n">public</span> <span class="kt">void</span> <span class="nf">getResults</span><span class="p">(</span><span class="n">string</span> <span class="n">websiteURL</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">WebClient</span> <span class="n">c</span> <span class="o">=</span> <span class="n">new</span> <span class="n">WebClient</span><span class="p">();</span>
+    <span class="n">c</span><span class="p">.</span><span class="n">DownloadStringAsync</span><span class="p">(</span><span class="n">new</span> <span class="n">Uri</span><span class="p">(</span><span class="n">websiteURL</span><span class="p">));</span>
+    <span class="n">c</span><span class="p">.</span><span class="n">DownloadStringCompleted</span> <span class="o">+=</span> <span class="n">new</span>
+        <span class="n">DownloadStringCompletedEventHandler</span><span class="p">(</span><span class="n">c_DownloadStringCompleted</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="kt">void</span> <span class="nf">c_DownloadStringCompleted</span><span class="p">(</span><span class="n">object</span> <span class="n">sender</span><span class="p">,</span>
+        <span class="n">DownloadStringCompletedEventArgs</span> <span class="n">e</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">lock</span> <span class="p">(</span><span class="n">this</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">string</span> <span class="n">s</span> <span class="o">=</span> <span class="n">e</span><span class="p">.</span><span class="n">Result</span><span class="p">;</span>
+        <span class="n">XmlReader</span> <span class="n">r</span> <span class="o">=</span> <span class="n">XmlReader</span><span class="p">.</span><span class="n">Create</span><span class="p">(</span><span class="n">new</span>
+                <span class="n">MemoryStream</span><span class="p">(</span><span class="n">System</span><span class="p">.</span><span class="n">Text</span><span class="p">.</span><span class="n">UnicodeEncoding</span><span class="p">.</span><span class="n">Unicode</span><span class="p">.</span><span class="n">GetBytes</span><span class="p">(</span><span class="n">s</span><span class="p">)));</span>
+        <span class="c1">// So something with the XML we get back</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>So basically all we do is say download the string and make the action to
+take when it is completed as c_DownloadStringCompleted event handler.
+You may want to do something different than place it in an xml reader
+(in this case the string we are getting back corresponds to a non-xhtml
+ xml file. Enjoy.</p>
+</p>
+      </div>
+    </diV>
+  </div>
+</div>	
+<br>
+<hr/>
+</ul>
+
+<div class="pagination">
+  <ul>
+            <li class="prev"><a href="./index5.html">&larr; Previous</a></li>
+            <li class=""><a href="./index.html">1</a></li>
+        <li class=""><a href="./index2.html">2</a></li>
+        <li class=""><a href="./index3.html">3</a></li>
+        <li class=""><a href="./index4.html">4</a></li>
+        <li class=""><a href="./index5.html">5</a></li>
+        <li class="active"><a href="./index6.html">6</a></li>
+        <li class=""><a href="./index7.html">7</a></li>
+        <li class=""><a href="./index8.html">8</a></li>
+        <li class=""><a href="./index9.html">9</a></li>
+        <li class=""><a href="./index10.html">10</a></li>
+        <li class=""><a href="./index11.html">11</a></li>
+        <li class=""><a href="./index12.html">12</a></li>
+        <li class=""><a href="./index13.html">13</a></li>
+            <li class="next"><a href="./index7.html">Next &rarr;</a></li>
+      </ul>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    <footer class="footer">
+    <div class="container">
+      <p> 
+                <a href="https://facebook.com/daniel.sousa"><i class="icon-color-facebook icon-2x icon-facebook-sign"></i></a>
+                        <a href="http://twitter.com/dandesousa"><i class="icon-color-twitter icon-2x icon-twitter-sign"></i></a>
+                        <a href="https://github.com/dandesousa"><i class="icon-color-github icon-2x icon-github-alt"></i></a>
+              </p>
+      <p><a href="http://github.com/minksoftware/pelican-showcase">Showcase</a> based on <a href="http://twitter.github.com/bootstrap/">Bootstrap, from Twitter</a>.</p>
+      <p><a href="http://fortawesome.github.com/Font-Awesome">Font Awesome by Dave Gandy</a></p>
+      <p>&copy;  Dan DeSousa  2013</p>
+    </div>
+    </footer>
+
+    <script type="text/javascript">
+/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+var disqus_shortname = 'example'; // required: replace example with your forum shortname
+
+/* * * DON'T EDIT BELOW THIS LINE * * */
+(function () {
+var s = document.createElement('script'); s.async = true;
+s.type = 'text/javascript';
+s.src = 'http://' + disqus_shortname + '.disqus.com/count.js';
+(document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+}());
+</script>  </body>
+</html>

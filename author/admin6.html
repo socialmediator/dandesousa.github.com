@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Dan DeSousa's Blog</title>
+    <meta name="description" content="">
+    <meta name="author" content="Dan">
+
+    <link href="../theme/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../theme/css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link href="../theme/css/font-awesome.min.css" rel="stylesheet">
+    <link href="../theme/css/showcase.css" rel="stylesheet">
+    <link href="../theme/css/showcase-icons.css" rel="stylesheet">
+    <link href="../theme/css/showcase-pygments.css" rel="stylesheet">
+    <script>var _gaq=[['_setAccount','UA-10113677-1'],['_trackPageview']];(function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];g.src='//www.google-analytics.com/ga.js';s.parentNode.insertBefore(g,s)}(document,'script'))</script>
+      </head>
+  <body>
+    
+    <div class="container site-container">
+      <div class="row">
+        <div class="span12 text-center">
+                    <a style="text-decoration: none" href=".."><h1>Dan DeSousa's Blog</h1></a>
+                  </div>
+      </div>
+
+      <div class="row">
+        <div class="span12 centered-pills">
+          <ul class="nav nav-pills">
+            <li class="active"><a href="/">Blog</a></li>
+                        <li ><a href="/pages/about">About</a></li>
+                      </ul>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="span12">
+                    
+<div class="page-header"><h1>Blog</h1></div>
+<div class='article'>
+    <h3>Howto: Setup A Network With Two Internet Connections</h3>
+  <div class="row">
+    <div class="span4">
+      <div class="well well-small">
+        <ul class="unstyled">
+  <li><i class="icon-time"></i> <a class="more" href="../posts/2012/05/26/howto-setup-a-network-with-two-internet-connections/">Saturday, May 26 2012 08:41 AM</a> </li> 
+  <li><i class="icon-pencil"></i> <a class="url fn" href="../author/admin.html">Admin</a> </li>
+  <li>
+  <i class="icon-tags"></i> 
+    <a href="../tag/networking.html">networking</a>
+    </li>
+  <!-- <li><i class="icon-folder-open"></i> <a href="../category/technology.html">Technology</a></li> -->
+</ul>        <i class="icon-comments-alt"></i> <a href="../posts/2012/05/26/howto-setup-a-network-with-two-internet-connections/#disqus_thread"></a>      </div>
+    </div>
+    <div class="span8">
+      <div class="summary">
+        <p>If you are living in an area where internet connection options are
+limited, you may find yourself in a connundrum. Perhaps you want to be
+able to use high bandwidth services (netflix, itunes, bittorrent,
+gaming) but a single connection pipe is not large enough to accomodate
+all the traffic. Or perhaps, your internet is capped or throttled after
+a certain amount of time.</p>
+<h2><strong>My Situation</strong></h2>
+<p></p>
+I currently live in such an area, where my faster internet provider will
+quickly throttle for high usage. I needed to be able to download (iTunes
+videos, Steam games, etc), but my primary provider throttles if we
+download too much. To make matters worse, my girlfriend works from home,
+so she needs a fast constant connection.</p>
+<p>So what I wanted was to be able to use Clear (which has great speed and
+reception in our area) for normal internet and DSL for all the high
+bandwidth content. We needed to have one or two computers in our network
+use the DSL, and the others use Clear. However, we still needed everyone
+on the same network because we needed to access file shares and other
+applications running on the network.</p>
+<p>After much searching I found a solution that fits my needs and that I
+hope will help some other people as well.</p>
+<h2><strong>The Solution</strong></h2>
+<p></p>
+The solution to my problem is to create a <strong><em>Multiple Gateway</em></strong> setup.
+The idea is you have a standard network with one internet connection
+that acts as the primary gateway. By default all connecting devices use
+this connection. You then add one or more routers with separate incoming
+connections as other gateways. You assign them IPs and you tell the
+devices you want to use that gateway and it will use it for those
+connections.</p>
+<p><em>So in summary, this setup will allow you to keep all devices on one
+network and manually assign which connection each device uses (using one
+connection as the default).</em></p>
+<p>You just need to follow these steps:</p>
+<h3><strong>Setup your default gateway</strong></h3>
+<p></p>
+For the purpose of this article, gateway is just another term for a
+router with an incoming WAN or internet connection. Chances are your
+default gateway is already setup -- its just your current single
+connection network setup. If you want to continue to use this connection
+as the default for all devices on the network, leave as is and continue
+to the next step. Otherwise swap the internet connections.</p>
+<p><em>The internet connection on this gateway will be used for all devices by
+default.</em></p>
+<p><strong><em>Make a note of your router's IP address; in most cases it is
+'192.168.1.1'.</em></strong></p>
+<p>Also note the DHCP range of your router, this varies by model but on the
+common dd-wrt setup can be found here:</p>
+<p><img alt="" src="/static/wp-content/uploads/2012/05/default-gateway-192.168.1.1-dhcp-address-781x1024.png" title="default-gateway-192.168.1.1-dhcp-address" /></p>
+<p></p>
+For this scenario our DHCP range starts at 192.168.1.100. So anything
+from 192.168.1.0 - 192.168.1.99 is out of range and won't be used by the
+router when assigning the addresses to devices. This is important to
+know for the next step.</p>
+<h3><strong>Setup your second gateway</strong></h3>
+<p></p>
+You want to setup a completely separate network with the second router
+and connection. Don't connect the second gateway to the main network
+yet. Verify that on your second connection you have an internet
+connection and everything is working.</p>
+<p><strong>Assign the second gateway an IP address</strong></p>
+<p>Once that works, you want to give the second gateway a different IP
+address to distinguish it from the primary gateway. Since the primary
+gateway is IP address 192.168.1.1, we'll use 192.168.1.2. Note that the
+address must be outside the range of DHCP for the primary gateway.</p>
+<p><strong>Disable DHCP on the second gateway</strong></p>
+<p>Now, you want to disable DHCP server on the second gateway. If you are
+using DD-WRT, the highlighted radio box in the box image should be
+'Disable'. This is important, DHCP MUST BE DISABLED. Not set to a new
+gateway, not turned onto DHCP forwarding -- DISABLED. Make sure you hit
+apply and save any settings before moving onto the next step.</p>
+<h3><strong>Connect your second gateway to your network through the LAN port</strong></h3>
+<p></p>
+Now connect your second gateway to your network through the LAN part as
+you would connect a switch to your network to allow for additional
+connections. Once you do so, you should be able to connect to your
+primary network and access both the primary gateway and the secondary
+gateway by their addresses. Confirm this by ensuring you can access
+192.168.1.1 and 192.168.1.2.</p>
+<h3><strong>Configure your machines to use the alternative gateway</strong></h3>
+<p></p>
+Good news is you are pretty much done now. You can confirm your setup is
+working by assigning a machine to either network. You want to open up
+your network menu and find your network interface (representing the one
+connected to your network  -- be it wired or wireless).</p>
+<p><img alt="" src="/static/wp-content/uploads/2012/05/network-1.png" title="network-1" /></p>
+<p>now right click and select properties. Then select the IPv4 settings and
+hit properties again:</p>
+<p><img alt="" src="/static/wp-content/uploads/2012/05/network-2.png" title="network-2" /></p>
+<p>Now you want to manually configure your connection.</p>
+<p><img alt="" src="/static/wp-content/uploads/2012/05/network-3.png" title="network-3" /></p>
+<p>For your IP address, assign anything that is outside the DHCP range of
+your router (anything below 192.168.1.100 works in this example). Leave
+subnet mask matching your primary gateway and assign default gateway to
+the second connection. You'll also want to add that as the DNS server.
+This tells this network interface to use that gateway for your internet
+connection.</p>
+<p>If all works successfully you should now have access, and all traffic on
+that box will flow to your second gateway, leaving your other
+connections unaffected.</p>
+<p>Most devices give you the ability to customize the your IP configuration
+this way, so you should be able to configure your devices in any manner
+you choose.</p>
+<h3><strong>Repeat for any additional connections </strong></h3>
+<p></p>
+The multiple gateway setup works for as many connections as you want.
+Just continue adding addresses outside your DHCP range for your gateways
+and you should be fine.</p>
+<p>Hopefully this will be useful to people out there trying to work out how
+to use multiple connections in their home network. I know it was for me.</p>
+      </div>
+    </diV>
+  </div>
+</div>	
+<br>
+<hr/>
+</ul>
+<div class='article'>
+    <h3>Htpc Stutter Over Hdmi On Samsung Hdtv</h3>
+  <div class="row">
+    <div class="span4">
+      <div class="well well-small">
+        <ul class="unstyled">
+  <li><i class="icon-time"></i> <a class="more" href="../posts/2011/02/18/htpc-stutter-over-hdmi-on-samsung-hdtv/">Friday, February 18 2011 11:25 PM</a> </li> 
+  <li><i class="icon-pencil"></i> <a class="url fn" href="../author/admin.html">Admin</a> </li>
+  <li>
+  <i class="icon-tags"></i> 
+    <a href="../tag/hdmi.html">hdmi</a>
+    <a href="../tag/samsung.html">samsung</a>
+    <a href="../tag/tv.html">tv</a>
+    <a href="../tag/xbmc.html">xbmc</a>
+    </li>
+  <!-- <li><i class="icon-folder-open"></i> <a href="../category/technology.html">Technology</a></li> -->
+</ul>        <i class="icon-comments-alt"></i> <a href="../posts/2011/02/18/htpc-stutter-over-hdmi-on-samsung-hdtv/#disqus_thread"></a>      </div>
+    </div>
+    <div class="span8">
+      <div class="summary">
+        <p>This will be a quick one. I recently built an HTPC to run XBMC and play
+videos off my file share. I noticed that almost all videos had
+an occasional stutter that would occur every few seconds and produce a
+very slight stutter in the image. This happened for all file types and
+resolutions. I'm running with an integrated ATI HD 4250.</p>
+<p>I eventually figured out that it was my TV settings. I was connecting
+over HDMI and Samsung must do some extra processing or handshaking over
+the HDMI to HTPC. I realized this since I connected my HTPC to my
+monitor at the same resolution (1080p 60hz) and I experienced perfect
+video playback. I eventually was able to solve the problem by setting
+the HDMI input source name to PC and disabling Auto Motion Plus
+features. It seems like this tells the Samsung set to stop any extra
+processing that causes and occasional stutter.</p>
+<p>Hope this helps someone out there!</p>
+<p>UPDATE: I found that turning off "de-interlacing" in the ATI catalyst
+settings eliminated this effect. Try that in addition to the above steps</p>
+      </div>
+    </diV>
+  </div>
+</div>	
+<br>
+<hr/>
+</ul>
+<div class='article'>
+    <h3>Implementing Jquery Tablesorter Natural Sort Plugin As Text Sort</h3>
+  <div class="row">
+    <div class="span4">
+      <div class="well well-small">
+        <ul class="unstyled">
+  <li><i class="icon-time"></i> <a class="more" href="../posts/2011/11/04/implementing-jquery-tablesorter-natural-sort-plugin-as-text-sort/">Friday, November 04 2011 10:55 PM</a> </li> 
+  <li><i class="icon-pencil"></i> <a class="url fn" href="../author/admin.html">Admin</a> </li>
+  <li>
+  <i class="icon-tags"></i> 
+    </li>
+  <!-- <li><i class="icon-folder-open"></i> <a href="../category/programming.html">Programming</a></li> -->
+</ul>        <i class="icon-comments-alt"></i> <a href="../posts/2011/11/04/implementing-jquery-tablesorter-natural-sort-plugin-as-text-sort/#disqus_thread"></a>      </div>
+    </div>
+    <div class="span8">
+      <div class="summary">
+        <p>I have been doing quite a bit of web programming lately and was recently
+trying to figure out how to get the jquery plugin '<a href="http://tablesorter.com/docs/">tablesorter</a>' to
+perform a natural sort.</p>
+<p>For those not aware of what natural sort is, it is the way in which
+human beings tend to sort things intuitively (hence the prefix
+'natural'). In fact, [coding horror as a pretty good article about
+natural sort and how tough it can be][]. To cut the story short, it
+ensures that word19 comes after word2 in a sorted list (a typical sort
+would place word2 after, since the ascii characters in the 5th position
+define the sort order).</p>
+<p>Now, normally implementing a natural sort is not so difficult depending
+on the language, you basically split up the areas of the string that
+represent digits, and then sort each substring piece in order (string
+order if two strings, numeric order if two digits). Unfortunately, the
+javascript tablesorter plugin allows you to sort by providing a function
+that takes an element to be sorted and transforms it into a different
+string or number that must be sorted EITHER numerical OR textually, but
+not both.</p>
+<p>Looking around online didn't yield any good solutions aside from,
+"implement a jquery plugin". So I got to wondering what how it could be
+done. These plugins could take the either table or cell as an argument
+but then you'd have to remain stateless and re-perform the entire
+natural sort over again. It may be possible to also use the jquery data
+api to store data about a table to be sorted and then fetch it on each
+call (performing the natural sort once and assigning ids to each cell or
+something).</p>
+<p>It got me wondering about formulating a natural sorting algorithm as a
+numeric or textual sort. So I tried to prove if it could be done. I tend
+to get carried away and engrossed by certain little challenges like
+this:</p>
+<p>1.) Natural Sort As Numeric Sort</p>
+<p>This should become clear shortly that natural sort cannot be easily
+implemented as a stateless numerical sort. Since you are ultimately
+converting the string to a number, you can simply make the string longer
+to produce a bigger number and mess up the sort order.</p>
+<p>2.) Natural Sort As Textual Sort</p>
+<p>This seemed like it could work. A textual sort is just a sequential
+comparison of ascii coded bytes, each with a numeric value. Natural sort
+is also a set of sequential comparison operations that ultimately break
+down to numeric comparisons. One simply needs to convert the numeric
+pieces into a string of characters preserving the same order as the
+numeric sort, then create a new string with these numeric characters
+replaced.</p>
+<p>I decided to follow the original idea of ascii code comparisons, and I
+decided to convert each number to a fixed length string in which each
+digit is a base 127 or 256 number. Why 127 or 256? They represent
+standard and extended ascii code length and ensure that the values
+always fall without the proper range. String needs to be fixed length so
+that all numerals are compared equally (longer numbers won't be
+incorrectly compared against smaller numbers). The length of your string
+determines the maximum size of any numeric segment. That means that
+using a N digit base 127 string gives you 127\^(N-1) numbers. At 10
+digits, thats 3x10\^18 numbers. If you use base 256 you get 21 decimal
+places. Technically you can go even higher with UTF8.</p>
+<p>Anyway, here is my solution (excuse my probably ugly javascript,
+truthfully its one of the first javascript functions I've written from
+scratch).</p>
+<div class="codehilite"><pre>  <span class="nx">ts</span><span class="p">.</span><span class="nx">addParser</span><span class="p">({</span>
+  <span class="nx">id</span><span class="o">:</span> <span class="s2">&quot;natural&quot;</span><span class="p">,</span>
+  <span class="nx">is</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">s</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+  <span class="p">},</span>
+  <span class="nx">format</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">s</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">var</span> <span class="nx">ret</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">;</span>
+  <span class="kd">var</span> <span class="nx">num_str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">;</span>
+  <span class="kd">var</span> <span class="nx">base_num</span> <span class="o">=</span> <span class="mi">256</span><span class="p">;</span>
+  <span class="kd">var</span> <span class="nx">fixed_len</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+  <span class="kd">var</span> <span class="nx">num_to_ascii_len_str</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">base</span><span class="p">,</span> <span class="nx">max_len</span><span class="p">,</span> <span class="nx">num</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">tmp</span> <span class="o">=</span> <span class="nx">num</span><span class="p">;</span>
+    <span class="kd">var</span> <span class="nx">ret</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">;</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">max_len</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span>
+    <span class="p">{</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">tmp</span> <span class="o">&gt;</span> <span class="nx">base</span><span class="p">)</span>
+      <span class="p">{</span>
+        <span class="kd">var</span> <span class="nx">div</span> <span class="o">=</span> <span class="nx">tmp</span> <span class="o">/</span> <span class="nx">base</span><span class="p">;</span>
+        <span class="nx">tmp</span> <span class="o">=</span> <span class="nx">tmp</span> <span class="o">-</span> <span class="nx">div</span> <span class="o">*</span> <span class="nx">base</span><span class="p">;</span>
+        <span class="nx">ret</span> <span class="o">=</span> <span class="nb">String</span><span class="p">.</span><span class="nx">fromCharCode</span><span class="p">(</span><span class="nx">div</span><span class="p">)</span> <span class="o">+</span> <span class="nx">ret</span><span class="p">;</span>
+      <span class="p">}</span>
+      <span class="k">else</span>
+      <span class="p">{</span>
+        <span class="nx">ret</span> <span class="o">=</span> <span class="nb">String</span><span class="p">.</span><span class="nx">fromCharCode</span><span class="p">(</span><span class="nx">tmp</span><span class="p">)</span> <span class="o">+</span> <span class="nx">ret</span><span class="p">;</span>
+        <span class="nx">tmp</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="nx">ret</span><span class="p">;</span>
+  <span class="p">};</span>
+  <span class="k">for</span><span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">s</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="nx">code</span> <span class="o">=</span> <span class="nx">s</span><span class="p">.</span><span class="nx">charCodeAt</span><span class="p">(</span><span class="nx">i</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">code</span> <span class="o">&gt;</span> <span class="mi">47</span> <span class="o">&amp;&amp;</span> <span class="nx">code</span> <span class="o">&lt;</span> <span class="mi">58</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">num_str</span> <span class="o">=</span> <span class="nx">num_str</span> <span class="o">+</span> <span class="nx">s</span><span class="p">.</span><span class="nx">charAt</span><span class="p">(</span><span class="nx">i</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="k">else</span><span class="p">{</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">num_str</span><span class="p">.</span><span class="nx">length</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span>
+      <span class="p">{</span>
+        <span class="nx">ret</span> <span class="o">=</span> <span class="nx">ret</span> <span class="o">+</span> <span class="nx">num_to_ascii_len_str</span><span class="p">(</span><span class="nx">base_num</span><span class="p">,</span> <span class="nx">fixed_len</span><span class="p">,</span>
+            <span class="nb">parseInt</span><span class="p">(</span><span class="nx">num_str</span><span class="p">));</span>
+        <span class="nx">num_str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">;</span>
+      <span class="p">}</span>
+      <span class="k">else</span>
+      <span class="p">{</span>
+        <span class="nx">ret</span> <span class="o">=</span> <span class="nx">ret</span> <span class="o">+</span> <span class="nx">s</span><span class="p">.</span><span class="nx">charAt</span><span class="p">(</span><span class="nx">i</span><span class="p">);</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">num_str</span><span class="p">.</span><span class="nx">length</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="nx">ret</span> <span class="o">=</span> <span class="nx">ret</span> <span class="o">+</span> <span class="nx">num_to_ascii_len_str</span><span class="p">(</span><span class="nx">base_num</span><span class="p">,</span> <span class="nx">fixed_len</span><span class="p">,</span>
+        <span class="nb">parseInt</span><span class="p">(</span><span class="nx">num_str</span><span class="p">));</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="nx">ret</span><span class="p">;</span>
+  <span class="p">},</span>
+  <span class="nx">type</span><span class="o">:</span> <span class="s2">&quot;text&quot;</span>
+  <span class="p">});</span>
+</pre></div>
+
+
+<p>Hope this helps someone out there, as this kind of thing is useful but
+not easily found. Oh and if anyone can figure out if its possible for
+formulate this as a numeric sort or knows a better way to do this in the
+context of the tablesorter plugin, please share!</p>
+<p>[coding horror as a pretty good article about natural sort and how
+  tough it can be]: http://www.codinghorror.com/blog/2007/12/sorting-for-humans-natural-sort-order.html</p>
+      </div>
+    </diV>
+  </div>
+</div>	
+<br>
+<hr/>
+</ul>
+
+<div class="pagination">
+  <ul>
+            <li class="prev"><a href="../author/admin5.html">&larr; Previous</a></li>
+            <li class=""><a href="../author/admin.html">1</a></li>
+        <li class=""><a href="../author/admin2.html">2</a></li>
+        <li class=""><a href="../author/admin3.html">3</a></li>
+        <li class=""><a href="../author/admin4.html">4</a></li>
+        <li class=""><a href="../author/admin5.html">5</a></li>
+        <li class="active"><a href="../author/admin6.html">6</a></li>
+        <li class=""><a href="../author/admin7.html">7</a></li>
+        <li class=""><a href="../author/admin8.html">8</a></li>
+        <li class=""><a href="../author/admin9.html">9</a></li>
+        <li class=""><a href="../author/admin10.html">10</a></li>
+        <li class=""><a href="../author/admin11.html">11</a></li>
+        <li class=""><a href="../author/admin12.html">12</a></li>
+            <li class="next"><a href="../author/admin7.html">Next &rarr;</a></li>
+      </ul>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    <footer class="footer">
+    <div class="container">
+      <p> 
+                <a href="https://facebook.com/daniel.sousa"><i class="icon-color-facebook icon-2x icon-facebook-sign"></i></a>
+                        <a href="http://twitter.com/dandesousa"><i class="icon-color-twitter icon-2x icon-twitter-sign"></i></a>
+                        <a href="https://github.com/dandesousa"><i class="icon-color-github icon-2x icon-github-alt"></i></a>
+              </p>
+      <p><a href="http://github.com/minksoftware/pelican-showcase">Showcase</a> based on <a href="http://twitter.github.com/bootstrap/">Bootstrap, from Twitter</a>.</p>
+      <p><a href="http://fortawesome.github.com/Font-Awesome">Font Awesome by Dave Gandy</a></p>
+      <p>&copy;  Dan DeSousa  2013</p>
+    </div>
+    </footer>
+
+    <script type="text/javascript">
+/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+var disqus_shortname = 'example'; // required: replace example with your forum shortname
+
+/* * * DON'T EDIT BELOW THIS LINE * * */
+(function () {
+var s = document.createElement('script'); s.async = true;
+s.type = 'text/javascript';
+s.src = 'http://' + disqus_shortname + '.disqus.com/count.js';
+(document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+}());
+</script>  </body>
+</html>

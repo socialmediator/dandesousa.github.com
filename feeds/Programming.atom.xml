@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Dan DeSousa's Blog</title><link href="http://dandesousa.com/" rel="alternate"></link><link href="http://dandesousa.com/feeds/Programming.atom.xml" rel="self"></link><id>http://dandesousa.com/</id><updated>2011-12-11T21:46:00-05:00</updated><entry><title>[Boost.Python] Calling back into python from native C++ threads</title><link href="http://dandesousa.com/boostpython-calling-back-into-python-from-native-c-threads.html" rel="alternate"></link><updated>2011-12-11T21:46:00-05:00</updated><author><name>Admin</name></author><id>tag:dandesousa.com,2011-12-11:boostpython-calling-back-into-python-from-native-c-threads.html</id><summary type="html">&lt;p&gt;So I came across a particularly frustrating problem dealing with a boost
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Dan DeSousa's Blog</title><link href="http://dandesousa.com/" rel="alternate"></link><link href="http://dandesousa.com/feeds/Programming.atom.xml" rel="self"></link><id>http://dandesousa.com/</id><updated>2011-12-11T21:46:00-05:00</updated><entry><title>[Boost.Python] Calling back into python from native C++ threads</title><link href="http://dandesousa.com/posts/2011/12/11/boostpython-calling-back-into-python-from-native-c-threads/" rel="alternate"></link><updated>2011-12-11T21:46:00-05:00</updated><author><name>Admin</name></author><id>tag:dandesousa.com,2011-12-11:posts/2011/12/11/boostpython-calling-back-into-python-from-native-c-threads/</id><summary type="html">&lt;p&gt;So I came across a particularly frustrating problem dealing with a boost
 python wrapper around a library which is calling python functions from
 native c++ threads (boost threads in this case). The problem was that
 some calls to release the global interpreter lock would cause python to
@@ -76,7 +76,7 @@ information was extremely hard to find, so hopefully this helps someone
 out there from losing hours of time. &lt;a href="http://stackoverflow.com/questions/8451334/why-is-pygilstate-release-throwing-fatal-python-errors/8469304#8469304"&gt;Also, here is a link to the stack
 overflow question I eventually posted and quickly subsequently
 answered&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;Enjoy.&lt;/p&gt;</summary><category term="python"></category><category term="c++"></category><category term="programming"></category><category term="boost"></category></entry><entry><title>Implementing jQuery tablesorter natural sort plugin as text sort</title><link href="http://dandesousa.com/implementing-jquery-tablesorter-natural-sort-plugin-as-text-sort.html" rel="alternate"></link><updated>2011-11-04T22:55:00-04:00</updated><author><name>Admin</name></author><id>tag:dandesousa.com,2011-11-04:implementing-jquery-tablesorter-natural-sort-plugin-as-text-sort.html</id><summary type="html">&lt;p&gt;I have been doing quite a bit of web programming lately and was recently
+&lt;p&gt;Enjoy.&lt;/p&gt;</summary><category term="python"></category><category term="c++"></category><category term="programming"></category><category term="boost"></category></entry><entry><title>Implementing jQuery tablesorter natural sort plugin as text sort</title><link href="http://dandesousa.com/posts/2011/11/04/implementing-jquery-tablesorter-natural-sort-plugin-as-text-sort/" rel="alternate"></link><updated>2011-11-04T22:55:00-04:00</updated><author><name>Admin</name></author><id>tag:dandesousa.com,2011-11-04:posts/2011/11/04/implementing-jquery-tablesorter-natural-sort-plugin-as-text-sort/</id><summary type="html">&lt;p&gt;I have been doing quite a bit of web programming lately and was recently
 trying to figure out how to get the jquery plugin '&lt;a href="http://tablesorter.com/docs/"&gt;tablesorter&lt;/a&gt;' to
 perform a natural sort.&lt;/p&gt;
 &lt;p&gt;For those not aware of what natural sort is, it is the way in which
@@ -199,7 +199,7 @@ not easily found. Oh and if anyone can figure out if its possible for
 formulate this as a numeric sort or knows a better way to do this in the
 context of the tablesorter plugin, please share!&lt;/p&gt;
 &lt;p&gt;[coding horror as a pretty good article about natural sort and how
-  tough it can be]: http://www.codinghorror.com/blog/2007/12/sorting-for-humans-natural-sort-order.html&lt;/p&gt;</summary></entry><entry><title>How To Fix iOS Memory Leaks Coming From UIKit</title><link href="http://dandesousa.com/how-to-fix-ios-memory-leaks-coming-from-uikit.html" rel="alternate"></link><updated>2011-02-11T21:10:00-05:00</updated><author><name>Admin</name></author><id>tag:dandesousa.com,2011-02-11:how-to-fix-ios-memory-leaks-coming-from-uikit.html</id><summary type="html">&lt;p&gt;It looks as though I'm going to be posting a number of troubleshooting
+  tough it can be]: http://www.codinghorror.com/blog/2007/12/sorting-for-humans-natural-sort-order.html&lt;/p&gt;</summary></entry><entry><title>How To Fix iOS Memory Leaks Coming From UIKit</title><link href="http://dandesousa.com/posts/2011/02/11/how-to-fix-ios-memory-leaks-coming-from-uikit/" rel="alternate"></link><updated>2011-02-11T21:10:00-05:00</updated><author><name>Admin</name></author><id>tag:dandesousa.com,2011-02-11:posts/2011/02/11/how-to-fix-ios-memory-leaks-coming-from-uikit/</id><summary type="html">&lt;p&gt;It looks as though I'm going to be posting a number of troubleshooting
 iOS SDK and objective-c guides in the coming weeks. The first deals with
 memory leaks coming from UIKit and QuartzCore.&lt;/p&gt;
 &lt;p&gt;If you are using the leaks tool included with Instruments and XCode, you
@@ -224,7 +224,7 @@ This may seem totally counterintuitive since retain properties should
 properly free all held memory when nil is set, but actually the second
 step is required when dealing with UI components, otherwise it will
 result it leaks that appear to originate from UIKit or other Apple
-libraries. Be very careful that all IBOutlets are set to nil.&lt;/p&gt;</summary></entry><entry><title>iOS EXC_BAD_ACCESS error when navigating to/from nib</title><link href="http://dandesousa.com/ios-exc_bad_access-error-when-navigating-tofrom-nib.html" rel="alternate"></link><updated>2010-11-27T13:01:00-05:00</updated><author><name>Admin</name></author><id>tag:dandesousa.com,2010-11-27:ios-exc_bad_access-error-when-navigating-tofrom-nib.html</id><summary type="html">&lt;p&gt;As I have begun the trek towards mastering objective-c, I've come to
+libraries. Be very careful that all IBOutlets are set to nil.&lt;/p&gt;</summary></entry><entry><title>iOS EXC_BAD_ACCESS error when navigating to/from nib</title><link href="http://dandesousa.com/posts/2010/11/27/ios-exc_bad_access-error-when-navigating-tofrom-nib/" rel="alternate"></link><updated>2010-11-27T13:01:00-05:00</updated><author><name>Admin</name></author><id>tag:dandesousa.com,2010-11-27:posts/2010/11/27/ios-exc_bad_access-error-when-navigating-tofrom-nib/</id><summary type="html">&lt;p&gt;As I have begun the trek towards mastering objective-c, I've come to
 appreciate the memory management nuances. I came across a problem where
 when navigating backwards in a table view, the application would just
 crash with an EXC_BAD_ACCESS error. If you see this it is most likely
@@ -250,7 +250,7 @@ the controller you are in:&lt;/p&gt;
 
 
 &lt;p&gt;Hope this helps someone out there. &lt;a href="http://developer.apple.com/library/mac/#documentation/Cocoa/Conceptual/MemoryMgmt/Articles/mmNibObjects.html"&gt;Here are the details of how to
-manage memory in NIBS for Mac OS or iOS.&lt;/a&gt;&lt;/p&gt;</summary><category term="iphone"></category><category term="memory management"></category><category term="objective-c"></category><category term="UITableView"></category></entry><entry><title>Copying Test and Data Files to Build Directory in C# .NET Unit Tests</title><link href="http://dandesousa.com/copying-test-and-data-files-to-build-directory-in-c-net-unit-tests.html" rel="alternate"></link><updated>2010-10-02T08:20:00-04:00</updated><author><name>Admin</name></author><id>tag:dandesousa.com,2010-10-02:copying-test-and-data-files-to-build-directory-in-c-net-unit-tests.html</id><summary type="html">&lt;p&gt;Unit testing with VS2010's built in unit testing facilities is
+manage memory in NIBS for Mac OS or iOS.&lt;/a&gt;&lt;/p&gt;</summary><category term="iphone"></category><category term="memory management"></category><category term="objective-c"></category><category term="UITableView"></category></entry><entry><title>Copying Test and Data Files to Build Directory in C# .NET Unit Tests</title><link href="http://dandesousa.com/posts/2010/10/02/copying-test-and-data-files-to-build-directory-in-c-net-unit-tests/" rel="alternate"></link><updated>2010-10-02T08:20:00-04:00</updated><author><name>Admin</name></author><id>tag:dandesousa.com,2010-10-02:posts/2010/10/02/copying-test-and-data-files-to-build-directory-in-c-net-unit-tests/</id><summary type="html">&lt;p&gt;Unit testing with VS2010's built in unit testing facilities is
 especially convenient. However it is no always clear how to specific
 that an entire directory should be copied into the build / test
 directory as data. Aside from setting up pre- and post- build rules,
@@ -280,7 +280,7 @@ directories contents to also be copied over.&lt;/p&gt;
 &lt;/p&gt;
 
 &lt;p&gt;&lt;a href="http://dans-coding-examples.googlecode.com/files/UnitTestingProject.zip"&gt;Download Code.&lt;/a&gt;&lt;/p&gt;
-&lt;/p&gt;</summary><category term=".net"></category><category term="unit testing"></category></entry><entry><title>Windows Phone 7: Making an HTTP Request</title><link href="http://dandesousa.com/windows-phone-7-making-an-http-request.html" rel="alternate"></link><updated>2010-08-30T22:20:00-04:00</updated><author><name>Admin</name></author><id>tag:dandesousa.com,2010-08-30:windows-phone-7-making-an-http-request.html</id><summary type="html">&lt;p&gt;Silverlight and the Windows Phone 7 SDK include the standard System.Net
+&lt;/p&gt;</summary><category term=".net"></category><category term="unit testing"></category></entry><entry><title>Windows Phone 7: Making an HTTP Request</title><link href="http://dandesousa.com/posts/2010/08/30/windows-phone-7-making-an-http-request/" rel="alternate"></link><updated>2010-08-30T22:20:00-04:00</updated><author><name>Admin</name></author><id>tag:dandesousa.com,2010-08-30:posts/2010/08/30/windows-phone-7-making-an-http-request/</id><summary type="html">&lt;p&gt;Silverlight and the Windows Phone 7 SDK include the standard System.Net
 packages for making various requests over ftp and http. Making a
 standard http request in C# involves setting up a number of delegates
 and asynchronous callbacks for getting http responses and can be a tad
@@ -313,7 +313,7 @@ take when it is completed as c_DownloadStringCompleted event handler.
 You may want to do something different than place it in an xml reader
 (in this case the string we are getting back corresponds to a non-xhtml
  xml file. Enjoy.&lt;/p&gt;
-&lt;/p&gt;</summary><category term=".net"></category><category term="C#"></category><category term="Windows Phone 7"></category><category term="WP7"></category></entry><entry><title>Windows Phone 7: ListBox Item Horizontal Width Stretch</title><link href="http://dandesousa.com/windows-phone-7-listbox-item-horizontal-width-stretch.html" rel="alternate"></link><updated>2010-08-29T17:15:00-04:00</updated><author><name>Admin</name></author><id>tag:dandesousa.com,2010-08-29:windows-phone-7-listbox-item-horizontal-width-stretch.html</id><summary type="html">&lt;p&gt;I have spent most of the day today working on a Windows Phone 7 app I
+&lt;/p&gt;</summary><category term=".net"></category><category term="C#"></category><category term="Windows Phone 7"></category><category term="WP7"></category></entry><entry><title>Windows Phone 7: ListBox Item Horizontal Width Stretch</title><link href="http://dandesousa.com/posts/2010/08/29/windows-phone-7-listbox-item-horizontal-width-stretch/" rel="alternate"></link><updated>2010-08-29T17:15:00-04:00</updated><author><name>Admin</name></author><id>tag:dandesousa.com,2010-08-29:posts/2010/08/29/windows-phone-7-listbox-item-horizontal-width-stretch/</id><summary type="html">&lt;p&gt;I have spent most of the day today working on a Windows Phone 7 app I
 hope to have ready for launch this fall / winter. I figured that
 adoption of the platform and generation of apps is good for all of us as
 it generates hype for the platform and facilitates development. So I
@@ -389,7 +389,7 @@ the ListBox in red.&lt;/p&gt;
 &lt;h2&gt;Conclusions&lt;/h2&gt;
 &lt;p&gt;Although unintuitive this should get the job done. Hopefully Microsoft
 can make some of these details more straightforward before the final
-release or in updated versions of .NET.&lt;/p&gt;</summary><category term=".net"></category><category term="C#"></category><category term="WP7"></category></entry><entry><title>Asynchronous Data Binding in .NET (C#)</title><link href="http://dandesousa.com/asynchronous-data-binding-in-net-c.html" rel="alternate"></link><updated>2010-08-07T16:31:00-04:00</updated><author><name>Admin</name></author><id>tag:dandesousa.com,2010-08-07:asynchronous-data-binding-in-net-c.html</id><summary type="html">&lt;p&gt;Asynchronous operations are prevalent in all manner of modern systems,
+release or in updated versions of .NET.&lt;/p&gt;</summary><category term=".net"></category><category term="C#"></category><category term="WP7"></category></entry><entry><title>Asynchronous Data Binding in .NET (C#)</title><link href="http://dandesousa.com/posts/2010/08/07/asynchronous-data-binding-in-net-c/" rel="alternate"></link><updated>2010-08-07T16:31:00-04:00</updated><author><name>Admin</name></author><id>tag:dandesousa.com,2010-08-07:posts/2010/08/07/asynchronous-data-binding-in-net-c/</id><summary type="html">&lt;p&gt;Asynchronous operations are prevalent in all manner of modern systems,
 desktop and web applications. Doing this in .NET is relatively easy as
 Microsoft has provided us with a built in mechanism for binding data.&lt;/p&gt;
 &lt;p&gt;Specifically in WPF, we can perform databinding simply by providing a
@@ -447,7 +447,7 @@ ensure that the UI thread is not held up, whichever property you are
 bound to must have its data dispatched from another thread or launch a
 thread. This will ensure that retrieving the property will take slightly
 long and make the UI thread run smooth (user interactions will take
-precedent).&lt;/p&gt;</summary><category term=".net"></category><category term="C#"></category><category term="Programming"></category></entry><entry><title>Microsoft Solver Foundation for Quadratic Programming</title><link href="http://dandesousa.com/microsoft-solver-foundation-for-quadratic-programming.html" rel="alternate"></link><updated>2010-07-15T21:55:00-04:00</updated><author><name>Admin</name></author><id>tag:dandesousa.com,2010-07-15:microsoft-solver-foundation-for-quadratic-programming.html</id><summary type="html">&lt;p&gt;The Microsoft Solver Foundation provides some excellent APIs for solving
+precedent).&lt;/p&gt;</summary><category term=".net"></category><category term="C#"></category><category term="Programming"></category></entry><entry><title>Microsoft Solver Foundation for Quadratic Programming</title><link href="http://dandesousa.com/posts/2010/07/15/microsoft-solver-foundation-for-quadratic-programming/" rel="alternate"></link><updated>2010-07-15T21:55:00-04:00</updated><author><name>Admin</name></author><id>tag:dandesousa.com,2010-07-15:posts/2010/07/15/microsoft-solver-foundation-for-quadratic-programming/</id><summary type="html">&lt;p&gt;The Microsoft Solver Foundation provides some excellent APIs for solving
 optimization problems in C# .NET. Getting to documentation about the
 Quadratic Programming facilities can be a bit tricky though. I've added
 below some sample code to help out with this.&lt;/p&gt;
@@ -496,7 +496,7 @@ give it a shot yourself.&lt;/p&gt;
 as well. Its the official blog of one of the key developers on the
 project, specifically the links to tutorial on the quadratic programming
 solver.&lt;/p&gt;
-&lt;p&gt;&lt;a href="http://blogs.msdn.com/b/natbr/archive/2009/09/24/using-the-solver-foundation-interior-point-solver.aspx"&gt;Nathan Brixius' QP Solver Tutorial&lt;/a&gt;&lt;/p&gt;</summary><category term=".net"></category><category term="C#"></category><category term="math"></category></entry><entry><title>ChessGL3d Demo Video</title><link href="http://dandesousa.com/chessgl3d-demo-video.html" rel="alternate"></link><updated>2010-03-11T14:29:00-05:00</updated><author><name>Admin</name></author><id>tag:dandesousa.com,2010-03-11:chessgl3d-demo-video.html</id><summary type="html">&lt;div style="text-align: left; padding: 3px;"&gt;
+&lt;p&gt;&lt;a href="http://blogs.msdn.com/b/natbr/archive/2009/09/24/using-the-solver-foundation-interior-point-solver.aspx"&gt;Nathan Brixius' QP Solver Tutorial&lt;/a&gt;&lt;/p&gt;</summary><category term=".net"></category><category term="C#"></category><category term="math"></category></entry><entry><title>ChessGL3d Demo Video</title><link href="http://dandesousa.com/posts/2010/03/11/chessgl3d-demo-video/" rel="alternate"></link><updated>2010-03-11T14:29:00-05:00</updated><author><name>Admin</name></author><id>tag:dandesousa.com,2010-03-11:posts/2010/03/11/chessgl3d-demo-video/</id><summary type="html">&lt;div style="text-align: left; padding: 3px;"&gt;
 &lt;object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" width="500" height="313" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,40,0"&gt;
 &lt;param name="data" value="http://www.flickr.com/apps/video/stewart.swf?v=71377"&gt;&lt;/param&gt;&lt;param name="flashvars" value="intl_lang=en-us&amp;amp;photo_secret=6ee39f773e&amp;amp;photo_id=4425552860&amp;amp;flickr_show_info_box=true"&gt;&lt;/param&gt;&lt;param name="bgcolor" value="#000000"&gt;&lt;/param&gt;&lt;param name="allowFullScreen" value="true"&gt;&lt;/param&gt;&lt;param name="src" value="http://www.flickr.com/apps/video/stewart.swf?v=71377"&gt;&lt;/param&gt;&lt;param name="allowfullscreen" value="true"&gt;&lt;/param&gt;
 
@@ -515,7 +515,7 @@ originally uploaded by [dandesousa][].&lt;/span&gt;
 
 &lt;p&gt;Here is a demo video for my 3d chess game. See the games page for more
 details.&lt;/p&gt;
-&lt;/p&gt;</summary><category term="chess"></category><category term="graphics"></category><category term="opengl"></category></entry><entry><title>OpenGL Display Lists And Sub Windows</title><link href="http://dandesousa.com/opengl-display-lists-and-sub-windows.html" rel="alternate"></link><updated>2010-03-06T21:02:00-05:00</updated><author><name>Admin</name></author><id>tag:dandesousa.com,2010-03-06:opengl-display-lists-and-sub-windows.html</id><summary type="html">&lt;p&gt;I recently discovered after some needless frustration, that you need to
+&lt;/p&gt;</summary><category term="chess"></category><category term="graphics"></category><category term="opengl"></category></entry><entry><title>OpenGL Display Lists And Sub Windows</title><link href="http://dandesousa.com/posts/2010/03/06/opengl-display-lists-and-sub-windows/" rel="alternate"></link><updated>2010-03-06T21:02:00-05:00</updated><author><name>Admin</name></author><id>tag:dandesousa.com,2010-03-06:posts/2010/03/06/opengl-display-lists-and-sub-windows/</id><summary type="html">&lt;p&gt;I recently discovered after some needless frustration, that you need to
 declare display lists that contain model drawing information in all
 windows in which you wish to draw the model. For example, if I say:&lt;/p&gt;
 &lt;p&gt;
@@ -532,7 +532,7 @@ the window. For example&lt;/p&gt;
 
 &lt;/p&gt;
 
-&lt;p&gt;Hope that helps someone out there!&lt;/p&gt;</summary><category term="graphics"></category><category term="opengl"></category></entry><entry><title>Compiling OpenGL on Mac OS X or Linux</title><link href="http://dandesousa.com/compiling-opengl-on-mac-os-x-or-linux.html" rel="alternate"></link><updated>2010-01-16T21:50:00-05:00</updated><author><name>Admin</name></author><id>tag:dandesousa.com,2010-01-16:compiling-opengl-on-mac-os-x-or-linux.html</id><summary type="html">&lt;p&gt;Most linux distributions make it easy to compile programs using OpenGL.
+&lt;p&gt;Hope that helps someone out there!&lt;/p&gt;</summary><category term="graphics"></category><category term="opengl"></category></entry><entry><title>Compiling OpenGL on Mac OS X or Linux</title><link href="http://dandesousa.com/posts/2010/01/16/compiling-opengl-on-mac-os-x-or-linux/" rel="alternate"></link><updated>2010-01-16T21:50:00-05:00</updated><author><name>Admin</name></author><id>tag:dandesousa.com,2010-01-16:posts/2010/01/16/compiling-opengl-on-mac-os-x-or-linux/</id><summary type="html">&lt;p&gt;Most linux distributions make it easy to compile programs using OpenGL.
 Other systems, however, aren't so easy. Here are instructions on how to
 get it running in both platforms.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Ubuntu / Linux&lt;/strong&gt;&lt;/p&gt;
@@ -608,13 +608,13 @@ the following header instead of your linux/mac includes:&lt;/span&gt;&lt;/strong
 &lt;span class="cp"&gt;ifeq &amp;quot;$(OSTYPE)&amp;quot; &amp;quot;Darwin&amp;quot;&lt;/span&gt;
   &lt;span class="nv"&gt;LDFLAGS&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; -framework Carbon -framework OpenGL -framework GLUT
 &lt;span class="cp"&gt;endif&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;</summary></entry><entry><title>Timing Programs in C (Update)</title><link href="http://dandesousa.com/timing-programs-in-c-update.html" rel="alternate"></link><updated>2009-01-25T17:03:00-05:00</updated><author><name>Admin</name></author><id>tag:dandesousa.com,2009-01-25:timing-programs-in-c-update.html</id><summary type="html">&lt;p&gt;So I've decided to try and do at least one useful post a week to
+&lt;/pre&gt;&lt;/div&gt;</summary></entry><entry><title>Timing Programs in C (Update)</title><link href="http://dandesousa.com/posts/2009/01/25/timing-programs-in-c-update/" rel="alternate"></link><updated>2009-01-25T17:03:00-05:00</updated><author><name>Admin</name></author><id>tag:dandesousa.com,2009-01-25:posts/2009/01/25/timing-programs-in-c-update/</id><summary type="html">&lt;p&gt;So I've decided to try and do at least one useful post a week to
 hopefully help a random searcher out. Here is the the updated version of
 how to get millisecond precise wall clock time in C.&lt;/p&gt;
 &lt;p&gt;#include \&amp;lt;sys\time.h&gt;&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;gettimeofday(&amp;amp;tstart, NULL);&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;double t1=tstart.tv_sec+(tstart.tv_usec/1000000.0);&lt;/code&gt;&lt;/p&gt;
-&lt;/p&gt;</summary></entry><entry><title>Timing Programs in C (Why I hate clock())</title><link href="http://dandesousa.com/timing-programs-in-c-why-i-hate-clock.html" rel="alternate"></link><updated>2009-01-16T08:51:00-05:00</updated><author><name>Admin</name></author><id>tag:dandesousa.com,2009-01-16:timing-programs-in-c-why-i-hate-clock.html</id><summary type="html">&lt;p&gt;So in working on a parallel programming assignment for a grad class I
+&lt;/p&gt;</summary></entry><entry><title>Timing Programs in C (Why I hate clock())</title><link href="http://dandesousa.com/posts/2009/01/16/timing-programs-in-c-why-i-hate-clock/" rel="alternate"></link><updated>2009-01-16T08:51:00-05:00</updated><author><name>Admin</name></author><id>tag:dandesousa.com,2009-01-16:posts/2009/01/16/timing-programs-in-c-why-i-hate-clock/</id><summary type="html">&lt;p&gt;So in working on a parallel programming assignment for a grad class I
 needed to time two algorithms, a sequential approach and a parallel
 approach. In doing so I did something like this:&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;clock_t start, finish;&lt;/code&gt;&lt;/p&gt;

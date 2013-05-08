@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Dan DeSousa's Blog</title>
+    <meta name="description" content="">
+    <meta name="author" content="Dan">
+
+    <link href="../../../../../theme/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../../../../theme/css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link href="../../../../../theme/css/font-awesome.min.css" rel="stylesheet">
+    <link href="../../../../../theme/css/showcase.css" rel="stylesheet">
+    <link href="../../../../../theme/css/showcase-icons.css" rel="stylesheet">
+    <link href="../../../../../theme/css/showcase-pygments.css" rel="stylesheet">
+    <script>var _gaq=[['_setAccount','UA-10113677-1'],['_trackPageview']];(function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];g.src='//www.google-analytics.com/ga.js';s.parentNode.insertBefore(g,s)}(document,'script'))</script>
+    <script type="text/javascript">
+	var disqus_identifier = "posts/2010/08/07/asynchronous-data-binding-in-net-c/";
+	(function() {
+		var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+		dsq.src = 'http://dandesousacom.disqus.com/embed.js';
+		(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	})();
+</script>
+  </head>
+  <body>
+    
+    <div class="container site-container">
+      <div class="row">
+        <div class="span12 text-center">
+                    <a style="text-decoration: none" href="../../../../.."><h1>Dan DeSousa's Blog</h1></a>
+                  </div>
+      </div>
+
+      <div class="row">
+        <div class="span12 centered-pills">
+          <ul class="nav nav-pills">
+            <li class="active"><a href="/">Blog</a></li>
+                        <li ><a href="/pages/about">About</a></li>
+                      </ul>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="span12">
+                    <div class='article'>
+  <div class="page-header"><h1>Asynchronous Data Binding In .Net (C#)</h1>
+    <ul class="unstyled">
+  <li><i class="icon-time"></i> <a class="more" href="../../../../../posts/2010/08/07/asynchronous-data-binding-in-net-c/">Saturday, August 07 2010 04:31 PM</a> </li> 
+  <li><i class="icon-pencil"></i> <a class="url fn" href="../../../../../author/admin.html">Admin</a> </li>
+  <li>
+  <i class="icon-tags"></i> 
+    <a href="../../../../../tag/net.html">.net</a>
+    <a href="../../../../../tag/c.html">C#</a>
+    <a href="../../../../../tag/programming.html">Programming</a>
+    </li>
+  <!-- <li><i class="icon-folder-open"></i> <a href="../../../../../category/programming.html">Programming</a></li> -->
+</ul>  </div>
+  <div class="page-content"><p>Asynchronous operations are prevalent in all manner of modern systems,
+desktop and web applications. Doing this in .NET is relatively easy as
+Microsoft has provided us with a built in mechanism for binding data.</p>
+<p>Specifically in WPF, we can perform databinding simply by providing a
+binding target and a binding source. The binding target is the object in
+which the data belongs and the source is the property which it will be
+placed (sort of backwards, but basically they refer to the two
+endpoints). I won't write an entire article on Databinding but instead
+point you to<a href="http://msdn.microsoft.com/en-us/library/ms752347.aspx">MSDN's official documentation on the subject</a>.</p>
+<p>Needless to say Databinding is immensely powerful and greatly simplifies
+how we as developers deal with code in UI space. Now from the Microsoft
+example, assume we have a databinding code snippet that looks like this:</p>
+<div class="codehilite"><pre><span class="n">MyData</span> <span class="n">myDataObject</span> <span class="p">=</span> <span class="k">new</span> <span class="n">MyData</span><span class="p">(</span><span class="n">DateTime</span><span class="p">.</span><span class="n">Now</span><span class="p">);</span>
+<span class="n">Binding</span> <span class="n">myBinding</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Binding</span><span class="p">(</span><span class="s">&quot;MyDataProperty&quot;</span><span class="p">);</span>
+<span class="n">myBinding</span><span class="p">.</span><span class="n">Source</span> <span class="p">=</span> <span class="n">myDataObject</span><span class="p">;</span>
+<span class="n">myText</span><span class="p">.</span><span class="n">SetBinding</span><span class="p">(</span><span class="n">TextBlock</span><span class="p">.</span><span class="n">TextProperty</span><span class="p">,</span> <span class="n">myBinding</span><span class="p">);</span>
+</pre></div>
+
+
+<p>Then if we want to load the data asynchronously we would simply add:</p>
+<div class="codehilite"><pre><span class="n">MyData</span> <span class="n">myDataObject</span> <span class="p">=</span> <span class="k">new</span> <span class="n">MyData</span><span class="p">(</span><span class="n">DateTime</span><span class="p">.</span><span class="n">Now</span><span class="p">);</span>
+<span class="n">Binding</span> <span class="n">myBinding</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Binding</span><span class="p">(</span><span class="s">&quot;MyDataProperty&quot;</span><span class="p">);</span>
+<span class="n">myBinding</span><span class="p">.</span><span class="n">Source</span> <span class="p">=</span> <span class="n">myDataObject</span><span class="p">;</span>
+<span class="n">myText</span><span class="p">.</span><span class="n">SetBinding</span><span class="p">(</span><span class="n">TextBlock</span><span class="p">.</span><span class="n">TextProperty</span><span class="p">,</span> <span class="n">myBinding</span><span class="p">);</span>
+<span class="c1">// Load this asynchronously</span>
+<span class="n">myText</span><span class="p">.</span><span class="n">IsAsync</span> <span class="p">=</span> <span class="k">true</span><span class="p">;</span>
+</pre></div>
+
+
+<p>Which tells the binding to not wait for the value but instead move on
+with any other work while it waits for the value to come in. If you want
+to display a placeholder value, we can set that as well.</p>
+<div class="codehilite"><pre><span class="n">MyData</span> <span class="n">myDataObject</span> <span class="p">=</span> <span class="k">new</span> <span class="n">MyData</span><span class="p">(</span><span class="n">DateTime</span><span class="p">.</span><span class="n">Now</span><span class="p">);</span>
+<span class="n">Binding</span> <span class="n">myBinding</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Binding</span><span class="p">(</span><span class="s">&quot;MyDataProperty&quot;</span><span class="p">);</span>
+<span class="n">myBinding</span><span class="p">.</span><span class="n">Source</span> <span class="p">=</span> <span class="n">myDataObject</span><span class="p">;</span>
+<span class="n">myText</span><span class="p">.</span><span class="n">SetBinding</span><span class="p">(</span><span class="n">TextBlock</span><span class="p">.</span><span class="n">TextProperty</span><span class="p">,</span> <span class="n">myBinding</span><span class="p">);</span>
+<span class="c1">// Load this asynchronously</span>
+<span class="n">myText</span><span class="p">.</span><span class="n">IsAsync</span> <span class="p">=</span> <span class="k">true</span><span class="p">;</span>
+<span class="n">myText</span><span class="p">.</span><span class="n">FallbackValue</span> <span class="p">=</span> <span class="s">&quot;Loading...&quot;</span>
+</pre></div>
+
+
+<p>Which will initially display "Loading..." until the value is ready from
+the bound property. This is useful in situations where you want to load
+an image which may take a while but want to hold some placeholder image
+until it is ready (we see in many mobile applications where data loading
+may be unpredictable and slow).</p>
+<p>If you want to load multiple levels of objects, you can create a
+PriorityBinding object which can contain multiple bindings as above, and
+set each individual Binding object to be asynchronous and it will load
+them in order as it gets them. You can find details about this on
+<a href="http://msdn.microsoft.com/en-us/library/system.windows.data.prioritybinding.aspx">Microsoft's PriorityBinding MSDN documentation page</a>.</p>
+<p>Lastly, remember that just because a value is asynchronous does not mean
+it is automatically loaded from a different thread. If you want to
+ensure that the UI thread is not held up, whichever property you are
+bound to must have its data dispatched from another thread or launch a
+thread. This will ensure that retrieving the property will take slightly
+long and make the UI thread run smooth (user interactions will take
+precedent).</p></div>
+  <br><br>
+  <div>
+    <h2>Comments</h2>
+    <a href="http://twitter.com/share" class="twitter-share-button" data-count="horizontal" data-via="dandesousa">Tweet</a><script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
+    <div id="disqus_thread"></div>      </div>
+</div>	
+        </div>
+      </div>
+    </div>
+
+    <footer class="footer">
+    <div class="container">
+      <p> 
+                <a href="https://facebook.com/daniel.sousa"><i class="icon-color-facebook icon-2x icon-facebook-sign"></i></a>
+                        <a href="http://twitter.com/dandesousa"><i class="icon-color-twitter icon-2x icon-twitter-sign"></i></a>
+                        <a href="https://github.com/dandesousa"><i class="icon-color-github icon-2x icon-github-alt"></i></a>
+              </p>
+      <p><a href="http://github.com/minksoftware/pelican-showcase">Showcase</a> based on <a href="http://twitter.github.com/bootstrap/">Bootstrap, from Twitter</a>.</p>
+      <p><a href="http://fortawesome.github.com/Font-Awesome">Font Awesome by Dave Gandy</a></p>
+      <p>&copy;  Dan DeSousa  2013</p>
+    </div>
+    </footer>
+
+    <script type="text/javascript">
+/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+var disqus_shortname = 'example'; // required: replace example with your forum shortname
+
+/* * * DON'T EDIT BELOW THIS LINE * * */
+(function () {
+var s = document.createElement('script'); s.async = true;
+s.type = 'text/javascript';
+s.src = 'http://' + disqus_shortname + '.disqus.com/count.js';
+(document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+}());
+</script>  </body>
+</html>
