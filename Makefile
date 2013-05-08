@@ -1,5 +1,5 @@
 PELICAN=pelican
-PELICANOPTS=-t timberland
+PELICANOPTS=-t showcase
 
 BASEDIR=$(CURDIR)
 INPUTDIR=$(BASEDIR)/content

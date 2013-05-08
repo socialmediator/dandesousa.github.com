@@ -3,7 +3,7 @@
 # This section should match your Makefile
 ##
 PELICAN=pelican
-PELICANOPTS=
+PELICANOPTS="-t showcase"
 
 BASEDIR=$(pwd)
 INPUTDIR=$BASEDIR/content
