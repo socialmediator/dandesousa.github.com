@@ -38,57 +38,6 @@
                     
 <div class="page-header"><h1>Blog</h1></div>
 <div class='article'>
-    <h3>Openmp And Gcc Optimization</h3>
-  <div class="row">
-    <div class="span4">
-      <div class="well well-small">
-        <ul class="unstyled">
-  <li><i class="icon-time"></i> <a class="more" href="./posts/2009/02/10/openmp-and-gcc-optimization/">Tuesday, February 10 2009 08:34 PM</a> </li> 
-  <li><i class="icon-pencil"></i> <a class="url fn" href="./author/admin.html">Admin</a> </li>
-  <li>
-  <i class="icon-tags"></i> 
-    </li>
-  <!-- <li><i class="icon-folder-open"></i> <a href="./category/articles.html">Articles</a></li> -->
-</ul>        <i class="icon-comments-alt"></i> <a href="./posts/2009/02/10/openmp-and-gcc-optimization/#disqus_thread"></a>      </div>
-    </div>
-    <div class="span8">
-      <div class="summary">
-        <p>So I encountered and interesting little affect while compiling some C
-code in OpenMP using GCC. Seems that my code ran fine without any
-automatic optimization flags (-O2, -O3), but when I turned them on, went
-haywire. The sequential version wasn't affected.</p>
-<p>I tracked down the problem and found that it was actually do to my use
-of the private variable in the OpenMP directive. Here is a sample of the
-problem.</p>
-<div class="codehilite"><pre><span class="cp">#pragma omp parallel</span>
-<span class="p">{</span> 
-<span class="cp">#pragma omp for private(i, j, new_j, skip_next)</span>
-    <span class="k">for</span><span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-        <span class="c1">// Set each thread on one row of the loop</span>
-        <span class="n">skip_next</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-        <span class="k">for</span><span class="p">(</span><span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span>
-        <span class="p">{</span>
-        <span class="p">...</span>
-</pre></div>
-
-
-<p>The problem actually occured because I did not have 'skip_next=0' on
-line 5 of this code. This didn't seem to matter when optimization was
-disabled but did cause incorrect semantics when I turned it on. Seems
-like OpenMP says you must assume that all privates are uninitialized
-when you start a new directive block. If you want them to be private but
-start with some default value, do what I did above or add the variable
-to the firstprivate() attribute instead of the private attribute:</p>
-<div class="codehilite"><pre><span class="cp">#pragma omp for firstprivate(skip_next) private(i, j, new_j)</span>
-</pre></div>
-      </div>
-    </diV>
-  </div>
-</div>	
-<br>
-<hr/>
-</ul>
-<div class='article'>
     <h3>Hf100 + Imagemixer Fix For Startup Freeze</h3>
   <div class="row">
     <div class="span4">
@@ -177,6 +126,51 @@ how to get millisecond precise wall clock time in C.</p>
 <br>
 <hr/>
 </ul>
+<div class='article'>
+    <h3>Timing Programs In C (Why I Hate Clock())</h3>
+  <div class="row">
+    <div class="span4">
+      <div class="well well-small">
+        <ul class="unstyled">
+  <li><i class="icon-time"></i> <a class="more" href="./posts/2009/01/16/timing-programs-in-c-why-i-hate-clock/">Friday, January 16 2009 08:51 AM</a> </li> 
+  <li><i class="icon-pencil"></i> <a class="url fn" href="./author/admin.html">Admin</a> </li>
+  <li>
+  <i class="icon-tags"></i> 
+    </li>
+  <!-- <li><i class="icon-folder-open"></i> <a href="./category/programming.html">Programming</a></li> -->
+</ul>        <i class="icon-comments-alt"></i> <a href="./posts/2009/01/16/timing-programs-in-c-why-i-hate-clock/#disqus_thread"></a>      </div>
+    </div>
+    <div class="span8">
+      <div class="summary">
+        <p>So in working on a parallel programming assignment for a grad class I
+needed to time two algorithms, a sequential approach and a parallel
+approach. In doing so I did something like this:</p>
+<p><code>clock_t start, finish;</code></p>
+<p><code>start = clock();</code></p>
+<p><code>// do something finish = clock();</code></p>
+<p><code>printf("Time Elapsed: %f", ((double) finish - start) / CLOCKS_PER_SEC);</code></p>
+<p>However this code will give you the wrong time if you are trying to
+compare the runtime between these two types of programs.</p>
+<p>On a sequential algorithm it should produce a good approximation of the
+wall-clock time, or the amount of time that would expire if you timed it
+using a clock on the wall (or stopwatch). But in a parallel algorithm we
+find that it actually gives you a larger time difference.</p>
+<p>This is because in a multi-threaded program you are engaging multiple
+processors (if you have them). Since the clock() gets the number of
+clock ticks for the program, we get back almost 2x as many (on a
+two-core machine).</p>
+<p>Unfortunately I have yet to find a decent way of getting the
+milliseconds for a C program accurately. You can use regular old time()
+to get the seconds, or if you are running on UNIX you can use the time
+command.</p>
+</p>
+      </div>
+    </diV>
+  </div>
+</div>	
+<br>
+<hr/>
+</ul>
 
 <div class="pagination">
   <ul>
@@ -193,7 +187,6 @@ how to get millisecond precise wall clock time in C.</p>
         <li class=""><a href="./index10.html">10</a></li>
         <li class="active"><a href="./index11.html">11</a></li>
         <li class=""><a href="./index12.html">12</a></li>
-        <li class=""><a href="./index13.html">13</a></li>
             <li class="next"><a href="./index12.html">Next &rarr;</a></li>
       </ul>
 </div>

@@ -38,48 +38,6 @@
                     
 <div class="page-header"><h1>Blog</h1></div>
 <div class='article'>
-    <h3>Changing Plexsync Temporary Directory</h3>
-  <div class="row">
-    <div class="span4">
-      <div class="well well-small">
-        <ul class="unstyled">
-  <li><i class="icon-time"></i> <a class="more" href="./posts/2012/11/20/changing-plexsync-temporary-directory/">Tuesday, November 20 2012 08:10 PM</a> </li> 
-  <li><i class="icon-pencil"></i> <a class="url fn" href="./author/admin.html">Admin</a> </li>
-  <li>
-  <i class="icon-tags"></i> 
-    <a href="./tag/plex.html">plex</a>
-    </li>
-  <!-- <li><i class="icon-folder-open"></i> <a href="./category/technology.html">Technology</a></li> -->
-</ul>        <i class="icon-comments-alt"></i> <a href="./posts/2012/11/20/changing-plexsync-temporary-directory/#disqus_thread"></a>      </div>
-    </div>
-    <div class="span8">
-      <div class="summary">
-        <p>Plex just announced a great new syncing feature for iOS devices, but I
-noticed that when I started syncing, my SSD would quickly fill up. It
-turns out that as of the current release of plex server v0.9.7.3, you
-cannot directly change the directory. However, you can change the entire
-local application path for plex. There are instructions on the Plex wiki
-detailing how this is done:</p>
-<p><a href="http://wiki.plexapp.com/index.php/Plex_Media_Server_Preferences#Advanced_Preferences%20%20">Plex Wiki</a></p>
-<p>In my case I set LocalAppDataPath in the registry to my RAID disc which
-has plenty of storage. You'll have to follow the instructions for your
-particular platform.</p>
-<p><strong>IMPORTANT: </strong>Make sure that when you change the path you copy your old
-plex app data directory to preserve all your metadata, thumbnails, and
-database. On Windows, its in "C:/Users/\&lt;USERNAME>/AppData/Local/Plex
-Media Server". Also important, remember that the directory
-Cache/Transcode/Sync <strong>MUST</strong> exist. I tried to delete the cache to save
-myself some transfer time and when I was missing that
-Cache/Transcode/Sync directory, PlexSync would not work at all. Once I
-restored the directory, all was well.</p>
-      </div>
-    </diV>
-  </div>
-</div>	
-<br>
-<hr/>
-</ul>
-<div class='article'>
     <h3>Howto: Setup A Network With Two Internet Connections</h3>
   <div class="row">
     <div class="span4">
@@ -256,6 +214,52 @@ this simple fix should help everyone having headaches with this like me.</p>
 <br>
 <hr/>
 </ul>
+<div class='article'>
+    <h3>Howto Fix: Slow Ssd Boot Times In Mac Os X</h3>
+  <div class="row">
+    <div class="span4">
+      <div class="well well-small">
+        <ul class="unstyled">
+  <li><i class="icon-time"></i> <a class="more" href="./posts/2012/03/07/howto-fix-slow-ssd-boot-times-in-mac-os-x/">Wednesday, March 07 2012 09:31 PM</a> </li> 
+  <li><i class="icon-pencil"></i> <a class="url fn" href="./author/admin.html">Admin</a> </li>
+  <li>
+  <i class="icon-tags"></i> 
+    <a href="./tag/ssd.html">ssd</a>
+    <a href="./tag/apple.html">apple</a>
+    <a href="./tag/macbook.html">macbook</a>
+    <a href="./tag/boot.html">boot</a>
+    </li>
+  <!-- <li><i class="icon-folder-open"></i> <a href="./category/technology.html">Technology</a></li> -->
+</ul>        <i class="icon-comments-alt"></i> <a href="./posts/2012/03/07/howto-fix-slow-ssd-boot-times-in-mac-os-x/#disqus_thread"></a>      </div>
+    </div>
+    <div class="span8">
+      <div class="summary">
+        <p>I recently bought a ssd for my macbook pro and noticed after installing
+and reformatting, the boot times were slow ... about as slow as my hdd
+or even slower. If you have an SSD, you can except boot times around 15
+seconds or so. If you are encountering boot times of 35+ seconds, you
+may have the same problem I had. I was able to solve the problem by
+following these steps:</p>
+<ol>
+<li>System Preferences -> Startup Disk. Make sure that your SSD drive
+    is selected.</li>
+<li>Open Disk Utility and select your drive, and click "Repair Disk
+    Permissions"</li>
+<li><a href="http://support.apple.com/kb/ht1379">Reset your PRAM</a></li>
+<li><a href="http://support.apple.com/kb/HT3964">Reset your SMC</a></li>
+</ol>
+<p></p>
+The final step of reseting the SMC finally fixed this for me, but I had
+tried all the steps before hand, so I cannot be sure which will work for
+you. If you have any comments, please post for the benefit of all
+readers.</p>
+      </div>
+    </diV>
+  </div>
+</div>	
+<br>
+<hr/>
+</ul>
 
 <div class="pagination">
   <ul>
@@ -272,7 +276,6 @@ this simple fix should help everyone having headaches with this like me.</p>
         <li class=""><a href="./index10.html">10</a></li>
         <li class=""><a href="./index11.html">11</a></li>
         <li class=""><a href="./index12.html">12</a></li>
-        <li class=""><a href="./index13.html">13</a></li>
             <li class="next"><a href="./index3.html">Next &rarr;</a></li>
       </ul>
 </div>

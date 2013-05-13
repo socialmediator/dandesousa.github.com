@@ -38,51 +38,6 @@
                     
 <div class="page-header"><h1>Blog</h1></div>
 <div class='article'>
-    <h3>Timing Programs In C (Why I Hate Clock())</h3>
-  <div class="row">
-    <div class="span4">
-      <div class="well well-small">
-        <ul class="unstyled">
-  <li><i class="icon-time"></i> <a class="more" href="./posts/2009/01/16/timing-programs-in-c-why-i-hate-clock/">Friday, January 16 2009 08:51 AM</a> </li> 
-  <li><i class="icon-pencil"></i> <a class="url fn" href="./author/admin.html">Admin</a> </li>
-  <li>
-  <i class="icon-tags"></i> 
-    </li>
-  <!-- <li><i class="icon-folder-open"></i> <a href="./category/programming.html">Programming</a></li> -->
-</ul>        <i class="icon-comments-alt"></i> <a href="./posts/2009/01/16/timing-programs-in-c-why-i-hate-clock/#disqus_thread"></a>      </div>
-    </div>
-    <div class="span8">
-      <div class="summary">
-        <p>So in working on a parallel programming assignment for a grad class I
-needed to time two algorithms, a sequential approach and a parallel
-approach. In doing so I did something like this:</p>
-<p><code>clock_t start, finish;</code></p>
-<p><code>start = clock();</code></p>
-<p><code>// do something finish = clock();</code></p>
-<p><code>printf("Time Elapsed: %f", ((double) finish - start) / CLOCKS_PER_SEC);</code></p>
-<p>However this code will give you the wrong time if you are trying to
-compare the runtime between these two types of programs.</p>
-<p>On a sequential algorithm it should produce a good approximation of the
-wall-clock time, or the amount of time that would expire if you timed it
-using a clock on the wall (or stopwatch). But in a parallel algorithm we
-find that it actually gives you a larger time difference.</p>
-<p>This is because in a multi-threaded program you are engaging multiple
-processors (if you have them). Since the clock() gets the number of
-clock ticks for the program, we get back almost 2x as many (on a
-two-core machine).</p>
-<p>Unfortunately I have yet to find a decent way of getting the
-milliseconds for a C program accurately. You can use regular old time()
-to get the seconds, or if you are running on UNIX you can use the time
-command.</p>
-</p>
-      </div>
-    </diV>
-  </div>
-</div>	
-<br>
-<hr/>
-</ul>
-<div class='article'>
     <h3>Nes Rom Editing</h3>
   <div class="row">
     <div class="span4">
@@ -160,6 +115,47 @@ of it.</p>
 <br>
 <hr/>
 </ul>
+<div class='article'>
+    <h3>Kitten Vs. Ferret (Part 1 -- 6 Weeks)</h3>
+  <div class="row">
+    <div class="span4">
+      <div class="well well-small">
+        <ul class="unstyled">
+  <li><i class="icon-time"></i> <a class="more" href="./posts/2008/10/29/kitten-vs-ferret-part-1-6-weeks/">Wednesday, October 29 2008 09:41 PM</a> </li> 
+  <li><i class="icon-pencil"></i> <a class="url fn" href="./author/admin.html">Admin</a> </li>
+  <li>
+  <i class="icon-tags"></i> 
+    <a href="./tag/cat.html">cat</a>
+    <a href="./tag/ferrets.html">ferrets</a>
+    <a href="./tag/pets.html">Pets</a>
+    </li>
+  <!-- <li><i class="icon-folder-open"></i> <a href="./category/personal.html">Personal</a></li> -->
+</ul>        <i class="icon-comments-alt"></i> <a href="./posts/2008/10/29/kitten-vs-ferret-part-1-6-weeks/#disqus_thread"></a>      </div>
+    </div>
+    <div class="span8">
+      <div class="summary">
+        <p>My roommate just got a kitten and we decided to allow it to interact
+with our ferrets. Seems that it likes to have a good tussle with my
+ferret Jean-Luc. Right now it's not much of a challenge, but should be
+interesting to see what happens when the cat gets older. Here is part 1
+of a series I'll be updating every few weeks.</p>
+<p align="center">
+<object width="425" height="344">
+<param name="movie" value="http://www.youtube.com/v/erlvcrISuPE&amp;hl=en&amp;fs=1"></param><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param>
+
+<embed src="http://www.youtube.com/v/erlvcrISuPE&amp;hl=en&amp;fs=1" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="425" height="344">
+</embed>
+</object>
+</p>
+
+</p>
+      </div>
+    </diV>
+  </div>
+</div>	
+<br>
+<hr/>
+</ul>
 
 <div class="pagination">
   <ul>
@@ -176,8 +172,7 @@ of it.</p>
         <li class=""><a href="./index10.html">10</a></li>
         <li class=""><a href="./index11.html">11</a></li>
         <li class="active"><a href="./index12.html">12</a></li>
-        <li class=""><a href="./index13.html">13</a></li>
-            <li class="next"><a href="./index13.html">Next &rarr;</a></li>
+            <li class="next disabled"><a href="#">&rarr; Next</a></li>
       </ul>
 </div>
 

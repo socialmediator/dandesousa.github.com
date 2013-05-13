@@ -38,52 +38,6 @@
                     
 <div class="page-header"><h1>Blog</h1></div>
 <div class='article'>
-    <h3>Howto Fix: Slow Ssd Boot Times In Mac Os X</h3>
-  <div class="row">
-    <div class="span4">
-      <div class="well well-small">
-        <ul class="unstyled">
-  <li><i class="icon-time"></i> <a class="more" href="./posts/2012/03/07/howto-fix-slow-ssd-boot-times-in-mac-os-x/">Wednesday, March 07 2012 09:31 PM</a> </li> 
-  <li><i class="icon-pencil"></i> <a class="url fn" href="./author/admin.html">Admin</a> </li>
-  <li>
-  <i class="icon-tags"></i> 
-    <a href="./tag/ssd.html">ssd</a>
-    <a href="./tag/apple.html">apple</a>
-    <a href="./tag/macbook.html">macbook</a>
-    <a href="./tag/boot.html">boot</a>
-    </li>
-  <!-- <li><i class="icon-folder-open"></i> <a href="./category/technology.html">Technology</a></li> -->
-</ul>        <i class="icon-comments-alt"></i> <a href="./posts/2012/03/07/howto-fix-slow-ssd-boot-times-in-mac-os-x/#disqus_thread"></a>      </div>
-    </div>
-    <div class="span8">
-      <div class="summary">
-        <p>I recently bought a ssd for my macbook pro and noticed after installing
-and reformatting, the boot times were slow ... about as slow as my hdd
-or even slower. If you have an SSD, you can except boot times around 15
-seconds or so. If you are encountering boot times of 35+ seconds, you
-may have the same problem I had. I was able to solve the problem by
-following these steps:</p>
-<ol>
-<li>System Preferences -> Startup Disk. Make sure that your SSD drive
-    is selected.</li>
-<li>Open Disk Utility and select your drive, and click "Repair Disk
-    Permissions"</li>
-<li><a href="http://support.apple.com/kb/ht1379">Reset your PRAM</a></li>
-<li><a href="http://support.apple.com/kb/HT3964">Reset your SMC</a></li>
-</ol>
-<p></p>
-The final step of reseting the SMC finally fixed this for me, but I had
-tried all the steps before hand, so I cannot be sure which will work for
-you. If you have any comments, please post for the benefit of all
-readers.</p>
-      </div>
-    </diV>
-  </div>
-</div>	
-<br>
-<hr/>
-</ul>
-<div class='article'>
     <h3>[Boost.Python] Calling Back Into Python From Native C++ Threads</h3>
   <div class="row">
     <div class="span4">
@@ -431,6 +385,153 @@ have, what do you want to see in a streaming service that doesn't exist?</p>
 <br>
 <hr/>
 </ul>
+<div class='article'>
+    <h3>Implementing Jquery Tablesorter Natural Sort Plugin As Text Sort</h3>
+  <div class="row">
+    <div class="span4">
+      <div class="well well-small">
+        <ul class="unstyled">
+  <li><i class="icon-time"></i> <a class="more" href="./posts/2011/11/04/implementing-jquery-tablesorter-natural-sort-plugin-as-text-sort/">Friday, November 04 2011 10:55 PM</a> </li> 
+  <li><i class="icon-pencil"></i> <a class="url fn" href="./author/admin.html">Admin</a> </li>
+  <li>
+  <i class="icon-tags"></i> 
+    </li>
+  <!-- <li><i class="icon-folder-open"></i> <a href="./category/programming.html">Programming</a></li> -->
+</ul>        <i class="icon-comments-alt"></i> <a href="./posts/2011/11/04/implementing-jquery-tablesorter-natural-sort-plugin-as-text-sort/#disqus_thread"></a>      </div>
+    </div>
+    <div class="span8">
+      <div class="summary">
+        <p>I have been doing quite a bit of web programming lately and was recently
+trying to figure out how to get the jquery plugin '<a href="http://tablesorter.com/docs/">tablesorter</a>' to
+perform a natural sort.</p>
+<p>For those not aware of what natural sort is, it is the way in which
+human beings tend to sort things intuitively (hence the prefix
+'natural'). In fact, [coding horror as a pretty good article about
+natural sort and how tough it can be][]. To cut the story short, it
+ensures that word19 comes after word2 in a sorted list (a typical sort
+would place word2 after, since the ascii characters in the 5th position
+define the sort order).</p>
+<p>Now, normally implementing a natural sort is not so difficult depending
+on the language, you basically split up the areas of the string that
+represent digits, and then sort each substring piece in order (string
+order if two strings, numeric order if two digits). Unfortunately, the
+javascript tablesorter plugin allows you to sort by providing a function
+that takes an element to be sorted and transforms it into a different
+string or number that must be sorted EITHER numerical OR textually, but
+not both.</p>
+<p>Looking around online didn't yield any good solutions aside from,
+"implement a jquery plugin". So I got to wondering what how it could be
+done. These plugins could take the either table or cell as an argument
+but then you'd have to remain stateless and re-perform the entire
+natural sort over again. It may be possible to also use the jquery data
+api to store data about a table to be sorted and then fetch it on each
+call (performing the natural sort once and assigning ids to each cell or
+something).</p>
+<p>It got me wondering about formulating a natural sorting algorithm as a
+numeric or textual sort. So I tried to prove if it could be done. I tend
+to get carried away and engrossed by certain little challenges like
+this:</p>
+<p>1.) Natural Sort As Numeric Sort</p>
+<p>This should become clear shortly that natural sort cannot be easily
+implemented as a stateless numerical sort. Since you are ultimately
+converting the string to a number, you can simply make the string longer
+to produce a bigger number and mess up the sort order.</p>
+<p>2.) Natural Sort As Textual Sort</p>
+<p>This seemed like it could work. A textual sort is just a sequential
+comparison of ascii coded bytes, each with a numeric value. Natural sort
+is also a set of sequential comparison operations that ultimately break
+down to numeric comparisons. One simply needs to convert the numeric
+pieces into a string of characters preserving the same order as the
+numeric sort, then create a new string with these numeric characters
+replaced.</p>
+<p>I decided to follow the original idea of ascii code comparisons, and I
+decided to convert each number to a fixed length string in which each
+digit is a base 127 or 256 number. Why 127 or 256? They represent
+standard and extended ascii code length and ensure that the values
+always fall without the proper range. String needs to be fixed length so
+that all numerals are compared equally (longer numbers won't be
+incorrectly compared against smaller numbers). The length of your string
+determines the maximum size of any numeric segment. That means that
+using a N digit base 127 string gives you 127\^(N-1) numbers. At 10
+digits, thats 3x10\^18 numbers. If you use base 256 you get 21 decimal
+places. Technically you can go even higher with UTF8.</p>
+<p>Anyway, here is my solution (excuse my probably ugly javascript,
+truthfully its one of the first javascript functions I've written from
+scratch).</p>
+<div class="codehilite"><pre>  <span class="nx">ts</span><span class="p">.</span><span class="nx">addParser</span><span class="p">({</span>
+  <span class="nx">id</span><span class="o">:</span> <span class="s2">&quot;natural&quot;</span><span class="p">,</span>
+  <span class="nx">is</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">s</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+  <span class="p">},</span>
+  <span class="nx">format</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">s</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">var</span> <span class="nx">ret</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">;</span>
+  <span class="kd">var</span> <span class="nx">num_str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">;</span>
+  <span class="kd">var</span> <span class="nx">base_num</span> <span class="o">=</span> <span class="mi">256</span><span class="p">;</span>
+  <span class="kd">var</span> <span class="nx">fixed_len</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+  <span class="kd">var</span> <span class="nx">num_to_ascii_len_str</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">base</span><span class="p">,</span> <span class="nx">max_len</span><span class="p">,</span> <span class="nx">num</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">tmp</span> <span class="o">=</span> <span class="nx">num</span><span class="p">;</span>
+    <span class="kd">var</span> <span class="nx">ret</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">;</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">max_len</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span>
+    <span class="p">{</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">tmp</span> <span class="o">&gt;</span> <span class="nx">base</span><span class="p">)</span>
+      <span class="p">{</span>
+        <span class="kd">var</span> <span class="nx">div</span> <span class="o">=</span> <span class="nx">tmp</span> <span class="o">/</span> <span class="nx">base</span><span class="p">;</span>
+        <span class="nx">tmp</span> <span class="o">=</span> <span class="nx">tmp</span> <span class="o">-</span> <span class="nx">div</span> <span class="o">*</span> <span class="nx">base</span><span class="p">;</span>
+        <span class="nx">ret</span> <span class="o">=</span> <span class="nb">String</span><span class="p">.</span><span class="nx">fromCharCode</span><span class="p">(</span><span class="nx">div</span><span class="p">)</span> <span class="o">+</span> <span class="nx">ret</span><span class="p">;</span>
+      <span class="p">}</span>
+      <span class="k">else</span>
+      <span class="p">{</span>
+        <span class="nx">ret</span> <span class="o">=</span> <span class="nb">String</span><span class="p">.</span><span class="nx">fromCharCode</span><span class="p">(</span><span class="nx">tmp</span><span class="p">)</span> <span class="o">+</span> <span class="nx">ret</span><span class="p">;</span>
+        <span class="nx">tmp</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="nx">ret</span><span class="p">;</span>
+  <span class="p">};</span>
+  <span class="k">for</span><span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">s</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="nx">code</span> <span class="o">=</span> <span class="nx">s</span><span class="p">.</span><span class="nx">charCodeAt</span><span class="p">(</span><span class="nx">i</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">code</span> <span class="o">&gt;</span> <span class="mi">47</span> <span class="o">&amp;&amp;</span> <span class="nx">code</span> <span class="o">&lt;</span> <span class="mi">58</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">num_str</span> <span class="o">=</span> <span class="nx">num_str</span> <span class="o">+</span> <span class="nx">s</span><span class="p">.</span><span class="nx">charAt</span><span class="p">(</span><span class="nx">i</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="k">else</span><span class="p">{</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">num_str</span><span class="p">.</span><span class="nx">length</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span>
+      <span class="p">{</span>
+        <span class="nx">ret</span> <span class="o">=</span> <span class="nx">ret</span> <span class="o">+</span> <span class="nx">num_to_ascii_len_str</span><span class="p">(</span><span class="nx">base_num</span><span class="p">,</span> <span class="nx">fixed_len</span><span class="p">,</span>
+            <span class="nb">parseInt</span><span class="p">(</span><span class="nx">num_str</span><span class="p">));</span>
+        <span class="nx">num_str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">;</span>
+      <span class="p">}</span>
+      <span class="k">else</span>
+      <span class="p">{</span>
+        <span class="nx">ret</span> <span class="o">=</span> <span class="nx">ret</span> <span class="o">+</span> <span class="nx">s</span><span class="p">.</span><span class="nx">charAt</span><span class="p">(</span><span class="nx">i</span><span class="p">);</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">num_str</span><span class="p">.</span><span class="nx">length</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="nx">ret</span> <span class="o">=</span> <span class="nx">ret</span> <span class="o">+</span> <span class="nx">num_to_ascii_len_str</span><span class="p">(</span><span class="nx">base_num</span><span class="p">,</span> <span class="nx">fixed_len</span><span class="p">,</span>
+        <span class="nb">parseInt</span><span class="p">(</span><span class="nx">num_str</span><span class="p">));</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="nx">ret</span><span class="p">;</span>
+  <span class="p">},</span>
+  <span class="nx">type</span><span class="o">:</span> <span class="s2">&quot;text&quot;</span>
+  <span class="p">});</span>
+</pre></div>
+
+
+<p>Hope this helps someone out there, as this kind of thing is useful but
+not easily found. Oh and if anyone can figure out if its possible for
+formulate this as a numeric sort or knows a better way to do this in the
+context of the tablesorter plugin, please share!</p>
+<p>[coding horror as a pretty good article about natural sort and how
+  tough it can be]: http://www.codinghorror.com/blog/2007/12/sorting-for-humans-natural-sort-order.html</p>
+      </div>
+    </diV>
+  </div>
+</div>	
+<br>
+<hr/>
+</ul>
 
 <div class="pagination">
   <ul>
@@ -447,7 +548,6 @@ have, what do you want to see in a streaming service that doesn't exist?</p>
         <li class=""><a href="./index10.html">10</a></li>
         <li class=""><a href="./index11.html">11</a></li>
         <li class=""><a href="./index12.html">12</a></li>
-        <li class=""><a href="./index13.html">13</a></li>
             <li class="next"><a href="./index4.html">Next &rarr;</a></li>
       </ul>
 </div>

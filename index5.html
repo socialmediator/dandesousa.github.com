@@ -38,49 +38,6 @@
                     
 <div class="page-header"><h1>Blog</h1></div>
 <div class='article'>
-    <h3>Htpc Stutter Over Hdmi On Samsung Hdtv</h3>
-  <div class="row">
-    <div class="span4">
-      <div class="well well-small">
-        <ul class="unstyled">
-  <li><i class="icon-time"></i> <a class="more" href="./posts/2011/02/18/htpc-stutter-over-hdmi-on-samsung-hdtv/">Friday, February 18 2011 11:25 PM</a> </li> 
-  <li><i class="icon-pencil"></i> <a class="url fn" href="./author/admin.html">Admin</a> </li>
-  <li>
-  <i class="icon-tags"></i> 
-    <a href="./tag/hdmi.html">hdmi</a>
-    <a href="./tag/samsung.html">samsung</a>
-    <a href="./tag/tv.html">tv</a>
-    <a href="./tag/xbmc.html">xbmc</a>
-    </li>
-  <!-- <li><i class="icon-folder-open"></i> <a href="./category/technology.html">Technology</a></li> -->
-</ul>        <i class="icon-comments-alt"></i> <a href="./posts/2011/02/18/htpc-stutter-over-hdmi-on-samsung-hdtv/#disqus_thread"></a>      </div>
-    </div>
-    <div class="span8">
-      <div class="summary">
-        <p>This will be a quick one. I recently built an HTPC to run XBMC and play
-videos off my file share. I noticed that almost all videos had
-an occasional stutter that would occur every few seconds and produce a
-very slight stutter in the image. This happened for all file types and
-resolutions. I'm running with an integrated ATI HD 4250.</p>
-<p>I eventually figured out that it was my TV settings. I was connecting
-over HDMI and Samsung must do some extra processing or handshaking over
-the HDMI to HTPC. I realized this since I connected my HTPC to my
-monitor at the same resolution (1080p 60hz) and I experienced perfect
-video playback. I eventually was able to solve the problem by setting
-the HDMI input source name to PC and disabling Auto Motion Plus
-features. It seems like this tells the Samsung set to stop any extra
-processing that causes and occasional stutter.</p>
-<p>Hope this helps someone out there!</p>
-<p>UPDATE: I found that turning off "de-interlacing" in the ATI catalyst
-settings eliminated this effect. Try that in addition to the above steps</p>
-      </div>
-    </diV>
-  </div>
-</div>	
-<br>
-<hr/>
-</ul>
-<div class='article'>
     <h3>How To Fix Ios Memory Leaks Coming From Uikit</h3>
   <div class="row">
     <div class="span4">
@@ -165,6 +122,60 @@ following these steps to enabled gestures on your iPad:</p>
 <br>
 <hr/>
 </ul>
+<div class='article'>
+    <h3>Ios Exc_Bad_Access Error When Navigating To/From Nib</h3>
+  <div class="row">
+    <div class="span4">
+      <div class="well well-small">
+        <ul class="unstyled">
+  <li><i class="icon-time"></i> <a class="more" href="./posts/2010/11/27/ios-exc_bad_access-error-when-navigating-tofrom-nib/">Saturday, November 27 2010 01:01 PM</a> </li> 
+  <li><i class="icon-pencil"></i> <a class="url fn" href="./author/admin.html">Admin</a> </li>
+  <li>
+  <i class="icon-tags"></i> 
+    <a href="./tag/iphone.html">iphone</a>
+    <a href="./tag/memory-management.html">memory management</a>
+    <a href="./tag/objective-c.html">objective-c</a>
+    <a href="./tag/uitableview.html">UITableView</a>
+    </li>
+  <!-- <li><i class="icon-folder-open"></i> <a href="./category/programming.html">Programming</a></li> -->
+</ul>        <i class="icon-comments-alt"></i> <a href="./posts/2010/11/27/ios-exc_bad_access-error-when-navigating-tofrom-nib/#disqus_thread"></a>      </div>
+    </div>
+    <div class="span8">
+      <div class="summary">
+        <p>As I have begun the trek towards mastering objective-c, I've come to
+appreciate the memory management nuances. I came across a problem where
+when navigating backwards in a table view, the application would just
+crash with an EXC_BAD_ACCESS error. If you see this it is most likely
+due to accidently mis-managing memory. I fixed my particular error by
+referring to the memory management rules with NIBs. Because of the way
+nibs are access you need to unload IBOutlet properties in the
+viewDidUnload method. Here are examples from apple's documentation:</p>
+<div class="codehilite"><pre><span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">viewDidUnload</span> <span class="p">{</span>
+    <span class="n">self</span><span class="p">.</span><span class="n">anOutlet</span> <span class="o">=</span> <span class="nb">nil</span><span class="p">;</span>
+    <span class="p">[</span><span class="n">super</span> <span class="n">viewDidUnload</span><span class="p">];</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>Also, for some reason you also have to release them in the dealloc for
+the controller you are in:</p>
+<div class="codehilite"><pre><span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">dealloc</span> <span class="p">{</span>
+    <span class="c1">// Release outlets and set outlet variables to nil.</span>
+    <span class="p">[</span><span class="n">anOutlet</span> <span class="n">release</span><span class="p">],</span> <span class="n">anOutlet</span> <span class="o">=</span> <span class="nb">nil</span><span class="p">;</span>
+    <span class="p">[</span><span class="n">super</span> <span class="n">dealloc</span><span class="p">];</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>Hope this helps someone out there. <a href="http://developer.apple.com/library/mac/#documentation/Cocoa/Conceptual/MemoryMgmt/Articles/mmNibObjects.html">Here are the details of how to
+manage memory in NIBS for Mac OS or iOS.</a></p>
+      </div>
+    </diV>
+  </div>
+</div>	
+<br>
+<hr/>
+</ul>
 
 <div class="pagination">
   <ul>
@@ -181,7 +192,6 @@ following these steps to enabled gestures on your iPad:</p>
         <li class=""><a href="./index10.html">10</a></li>
         <li class=""><a href="./index11.html">11</a></li>
         <li class=""><a href="./index12.html">12</a></li>
-        <li class=""><a href="./index13.html">13</a></li>
             <li class="next"><a href="./index6.html">Next &rarr;</a></li>
       </ul>
 </div>

@@ -38,82 +38,6 @@
                     
 <div class="page-header"><h1>Blog</h1></div>
 <div class='article'>
-    <h3>Microsoft Solver Foundation For Quadratic Programming</h3>
-  <div class="row">
-    <div class="span4">
-      <div class="well well-small">
-        <ul class="unstyled">
-  <li><i class="icon-time"></i> <a class="more" href="./posts/2010/07/15/microsoft-solver-foundation-for-quadratic-programming/">Thursday, July 15 2010 09:55 PM</a> </li> 
-  <li><i class="icon-pencil"></i> <a class="url fn" href="./author/admin.html">Admin</a> </li>
-  <li>
-  <i class="icon-tags"></i> 
-    <a href="./tag/net.html">.net</a>
-    <a href="./tag/c.html">C#</a>
-    <a href="./tag/math.html">math</a>
-    </li>
-  <!-- <li><i class="icon-folder-open"></i> <a href="./category/programming.html">Programming</a></li> -->
-</ul>        <i class="icon-comments-alt"></i> <a href="./posts/2010/07/15/microsoft-solver-foundation-for-quadratic-programming/#disqus_thread"></a>      </div>
-    </div>
-    <div class="span8">
-      <div class="summary">
-        <p>The Microsoft Solver Foundation provides some excellent APIs for solving
-optimization problems in C# .NET. Getting to documentation about the
-Quadratic Programming facilities can be a bit tricky though. I've added
-below some sample code to help out with this.</p>
-<p>In the following example I'm solving an example of the lagrangian dual
-form used for classification in an SVM.</p>
-<div class="codehilite"><pre><span class="n">InteriorPointSolver</span> <span class="n">solver</span> <span class="p">=</span> <span class="k">new</span> <span class="n">InteriorPointSolver</span><span class="p">();</span>
-<span class="c1">// Langrangian Dual</span>
-<span class="kt">int</span> <span class="n">dual</span> <span class="p">=</span> <span class="m">0</span><span class="p">;</span>
-<span class="n">solver</span><span class="p">.</span><span class="n">AddRow</span><span class="p">(</span><span class="s">&quot;L&quot;</span><span class="p">,</span> <span class="k">out</span> <span class="n">dual</span><span class="p">);</span>
-<span class="c1">// Sum Constraint</span>
-<span class="kt">int</span> <span class="n">linearConstraint</span> <span class="p">=</span> <span class="m">0</span><span class="p">;</span>
-<span class="n">solver</span><span class="p">.</span><span class="n">AddRow</span><span class="p">(</span><span class="s">&quot;SumConstraint&quot;</span><span class="p">,</span> <span class="k">out</span> <span class="n">linearConstraint</span><span class="p">);</span>
-<span class="c1">// Add variables and Lagrangian linear terms</span>
-<span class="kt">int</span><span class="p">[]</span> <span class="n">vars</span> <span class="p">=</span> <span class="k">new</span> <span class="kt">int</span><span class="p">[</span><span class="n">n</span><span class="p">];</span>
-<span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="p">=</span> <span class="m">0</span><span class="p">;</span> <span class="n">i</span> <span class="p">&amp;</span><span class="n">lt</span><span class="p">;</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="p">++)</span>
-<span class="p">{</span>
-    <span class="c1">// Add the variable</span>
-    <span class="n">solver</span><span class="p">.</span><span class="n">AddVariable</span><span class="p">(</span><span class="s">&quot;a&quot;</span> <span class="p">+</span> <span class="n">i</span><span class="p">,</span> <span class="k">out</span> <span class="n">vars</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
-    <span class="c1">// Factor in C upper bounds</span>
-    <span class="n">solver</span><span class="p">.</span><span class="n">SetBounds</span><span class="p">(</span><span class="n">vars</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="m">0</span><span class="p">,</span> <span class="n">C</span><span class="p">);</span>
-<span class="p">}</span>
-<span class="c1">// Linear constraint must equal 0</span>
-<span class="n">solver</span><span class="p">.</span><span class="n">SetBounds</span><span class="p">(</span><span class="n">linearConstraint</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">);</span>
-<span class="c1">// Lagrangian Quadratic Terms</span>
-<span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="p">=</span> <span class="m">0</span><span class="p">;</span> <span class="n">i</span> <span class="p">&amp;</span><span class="n">lt</span><span class="p">;</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="p">++)</span> <span class="p">{</span> <span class="n">solver</span><span class="p">.</span><span class="n">SetCoefficient</span><span class="p">(</span><span class="n">linearConstraint</span><span class="p">,</span>
-        <span class="n">vars</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">trainingData</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">output</span><span class="p">());</span> <span class="n">solver</span><span class="p">.</span><span class="n">SetCoefficient</span><span class="p">(</span><span class="n">dual</span><span class="p">,</span> <span class="n">vars</span><span class="p">[</span><span class="n">i</span><span class="p">],</span>
-        <span class="m">1</span><span class="p">);</span> <span class="n">Parallel</span><span class="p">.</span><span class="n">For</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">o</span><span class="p">,</span> <span class="p">(</span><span class="kt">int</span> <span class="n">j</span><span class="p">)</span> <span class="p">=&amp;</span><span class="n">gt</span><span class="p">;</span>
-            <span class="p">{</span>
-            <span class="kt">double</span> <span class="n">coef</span> <span class="p">=</span> <span class="n">trainingData</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">output</span><span class="p">()</span> <span class="err">\</span><span class="p">*</span> <span class="n">trainingData</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">output</span><span class="p">()</span> <span class="err">\</span><span class="p">*</span>
-            <span class="n">kernel</span><span class="p">.</span><span class="n">evaluate</span><span class="p">(</span><span class="n">trainingData</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">point</span><span class="p">(),</span> <span class="n">trainingData</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">point</span><span class="p">());</span>
-            <span class="n">solver</span><span class="p">.</span><span class="n">SetCoefficient</span><span class="p">(</span><span class="n">dual</span><span class="p">,</span> <span class="p">-</span><span class="m">0.5</span> <span class="err">\</span><span class="p">*</span> <span class="n">coef</span><span class="p">,</span> <span class="n">vars</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">vars</span><span class="p">[</span><span class="n">j</span><span class="p">]);</span>
-            <span class="p">});</span>
-<span class="p">}</span>
-<span class="n">solver</span><span class="p">.</span><span class="n">AddGoal</span><span class="p">(</span><span class="n">dual</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="k">false</span><span class="p">);</span>
-<span class="n">InteriorPointSolverParams</span> <span class="n">param</span> <span class="p">=</span> <span class="k">new</span>
-<span class="n">InteriorPointSolverParams</span><span class="p">();[/</span><span class="n">csharp</span><span class="p">]</span>
-</pre></div>
-
-
-<p>Essentially all we are doing here is adding all the variables to our
-constraint optimization problem and asking the solver to minimize. The
-vars array simply expressing a list of identifier for variables in the
-constraint problem. You should fire up the Solver Foundation library and
-give it a shot yourself.</p>
-<p>Here are some resources that should make understanding this a bit easier
-as well. Its the official blog of one of the key developers on the
-project, specifically the links to tutorial on the quadratic programming
-solver.</p>
-<p><a href="http://blogs.msdn.com/b/natbr/archive/2009/09/24/using-the-solver-foundation-interior-point-solver.aspx">Nathan Brixius' QP Solver Tutorial</a></p>
-      </div>
-    </diV>
-  </div>
-</div>	
-<br>
-<hr/>
-</ul>
-<div class='article'>
     <h3>Howto Fix: Roomba Clicking Noise</h3>
   <div class="row">
     <div class="span4">
@@ -196,6 +120,52 @@ will leave the explanation to him:</p>
 <br>
 <hr/>
 </ul>
+<div class='article'>
+    <h3>Chessgl3D Demo Video</h3>
+  <div class="row">
+    <div class="span4">
+      <div class="well well-small">
+        <ul class="unstyled">
+  <li><i class="icon-time"></i> <a class="more" href="./posts/2010/03/11/chessgl3d-demo-video/">Thursday, March 11 2010 02:29 PM</a> </li> 
+  <li><i class="icon-pencil"></i> <a class="url fn" href="./author/admin.html">Admin</a> </li>
+  <li>
+  <i class="icon-tags"></i> 
+    <a href="./tag/chess.html">chess</a>
+    <a href="./tag/graphics.html">graphics</a>
+    <a href="./tag/opengl.html">opengl</a>
+    </li>
+  <!-- <li><i class="icon-folder-open"></i> <a href="./category/programming.html">Programming</a></li> -->
+</ul>        <i class="icon-comments-alt"></i> <a href="./posts/2010/03/11/chessgl3d-demo-video/#disqus_thread"></a>      </div>
+    </div>
+    <div class="span8">
+      <div class="summary">
+        <div style="text-align: left; padding: 3px;">
+<object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" width="500" height="313" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,40,0">
+<param name="data" value="http://www.flickr.com/apps/video/stewart.swf?v=71377"></param><param name="flashvars" value="intl_lang=en-us&amp;photo_secret=6ee39f773e&amp;photo_id=4425552860&amp;flickr_show_info_box=true"></param><param name="bgcolor" value="#000000"></param><param name="allowFullScreen" value="true"></param><param name="src" value="http://www.flickr.com/apps/video/stewart.swf?v=71377"></param><param name="allowfullscreen" value="true"></param>
+
+<embed type="application/x-shockwave-flash" width="500" height="313" src="http://www.flickr.com/apps/video/stewart.swf?v=71377" allowfullscreen="true" bgcolor="#000000" flashvars="intl_lang=en-us&amp;photo_secret=6ee39f773e&amp;photo_id=4425552860&amp;flickr_show_info_box=true" data="http://www.flickr.com/apps/video/stewart.swf?v=71377">
+</embed>
+</object>
+</p>
+
+<p>
+<span style="font-size: 0.8em; margin-top: 0px;">[chessgl3d][],
+originally uploaded by [dandesousa][].</span>
+
+</div>
+
+</p>
+
+<p>Here is a demo video for my 3d chess game. See the games page for more
+details.</p>
+</p>
+      </div>
+    </diV>
+  </div>
+</div>	
+<br>
+<hr/>
+</ul>
 
 <div class="pagination">
   <ul>
@@ -212,7 +182,6 @@ will leave the explanation to him:</p>
         <li class=""><a href="./index10.html">10</a></li>
         <li class=""><a href="./index11.html">11</a></li>
         <li class=""><a href="./index12.html">12</a></li>
-        <li class=""><a href="./index13.html">13</a></li>
             <li class="next"><a href="./index9.html">Next &rarr;</a></li>
       </ul>
 </div>
