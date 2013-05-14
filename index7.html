@@ -38,73 +38,6 @@
                     
 <div class="page-header"><h1>Blog</h1></div>
 <div class='article'>
-    <h3>Howto Fix: C# .Net Backgroundworker.Isbusy Always True</h3>
-  <div class="row">
-    <div class="span4">
-      <div class="well well-small">
-        <ul class="unstyled">
-  <li><i class="icon-time"></i> <a class="more" href="./posts/2010/08/20/howto-fix-c-net-backgroundworkerisbusy-always-true/">Friday, August 20 2010 11:52 PM</a> </li> 
-  <li><i class="icon-pencil"></i> <a class="url fn" href="./author/admin.html">Admin</a> </li>
-  <li>
-  <i class="icon-tags"></i> 
-    <a href="./tag/net.html">.net</a>
-    <a href="./tag/c.html">C#</a>
-    <a href="./tag/threading.html">Threading</a>
-    </li>
-  <!-- <li><i class="icon-folder-open"></i> <a href="./category/technology.html">Technology</a></li> -->
-</ul>        <i class="icon-comments-alt"></i> <a href="./posts/2010/08/20/howto-fix-c-net-backgroundworkerisbusy-always-true/#disqus_thread"></a>      </div>
-    </div>
-    <div class="span8">
-      <div class="summary">
-        <p>BackgroundWorker provides a great simplified mechanism for seperating
-CPU intensive work from the UI thread in C# .NET. Indeed<a href="http://msdn.microsoft.com/en-us/library/system.componentmodel.backgroundworker.aspx">the MSDN
-documentation does an excellent job detailing its usage</a>. However, you
-may come across a bug wherein you need to run the backgroundworker while
-it is still running. You have code like this:</p>
-<div class="codehilite"><pre><span class="n">System</span><span class="p">.</span><span class="n">ComponentModel</span><span class="p">.</span><span class="n">BackgroundWorker</span> <span class="n">backgroundWorker</span><span class="p">;</span>
-<span class="k">public</span> <span class="k">void</span> <span class="nf">someEvent</span><span class="p">()</span>
-<span class="p">{</span>
-    <span class="k">while</span> <span class="p">(</span><span class="n">backgroundWorker</span><span class="p">.</span><span class="n">IsBusy</span><span class="p">)</span>
-    <span class="p">{</span>
-        <span class="n">Thread</span><span class="p">.</span><span class="n">Yield</span><span class="p">();</span>
-    <span class="p">}</span>
-    <span class="n">backgroundWorker</span><span class="p">.</span><span class="n">RunWorkerAsync</span><span class="p">();</span>
-<span class="p">}</span>
-</pre></div>
-
-
-<p>But you may find that backgroundWorker.IsBusy is always true so the loop
-never executes. It seems that simply yielding the thread will not force
-the backgroundWorker to mark itself as done even though that worker
-thread has successfully completed. In some situations you are blocking
-the UI so it cannot mark itself complete. To resolve the problem, simply
-include a call to System.Windows.Forms.Application.DoEvents(). You can
-do this even if you are running an application under WPF. It should
-force the UI to load a frame.</p>
-<div class="codehilite"><pre><span class="n">using</span> <span class="n">System</span><span class="p">.</span><span class="n">Windows</span><span class="p">.</span><span class="n">Forms</span><span class="p">;</span>
-<span class="n">System</span><span class="p">.</span><span class="n">ComponentModel</span><span class="p">.</span><span class="n">BackgroundWorker</span> <span class="n">backgroundWorker</span><span class="p">;</span>
-<span class="n">public</span> <span class="kt">void</span> <span class="nf">someEvent</span><span class="p">()</span>
-<span class="p">{</span>
-    <span class="k">while</span> <span class="p">(</span><span class="n">backgroundWorker</span><span class="p">.</span><span class="n">IsBusy</span><span class="p">)</span>
-    <span class="p">{</span>
-        <span class="n">Thread</span><span class="p">.</span><span class="n">Yield</span><span class="p">();</span>
-        <span class="n">Application</span><span class="p">.</span><span class="n">DoEvents</span><span class="p">();</span>
-    <span class="p">}</span>
-    <span class="n">backgroundWorker</span><span class="p">.</span><span class="n">RunWorkerAsync</span><span class="p">();</span>
-<span class="p">}</span>
-</pre></div>
-
-
-<p>For more information on this method check out <a href="http://msdn.microsoft.com/en-us/library/system.windows.forms.application.doevents.aspx">the MSDN documentation on
-Application.DoEvents()</a>.</p>
-      </div>
-    </diV>
-  </div>
-</div>	
-<br>
-<hr/>
-</ul>
-<div class='article'>
     <h3>Asynchronous Data Binding In .Net (C#)</h3>
   <div class="row">
     <div class="span4">
@@ -258,6 +191,55 @@ as well. Its the official blog of one of the key developers on the
 project, specifically the links to tutorial on the quadratic programming
 solver.</p>
 <p><a href="http://blogs.msdn.com/b/natbr/archive/2009/09/24/using-the-solver-foundation-interior-point-solver.aspx">Nathan Brixius' QP Solver Tutorial</a></p>
+      </div>
+    </diV>
+  </div>
+</div>	
+<br>
+<hr/>
+</ul>
+<div class='article'>
+    <h3>Howto Fix: Roomba Clicking Noise</h3>
+  <div class="row">
+    <div class="span4">
+      <div class="well well-small">
+        <ul class="unstyled">
+  <li><i class="icon-time"></i> <a class="more" href="./posts/2010/05/28/howto-fix-roomba-clicking-noise/">Friday, May 28 2010 01:02 PM</a> </li> 
+  <li><i class="icon-pencil"></i> <a class="url fn" href="./author/admin.html">Admin</a> </li>
+  <li>
+  <i class="icon-tags"></i> 
+    <a href="./tag/cleaning.html">cleaning</a>
+    <a href="./tag/robots.html">robots</a>
+    <a href="./tag/roomba.html">roomba</a>
+    </li>
+  <!-- <li><i class="icon-folder-open"></i> <a href="./category/technology.html">Technology</a></li> -->
+</ul>        <i class="icon-comments-alt"></i> <a href="./posts/2010/05/28/howto-fix-roomba-clicking-noise/#disqus_thread"></a>      </div>
+    </div>
+    <div class="span8">
+      <div class="summary">
+        <p>A while back the vacuum in our apartment stopped working so I decided to
+do something I always wanted: Get a roomba. So far its been great and it
+keeps the carpet clean with minimum effort.</p>
+<p>However, we have encountered some problems where the Roomba occasionally
+makes a repeated clicking noise and then shuts off. It then repeats
+"Please Clean Roomba's Brushes". It got to the point where it was making
+the clicking noise EVERY time it was run and would shut down after about
+2 minutes. I tried reseting the battery, cleaning the
+brushes...everything. Finally I realized what was wrong. I wasn't
+cleaning the brushes properly. If you have a lot of dirt in your carpet
+or pets (we have cats), it's easy for fibers to get wrapped around some
+of the moving parts of the roomba brush.</p>
+<p>So to fix the problem simply remove the brushes from the Roomba as your
+normally would to clean them. However, check under the yellow cap at the
+end of both brushes (by that I mean the brush and the rubber roller).
+Don't worry, they are designed to come off, so you can pull on them.
+Afterwards you may see something like this:</p>
+<p><img alt="" src="http://farm5.static.flickr.com/4045/4647414023_625bc72f44_d.jpg" title="Roomba Brush Under-Cap" /></p>
+<p>Just pull out all the hair and fibers with a pencil or paper clip and
+replace the yellow cap. Afterwards your roomba will be good as new! Be
+aware though, that this is likely to happen again so make sure you
+periodically clean under the cap of both brush attachments.</p>
+<p><img alt="" src="http://farm5.static.flickr.com/4038/4647413667_40a50cb12a_d.jpg" title="Another Brush Angle" /></p>
       </div>
     </diV>
   </div>

@@ -38,35 +38,6 @@
                     
 <div class="page-header"><h1>Blog</h1></div>
 <div class='article'>
-    <h3>Realtek Rtl8111 Windows Server 2008</h3>
-  <div class="row">
-    <div class="span4">
-      <div class="well well-small">
-        <ul class="unstyled">
-  <li><i class="icon-time"></i> <a class="more" href="./posts/2011/06/03/realtek-rtl8111-windows-server-2008/">Friday, June 03 2011 09:45 PM</a> </li> 
-  <li><i class="icon-pencil"></i> <a class="url fn" href="./author/admin.html">Admin</a> </li>
-  <li>
-  <i class="icon-tags"></i> 
-    </li>
-  <!-- <li><i class="icon-folder-open"></i> <a href="./category/technology.html">Technology</a></li> -->
-</ul>        <i class="icon-comments-alt"></i> <a href="./posts/2011/06/03/realtek-rtl8111-windows-server-2008/#disqus_thread"></a>      </div>
-    </div>
-    <div class="span8">
-      <div class="summary">
-        <p>Encountered an issue when loading Windows Server 2008 R2 onto my new
-media server. Seems it couldn't find my Realtek Gigabit onboard NIC on
-my Biostar A880G+. Anyway after much searching I failure installing the
-official realtek driver. I found the following driver which worked and
-allowed me to update all my other drivers:</p>
-<p><a href="http://drivers.softpedia.com/progDownload/Realtek-RTL8110SC-L-Driver-6218-for-WinServer-2008-Download-77885.html">http://drivers.softpedia.com/progDownload/Realtek-RTL8110SC-L-Driver-6218-for-WinServer-2008-Download-77885.html</a></p>
-      </div>
-    </diV>
-  </div>
-</div>	
-<br>
-<hr/>
-</ul>
-<div class='article'>
     <h3>Getting Highpoint Rocketraid 2640X4 Controller To Work In Linux</h3>
   <div class="row">
     <div class="span4">
@@ -159,6 +130,55 @@ processing that causes and occasional stutter.</p>
 <p>Hope this helps someone out there!</p>
 <p>UPDATE: I found that turning off "de-interlacing" in the ATI catalyst
 settings eliminated this effect. Try that in addition to the above steps</p>
+      </div>
+    </diV>
+  </div>
+</div>	
+<br>
+<hr/>
+</ul>
+<div class='article'>
+    <h3>How To Fix Ios Memory Leaks Coming From Uikit</h3>
+  <div class="row">
+    <div class="span4">
+      <div class="well well-small">
+        <ul class="unstyled">
+  <li><i class="icon-time"></i> <a class="more" href="./posts/2011/02/11/how-to-fix-ios-memory-leaks-coming-from-uikit/">Friday, February 11 2011 09:10 PM</a> </li> 
+  <li><i class="icon-pencil"></i> <a class="url fn" href="./author/admin.html">Admin</a> </li>
+  <li>
+  <i class="icon-tags"></i> 
+    </li>
+  <!-- <li><i class="icon-folder-open"></i> <a href="./category/programming.html">Programming</a></li> -->
+</ul>        <i class="icon-comments-alt"></i> <a href="./posts/2011/02/11/how-to-fix-ios-memory-leaks-coming-from-uikit/#disqus_thread"></a>      </div>
+    </div>
+    <div class="span8">
+      <div class="summary">
+        <p>It looks as though I'm going to be posting a number of troubleshooting
+iOS SDK and objective-c guides in the coming weeks. The first deals with
+memory leaks coming from UIKit and QuartzCore.</p>
+<p>If you are using the leaks tool included with Instruments and XCode, you
+might notice leaks. This is a pretty amazing tool that will tell you
+when you leak, how much and where the allocations occurred.</p>
+<p>In instruments, you can select View -> Extended Detail. This will
+provide you with the stack trace. You can then see where the leak
+originated. If you see errors coming straight from main, or from a call
+to pushViewController, you likely had the same problem I had -- you are
+not cleaning up your View or ViewController.</p>
+<p>To be safe in memory management, be careful to do the following:</p>
+<ol>
+<li>In viewDidUnload:, you should set all your retain and IBOutlet
+    properties to nil like so:</li>
+<li>Secondly, and very important, you should release and set all the
+    IBOutlet backing properties to nil, like so:</li>
+<li>Make sure you have no references to parent views or controllers in
+    the leaking view controller.</li>
+</ol>
+<p></p>
+This may seem totally counterintuitive since retain properties should
+properly free all held memory when nil is set, but actually the second
+step is required when dealing with UI components, otherwise it will
+result it leaks that appear to originate from UIKit or other Apple
+libraries. Be very careful that all IBOutlets are set to nil.</p>
       </div>
     </diV>
   </div>
