@@ -36,7 +36,63 @@
       <div class="row">
         <div class="span12">
                     
-<div class="page-header"><h1>Blog</h1></div>
+<div class="page-header"><h1><a href="/">Blog</a> <small></small></h1></div>
+<div class='article'>
+    <h3>Copying Test And Data Files To Build Directory In C# .Net Unit Tests</h3>
+  <div class="row">
+    <div class="span4">
+      <div class="well well-small">
+        <ul class="unstyled">
+  <li><i class="icon-time"></i> <a class="more" href="./posts/2010/10/02/copying-test-and-data-files-to-build-directory-in-c-net-unit-tests/">Saturday, October 02 2010 08:20 AM</a> </li> 
+  <li><i class="icon-pencil"></i> <a class="url fn" href="./author/admin.html">Admin</a> </li>
+  <li>
+  <i class="icon-tags"></i> 
+    <a href="./tag/net.html">.net</a>
+    <a href="./tag/unit-testing.html">unit testing</a>
+    </li>
+  <!-- <li><i class="icon-folder-open"></i> <a href="./category/programming.html">Programming</a></li> -->
+</ul>        <i class="icon-comments-alt"></i> <a href="./posts/2010/10/02/copying-test-and-data-files-to-build-directory-in-c-net-unit-tests/#disqus_thread"></a>      </div>
+    </div>
+    <div class="span8">
+      <div class="summary">
+        <p>Unit testing with VS2010's built in unit testing facilities is
+especially convenient. However it is no always clear how to specific
+that an entire directory should be copied into the build / test
+directory as data. Aside from setting up pre- and post- build rules,
+VS2010 comes with a way to automatically include any project or
+referenced directories and files as part of the build deployment. To
+specify this, you use what is known as the testconfigs file.</p>
+<p>First, open up your unit testing project with visual studio, and from
+the test menu item, select edit test configuration.</p>
+<p><img alt="" src="http://dans-coding-examples.googlecode.com/files/testcopy-editsettings.png" title="Test Copy Tutorial Edit Test Settings" /></p>
+<p></p>
+Then, in the window that appears, select deployment and make sure that
+the enable deployment check box is <strong>selected</strong>.</p>
+<p><img alt="" src="http://dans-coding-examples.googlecode.com/files/testcopy-editdeployment.png" title="Test Copy Deployment" /></p>
+</p>
+
+<p>Finally, just select add/remove file or directory and select what you
+want to copy.</p>
+</p>
+
+<p><img alt="" src="http://dans-coding-examples.googlecode.com/files/testcopy-editselect.png" title="http://dans-coding-examples.googlecode.com/files/testcopy-editselect.png" /></p>
+</p>
+
+</p>
+
+<p>Now, each time you run or deploy your projects you can select that
+directories contents to also be copied over.</p>
+</p>
+
+<p><a href="http://dans-coding-examples.googlecode.com/files/UnitTestingProject.zip">Download Code.</a></p>
+</p>
+      </div>
+    </diV>
+  </div>
+</div>	
+<br>
+<hr/>
+</ul>
 <div class='article'>
     <h3>Windows Phone 7: Making An Http Request</h3>
   <div class="row">
@@ -194,73 +250,6 @@ the ListBox in red.</p>
 <p>Although unintuitive this should get the job done. Hopefully Microsoft
 can make some of these details more straightforward before the final
 release or in updated versions of .NET.</p>
-      </div>
-    </diV>
-  </div>
-</div>	
-<br>
-<hr/>
-</ul>
-<div class='article'>
-    <h3>Howto Fix: C# .Net Backgroundworker.Isbusy Always True</h3>
-  <div class="row">
-    <div class="span4">
-      <div class="well well-small">
-        <ul class="unstyled">
-  <li><i class="icon-time"></i> <a class="more" href="./posts/2010/08/20/howto-fix-c-net-backgroundworkerisbusy-always-true/">Friday, August 20 2010 11:52 PM</a> </li> 
-  <li><i class="icon-pencil"></i> <a class="url fn" href="./author/admin.html">Admin</a> </li>
-  <li>
-  <i class="icon-tags"></i> 
-    <a href="./tag/net.html">.net</a>
-    <a href="./tag/c.html">C#</a>
-    <a href="./tag/threading.html">Threading</a>
-    </li>
-  <!-- <li><i class="icon-folder-open"></i> <a href="./category/technology.html">Technology</a></li> -->
-</ul>        <i class="icon-comments-alt"></i> <a href="./posts/2010/08/20/howto-fix-c-net-backgroundworkerisbusy-always-true/#disqus_thread"></a>      </div>
-    </div>
-    <div class="span8">
-      <div class="summary">
-        <p>BackgroundWorker provides a great simplified mechanism for seperating
-CPU intensive work from the UI thread in C# .NET. Indeed<a href="http://msdn.microsoft.com/en-us/library/system.componentmodel.backgroundworker.aspx">the MSDN
-documentation does an excellent job detailing its usage</a>. However, you
-may come across a bug wherein you need to run the backgroundworker while
-it is still running. You have code like this:</p>
-<div class="codehilite"><pre><span class="n">System</span><span class="p">.</span><span class="n">ComponentModel</span><span class="p">.</span><span class="n">BackgroundWorker</span> <span class="n">backgroundWorker</span><span class="p">;</span>
-<span class="k">public</span> <span class="k">void</span> <span class="nf">someEvent</span><span class="p">()</span>
-<span class="p">{</span>
-    <span class="k">while</span> <span class="p">(</span><span class="n">backgroundWorker</span><span class="p">.</span><span class="n">IsBusy</span><span class="p">)</span>
-    <span class="p">{</span>
-        <span class="n">Thread</span><span class="p">.</span><span class="n">Yield</span><span class="p">();</span>
-    <span class="p">}</span>
-    <span class="n">backgroundWorker</span><span class="p">.</span><span class="n">RunWorkerAsync</span><span class="p">();</span>
-<span class="p">}</span>
-</pre></div>
-
-
-<p>But you may find that backgroundWorker.IsBusy is always true so the loop
-never executes. It seems that simply yielding the thread will not force
-the backgroundWorker to mark itself as done even though that worker
-thread has successfully completed. In some situations you are blocking
-the UI so it cannot mark itself complete. To resolve the problem, simply
-include a call to System.Windows.Forms.Application.DoEvents(). You can
-do this even if you are running an application under WPF. It should
-force the UI to load a frame.</p>
-<div class="codehilite"><pre><span class="n">using</span> <span class="n">System</span><span class="p">.</span><span class="n">Windows</span><span class="p">.</span><span class="n">Forms</span><span class="p">;</span>
-<span class="n">System</span><span class="p">.</span><span class="n">ComponentModel</span><span class="p">.</span><span class="n">BackgroundWorker</span> <span class="n">backgroundWorker</span><span class="p">;</span>
-<span class="n">public</span> <span class="kt">void</span> <span class="nf">someEvent</span><span class="p">()</span>
-<span class="p">{</span>
-    <span class="k">while</span> <span class="p">(</span><span class="n">backgroundWorker</span><span class="p">.</span><span class="n">IsBusy</span><span class="p">)</span>
-    <span class="p">{</span>
-        <span class="n">Thread</span><span class="p">.</span><span class="n">Yield</span><span class="p">();</span>
-        <span class="n">Application</span><span class="p">.</span><span class="n">DoEvents</span><span class="p">();</span>
-    <span class="p">}</span>
-    <span class="n">backgroundWorker</span><span class="p">.</span><span class="n">RunWorkerAsync</span><span class="p">();</span>
-<span class="p">}</span>
-</pre></div>
-
-
-<p>For more information on this method check out <a href="http://msdn.microsoft.com/en-us/library/system.windows.forms.application.doevents.aspx">the MSDN documentation on
-Application.DoEvents()</a>.</p>
       </div>
     </diV>
   </div>

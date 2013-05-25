@@ -36,38 +36,27 @@
       <div class="row">
         <div class="span12">
                     
-<div class="page-header"><h1>Blog</h1></div>
+<div class="page-header"><h1><a href="/">Blog</a> <small>Dan</small></h1></div>
 <div class='article'>
-    <h3>Migrating My Site To Github</h3>
+    <h3>Manage Your Pelican Blog With Pelican-Shovel</h3>
   <div class="row">
     <div class="span4">
       <div class="well well-small">
         <ul class="unstyled">
-  <li><i class="icon-time"></i> <a class="more" href="../posts/2013/03/25/migrating-my-site-to-github/">Monday, March 25 2013 08:20 AM</a> </li> 
-  <li><i class="icon-pencil"></i> <a class="url fn" href="../author/dan-de-sousa.html">Dan De Sousa</a> </li>
+  <li><i class="icon-time"></i> <a class="more" href="../posts/2013/05/25/manage-your-pelican-blog-with-pelican-shovel/">Saturday, May 25 2013 07:08 PM</a> </li> 
+  <li><i class="icon-pencil"></i> <a class="url fn" href="../author/dan.html">Dan</a> </li>
   <li>
   <i class="icon-tags"></i> 
-    <a href="../tag/github.html">github</a>
-    <a href="../tag/wordpress.html">wordpress</a>
+    <a href="../tag/pelican.html">pelican</a>
+    <a href="../tag/programming.html">programming</a>
     </li>
-  <!-- <li><i class="icon-folder-open"></i> <a href="../category/ramblings.html">Ramblings</a></li> -->
-</ul>        <i class="icon-comments-alt"></i> <a href="../posts/2013/03/25/migrating-my-site-to-github/#disqus_thread"></a>      </div>
+  <!-- <li><i class="icon-folder-open"></i> <a href="../category/programming.html">Programming</a></li> -->
+</ul>        <i class="icon-comments-alt"></i> <a href="../posts/2013/05/25/manage-your-pelican-blog-with-pelican-shovel/#disqus_thread"></a>      </div>
     </div>
     <div class="span8">
       <div class="summary">
-        <p>I recently left my secure job to pursue my dream of working for myself. In honor of new beginnings, I felt it appropriate that I migrate my website to github. As I plan to be a much more active member of the open source community, I decided to delve right in and move from wordpress to a github pages hosted site with a theme of my own design. I'll go over how I did this, the tools I used, the code I developed, etc. Convienently, these and the subsequent blog posts will server as test data for my theme / tool development.</p>
-<h2>Why move away from something like Wordpress?</h2>
-<p>This is an interesting question because is presumes something, mainly that given an already setup Wordpress site is not currently meeting your needs. For me those needs were control, visibility, simplicity. </p>
-<p>I wanted control over how my site was generated. I wanted to understand everything that was going on under the hood. Unfortunately this meant learning, nay 'groking' PHP. While I admire and respect PHP as the "father" of server side web languages, I would feel much more comfortable having something depending only on python. Additionally, wordpress has dependencies like MySQL, which is yet another dependency I would rather not wish to have, given the low level of user interaction on my site.</p>
-<p>So I decided to go with github pages, which lets me serve my content statically. I opted to go with pelican over jekyll. Again, opting for something written in python which I could assist with contributing right away, and because it provided a bit more flexibility in terms of templating and generation over jekyll and liquid. </p>
-<h2>What works and what doesn't</h2>
-<p>Right off the bat, I found that for just quickly getting setup, it pelican works great. It let's me choose the markup language I want, generate my page and commit to a separate branch in my github repo. However, I find myself wanting for page management and organization (something I plan to take a stab at in the near future). Additionally, while there is a fair amount of themes available for pelican, they aren't as numerous as jekyll or wordpress (of which there are literally thousands).</p>
-<h2>Future work</h2>
-<p>I plan on doing the following in the near future:</p>
-<ul>
-<li>Create my own theme</li>
-<li>Create a set of util scripts to assist with pelican post / page management</li>
-</ul>
+        <p>Switching your blog to a static site has a number of advantages, including speed, simplicity, transparency and control. One disadvantage, however, is usability. Static site generators like Pelican, encourage uses to create their own pages and posts, but lack a good management interface for creating those files. </p>
+<p>As a result, I've decided to create a project to assist with managing pelican sites through the command like, and its called <a href="https://github.com/dandesousa/pelican-shovel">pelican-shovel</a>. As a pelican user, I'll be eating my own dog food so to speak, and be adding features to assist with the management of my own blog. Currently it supports assisted generation of new pages and posts, list and editting those posts. Check out the <a href="https://github.com/dandesousa/pelican-shovel">github page</a> for installation and usage details.</p>
       </div>
     </diV>
   </div>

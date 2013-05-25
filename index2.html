@@ -36,7 +36,141 @@
       <div class="row">
         <div class="span12">
                     
-<div class="page-header"><h1>Blog</h1></div>
+<div class="page-header"><h1><a href="/">Blog</a> <small></small></h1></div>
+<div class='article'>
+    <h3>Howto: Setup A Network With Two Internet Connections</h3>
+  <div class="row">
+    <div class="span4">
+      <div class="well well-small">
+        <ul class="unstyled">
+  <li><i class="icon-time"></i> <a class="more" href="./posts/2012/05/26/howto-setup-a-network-with-two-internet-connections/">Saturday, May 26 2012 08:41 AM</a> </li> 
+  <li><i class="icon-pencil"></i> <a class="url fn" href="./author/admin.html">Admin</a> </li>
+  <li>
+  <i class="icon-tags"></i> 
+    <a href="./tag/networking.html">networking</a>
+    </li>
+  <!-- <li><i class="icon-folder-open"></i> <a href="./category/technology.html">Technology</a></li> -->
+</ul>        <i class="icon-comments-alt"></i> <a href="./posts/2012/05/26/howto-setup-a-network-with-two-internet-connections/#disqus_thread"></a>      </div>
+    </div>
+    <div class="span8">
+      <div class="summary">
+        <p>If you are living in an area where internet connection options are
+limited, you may find yourself in a connundrum. Perhaps you want to be
+able to use high bandwidth services (netflix, itunes, bittorrent,
+gaming) but a single connection pipe is not large enough to accomodate
+all the traffic. Or perhaps, your internet is capped or throttled after
+a certain amount of time.</p>
+<h2><strong>My Situation</strong></h2>
+<p></p>
+I currently live in such an area, where my faster internet provider will
+quickly throttle for high usage. I needed to be able to download (iTunes
+videos, Steam games, etc), but my primary provider throttles if we
+download too much. To make matters worse, my girlfriend works from home,
+so she needs a fast constant connection.</p>
+<p>So what I wanted was to be able to use Clear (which has great speed and
+reception in our area) for normal internet and DSL for all the high
+bandwidth content. We needed to have one or two computers in our network
+use the DSL, and the others use Clear. However, we still needed everyone
+on the same network because we needed to access file shares and other
+applications running on the network.</p>
+<p>After much searching I found a solution that fits my needs and that I
+hope will help some other people as well.</p>
+<h2><strong>The Solution</strong></h2>
+<p></p>
+The solution to my problem is to create a <strong><em>Multiple Gateway</em></strong> setup.
+The idea is you have a standard network with one internet connection
+that acts as the primary gateway. By default all connecting devices use
+this connection. You then add one or more routers with separate incoming
+connections as other gateways. You assign them IPs and you tell the
+devices you want to use that gateway and it will use it for those
+connections.</p>
+<p><em>So in summary, this setup will allow you to keep all devices on one
+network and manually assign which connection each device uses (using one
+connection as the default).</em></p>
+<p>You just need to follow these steps:</p>
+<h3><strong>Setup your default gateway</strong></h3>
+<p></p>
+For the purpose of this article, gateway is just another term for a
+router with an incoming WAN or internet connection. Chances are your
+default gateway is already setup -- its just your current single
+connection network setup. If you want to continue to use this connection
+as the default for all devices on the network, leave as is and continue
+to the next step. Otherwise swap the internet connections.</p>
+<p><em>The internet connection on this gateway will be used for all devices by
+default.</em></p>
+<p><strong><em>Make a note of your router's IP address; in most cases it is
+'192.168.1.1'.</em></strong></p>
+<p>Also note the DHCP range of your router, this varies by model but on the
+common dd-wrt setup can be found here:</p>
+<p><img alt="" src="/static/wp-content/uploads/2012/05/default-gateway-192.168.1.1-dhcp-address-781x1024.png" title="default-gateway-192.168.1.1-dhcp-address" /></p>
+<p></p>
+For this scenario our DHCP range starts at 192.168.1.100. So anything
+from 192.168.1.0 - 192.168.1.99 is out of range and won't be used by the
+router when assigning the addresses to devices. This is important to
+know for the next step.</p>
+<h3><strong>Setup your second gateway</strong></h3>
+<p></p>
+You want to setup a completely separate network with the second router
+and connection. Don't connect the second gateway to the main network
+yet. Verify that on your second connection you have an internet
+connection and everything is working.</p>
+<p><strong>Assign the second gateway an IP address</strong></p>
+<p>Once that works, you want to give the second gateway a different IP
+address to distinguish it from the primary gateway. Since the primary
+gateway is IP address 192.168.1.1, we'll use 192.168.1.2. Note that the
+address must be outside the range of DHCP for the primary gateway.</p>
+<p><strong>Disable DHCP on the second gateway</strong></p>
+<p>Now, you want to disable DHCP server on the second gateway. If you are
+using DD-WRT, the highlighted radio box in the box image should be
+'Disable'. This is important, DHCP MUST BE DISABLED. Not set to a new
+gateway, not turned onto DHCP forwarding -- DISABLED. Make sure you hit
+apply and save any settings before moving onto the next step.</p>
+<h3><strong>Connect your second gateway to your network through the LAN port</strong></h3>
+<p></p>
+Now connect your second gateway to your network through the LAN part as
+you would connect a switch to your network to allow for additional
+connections. Once you do so, you should be able to connect to your
+primary network and access both the primary gateway and the secondary
+gateway by their addresses. Confirm this by ensuring you can access
+192.168.1.1 and 192.168.1.2.</p>
+<h3><strong>Configure your machines to use the alternative gateway</strong></h3>
+<p></p>
+Good news is you are pretty much done now. You can confirm your setup is
+working by assigning a machine to either network. You want to open up
+your network menu and find your network interface (representing the one
+connected to your network  -- be it wired or wireless).</p>
+<p><img alt="" src="/static/wp-content/uploads/2012/05/network-1.png" title="network-1" /></p>
+<p>now right click and select properties. Then select the IPv4 settings and
+hit properties again:</p>
+<p><img alt="" src="/static/wp-content/uploads/2012/05/network-2.png" title="network-2" /></p>
+<p>Now you want to manually configure your connection.</p>
+<p><img alt="" src="/static/wp-content/uploads/2012/05/network-3.png" title="network-3" /></p>
+<p>For your IP address, assign anything that is outside the DHCP range of
+your router (anything below 192.168.1.100 works in this example). Leave
+subnet mask matching your primary gateway and assign default gateway to
+the second connection. You'll also want to add that as the DNS server.
+This tells this network interface to use that gateway for your internet
+connection.</p>
+<p>If all works successfully you should now have access, and all traffic on
+that box will flow to your second gateway, leaving your other
+connections unaffected.</p>
+<p>Most devices give you the ability to customize the your IP configuration
+this way, so you should be able to configure your devices in any manner
+you choose.</p>
+<h3><strong>Repeat for any additional connections </strong></h3>
+<p></p>
+The multiple gateway setup works for as many connections as you want.
+Just continue adding addresses outside your DHCP range for your gateways
+and you should be fine.</p>
+<p>Hopefully this will be useful to people out there trying to work out how
+to use multiple connections in their home network. I know it was for me.</p>
+      </div>
+    </diV>
+  </div>
+</div>	
+<br>
+<hr/>
+</ul>
 <div class='article'>
     <h3>Howto Fix: Macbook Pro And Dell 2711 Displayport Issues</h3>
   <div class="row">
@@ -119,111 +253,6 @@ The final step of reseting the SMC finally fixed this for me, but I had
 tried all the steps before hand, so I cannot be sure which will work for
 you. If you have any comments, please post for the benefit of all
 readers.</p>
-      </div>
-    </diV>
-  </div>
-</div>	
-<br>
-<hr/>
-</ul>
-<div class='article'>
-    <h3>[Boost.Python] Calling Back Into Python From Native C++ Threads</h3>
-  <div class="row">
-    <div class="span4">
-      <div class="well well-small">
-        <ul class="unstyled">
-  <li><i class="icon-time"></i> <a class="more" href="./posts/2011/12/11/boostpython-calling-back-into-python-from-native-c-threads/">Sunday, December 11 2011 09:46 PM</a> </li> 
-  <li><i class="icon-pencil"></i> <a class="url fn" href="./author/admin.html">Admin</a> </li>
-  <li>
-  <i class="icon-tags"></i> 
-    <a href="./tag/python.html">python</a>
-    <a href="./tag/c.html">c++</a>
-    <a href="./tag/programming.html">programming</a>
-    <a href="./tag/boost.html">boost</a>
-    </li>
-  <!-- <li><i class="icon-folder-open"></i> <a href="./category/programming.html">Programming</a></li> -->
-</ul>        <i class="icon-comments-alt"></i> <a href="./posts/2011/12/11/boostpython-calling-back-into-python-from-native-c-threads/#disqus_thread"></a>      </div>
-    </div>
-    <div class="span8">
-      <div class="summary">
-        <p>So I came across a particularly frustrating problem dealing with a boost
-python wrapper around a library which is calling python functions from
-native c++ threads (boost threads in this case). The problem was that
-some calls to release the global interpreter lock would cause python to
-through fatal errors and segmentation fault, despite seeming to acquire
-the GIL properly. This is how I solved the problem.</p>
-<p>As a quick overview, you need to make sure that any native threads
-acquire the GIL (global interpreter lock) before any sort of python
-resources are touched. You may not use any C Python API functions or
-call into python until the GIL is acquired. A good practice is to follow
-the RIAA method for acquiring the GIL like so:</p>
-<div class="codehilite"><pre><span class="k">class</span> <span class="nc">ScopedGILRelease</span>
-<span class="p">{</span>
-    <span class="nl">public:</span>
-        <span class="kr">inline</span> <span class="n">ScopedGILRelease</span><span class="p">()</span>
-        <span class="p">{</span>
-            <span class="n">d_gstate</span> <span class="o">=</span> <span class="n">PyGILState_Ensure</span><span class="p">();</span>
-        <span class="p">}</span>
-        <span class="kr">inline</span> <span class="o">~</span><span class="n">ScopedGILRelease</span><span class="p">()</span>
-        <span class="p">{</span>
-            <span class="n">PyGILState_Release</span><span class="p">(</span><span class="n">d_gstate</span><span class="p">);</span>
-        <span class="p">}</span>
-    <span class="nl">private:</span>
-        <span class="n">PyGILState_STATE</span> <span class="n">d_gstate</span><span class="p">;</span>
-<span class="p">};</span>
-
-<span class="kt">void</span> <span class="nf">onData</span><span class="p">(</span><span class="k">const</span> <span class="n">boost</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">Data</span><span class="o">&gt;::</span><span class="n">P</span> <span class="o">&amp;</span> <span class="n">data</span><span class="p">,</span> <span class="k">const</span> <span class="kt">void</span> <span class="o">*</span>
-        <span class="n">closure</span><span class="p">)</span>
-<span class="p">{</span>
-    <span class="n">ScopedGILRelease</span> <span class="n">gil_lock</span><span class="p">;</span>
-    <span class="c1">// invoke call_method to python</span>
-<span class="p">}</span>
-</pre></div>
-
-
-<p>In the above example we call the lock which invokes PyGILState_Ensure()
-to acquire the lock. Additionally we call PyGILState_Release() on the
-same thread state object when we go out of scope.</p>
-<p>What bit me when developing this solution was that the api was not being
-properly initialized. Originally I was calling two functions in my one
-of my modules objects which I assumed was going to be called before any
-threads were made.</p>
-<div class="codehilite"><pre><span class="n">PyEval_InitThreads</span><span class="p">();</span>
-<span class="n">PyEval_ReleaseLock</span><span class="p">();</span>
-</pre></div>
-
-
-<p>Now according to the <a href="http://docs.python.org/c-api/init.html#PyEval_InitThreads">python documentation</a>, the first thread should:</p>
-<p>
-> Initialize and acquire the global interpreter lock. It should be
-> called in the main thread before creating a second thread or engaging
-> in any other thread operations such as PyEval_ReleaseLock() or
-> PyEval_ReleaseThread(tstate). It is not needed before calling
-> PyEval_SaveThread() or PyEval_RestoreThread().
-</p>
-
-<p>However, that documentation is either incorrect or something very subtle
-was going on in my library, since PyEval_InitThreads() was being called
-before any thread operations and the object was being created in the
-main thread of the python interpreter. Perhaps I couldn't guarantee that
-python wasn't spawning some sub-thread to handle that part of the
-script. Anyway I found that I had to instead call PyEval_InitThreads()
-once in the module definition macro for boost python. Looking something
-like this:</p>
-<div class="codehilite"><pre><span class="n">BOOST_PYTHON_MODULE</span><span class="p">(</span><span class="n">ModuleName</span><span class="p">)</span>
-<span class="p">{</span>
-    <span class="n">PyEval_InitThreads</span><span class="p">();</span>
-    <span class="p">...</span>
-<span class="p">}</span>
-</pre></div>
-
-
-<p>As always a super simple solution to a super frustrating problem. This
-information was extremely hard to find, so hopefully this helps someone
-out there from losing hours of time. <a href="http://stackoverflow.com/questions/8451334/why-is-pygilstate-release-throwing-fatal-python-errors/8469304#8469304">Also, here is a link to the stack
-overflow question I eventually posted and quickly subsequently
-answered</a>.</p>
-<p>Enjoy.</p>
       </div>
     </diV>
   </div>

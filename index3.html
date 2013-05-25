@@ -36,7 +36,112 @@
       <div class="row">
         <div class="span12">
                     
-<div class="page-header"><h1>Blog</h1></div>
+<div class="page-header"><h1><a href="/">Blog</a> <small></small></h1></div>
+<div class='article'>
+    <h3>[Boost.Python] Calling Back Into Python From Native C++ Threads</h3>
+  <div class="row">
+    <div class="span4">
+      <div class="well well-small">
+        <ul class="unstyled">
+  <li><i class="icon-time"></i> <a class="more" href="./posts/2011/12/11/boostpython-calling-back-into-python-from-native-c-threads/">Sunday, December 11 2011 09:46 PM</a> </li> 
+  <li><i class="icon-pencil"></i> <a class="url fn" href="./author/admin.html">Admin</a> </li>
+  <li>
+  <i class="icon-tags"></i> 
+    <a href="./tag/python.html">python</a>
+    <a href="./tag/c.html">c++</a>
+    <a href="./tag/programming.html">programming</a>
+    <a href="./tag/boost.html">boost</a>
+    </li>
+  <!-- <li><i class="icon-folder-open"></i> <a href="./category/programming.html">Programming</a></li> -->
+</ul>        <i class="icon-comments-alt"></i> <a href="./posts/2011/12/11/boostpython-calling-back-into-python-from-native-c-threads/#disqus_thread"></a>      </div>
+    </div>
+    <div class="span8">
+      <div class="summary">
+        <p>So I came across a particularly frustrating problem dealing with a boost
+python wrapper around a library which is calling python functions from
+native c++ threads (boost threads in this case). The problem was that
+some calls to release the global interpreter lock would cause python to
+through fatal errors and segmentation fault, despite seeming to acquire
+the GIL properly. This is how I solved the problem.</p>
+<p>As a quick overview, you need to make sure that any native threads
+acquire the GIL (global interpreter lock) before any sort of python
+resources are touched. You may not use any C Python API functions or
+call into python until the GIL is acquired. A good practice is to follow
+the RIAA method for acquiring the GIL like so:</p>
+<div class="codehilite"><pre><span class="k">class</span> <span class="nc">ScopedGILRelease</span>
+<span class="p">{</span>
+    <span class="nl">public:</span>
+        <span class="kr">inline</span> <span class="n">ScopedGILRelease</span><span class="p">()</span>
+        <span class="p">{</span>
+            <span class="n">d_gstate</span> <span class="o">=</span> <span class="n">PyGILState_Ensure</span><span class="p">();</span>
+        <span class="p">}</span>
+        <span class="kr">inline</span> <span class="o">~</span><span class="n">ScopedGILRelease</span><span class="p">()</span>
+        <span class="p">{</span>
+            <span class="n">PyGILState_Release</span><span class="p">(</span><span class="n">d_gstate</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="nl">private:</span>
+        <span class="n">PyGILState_STATE</span> <span class="n">d_gstate</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="kt">void</span> <span class="nf">onData</span><span class="p">(</span><span class="k">const</span> <span class="n">boost</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">Data</span><span class="o">&gt;::</span><span class="n">P</span> <span class="o">&amp;</span> <span class="n">data</span><span class="p">,</span> <span class="k">const</span> <span class="kt">void</span> <span class="o">*</span>
+        <span class="n">closure</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">ScopedGILRelease</span> <span class="n">gil_lock</span><span class="p">;</span>
+    <span class="c1">// invoke call_method to python</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>In the above example we call the lock which invokes PyGILState_Ensure()
+to acquire the lock. Additionally we call PyGILState_Release() on the
+same thread state object when we go out of scope.</p>
+<p>What bit me when developing this solution was that the api was not being
+properly initialized. Originally I was calling two functions in my one
+of my modules objects which I assumed was going to be called before any
+threads were made.</p>
+<div class="codehilite"><pre><span class="n">PyEval_InitThreads</span><span class="p">();</span>
+<span class="n">PyEval_ReleaseLock</span><span class="p">();</span>
+</pre></div>
+
+
+<p>Now according to the <a href="http://docs.python.org/c-api/init.html#PyEval_InitThreads">python documentation</a>, the first thread should:</p>
+<p>
+> Initialize and acquire the global interpreter lock. It should be
+> called in the main thread before creating a second thread or engaging
+> in any other thread operations such as PyEval_ReleaseLock() or
+> PyEval_ReleaseThread(tstate). It is not needed before calling
+> PyEval_SaveThread() or PyEval_RestoreThread().
+</p>
+
+<p>However, that documentation is either incorrect or something very subtle
+was going on in my library, since PyEval_InitThreads() was being called
+before any thread operations and the object was being created in the
+main thread of the python interpreter. Perhaps I couldn't guarantee that
+python wasn't spawning some sub-thread to handle that part of the
+script. Anyway I found that I had to instead call PyEval_InitThreads()
+once in the module definition macro for boost python. Looking something
+like this:</p>
+<div class="codehilite"><pre><span class="n">BOOST_PYTHON_MODULE</span><span class="p">(</span><span class="n">ModuleName</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">PyEval_InitThreads</span><span class="p">();</span>
+    <span class="p">...</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>As always a super simple solution to a super frustrating problem. This
+information was extremely hard to find, so hopefully this helps someone
+out there from losing hours of time. <a href="http://stackoverflow.com/questions/8451334/why-is-pygilstate-release-throwing-fatal-python-errors/8469304#8469304">Also, here is a link to the stack
+overflow question I eventually posted and quickly subsequently
+answered</a>.</p>
+<p>Enjoy.</p>
+      </div>
+    </diV>
+  </div>
+</div>	
+<br>
+<hr/>
+</ul>
 <div class='article'>
     <h3>The Ultimate Home Media Center Solution [Spoiler: Plex!]</h3>
   <div class="row">
@@ -420,35 +525,6 @@ formulate this as a numeric sort or knows a better way to do this in the
 context of the tablesorter plugin, please share!</p>
 <p>[coding horror as a pretty good article about natural sort and how
   tough it can be]: http://www.codinghorror.com/blog/2007/12/sorting-for-humans-natural-sort-order.html</p>
-      </div>
-    </diV>
-  </div>
-</div>	
-<br>
-<hr/>
-</ul>
-<div class='article'>
-    <h3>Realtek Rtl8111 Windows Server 2008</h3>
-  <div class="row">
-    <div class="span4">
-      <div class="well well-small">
-        <ul class="unstyled">
-  <li><i class="icon-time"></i> <a class="more" href="./posts/2011/06/03/realtek-rtl8111-windows-server-2008/">Friday, June 03 2011 09:45 PM</a> </li> 
-  <li><i class="icon-pencil"></i> <a class="url fn" href="./author/admin.html">Admin</a> </li>
-  <li>
-  <i class="icon-tags"></i> 
-    </li>
-  <!-- <li><i class="icon-folder-open"></i> <a href="./category/technology.html">Technology</a></li> -->
-</ul>        <i class="icon-comments-alt"></i> <a href="./posts/2011/06/03/realtek-rtl8111-windows-server-2008/#disqus_thread"></a>      </div>
-    </div>
-    <div class="span8">
-      <div class="summary">
-        <p>Encountered an issue when loading Windows Server 2008 R2 onto my new
-media server. Seems it couldn't find my Realtek Gigabit onboard NIC on
-my Biostar A880G+. Anyway after much searching I failure installing the
-official realtek driver. I found the following driver which worked and
-allowed me to update all my other drivers:</p>
-<p><a href="http://drivers.softpedia.com/progDownload/Realtek-RTL8110SC-L-Driver-6218-for-WinServer-2008-Download-77885.html">http://drivers.softpedia.com/progDownload/Realtek-RTL8110SC-L-Driver-6218-for-WinServer-2008-Download-77885.html</a></p>
       </div>
     </diV>
   </div>

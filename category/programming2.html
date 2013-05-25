@@ -36,7 +36,56 @@
       <div class="row">
         <div class="span12">
                     
-<div class="page-header"><h1>Blog</h1></div>
+<div class="page-header"><h1><a href="/">Blog</a> <small></small></h1></div>
+<div class='article'>
+    <h3>How To Fix Ios Memory Leaks Coming From Uikit</h3>
+  <div class="row">
+    <div class="span4">
+      <div class="well well-small">
+        <ul class="unstyled">
+  <li><i class="icon-time"></i> <a class="more" href="../posts/2011/02/11/how-to-fix-ios-memory-leaks-coming-from-uikit/">Friday, February 11 2011 09:10 PM</a> </li> 
+  <li><i class="icon-pencil"></i> <a class="url fn" href="../author/admin.html">Admin</a> </li>
+  <li>
+  <i class="icon-tags"></i> 
+    </li>
+  <!-- <li><i class="icon-folder-open"></i> <a href="../category/programming.html">Programming</a></li> -->
+</ul>        <i class="icon-comments-alt"></i> <a href="../posts/2011/02/11/how-to-fix-ios-memory-leaks-coming-from-uikit/#disqus_thread"></a>      </div>
+    </div>
+    <div class="span8">
+      <div class="summary">
+        <p>It looks as though I'm going to be posting a number of troubleshooting
+iOS SDK and objective-c guides in the coming weeks. The first deals with
+memory leaks coming from UIKit and QuartzCore.</p>
+<p>If you are using the leaks tool included with Instruments and XCode, you
+might notice leaks. This is a pretty amazing tool that will tell you
+when you leak, how much and where the allocations occurred.</p>
+<p>In instruments, you can select View -> Extended Detail. This will
+provide you with the stack trace. You can then see where the leak
+originated. If you see errors coming straight from main, or from a call
+to pushViewController, you likely had the same problem I had -- you are
+not cleaning up your View or ViewController.</p>
+<p>To be safe in memory management, be careful to do the following:</p>
+<ol>
+<li>In viewDidUnload:, you should set all your retain and IBOutlet
+    properties to nil like so:</li>
+<li>Secondly, and very important, you should release and set all the
+    IBOutlet backing properties to nil, like so:</li>
+<li>Make sure you have no references to parent views or controllers in
+    the leaking view controller.</li>
+</ol>
+<p></p>
+This may seem totally counterintuitive since retain properties should
+properly free all held memory when nil is set, but actually the second
+step is required when dealing with UI components, otherwise it will
+result it leaks that appear to originate from UIKit or other Apple
+libraries. Be very careful that all IBOutlets are set to nil.</p>
+      </div>
+    </diV>
+  </div>
+</div>	
+<br>
+<hr/>
+</ul>
 <div class='article'>
     <h3>Ios Exc_Bad_Access Error When Navigating To/From Nib</h3>
   <div class="row">
@@ -139,67 +188,6 @@ directories contents to also be copied over.</p>
 </p>
 
 <p><a href="http://dans-coding-examples.googlecode.com/files/UnitTestingProject.zip">Download Code.</a></p>
-</p>
-      </div>
-    </diV>
-  </div>
-</div>	
-<br>
-<hr/>
-</ul>
-<div class='article'>
-    <h3>Windows Phone 7: Making An Http Request</h3>
-  <div class="row">
-    <div class="span4">
-      <div class="well well-small">
-        <ul class="unstyled">
-  <li><i class="icon-time"></i> <a class="more" href="../posts/2010/08/30/windows-phone-7-making-an-http-request/">Monday, August 30 2010 10:20 PM</a> </li> 
-  <li><i class="icon-pencil"></i> <a class="url fn" href="../author/admin.html">Admin</a> </li>
-  <li>
-  <i class="icon-tags"></i> 
-    <a href="../tag/net.html">.net</a>
-    <a href="../tag/c.html">C#</a>
-    <a href="../tag/windows-phone-7.html">Windows Phone 7</a>
-    <a href="../tag/wp7.html">WP7</a>
-    </li>
-  <!-- <li><i class="icon-folder-open"></i> <a href="../category/programming.html">Programming</a></li> -->
-</ul>        <i class="icon-comments-alt"></i> <a href="../posts/2010/08/30/windows-phone-7-making-an-http-request/#disqus_thread"></a>      </div>
-    </div>
-    <div class="span8">
-      <div class="summary">
-        <p>Silverlight and the Windows Phone 7 SDK include the standard System.Net
-packages for making various requests over ftp and http. Making a
-standard http request in C# involves setting up a number of delegates
-and asynchronous callbacks for getting http responses and can be a tad
-complicated. If you simply want to get some xml or html back as a string
-over http, it’s much easier to use the simpler, more abstract WebClient
-class. Here’s an example of using the WebClient class to make a request.</p>
-<div class="codehilite"><pre><span class="n">public</span> <span class="kt">void</span> <span class="nf">getResults</span><span class="p">(</span><span class="n">string</span> <span class="n">websiteURL</span><span class="p">)</span>
-<span class="p">{</span>
-    <span class="n">WebClient</span> <span class="n">c</span> <span class="o">=</span> <span class="n">new</span> <span class="n">WebClient</span><span class="p">();</span>
-    <span class="n">c</span><span class="p">.</span><span class="n">DownloadStringAsync</span><span class="p">(</span><span class="n">new</span> <span class="n">Uri</span><span class="p">(</span><span class="n">websiteURL</span><span class="p">));</span>
-    <span class="n">c</span><span class="p">.</span><span class="n">DownloadStringCompleted</span> <span class="o">+=</span> <span class="n">new</span>
-        <span class="n">DownloadStringCompletedEventHandler</span><span class="p">(</span><span class="n">c_DownloadStringCompleted</span><span class="p">);</span>
-<span class="p">}</span>
-<span class="kt">void</span> <span class="nf">c_DownloadStringCompleted</span><span class="p">(</span><span class="n">object</span> <span class="n">sender</span><span class="p">,</span>
-        <span class="n">DownloadStringCompletedEventArgs</span> <span class="n">e</span><span class="p">)</span>
-<span class="p">{</span>
-    <span class="n">lock</span> <span class="p">(</span><span class="n">this</span><span class="p">)</span>
-    <span class="p">{</span>
-        <span class="n">string</span> <span class="n">s</span> <span class="o">=</span> <span class="n">e</span><span class="p">.</span><span class="n">Result</span><span class="p">;</span>
-        <span class="n">XmlReader</span> <span class="n">r</span> <span class="o">=</span> <span class="n">XmlReader</span><span class="p">.</span><span class="n">Create</span><span class="p">(</span><span class="n">new</span>
-                <span class="n">MemoryStream</span><span class="p">(</span><span class="n">System</span><span class="p">.</span><span class="n">Text</span><span class="p">.</span><span class="n">UnicodeEncoding</span><span class="p">.</span><span class="n">Unicode</span><span class="p">.</span><span class="n">GetBytes</span><span class="p">(</span><span class="n">s</span><span class="p">)));</span>
-        <span class="c1">// So something with the XML we get back</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-</pre></div>
-
-
-<p>So basically all we do is say download the string and make the action to
-take when it is completed as c_DownloadStringCompleted event handler.
-You may want to do something different than place it in an xml reader
-(in this case the string we are getting back corresponds to a non-xhtml
- xml file. Enjoy.</p>
 </p>
       </div>
     </diV>

@@ -36,7 +36,56 @@
       <div class="row">
         <div class="span12">
                     
-<div class="page-header"><h1>Blog</h1></div>
+<div class="page-header"><h1><a href="/">Blog</a> <small></small></h1></div>
+<div class='article'>
+    <h3>How To Fix Ios Memory Leaks Coming From Uikit</h3>
+  <div class="row">
+    <div class="span4">
+      <div class="well well-small">
+        <ul class="unstyled">
+  <li><i class="icon-time"></i> <a class="more" href="./posts/2011/02/11/how-to-fix-ios-memory-leaks-coming-from-uikit/">Friday, February 11 2011 09:10 PM</a> </li> 
+  <li><i class="icon-pencil"></i> <a class="url fn" href="./author/admin.html">Admin</a> </li>
+  <li>
+  <i class="icon-tags"></i> 
+    </li>
+  <!-- <li><i class="icon-folder-open"></i> <a href="./category/programming.html">Programming</a></li> -->
+</ul>        <i class="icon-comments-alt"></i> <a href="./posts/2011/02/11/how-to-fix-ios-memory-leaks-coming-from-uikit/#disqus_thread"></a>      </div>
+    </div>
+    <div class="span8">
+      <div class="summary">
+        <p>It looks as though I'm going to be posting a number of troubleshooting
+iOS SDK and objective-c guides in the coming weeks. The first deals with
+memory leaks coming from UIKit and QuartzCore.</p>
+<p>If you are using the leaks tool included with Instruments and XCode, you
+might notice leaks. This is a pretty amazing tool that will tell you
+when you leak, how much and where the allocations occurred.</p>
+<p>In instruments, you can select View -> Extended Detail. This will
+provide you with the stack trace. You can then see where the leak
+originated. If you see errors coming straight from main, or from a call
+to pushViewController, you likely had the same problem I had -- you are
+not cleaning up your View or ViewController.</p>
+<p>To be safe in memory management, be careful to do the following:</p>
+<ol>
+<li>In viewDidUnload:, you should set all your retain and IBOutlet
+    properties to nil like so:</li>
+<li>Secondly, and very important, you should release and set all the
+    IBOutlet backing properties to nil, like so:</li>
+<li>Make sure you have no references to parent views or controllers in
+    the leaking view controller.</li>
+</ol>
+<p></p>
+This may seem totally counterintuitive since retain properties should
+properly free all held memory when nil is set, but actually the second
+step is required when dealing with UI components, otherwise it will
+result it leaks that appear to originate from UIKit or other Apple
+libraries. Be very careful that all IBOutlets are set to nil.</p>
+      </div>
+    </diV>
+  </div>
+</div>	
+<br>
+<hr/>
+</ul>
 <div class='article'>
     <h3>Howto Fix: Ios 4.3 Beta Installed On Ipad But Missing Gestures</h3>
   <div class="row">
@@ -120,62 +169,6 @@ the controller you are in:</p>
 
 <p>Hope this helps someone out there. <a href="http://developer.apple.com/library/mac/#documentation/Cocoa/Conceptual/MemoryMgmt/Articles/mmNibObjects.html">Here are the details of how to
 manage memory in NIBS for Mac OS or iOS.</a></p>
-      </div>
-    </diV>
-  </div>
-</div>	
-<br>
-<hr/>
-</ul>
-<div class='article'>
-    <h3>Copying Test And Data Files To Build Directory In C# .Net Unit Tests</h3>
-  <div class="row">
-    <div class="span4">
-      <div class="well well-small">
-        <ul class="unstyled">
-  <li><i class="icon-time"></i> <a class="more" href="./posts/2010/10/02/copying-test-and-data-files-to-build-directory-in-c-net-unit-tests/">Saturday, October 02 2010 08:20 AM</a> </li> 
-  <li><i class="icon-pencil"></i> <a class="url fn" href="./author/admin.html">Admin</a> </li>
-  <li>
-  <i class="icon-tags"></i> 
-    <a href="./tag/net.html">.net</a>
-    <a href="./tag/unit-testing.html">unit testing</a>
-    </li>
-  <!-- <li><i class="icon-folder-open"></i> <a href="./category/programming.html">Programming</a></li> -->
-</ul>        <i class="icon-comments-alt"></i> <a href="./posts/2010/10/02/copying-test-and-data-files-to-build-directory-in-c-net-unit-tests/#disqus_thread"></a>      </div>
-    </div>
-    <div class="span8">
-      <div class="summary">
-        <p>Unit testing with VS2010's built in unit testing facilities is
-especially convenient. However it is no always clear how to specific
-that an entire directory should be copied into the build / test
-directory as data. Aside from setting up pre- and post- build rules,
-VS2010 comes with a way to automatically include any project or
-referenced directories and files as part of the build deployment. To
-specify this, you use what is known as the testconfigs file.</p>
-<p>First, open up your unit testing project with visual studio, and from
-the test menu item, select edit test configuration.</p>
-<p><img alt="" src="http://dans-coding-examples.googlecode.com/files/testcopy-editsettings.png" title="Test Copy Tutorial Edit Test Settings" /></p>
-<p></p>
-Then, in the window that appears, select deployment and make sure that
-the enable deployment check box is <strong>selected</strong>.</p>
-<p><img alt="" src="http://dans-coding-examples.googlecode.com/files/testcopy-editdeployment.png" title="Test Copy Deployment" /></p>
-</p>
-
-<p>Finally, just select add/remove file or directory and select what you
-want to copy.</p>
-</p>
-
-<p><img alt="" src="http://dans-coding-examples.googlecode.com/files/testcopy-editselect.png" title="http://dans-coding-examples.googlecode.com/files/testcopy-editselect.png" /></p>
-</p>
-
-</p>
-
-<p>Now, each time you run or deploy your projects you can select that
-directories contents to also be copied over.</p>
-</p>
-
-<p><a href="http://dans-coding-examples.googlecode.com/files/UnitTestingProject.zip">Download Code.</a></p>
-</p>
       </div>
     </diV>
   </div>

@@ -36,7 +36,107 @@
       <div class="row">
         <div class="span12">
                     
-<div class="page-header"><h1>Blog</h1></div>
+<div class="page-header"><h1><a href="/">Blog</a> <small></small></h1></div>
+<div class='article'>
+    <h3>Compiling Opengl On Mac Os X Or Linux</h3>
+  <div class="row">
+    <div class="span4">
+      <div class="well well-small">
+        <ul class="unstyled">
+  <li><i class="icon-time"></i> <a class="more" href="../posts/2010/01/16/compiling-opengl-on-mac-os-x-or-linux/">Saturday, January 16 2010 09:50 PM</a> </li> 
+  <li><i class="icon-pencil"></i> <a class="url fn" href="../author/admin.html">Admin</a> </li>
+  <li>
+  <i class="icon-tags"></i> 
+    </li>
+  <!-- <li><i class="icon-folder-open"></i> <a href="../category/programming.html">Programming</a></li> -->
+</ul>        <i class="icon-comments-alt"></i> <a href="../posts/2010/01/16/compiling-opengl-on-mac-os-x-or-linux/#disqus_thread"></a>      </div>
+    </div>
+    <div class="span8">
+      <div class="summary">
+        <p>Most linux distributions make it easy to compile programs using OpenGL.
+Other systems, however, aren't so easy. Here are instructions on how to
+get it running in both platforms.</p>
+<p><strong>Ubuntu / Linux</strong></p>
+<ol>
+<li>
+<p>Make sure you install the opengl-mesa packages for opengl
+    development. On ubuntu you can get them all with the following
+    invocation:</p>
+<p><code>sudo apt-get install freeglut3-dev</code></p>
+</li>
+<li>
+<p>You should include the following #includes in your code referencing
+    opengl:</p>
+<div class="codehilite"><pre><span class="cp">#include &lt;GL/gl.h&gt;</span>
+<span class="cp">#include &lt;GL/glu.h&gt;</span>
+<span class="cp">#include &lt;GL/glut.h&gt;</span>
+</pre></div>
+
+
+</li>
+<li>
+<p>You should also have the following gcc cmdline flags in your
+    makefile:</p>
+<p><code>gcc -o simple simple.c -lGL -lglut -lGLU</code></p>
+</li>
+</ol>
+<p><strong>Mac OS X (tested on Snow Leopard)</strong></p>
+<ol>
+<li>
+<p>For this to work you will have to install gcc and Xcode, which
+    should install all the required opengl/glut libraries. You can get
+    it <a href="http://developer.apple.com/">here</a>.</p>
+</li>
+<li>
+<p>Now, you'll have to alter all the #includes in your files to
+    conform to the proper location. Change all your opengl #includes to
+    the following:<span style="font-family: monospace;"> </span></p>
+<div class="codehilite"><pre><span class="cp">#include &lt;OpenGL/gl.h&gt;</span>
+<span class="cp">#include &lt;OpenGL/glu.h&gt;</span>
+<span class="cp">#include &lt;GLUT/glut.h&gt;</span>
+</pre></div>
+
+
+</li>
+<li>
+<p>Additionally your gcc command line will need to contain the
+    following flags to link, along with any others you might have:</p>
+<p><code>gcc -o simple simple.c -framework Carbon -framework OpenGL -framework GLUT</code></p>
+</li>
+</ol>
+<p><strong>Cross Platform Compatibility</strong></p>
+<p><strong><span style="font-weight: normal;">If you want your code to run on
+both, you need to get the Makefile and code to load the proper libraries
+depending on your system. </span></strong></p>
+<p><strong><span style="font-weight: normal;">In all your OpenGL .c files, add
+the following header instead of your linux/mac includes:</span></strong></p>
+<div class="codehilite"><pre><span class="cp">#ifdef __APPLE__</span>
+<span class="cp">#  include &lt;OpenGL/gl.h&gt;</span>
+<span class="cp">#  include &lt;OpenGL/glu.h&gt;</span>
+<span class="cp">#  include &lt;GLUT/glut.h&gt;</span>
+<span class="cp">#else</span>
+<span class="cp">#  include &lt;GL/gl.h&gt;</span>
+<span class="cp">#  include &lt;GL/glu.h&gt;</span>
+<span class="cp">#  include &lt;GL/glut.h&gt;</span>
+<span class="cp">#endif</span>
+</pre></div>
+
+
+<p>Then in your makefile, add the following before your build targets:</p>
+<div class="codehilite"><pre><span class="c">#default cmdline flags</span>
+<span class="nv">LDFLAGS</span>  <span class="o">=</span> -lGL -lglut -lGLU
+<span class="c"># Mac OS alternate cmdline link options</span>
+<span class="cp">ifeq &quot;$(OSTYPE)&quot; &quot;Darwin&quot;</span>
+  <span class="nv">LDFLAGS</span> <span class="o">=</span> -framework Carbon -framework OpenGL -framework GLUT
+<span class="cp">endif</span>
+</pre></div>
+      </div>
+    </diV>
+  </div>
+</div>	
+<br>
+<hr/>
+</ul>
 <div class='article'>
     <h3>Timing Programs In C (Update)</h3>
   <div class="row">

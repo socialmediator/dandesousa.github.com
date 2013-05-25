@@ -36,7 +36,83 @@
       <div class="row">
         <div class="span12">
                     
-<div class="page-header"><h1>Blog</h1></div>
+<div class="page-header"><h1><a href="/">Blog</a> <small></small></h1></div>
+<div class='article'>
+    <h3>Microsoft Solver Foundation For Quadratic Programming</h3>
+  <div class="row">
+    <div class="span4">
+      <div class="well well-small">
+        <ul class="unstyled">
+  <li><i class="icon-time"></i> <a class="more" href="../posts/2010/07/15/microsoft-solver-foundation-for-quadratic-programming/">Thursday, July 15 2010 09:55 PM</a> </li> 
+  <li><i class="icon-pencil"></i> <a class="url fn" href="../author/admin.html">Admin</a> </li>
+  <li>
+  <i class="icon-tags"></i> 
+    <a href="../tag/net.html">.net</a>
+    <a href="../tag/c.html">C#</a>
+    <a href="../tag/math.html">math</a>
+    </li>
+  <!-- <li><i class="icon-folder-open"></i> <a href="../category/programming.html">Programming</a></li> -->
+</ul>        <i class="icon-comments-alt"></i> <a href="../posts/2010/07/15/microsoft-solver-foundation-for-quadratic-programming/#disqus_thread"></a>      </div>
+    </div>
+    <div class="span8">
+      <div class="summary">
+        <p>The Microsoft Solver Foundation provides some excellent APIs for solving
+optimization problems in C# .NET. Getting to documentation about the
+Quadratic Programming facilities can be a bit tricky though. I've added
+below some sample code to help out with this.</p>
+<p>In the following example I'm solving an example of the lagrangian dual
+form used for classification in an SVM.</p>
+<div class="codehilite"><pre><span class="n">InteriorPointSolver</span> <span class="n">solver</span> <span class="p">=</span> <span class="k">new</span> <span class="n">InteriorPointSolver</span><span class="p">();</span>
+<span class="c1">// Langrangian Dual</span>
+<span class="kt">int</span> <span class="n">dual</span> <span class="p">=</span> <span class="m">0</span><span class="p">;</span>
+<span class="n">solver</span><span class="p">.</span><span class="n">AddRow</span><span class="p">(</span><span class="s">&quot;L&quot;</span><span class="p">,</span> <span class="k">out</span> <span class="n">dual</span><span class="p">);</span>
+<span class="c1">// Sum Constraint</span>
+<span class="kt">int</span> <span class="n">linearConstraint</span> <span class="p">=</span> <span class="m">0</span><span class="p">;</span>
+<span class="n">solver</span><span class="p">.</span><span class="n">AddRow</span><span class="p">(</span><span class="s">&quot;SumConstraint&quot;</span><span class="p">,</span> <span class="k">out</span> <span class="n">linearConstraint</span><span class="p">);</span>
+<span class="c1">// Add variables and Lagrangian linear terms</span>
+<span class="kt">int</span><span class="p">[]</span> <span class="n">vars</span> <span class="p">=</span> <span class="k">new</span> <span class="kt">int</span><span class="p">[</span><span class="n">n</span><span class="p">];</span>
+<span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="p">=</span> <span class="m">0</span><span class="p">;</span> <span class="n">i</span> <span class="p">&amp;</span><span class="n">lt</span><span class="p">;</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="p">++)</span>
+<span class="p">{</span>
+    <span class="c1">// Add the variable</span>
+    <span class="n">solver</span><span class="p">.</span><span class="n">AddVariable</span><span class="p">(</span><span class="s">&quot;a&quot;</span> <span class="p">+</span> <span class="n">i</span><span class="p">,</span> <span class="k">out</span> <span class="n">vars</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+    <span class="c1">// Factor in C upper bounds</span>
+    <span class="n">solver</span><span class="p">.</span><span class="n">SetBounds</span><span class="p">(</span><span class="n">vars</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="m">0</span><span class="p">,</span> <span class="n">C</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="c1">// Linear constraint must equal 0</span>
+<span class="n">solver</span><span class="p">.</span><span class="n">SetBounds</span><span class="p">(</span><span class="n">linearConstraint</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">);</span>
+<span class="c1">// Lagrangian Quadratic Terms</span>
+<span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="p">=</span> <span class="m">0</span><span class="p">;</span> <span class="n">i</span> <span class="p">&amp;</span><span class="n">lt</span><span class="p">;</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="p">++)</span> <span class="p">{</span> <span class="n">solver</span><span class="p">.</span><span class="n">SetCoefficient</span><span class="p">(</span><span class="n">linearConstraint</span><span class="p">,</span>
+        <span class="n">vars</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">trainingData</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">output</span><span class="p">());</span> <span class="n">solver</span><span class="p">.</span><span class="n">SetCoefficient</span><span class="p">(</span><span class="n">dual</span><span class="p">,</span> <span class="n">vars</span><span class="p">[</span><span class="n">i</span><span class="p">],</span>
+        <span class="m">1</span><span class="p">);</span> <span class="n">Parallel</span><span class="p">.</span><span class="n">For</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">o</span><span class="p">,</span> <span class="p">(</span><span class="kt">int</span> <span class="n">j</span><span class="p">)</span> <span class="p">=&amp;</span><span class="n">gt</span><span class="p">;</span>
+            <span class="p">{</span>
+            <span class="kt">double</span> <span class="n">coef</span> <span class="p">=</span> <span class="n">trainingData</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">output</span><span class="p">()</span> <span class="err">\</span><span class="p">*</span> <span class="n">trainingData</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">output</span><span class="p">()</span> <span class="err">\</span><span class="p">*</span>
+            <span class="n">kernel</span><span class="p">.</span><span class="n">evaluate</span><span class="p">(</span><span class="n">trainingData</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">point</span><span class="p">(),</span> <span class="n">trainingData</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">point</span><span class="p">());</span>
+            <span class="n">solver</span><span class="p">.</span><span class="n">SetCoefficient</span><span class="p">(</span><span class="n">dual</span><span class="p">,</span> <span class="p">-</span><span class="m">0.5</span> <span class="err">\</span><span class="p">*</span> <span class="n">coef</span><span class="p">,</span> <span class="n">vars</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">vars</span><span class="p">[</span><span class="n">j</span><span class="p">]);</span>
+            <span class="p">});</span>
+<span class="p">}</span>
+<span class="n">solver</span><span class="p">.</span><span class="n">AddGoal</span><span class="p">(</span><span class="n">dual</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="k">false</span><span class="p">);</span>
+<span class="n">InteriorPointSolverParams</span> <span class="n">param</span> <span class="p">=</span> <span class="k">new</span>
+<span class="n">InteriorPointSolverParams</span><span class="p">();[/</span><span class="n">csharp</span><span class="p">]</span>
+</pre></div>
+
+
+<p>Essentially all we are doing here is adding all the variables to our
+constraint optimization problem and asking the solver to minimize. The
+vars array simply expressing a list of identifier for variables in the
+constraint problem. You should fire up the Solver Foundation library and
+give it a shot yourself.</p>
+<p>Here are some resources that should make understanding this a bit easier
+as well. Its the official blog of one of the key developers on the
+project, specifically the links to tutorial on the quadratic programming
+solver.</p>
+<p><a href="http://blogs.msdn.com/b/natbr/archive/2009/09/24/using-the-solver-foundation-interior-point-solver.aspx">Nathan Brixius' QP Solver Tutorial</a></p>
+      </div>
+    </diV>
+  </div>
+</div>	
+<br>
+<hr/>
+</ul>
 <div class='article'>
     <h3>Chessgl3D Demo Video</h3>
   <div class="row">
@@ -119,106 +195,6 @@ the window. For example</p>
 </p>
 
 <p>Hope that helps someone out there!</p>
-      </div>
-    </diV>
-  </div>
-</div>	
-<br>
-<hr/>
-</ul>
-<div class='article'>
-    <h3>Compiling Opengl On Mac Os X Or Linux</h3>
-  <div class="row">
-    <div class="span4">
-      <div class="well well-small">
-        <ul class="unstyled">
-  <li><i class="icon-time"></i> <a class="more" href="../posts/2010/01/16/compiling-opengl-on-mac-os-x-or-linux/">Saturday, January 16 2010 09:50 PM</a> </li> 
-  <li><i class="icon-pencil"></i> <a class="url fn" href="../author/admin.html">Admin</a> </li>
-  <li>
-  <i class="icon-tags"></i> 
-    </li>
-  <!-- <li><i class="icon-folder-open"></i> <a href="../category/programming.html">Programming</a></li> -->
-</ul>        <i class="icon-comments-alt"></i> <a href="../posts/2010/01/16/compiling-opengl-on-mac-os-x-or-linux/#disqus_thread"></a>      </div>
-    </div>
-    <div class="span8">
-      <div class="summary">
-        <p>Most linux distributions make it easy to compile programs using OpenGL.
-Other systems, however, aren't so easy. Here are instructions on how to
-get it running in both platforms.</p>
-<p><strong>Ubuntu / Linux</strong></p>
-<ol>
-<li>
-<p>Make sure you install the opengl-mesa packages for opengl
-    development. On ubuntu you can get them all with the following
-    invocation:</p>
-<p><code>sudo apt-get install freeglut3-dev</code></p>
-</li>
-<li>
-<p>You should include the following #includes in your code referencing
-    opengl:</p>
-<div class="codehilite"><pre><span class="cp">#include &lt;GL/gl.h&gt;</span>
-<span class="cp">#include &lt;GL/glu.h&gt;</span>
-<span class="cp">#include &lt;GL/glut.h&gt;</span>
-</pre></div>
-
-
-</li>
-<li>
-<p>You should also have the following gcc cmdline flags in your
-    makefile:</p>
-<p><code>gcc -o simple simple.c -lGL -lglut -lGLU</code></p>
-</li>
-</ol>
-<p><strong>Mac OS X (tested on Snow Leopard)</strong></p>
-<ol>
-<li>
-<p>For this to work you will have to install gcc and Xcode, which
-    should install all the required opengl/glut libraries. You can get
-    it <a href="http://developer.apple.com/">here</a>.</p>
-</li>
-<li>
-<p>Now, you'll have to alter all the #includes in your files to
-    conform to the proper location. Change all your opengl #includes to
-    the following:<span style="font-family: monospace;"> </span></p>
-<div class="codehilite"><pre><span class="cp">#include &lt;OpenGL/gl.h&gt;</span>
-<span class="cp">#include &lt;OpenGL/glu.h&gt;</span>
-<span class="cp">#include &lt;GLUT/glut.h&gt;</span>
-</pre></div>
-
-
-</li>
-<li>
-<p>Additionally your gcc command line will need to contain the
-    following flags to link, along with any others you might have:</p>
-<p><code>gcc -o simple simple.c -framework Carbon -framework OpenGL -framework GLUT</code></p>
-</li>
-</ol>
-<p><strong>Cross Platform Compatibility</strong></p>
-<p><strong><span style="font-weight: normal;">If you want your code to run on
-both, you need to get the Makefile and code to load the proper libraries
-depending on your system. </span></strong></p>
-<p><strong><span style="font-weight: normal;">In all your OpenGL .c files, add
-the following header instead of your linux/mac includes:</span></strong></p>
-<div class="codehilite"><pre><span class="cp">#ifdef __APPLE__</span>
-<span class="cp">#  include &lt;OpenGL/gl.h&gt;</span>
-<span class="cp">#  include &lt;OpenGL/glu.h&gt;</span>
-<span class="cp">#  include &lt;GLUT/glut.h&gt;</span>
-<span class="cp">#else</span>
-<span class="cp">#  include &lt;GL/gl.h&gt;</span>
-<span class="cp">#  include &lt;GL/glu.h&gt;</span>
-<span class="cp">#  include &lt;GL/glut.h&gt;</span>
-<span class="cp">#endif</span>
-</pre></div>
-
-
-<p>Then in your makefile, add the following before your build targets:</p>
-<div class="codehilite"><pre><span class="c">#default cmdline flags</span>
-<span class="nv">LDFLAGS</span>  <span class="o">=</span> -lGL -lglut -lGLU
-<span class="c"># Mac OS alternate cmdline link options</span>
-<span class="cp">ifeq &quot;$(OSTYPE)&quot; &quot;Darwin&quot;</span>
-  <span class="nv">LDFLAGS</span> <span class="o">=</span> -framework Carbon -framework OpenGL -framework GLUT
-<span class="cp">endif</span>
-</pre></div>
       </div>
     </diV>
   </div>

@@ -36,7 +36,34 @@
       <div class="row">
         <div class="span12">
                     
-<div class="page-header"><h1>Blog</h1></div>
+<div class="page-header"><h1><a href="/">Blog</a> <small></small></h1></div>
+<div class='article'>
+    <h3>Manage Your Pelican Blog With Pelican-Shovel</h3>
+  <div class="row">
+    <div class="span4">
+      <div class="well well-small">
+        <ul class="unstyled">
+  <li><i class="icon-time"></i> <a class="more" href="../posts/2013/05/25/manage-your-pelican-blog-with-pelican-shovel/">Saturday, May 25 2013 07:08 PM</a> </li> 
+  <li><i class="icon-pencil"></i> <a class="url fn" href="../author/dan.html">Dan</a> </li>
+  <li>
+  <i class="icon-tags"></i> 
+    <a href="../tag/pelican.html">pelican</a>
+    <a href="../tag/programming.html">programming</a>
+    </li>
+  <!-- <li><i class="icon-folder-open"></i> <a href="../category/programming.html">Programming</a></li> -->
+</ul>        <i class="icon-comments-alt"></i> <a href="../posts/2013/05/25/manage-your-pelican-blog-with-pelican-shovel/#disqus_thread"></a>      </div>
+    </div>
+    <div class="span8">
+      <div class="summary">
+        <p>Switching your blog to a static site has a number of advantages, including speed, simplicity, transparency and control. One disadvantage, however, is usability. Static site generators like Pelican, encourage uses to create their own pages and posts, but lack a good management interface for creating those files. </p>
+<p>As a result, I've decided to create a project to assist with managing pelican sites through the command like, and its called <a href="https://github.com/dandesousa/pelican-shovel">pelican-shovel</a>. As a pelican user, I'll be eating my own dog food so to speak, and be adding features to assist with the management of my own blog. Currently it supports assisted generation of new pages and posts, list and editting those posts. Check out the <a href="https://github.com/dandesousa/pelican-shovel">github page</a> for installation and usage details.</p>
+      </div>
+    </diV>
+  </div>
+</div>	
+<br>
+<hr/>
+</ul>
 <div class='article'>
     <h3>[Boost.Python] Calling Back Into Python From Native C++ Threads</h3>
   <div class="row">
@@ -282,55 +309,6 @@ formulate this as a numeric sort or knows a better way to do this in the
 context of the tablesorter plugin, please share!</p>
 <p>[coding horror as a pretty good article about natural sort and how
   tough it can be]: http://www.codinghorror.com/blog/2007/12/sorting-for-humans-natural-sort-order.html</p>
-      </div>
-    </diV>
-  </div>
-</div>	
-<br>
-<hr/>
-</ul>
-<div class='article'>
-    <h3>How To Fix Ios Memory Leaks Coming From Uikit</h3>
-  <div class="row">
-    <div class="span4">
-      <div class="well well-small">
-        <ul class="unstyled">
-  <li><i class="icon-time"></i> <a class="more" href="../posts/2011/02/11/how-to-fix-ios-memory-leaks-coming-from-uikit/">Friday, February 11 2011 09:10 PM</a> </li> 
-  <li><i class="icon-pencil"></i> <a class="url fn" href="../author/admin.html">Admin</a> </li>
-  <li>
-  <i class="icon-tags"></i> 
-    </li>
-  <!-- <li><i class="icon-folder-open"></i> <a href="../category/programming.html">Programming</a></li> -->
-</ul>        <i class="icon-comments-alt"></i> <a href="../posts/2011/02/11/how-to-fix-ios-memory-leaks-coming-from-uikit/#disqus_thread"></a>      </div>
-    </div>
-    <div class="span8">
-      <div class="summary">
-        <p>It looks as though I'm going to be posting a number of troubleshooting
-iOS SDK and objective-c guides in the coming weeks. The first deals with
-memory leaks coming from UIKit and QuartzCore.</p>
-<p>If you are using the leaks tool included with Instruments and XCode, you
-might notice leaks. This is a pretty amazing tool that will tell you
-when you leak, how much and where the allocations occurred.</p>
-<p>In instruments, you can select View -> Extended Detail. This will
-provide you with the stack trace. You can then see where the leak
-originated. If you see errors coming straight from main, or from a call
-to pushViewController, you likely had the same problem I had -- you are
-not cleaning up your View or ViewController.</p>
-<p>To be safe in memory management, be careful to do the following:</p>
-<ol>
-<li>In viewDidUnload:, you should set all your retain and IBOutlet
-    properties to nil like so:</li>
-<li>Secondly, and very important, you should release and set all the
-    IBOutlet backing properties to nil, like so:</li>
-<li>Make sure you have no references to parent views or controllers in
-    the leaking view controller.</li>
-</ol>
-<p></p>
-This may seem totally counterintuitive since retain properties should
-properly free all held memory when nil is set, but actually the second
-step is required when dealing with UI components, otherwise it will
-result it leaks that appear to originate from UIKit or other Apple
-libraries. Be very careful that all IBOutlets are set to nil.</p>
       </div>
     </diV>
   </div>
