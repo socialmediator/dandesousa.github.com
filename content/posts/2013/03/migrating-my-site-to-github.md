@@ -5,6 +5,7 @@ Category: Ramblings
 Slug: migrating-my-site-to-github
 Author: Dan De Sousa
 Summary: My considerations when migrating my site to github.
+Status: draft
 
 I recently left my secure job to pursue my dream of working for myself. In honor of new beginnings, I felt it appropriate that I migrate my website to github. As I plan to be a much more active member of the open source community, I decided to delve right in and move from wordpress to a github pages hosted site with a theme of my own design. I'll go over how I did this, the tools I used, the code I developed, etc. Convienently, these and the subsequent blog posts will server as test data for my theme / tool development.
 

@@ -3,6 +3,7 @@ Date: 2013-01-12 23:19
 Author: Admin
 Category: Politics
 Tags: guns, Politics
+Status: draft
 
 With all the debate surrounding firearms in the recently weeks, I
 happened about a discussion with my pro-gun friend about suppressors.
