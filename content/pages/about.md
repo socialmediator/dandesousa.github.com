@@ -4,9 +4,9 @@ Author: Dan De Sousa
 
 My name is Dan De Sousa and I'm a computer programmer living in Warrington, Pennsylvania.
 
-I'm an independent developer trying to scratch out a living developing mobile and web applications.
+I currently work in the field of financial software and proprietary trading systems. 
 
-I previously worked in the field of financial software and proprietary trading systems. I have worked as an intern at Motorola and Google.  My development experience ranging from Java, .NET, Python/C++ server development and most recently, objective-c and mobile application development.  I've created classic desktop applications, mobile applications, web applications, flash and 3d games, distributed AI systems, multi-touch interactive desktop apps.
+I have worked as an intern at Motorola and Google.  My development experience ranging from Java, .NET, Python/C++ server development and most recently, objective-c and mobile application development.  I've created classic desktop applications, mobile applications, web applications, flash and 3d games, distributed AI systems, multi-touch interactive desktop apps.
 
 My personal interests include reading, video games, camping, soccer, gambling, range shooting and spending time with family and close friends.
 
